@@ -193,8 +193,14 @@ class NavitionDrawer extends StatelessWidget {
             'Roder\nYour Ride, Your Way',
             style: subHeadingStyle,
           ),
-          content: const Text(
-              "Our app was created with a simple goal in mind: to provide a platform for riders to discover new routes and enjoy delicious breakfasts at the same time!\n\nOur team of dedicated developers and motorcycle enthusiasts have created an app that is easy to use. With Roder, you can:\n\n●Plan your ride: Once you've found a great breakfast spot, use our app to plan your ride.\n\n●Connect with other riders: Our app allows you to connect with other bikers who share your passion for breakfast runs."),
+          content: Text(
+            "Our app was created with a simple goal in mind: to provide a platform for riders to discover new routes and enjoy delicious breakfasts at the same time!\n\nOur team of dedicated developers and motorcycle enthusiasts have created an app that is easy to use. With Roder, you can:\n\n●Plan your ride: Once you've found a great breakfast spot, use our app to plan your ride.\n\n●Connect with other riders: Our app allows you to connect with other bikers who share your passion for breakfast runs.",
+            style: TextStyle(
+                fontFamily: 'OpenSans',
+                fontWeight: FontWeight.w400,
+                fontSize: 14,
+                color: Get.isDarkMode ? Colors.white : Colors.black),
+          ),
           actions: [
             TextButton(
                 onPressed: () => Navigator.pop(context),

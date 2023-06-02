@@ -1,6 +1,10 @@
 // ignore_for_file: unused_import, empty_constructor_bodies
+import 'dart:typed_data';
+import 'dart:ui';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
@@ -17,6 +21,8 @@ import 'navbar/navbar.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //
+  await loadFont();
   //
   await GetStorage.init();
   //
@@ -45,6 +51,19 @@ Future<void> main() async {
       child: const MyApp(),
     ),
   );
+}
+
+Future<void> loadFont() async {
+  await Future.wait([
+    loadFontFromAsset('fonts/OpenSans-VariableFont_wdth,wght.ttf'),
+  ]);
+}
+
+Future<void> loadFontFromAsset(String fontPath) async {
+  final fontData = await rootBundle.load(fontPath);
+  final font = FontLoader('OpenSans');
+  font.addFont(Future.value(fontData));
+  await font.load();
 }
 
 class MyApp extends StatelessWidget {

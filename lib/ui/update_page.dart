@@ -121,7 +121,7 @@ class _UpdatePageState extends State<UpdatePage> {
       width: isExpanded1
           ? MediaQuery.of(context).size.width
           : MediaQuery.of(context).size.width - 40,
-      height: isExpanded1 ? 530 : 160,
+      height: isExpanded1 ? 550 : 160,
       child: FlutterFancyContainer(
         colorOne: darkbl50,
         colorTwo: iceCold,
