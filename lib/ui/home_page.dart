@@ -145,7 +145,7 @@ class _HomePageState extends State<HomePage> {
         extentRatio: 1 / 5,
         children: [
           SlidableAction(
-            backgroundColor: _getBGClr(Rides['ref']['Color']),
+            backgroundColor: _getBGClr(Rides['Color'] ?? 0),
             icon: Icons.add,
             label: 'JOIN',
             onPressed: (context) async {
