@@ -16,10 +16,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 1.0.2+3
 
 environment:
-  sdk: '>=3.0.2 <4.0.0'
+  sdk: '>=2.19.6 <3.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -31,15 +31,85 @@ dependencies:
   flutter:
     sdk: flutter
 
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  #ui
   cupertino_icons: ^1.0.2
+  font_awesome_flutter: ^10.4.0
+  iconly: ^1.0.1
+  akar_icons_flutter: ^1.1.16
+  fancy_bar: ^2.0.0
+  line_icons: ^2.0.1
+  flutter_staggered_animations:
+  motion_tab_bar_v2: ^0.2.6
+  bottom_navigation_view: ^0.3.0
+  flutter_fancy_container: ^0.0.4
+  easy_container: ^1.0.4+1
+  auto_size_text: ^3.0.0
+  
+
+  #storage
+  provider: ^6.0.5
+  shared_preferences: ^2.0.17
+  get_storage:
+  get: ^4.6.5
+  sqflite:
+
+  #google maps
+  permission_handler: ^10.2.0
+  google_maps_webservice: ^0.0.19
+  google_api_headers: ^1.0.0
+  tuple: ^2.0.1
+  # tuple: ^2.0.0-nullsafety.0
+  http: ^0.13.0
+  uuid: ^3.0.7
+  google_maps_flutter: ^2.2.5
+  flutter_polyline_points: ^1.0.0
+  # geocoding: ^2.1.0
+  # geolocator: ^7.0.1
+
+  #time
+  intl:
+  date_picker_timeline:
+
+  #google
+  google_nav_bar: ^5.0.6
+  google_sign_in: ^6.1.2
+  in_app_review: ^2.0.6
+
+  #firebase database
+  firebase_database: ^10.0.14
+  flutter_slidable: ^2.0.0
+  search_page: ^2.3.0
+  firebase_core: ^2.6.1
+  firestore_ui: ^1.25.1
+  firebase_auth: ^4.6.1
+
+
+  #flutter native splash
+  flutter_native_splash: ^2.2.19
+
+flutter_native_splash:
+  image: "assets/appicon.png"
+  color: "#123fd0"
+
+  android: true
+  ios: true
+  web: true
+
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+    #flutter laucher icons
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/appicon.png"
+
+  
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -59,8 +129,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -74,15 +144,15 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: fonts/OpenSans-VariableFont_wdth,wght.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
+    - family: Audiowide
+      fonts:
+        - asset: fonts/Audiowide-Regular.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
