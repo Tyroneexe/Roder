@@ -134,8 +134,8 @@ class _SearchState extends State<Search> {
                 if (searchFilter.text.isEmpty) {
                   Map Rides = snapshot.value as Map;
                   Rides['key'] = snapshot.key;
-                  if (Rides['Date'] ??
-                      '' == DateFormat("d-MM-yyyy").format(_selectedDate)) {
+                  if (Rides['Date'] ==
+                      DateFormat("d-MM-yyyy").format(_selectedDate)) {
                     return listItem(Rides: Rides);
                   } else {
                     return Container();
@@ -234,7 +234,7 @@ Widget listItem({
       extentRatio: 1 / 5,
       children: [
         SlidableAction(
-          backgroundColor: _getBGClr(Rides['Color'] ?? 0),
+          backgroundColor: _getBGClr(Rides['Color']),
           icon: Icons.add,
           label: 'JOIN',
           onPressed: (context) async {
@@ -261,7 +261,7 @@ Widget listItem({
           decoration: BoxDecoration(
             color: joinedRides.contains(Rides['key'])
                 ? darkGr
-                : _getBGClr(Rides['Color'] ?? 0),
+                : _getBGClr(Rides['Color']),
             borderRadius: BorderRadius.circular(20.0),
           ),
           child: Stack(children: [
@@ -283,7 +283,7 @@ Widget listItem({
                   ),
                   child: Center(
                     child: Text(
-                      Rides['Name'] ?? '',
+                      Rides['Name'],
                       style: const TextStyle(
                           fontFamily: 'OpenSans',
                           fontWeight: FontWeight.bold,
@@ -299,8 +299,7 @@ Widget listItem({
                   child: FittedBox(
                     fit: BoxFit.contain,
                     child: Text(
-                      Rides['Origin'] ??
-                          '' + '  to  ' + (Rides['Destination'] ?? ''),
+                      Rides['Origin'] + '  to  ' + Rides['Destination'],
                       style: TextStyle(
                           fontFamily: 'OpenSans',
                           fontWeight: FontWeight.w400,
@@ -312,10 +311,9 @@ Widget listItem({
                 const SizedBox(
                   height: 15,
                 ),
-                Text(Rides['Date'] ?? '', style: tyStyle),
+                Text(Rides['Date'], style: tyStyle),
                 Text(
-                  Rides['Start Time'] ??
-                      '' + '  to  ' + (Rides['End Time'] ?? ''),
+                  Rides['Start Time'] + '  to  ' + Rides['End Time'],
                   style: tyStyle,
                 ),
               ],
@@ -326,7 +324,7 @@ Widget listItem({
           right: 0,
           child: CircleAvatar(
             radius: 25,
-            backgroundImage: NetworkImage(Rides['GPhoto'] ?? ''),
+            backgroundImage: NetworkImage(Rides['GPhoto']),
           ),
         ),
       ],
@@ -352,7 +350,7 @@ _getBGClr(int no) {
     case 1:
       return iceCold;
     case 2:
-      return themeRed;
+      return vBlue;
     default:
       return blueClr;
   }

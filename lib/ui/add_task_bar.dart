@@ -191,7 +191,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   MyButton(
                     onTap: () {
                       if (_validateDate() == true) {
-                        ref.child('Rides/${user.uid}').push().set({
+                        //ref.child('Rides/${user.uid}').push().set({
+                        ref.child('Rides').push().set({
                           'Name': _titleController.text,
                           'Date': _selectedDate,
                           'Start Time': _startTime,
@@ -200,7 +201,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           'Person': user.displayName!,
                           'GPhoto': user.photoURL!,
                           'Joined': 0,
-                          'Polyline': '',
                           'Origin': controllerProvider.fromController.text,
                           'Destination': controllerProvider.toController.text,
                         }).asStream();
@@ -322,19 +322,54 @@ class _AddTaskPageState extends State<AddTaskPage> {
     );
   }
 
+  ThemeData _getPickerTheme(BuildContext context) {
+    // Retrieve the current theme
+    ThemeData currentTheme = Theme.of(context);
+
+    // Create a copy of the current theme
+    ThemeData pickerTheme = currentTheme.copyWith(
+      colorScheme: currentTheme.colorScheme.copyWith(
+        primary: Colors.blue, // Customize the primary color
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.pressed)) {
+                return _getMainClr(Provider.of<ColorProvider>(context)
+                    .selectedColor); // Customize the button text color when pressed
+              }
+              return _getMainClr(Provider.of<ColorProvider>(context)
+                  .selectedColor); // Customize the default button text color
+            },
+          ),
+        ),
+      ),
+    );
+
+    return pickerTheme;
+  }
+
   _getDateFormUser() async {
     DateTime? pickerDate = (await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(2015),
-        lastDate: DateTime(2121)));
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2015),
+      lastDate: DateTime(2121),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: _getPickerTheme(context), // Apply the customized theme
+          child: child!,
+        );
+      },
+    ));
 
     if (pickerDate != null) {
       setState(() {
         _selectedDate = DateFormat("d-MM-yyyy").format(pickerDate);
       });
     } else {
-      //
+      //cancel action
     }
   }
 
@@ -344,6 +379,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
       // User pressed cancel, do nothing
     } else {
       String formatedTime = pickedTime.format(context);
+      String amPmIndicator = pickedTime.hour < 12 ? 'AM' : 'PM';
+      formatedTime =
+          formatedTime + ' ' + amPmIndicator; // Append AM/PM indicator
       if (isStartTime == true) {
         setState(() {
           _startTime = formatedTime;
@@ -358,10 +396,18 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
   _showTimePicker() {
     return showTimePicker(
-        initialEntryMode: TimePickerEntryMode.input,
-        context: context,
-        initialTime: TimeOfDay(
-            hour: int.parse(_startTime.split(":")[0]),
-            minute: int.parse(_startTime.split(":")[1].split(" ")[0])));
+      initialEntryMode: TimePickerEntryMode.input,
+      context: context,
+      initialTime: TimeOfDay(
+        hour: int.parse(_startTime.split(":")[0]),
+        minute: int.parse(_startTime.split(":")[1].split(" ")[0]),
+      ),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: _getPickerTheme(context), // Apply the customized theme
+          child: child!,
+        );
+      },
+    );
   }
 }

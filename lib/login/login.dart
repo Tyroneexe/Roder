@@ -71,7 +71,7 @@ class LogIn extends StatelessWidget {
                   final provider =
                       Provider.of<GoogleSignInProvider>(context, listen: false);
                   await provider.googleLogIn();
-                  assignUserID();
+                  // assignUserID();
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -126,21 +126,21 @@ class LogIn extends StatelessWidget {
     );
   }
 
-  void assignUserID() async {
-    final user = FirebaseAuth.instance.currentUser;
-    final ref = referenceDatabase.ref();
+  // void assignUserID() async {
+  //   final user = FirebaseAuth.instance.currentUser;
+  //   final ref = referenceDatabase.ref();
 
-    if (user != null) {
-      ref.child('Rides').child(user.uid).set({
-        'name': user.displayName!,
-        'email': user.email!,
-      }).then((_) {
-        print('User added to the database with ID: ${user.uid}');
-      }).catchError((error) {
-        print('Failed to add user: $error');
-      });
-    } else {
-      print('The user is null');
-    }
-  }
+  //   if (user != null) {
+  //     ref.child('Rides').child(user.uid).set({
+  //       'name': user.displayName!,
+  //       'email': user.email!,
+  //     }).then((_) {
+  //       print('User added to the database with ID: ${user.uid}');
+  //     }).catchError((error) {
+  //       print('Failed to add user: $error');
+  //     });
+  //   } else {
+  //     print('The user is null');
+  //   }
+  // }
 }

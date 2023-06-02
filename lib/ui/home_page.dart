@@ -144,7 +144,7 @@ class _HomePageState extends State<HomePage> {
         extentRatio: 1 / 5,
         children: [
           SlidableAction(
-            backgroundColor: _getBGClr(Rides['Color'] ?? 0),
+            backgroundColor: _getBGClr(Rides['Color']),
             icon: Icons.add,
             label: 'JOIN',
             onPressed: (context) async {
@@ -176,7 +176,7 @@ class _HomePageState extends State<HomePage> {
             decoration: BoxDecoration(
               color: joinedRides.contains(Rides['key'])
                   ? darkGr
-                  : _getBGClr(Rides['Color'] ?? 0),
+                  : _getBGClr(Rides['Color']),
               borderRadius: BorderRadius.circular(20.0),
             ),
             child: Stack(
@@ -199,7 +199,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       child: Center(
                         child: Text(
-                          Rides['Name'] ?? '',
+                          Rides['Name'],
                           style: const TextStyle(
                               fontFamily: 'OpenSans',
                               fontWeight: FontWeight.bold,
@@ -215,8 +215,7 @@ class _HomePageState extends State<HomePage> {
                       child: FittedBox(
                         fit: BoxFit.contain,
                         child: Text(
-                          Rides['Origin'] ??
-                              '' + '  to  ' + (Rides['Destination'] ?? ''),
+                          Rides['Origin'] + '  to  ' + Rides['Destination'],
                           style: TextStyle(
                               fontFamily: 'OpenSans',
                               fontWeight: FontWeight.w400,
@@ -228,10 +227,9 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(
                       height: 15,
                     ),
-                    Text(Rides['Date'] ?? '', style: tyStyle),
+                    Text(Rides['Date'], style: tyStyle),
                     Text(
-                      Rides['Start Time'] ??
-                          '' + '  to  ' + (Rides['End Time'] ?? ''),
+                      Rides['Start Time'] + '  to  ' + Rides['End Time'],
                       style: tyStyle,
                     ),
                   ],
@@ -243,7 +241,7 @@ class _HomePageState extends State<HomePage> {
             right: 0,
             child: CircleAvatar(
               radius: 25,
-              backgroundImage: NetworkImage(Rides['GPhoto'] ?? ''),
+              backgroundImage: NetworkImage(Rides['GPhoto']),
             ),
           ),
         ],

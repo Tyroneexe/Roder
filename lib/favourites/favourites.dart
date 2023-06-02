@@ -86,7 +86,7 @@ class _FavouritesState extends State<Favourites> {
             padding: const EdgeInsets.all(20),
             height: 200,
             decoration: BoxDecoration(
-              color: _getBGClr(Rides['Color'] ?? 0),
+              color: _getBGClr(Rides['Color']),
               borderRadius: BorderRadius.circular(20.0),
             ),
             child: Stack(children: [
@@ -108,7 +108,7 @@ class _FavouritesState extends State<Favourites> {
                     ),
                     child: Center(
                       child: Text(
-                        Rides['Name'] ?? '',
+                        Rides['Name'],
                         style: const TextStyle(
                             fontFamily: 'OpenSans',
                             fontWeight: FontWeight.bold,
@@ -124,8 +124,7 @@ class _FavouritesState extends State<Favourites> {
                     child: FittedBox(
                       fit: BoxFit.contain,
                       child: Text(
-                        Rides['Origin'] ??
-                            '' + '  to  ' + (Rides['Destination'] ?? ''),
+                        Rides['Origin'] + '  to  ' + Rides['Destination'],
                         style: TextStyle(
                             fontFamily: 'OpenSans',
                             fontWeight: FontWeight.w400,
@@ -137,10 +136,9 @@ class _FavouritesState extends State<Favourites> {
                   const SizedBox(
                     height: 15,
                   ),
-                  Text(Rides['Date'] ?? '', style: tyStyle),
+                  Text(Rides['Date'], style: tyStyle),
                   Text(
-                    Rides['Start Time'] ??
-                        '' + '  to  ' + (Rides['End Time'] ?? ''),
+                    Rides['Start Time'] + '  to  ' + Rides['End Time'],
                     style: tyStyle,
                   ),
                 ],
@@ -151,7 +149,7 @@ class _FavouritesState extends State<Favourites> {
             right: 0,
             child: CircleAvatar(
               radius: 25,
-              backgroundImage: NetworkImage(Rides['GPhoto'] ?? ''),
+              backgroundImage: NetworkImage(Rides['GPhoto']),
             ),
           ),
         ],
@@ -167,7 +165,7 @@ class _FavouritesState extends State<Favourites> {
       case 1:
         return iceCold;
       case 2:
-        return themeRed;
+        return vBlue;
       default:
         return blueClr;
     }
