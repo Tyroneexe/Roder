@@ -39,6 +39,7 @@ Updates —>
 | Wrtie to Database 
 | Make host join ride when press on 'create ride'
 | Delete ride
+| fix font changing on different devices
 \
 
 
