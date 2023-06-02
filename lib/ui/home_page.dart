@@ -57,7 +57,7 @@ Updates —>
 / Noti update
 | Customization dropdown in add page
 | add to promote
-| log in with facebook, instagram
+| log in with facebook and instagram
 | make search bar neon outburst
 | Make Host Delete Ride
 | Change  primary Color
@@ -65,6 +65,7 @@ Updates —>
 | Make a Ride change-able when clicked
 | invest in some art
 | word counter on text fields in add ride page because people can add infinite text
+| be able to share links of rides
 | show app to BMW
 \
 

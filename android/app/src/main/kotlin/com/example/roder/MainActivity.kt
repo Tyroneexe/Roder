@@ -1,4 +1,4 @@
-package com.example.roder
+package com.tiaanb.roder
 
 import io.flutter.embedding.android.FlutterActivity
 

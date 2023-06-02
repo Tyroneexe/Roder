@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "8501520045",
+    "firebase_url": "https://ride-40a27-default-rtdb.firebaseio.com",
+    "project_id": "ride-40a27",
+    "storage_bucket": "ride-40a27.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:8501520045:android:83bdc83bef6ed09e808824",
+        "android_client_info": {
+          "package_name": "com.tiaanb.roder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "8501520045-biuel5q0iladkemg9jshkhv81jr1ke1o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tiaanb.roder",
+            "certificate_hash": "8be61776185227f044cacf6288099957344036bf"
+          }
+        },
+        {
+          "client_id": "8501520045-fs83coflp3cboj3rb2c6c0upbbtjvoct.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tiaanb.roder",
+            "certificate_hash": "85393bd59d6036685d86e97bd6f0c046c3b03e12"
+          }
+        },
+        {
+          "client_id": "8501520045-m3sulg770rbmi7d68b7udnh1si1qirf4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlsT32J7nusGT0sCYqfd1AJU9LMN18Bps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "8501520045-a281ok380fmni5vp7kgr6c79b2csuedm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "8501520045-7ghjod6o60mu1408l4q2m11jmq88j6r5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ride"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
