@@ -329,7 +329,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
     // Create a copy of the current theme
     ThemeData pickerTheme = currentTheme.copyWith(
       colorScheme: currentTheme.colorScheme.copyWith(
-        primary: Colors.blue, // Customize the primary color
+        primary: blueClr, // Customize the primary color
       ),
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
