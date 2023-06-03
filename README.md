@@ -18,7 +18,7 @@ Once you have installed Roder, you can create an account and start exploring the
 If you want to schedule a meetup with other riders, you can use the app's chat feature to coordinate the details. And if you want to track your rides and view your stats, Roder has built-in tracking and analysis tools.
 
 ## Credits
-This game was developed by Tiaan Bothma. You can find more of my work on my Fiverr gig https://www.fiverr.com/totallyt484/build-a-mobile-app-using-flutter-with-a-database or at https://www.fiverr.com/totallyt484/code-your-c-sharp-and-python-projects.
+This app was developed by Tiaan Bothma. You can find more of my work on my Fiverr gig https://www.fiverr.com/totallyt484/build-a-mobile-app-using-flutter-with-a-database or at https://www.fiverr.com/totallyt484/code-your-c-sharp-and-python-projects.
 
 ## Contributing
 If you want to contribute to Roder, you can fork the repository and submit a pull request with your changes. We welcome contributions from anyone who wants to help make Roder a better app for bike riders.
