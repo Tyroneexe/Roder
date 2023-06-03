@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names,
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
@@ -103,6 +104,17 @@ class _HomePageState extends State<HomePage> {
   DatabaseReference reference = FirebaseDatabase.instance.ref().child('Rides');
   final databaseReference = FirebaseDatabase.instance.ref();
   //
+  @override
+  void initState() {
+    AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+      if (!isAllowed) {
+        AwesomeNotifications().requestPermissionToSendNotifications();
+      }
+    });
+
+    super.initState();
+  }
+
   //
   @override
   Widget build(BuildContext context) {

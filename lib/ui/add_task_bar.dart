@@ -1,5 +1,6 @@
 // ignore_for_file: unused_field
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +8,13 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/googlemaps/maps.dart';
+import 'package:roder/navbar/navbar.dart';
+import 'package:roder/ui/home_page.dart';
 import 'package:roder/ui/theme.dart';
 import 'package:roder/ui/widgets/button.dart';
 import 'package:roder/ui/widgets/input_field.dart';
 import '../googlemaps/maps_provider.dart';
+import '../main.dart';
 import '../provider/clrProvider.dart';
 import '../routes/routes.dart';
 
@@ -208,6 +212,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         _addedRideBar();
                         //join ride when click on button
                       }
+                      _scheduleNotification();
                     },
                   ),
                 ],
@@ -216,6 +221,22 @@ class _AddTaskPageState extends State<AddTaskPage> {
           ),
         ),
       ),
+    );
+  }
+
+  void _scheduleNotification() {
+    DateTime selectedDate = DateFormat("d MMMM yyyy")
+        .parse(_selectedDate)
+        .add(Duration(seconds: 5));
+
+    AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 10,
+        channelKey: 'basic_channel',
+        title: 'Scheduled Test',
+        body: 'This is a scheduled notification',
+      ),
+      schedule: NotificationCalendar.fromDate(date: selectedDate),
     );
   }
 
