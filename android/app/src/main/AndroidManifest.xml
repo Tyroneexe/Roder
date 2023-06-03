@@ -3,6 +3,15 @@
         android:label="Roder"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <receiver
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCPljTaSTK1vY7uP7XRUxg2TscBr62FqtY"/>

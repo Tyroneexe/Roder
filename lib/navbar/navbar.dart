@@ -14,7 +14,7 @@ import 'package:roder/ui/theme.dart';
 import '../provider/clrProvider.dart';
 
 class NavBar extends StatefulWidget {
-  const NavBar({super.key});
+  const NavBar({super.key, final String? payload});
 
   @override
   State<NavBar> createState() => _NavBarState();

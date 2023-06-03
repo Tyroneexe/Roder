@@ -44,7 +44,7 @@ dependencies:
   flutter_fancy_container: ^0.0.4
   easy_container: ^1.0.4+1
   auto_size_text: ^3.0.0
-  flutter_local_notifications: ^7.0.0
+  flutter_local_notifications: ^6.1.0
   rxdart: ^0.27.7
   
 

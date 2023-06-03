@@ -32,7 +32,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
   final TextEditingController _titleController = TextEditingController();
 
   //Date and Time
-  String _selectedDate = DateFormat("d-MM-yyyy").format(DateTime.now());
+  String _selectedDate = DateFormat("d MMMM yyyy").format(DateTime.now());
   String _endTime = "9:00 PM";
   String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
 
@@ -61,7 +61,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 style: headingStyle,
               ),
               MyInputField(
-                title: "Title",
+                title: "Ride Name",
                 hint: "Give Your Ride A Name",
                 controller: _titleController,
               ),
@@ -366,7 +366,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
     if (pickerDate != null) {
       setState(() {
-        _selectedDate = DateFormat("d-MM-yyyy").format(pickerDate);
+        _selectedDate = DateFormat("d MMMM yyyy").format(pickerDate);
       });
     } else {
       //cancel action
