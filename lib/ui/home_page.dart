@@ -39,8 +39,6 @@ Updates —>
 | Give each user a place in the database
 \
 
-| Popup message first time for update releases
-
 / User update
 | Wrtie to Database 
 | Make host join ride when press on 'create ride'
@@ -48,6 +46,7 @@ Updates —>
 \
 
 / UI and UX Update
+=================================================
 | Use AI images to improve UI
 | navigation bar
 | use animated icons for navbar

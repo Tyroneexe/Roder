@@ -291,7 +291,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
       initialTime: TimeOfDay.now(),
       builder: (BuildContext context, Widget? child) {
         return Theme(
-          data: _getPickerTheme(context), // Apply the customized theme
+          data: _getPickerTheme(context),
           child: child!,
         );
       },
