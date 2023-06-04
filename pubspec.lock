@@ -632,6 +632,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  new_version_plus:
+    dependency: "direct main"
+    description:
+      name: new_version_plus
+      sha256: "136cd6368ef96eae5ee3efb59f284c6ff61a06c3c08fb6a49f451ac5fa635e1d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.10"
   package_info_plus:
     dependency: transitive
     description:
@@ -974,7 +982,7 @@ packages:
     source: hosted
     version: "2.2.2"
   url_launcher:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: url_launcher
       sha256: eb1e00ab44303d50dd487aab67ebc575456c146c6af44422f9c13889984c00f3

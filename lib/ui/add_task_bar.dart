@@ -8,13 +8,10 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/googlemaps/maps.dart';
-import 'package:roder/navbar/navbar.dart';
-import 'package:roder/ui/home_page.dart';
 import 'package:roder/ui/theme.dart';
 import 'package:roder/ui/widgets/button.dart';
 import 'package:roder/ui/widgets/input_field.dart';
 import '../googlemaps/maps_provider.dart';
-import '../main.dart';
 import '../provider/clrProvider.dart';
 import '../routes/routes.dart';
 
