@@ -39,6 +39,8 @@ Future<void> main() async {
     debug: true,
   );
   //
+
+  //
   await Firebase.initializeApp();
   //
   // await Firebase.initializeApp(

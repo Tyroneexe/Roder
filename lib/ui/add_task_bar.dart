@@ -104,7 +104,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       color: _getMainClr(
                           Provider.of<ColorProvider>(context).selectedColor)),
                   onPressed: () {
-                    _getDateFormUser();
+                    _getDateFromUser();
                   },
                 ),
               ),
@@ -221,20 +221,74 @@ class _AddTaskPageState extends State<AddTaskPage> {
     );
   }
 
-  void _scheduleNotification() {
-    DateTime selectedDate = DateTime.now();
+  DateTime? _selectedDateTime;
 
-    AwesomeNotifications().createNotification(
-      content: NotificationContent(
-        id: 10,
-        channelKey: 'basic_channel',
-        title: 'Scheduled Test',
-        body: 'This is a scheduled notification',
-      ),
-      schedule: NotificationCalendar.fromDate(
-        date: selectedDate,
-        allowWhileIdle: true, // Schedule even if the device is idle
-      ),
+  _scheduleNotification() async {
+    DateTime scheduleDateTime = _selectedDateTime ?? DateTime.now();
+    if (_selectedDateTime != null) {
+      await AwesomeNotifications().createNotification(
+          content: NotificationContent(
+            id: -1,
+            channelKey: 'basic_channel',
+            title: 'There is a Ride Tomorrow!',
+            body: "Full up your bike and be ready",
+          ),
+          schedule: NotificationCalendar.fromDate(date: scheduleDateTime),
+          actionButtons: [
+            NotificationActionButton(
+                key: 'ACTION_BUTTON_OPEN', label: 'Open', autoDismissible: true)
+          ]);
+    }
+  }
+
+  _getDateFromUser() async {
+    DateTime? pickerDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2015),
+      lastDate: DateTime(2121),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: _getPickerTheme(context), // Apply the customized theme
+          child: child!,
+        );
+      },
+    );
+
+    if (pickerDate != null) {
+      setState(() {
+        _selectedDateTime = DateTime(
+          pickerDate.year,
+          pickerDate.month,
+          pickerDate.day,
+        );
+      });
+    } else {
+      // Cancel action
+    }
+  }
+
+  _getTimeFromUser({required bool isStartTime}) async {
+    var pickedTime = await _showTimePicker();
+    if (pickedTime != null) {
+      return pickedTime;
+    } else {
+      // User pressed cancel, return null
+      return null;
+    }
+  }
+
+  _showTimePicker() {
+    return showTimePicker(
+      initialEntryMode: TimePickerEntryMode.input,
+      context: context,
+      initialTime: TimeOfDay.now(),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: _getPickerTheme(context), // Apply the customized theme
+          child: child!,
+        );
+      },
     );
   }
 
@@ -367,63 +421,5 @@ class _AddTaskPageState extends State<AddTaskPage> {
     );
 
     return pickerTheme;
-  }
-
-  _getDateFormUser() async {
-    DateTime? pickerDate = (await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2015),
-      lastDate: DateTime(2121),
-      builder: (BuildContext context, Widget? child) {
-        return Theme(
-          data: _getPickerTheme(context), // Apply the customized theme
-          child: child!,
-        );
-      },
-    ));
-
-    if (pickerDate != null) {
-      setState(() {
-        _selectedDate = DateFormat("d MMMM yyyy").format(pickerDate);
-      });
-    } else {
-      //cancel action
-    }
-  }
-
-  _getTimeFromUser({required bool isStartTime}) async {
-    var pickedTime = await _showTimePicker();
-    if (pickedTime == null) {
-      // User pressed cancel, do nothing
-    } else {
-      String formatedTime = pickedTime.format(context);
-      if (isStartTime == true) {
-        setState(() {
-          _startTime = formatedTime;
-        });
-      } else if (isStartTime == false) {
-        setState(() {
-          _endTime = formatedTime;
-        });
-      }
-    }
-  }
-
-  _showTimePicker() {
-    return showTimePicker(
-      initialEntryMode: TimePickerEntryMode.input,
-      context: context,
-      initialTime: TimeOfDay(
-        hour: int.parse(_startTime.split(":")[0]),
-        minute: int.parse(_startTime.split(":")[1].split(" ")[0]),
-      ),
-      builder: (BuildContext context, Widget? child) {
-        return Theme(
-          data: _getPickerTheme(context), // Apply the customized theme
-          child: child!,
-        );
-      },
-    );
   }
 }
