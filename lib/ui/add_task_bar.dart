@@ -222,9 +222,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
   }
 
   void _scheduleNotification() {
-    DateTime selectedDate = DateFormat("d MMMM yyyy")
-        .parse(_selectedDate)
-        .add(Duration(seconds: 5));
+    DateTime selectedDate = DateTime.now();
 
     AwesomeNotifications().createNotification(
       content: NotificationContent(
@@ -233,7 +231,10 @@ class _AddTaskPageState extends State<AddTaskPage> {
         title: 'Scheduled Test',
         body: 'This is a scheduled notification',
       ),
-      schedule: NotificationCalendar.fromDate(date: selectedDate),
+      schedule: NotificationCalendar.fromDate(
+        date: selectedDate,
+        allowWhileIdle: true, // Schedule even if the device is idle
+      ),
     );
   }
 

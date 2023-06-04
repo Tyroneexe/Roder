@@ -33,7 +33,7 @@ Future<void> main() async {
       NotificationChannel(
         channelKey: 'basic_channel',
         channelName: 'Basic Notification',
-        channelDescription: 'Notification channel for basic tests',
+        channelDescription: 'Channel description',
       )
     ],
     debug: true,

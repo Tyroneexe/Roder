@@ -60,18 +60,18 @@ Updates —>
 
 / Noti update
 | Customization dropdown in add page
+| update message popup
 =================================================
-| Notifications
-| add to promote
-| log in with facebook and instagram
-| make search bar neon outburst
-| Make Host Delete Ride
-| Change  primary Color
-| Make a Ride change-able when clicked
-| invest in some art
 | word counter on text fields in add ride page because people can add infinite text
-| be able to share links of rides
+| Notifications
+| make search bar neon outburst
 | fix splash screen
+| Fix colors
+| Make a Ride change-able when clicked
+| ai art for app
+| log in with facebook and instagram
+| Make Host Delete Ride
+| be able to share links of rides
 | show app to BMW
 \
 
@@ -83,6 +83,7 @@ Updates —>
 | save polylines in database
 | make the splash screen the same font as the app
 | chage the font of the app
+| addvertisement to promote
 \
 
 / AI update
@@ -108,13 +109,13 @@ class _HomePageState extends State<HomePage> {
   //
   @override
   void initState() {
+    super.initState();
+
     AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
       if (!isAllowed) {
         AwesomeNotifications().requestPermissionToSendNotifications();
       }
     });
-
-    super.initState();
 
     // Instantiate NewVersion manager object (Using GCP Console app as example)
     final newVersion = NewVersionPlus(
