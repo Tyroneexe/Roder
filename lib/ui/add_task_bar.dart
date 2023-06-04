@@ -225,6 +225,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
   _scheduleNotification() async {
     DateTime scheduleDateTime = _selectedDateTime ?? DateTime.now();
+    //
+    DateTime notificationDateTime = scheduleDateTime.subtract(Duration(days: 1));
     if (_selectedDateTime != null) {
       await AwesomeNotifications().createNotification(
           content: NotificationContent(
@@ -233,7 +235,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
             title: 'There is a Ride Tomorrow!',
             body: "Full up your bike and be ready",
           ),
-          schedule: NotificationCalendar.fromDate(date: scheduleDateTime),
+          schedule: NotificationCalendar.fromDate(date: notificationDateTime),
           actionButtons: [
             NotificationActionButton(
                 key: 'ACTION_BUTTON_OPEN', label: 'Open', autoDismissible: true)
