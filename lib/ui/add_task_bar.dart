@@ -226,7 +226,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
   _scheduleNotification() async {
     DateTime scheduleDateTime = _selectedDateTime ?? DateTime.now();
     //
-    DateTime notificationDateTime = scheduleDateTime.subtract(Duration(days: 1));
+    DateTime notificationDateTime =
+        scheduleDateTime.subtract(Duration(days: 1));
     if (_selectedDateTime != null) {
       await AwesomeNotifications().createNotification(
           content: NotificationContent(
@@ -258,6 +259,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
     );
 
     if (pickerDate != null) {
+      setState(() {
+        _selectedDate = DateFormat("d MMMM yyyy").format(pickerDate);
+      });
       setState(() {
         _selectedDateTime = DateTime(
           pickerDate.year,
