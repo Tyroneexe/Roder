@@ -118,8 +118,8 @@ class _HomePageState extends State<HomePage> {
 
     // Instantiate NewVersion manager object (Using GCP Console app as example)
     final newVersion = NewVersionPlus(
-        iOSId: 'com.disney.disneyplus',
-        androidId: 'com.disney.disneyplus',
+        iOSId: 'com.tiaanb.roder',
+        androidId: 'com.tiaanb.roder',
         androidPlayStoreCountry: "es_ES" //support country code
         );
 
