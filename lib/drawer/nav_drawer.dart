@@ -153,7 +153,7 @@ class NavitionDrawer extends StatelessWidget {
             ),
             onTap: () {
               _aboutRoder(context);
-              // Get.to(test());
+              // Get.to(() => Test());
             },
           ),
           Divider(
