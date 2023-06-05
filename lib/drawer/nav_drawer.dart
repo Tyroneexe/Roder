@@ -29,40 +29,12 @@ class NavitionDrawer extends StatelessWidget {
   //
   //
   Widget buildHeader(BuildContext context) => Container(
+        height: 340, // Set the desired height
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-          colors: [
-            _getMainClr(Provider.of<ColorProvider>(context).selectedColor),
-            _getMainClr(Provider.of<ColorProvider>(context).selectedColor + 1),
-          ],
-          begin: Alignment.centerLeft,
-          end: Alignment.bottomRight,
-        )),
-        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-        child: Column(
-          children: [
-            CircleAvatar(
-              radius: 52,
-              backgroundImage: NetworkImage(user.photoURL!),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Text(
-              user.displayName!,
-              style: subHeadingStyle,
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Text(
-              user.email!,
-              style: subHeadingStyle,
-            ),
-            const SizedBox(
-              height: 20,
-            )
-          ],
+          image: DecorationImage(
+            image: AssetImage('assets/RoderNavD.jpg'),
+            fit: BoxFit.cover,
+          ),
         ),
       );
   //
