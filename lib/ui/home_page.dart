@@ -46,9 +46,9 @@ Updates —>
 \
 
 / UI and UX Update
-=================================================
 | Use AI images to improve UI
 | navigation bar
+=================================================
 | use animated icons for navbar
 | change color and images for the theme (main color blue)
 | glas kit pub dev package

@@ -29,7 +29,7 @@ class NavitionDrawer extends StatelessWidget {
   //
   //
   Widget buildHeader(BuildContext context) => Container(
-        height: 340, // Set the desired height
+        height: 340,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/RoderNavD.jpg'),

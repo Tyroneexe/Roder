@@ -14,20 +14,44 @@ import 'package:roder/ui/theme.dart';
 import '../provider/clrProvider.dart';
 
 class NavBar extends StatefulWidget {
-  const NavBar({super.key, final String? payload});
+  const NavBar({Key? key, final String? payload}) : super(key: key);
 
   @override
   State<NavBar> createState() => _NavBarState();
 }
 
-class _NavBarState extends State<NavBar> {
+class _NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
   final controller = Get.put(NavBarController());
   Color _mainColor = blueClr;
+  late AnimationController _animationController;
+  late Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
     Provider.of<ColorProvider>(context, listen: false).init();
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+
+    _animation = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeInOut,
+      ),
+    );
+
+    _animationController.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -45,19 +69,30 @@ class _NavBarState extends State<NavBar> {
             unselectedItemColor: Colors.grey[700],
             selectedFontSize: 16,
             currentIndex: controller.tabIndex,
-            onTap: controller.changeTabIndex,
+            onTap: (index) {
+              final rotationAngle = (index == controller.tabIndex) ? 0.5 : 1.0;
+              controller.changeTabIndex(index);
+              _startAnimation(rotationAngle);
+            },
             items: [
-              _bottombarItem(AkarIcons.home, "Home"),
-              _bottombarItem(AkarIcons.search, "Search"),
-              _bottombarItem(AkarIcons.heart, "Joined"),
-              _bottombarItem(
-                Icons.add_circle_outline,
-                "Add",
-              ),
+              _bottombarItem(AkarIcons.home, "Home", 0),
+              _bottombarItem(AkarIcons.search, "Search", 1),
+              _bottombarItem(AkarIcons.heart, "Joined", 2),
+              _bottombarItem(Icons.add_circle_outline, "Add", 3),
             ],
           ),
         ),
       );
+    });
+  }
+
+  void _startAnimation(double rotationAngle) {
+    _animationController.reset();
+    _animationController.forward();
+    _animationController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _animationController.reset();
+      }
     });
   }
 
@@ -77,14 +112,17 @@ class _NavBarState extends State<NavBar> {
         return blueClr;
     }
   }
-}
 
-_bottombarItem(IconData icon, String label) {
-  return BottomNavigationBarItem(
-    icon: Icon(
-      icon,
-      size: 24,
-    ),
-    label: label,
-  );
+  _bottombarItem(IconData icon, String label, int index) {
+    return BottomNavigationBarItem(
+      icon: RotationTransition(
+        turns: Tween(begin: 0.0, end: 1.0).animate(_animationController),
+        child: Icon(
+          icon,
+          size: 24,
+        ),
+      ),
+      label: label,
+    );
+  }
 }
