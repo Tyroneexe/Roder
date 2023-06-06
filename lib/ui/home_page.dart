@@ -48,11 +48,11 @@ Updates —>
 / UI and UX Update
 | Use AI images to improve UI
 | navigation bar
-=================================================
 | use animated icons for navbar
+=================================================
 | change color and images for the theme (main color blue)
-| glas kit pub dev package
-| dragable home pub dev package
+| glas kit pub dev package for upadte pop up maybe
+| dragable home pub dev package (all / near me / outside sate)
 | remove food in about page popup
 \
 
