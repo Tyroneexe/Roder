@@ -52,7 +52,7 @@ Updates —>
 =================================================
 | change color and images for the theme (main color blue)
 | glas kit pub dev package for upadte pop up maybe
-| dragable home pub dev package (all / near me / outside sate)
+| draggable home pub dev package (all / near me / outside sate)
 | remove food in about page popup
 \
 
@@ -165,8 +165,8 @@ class _HomePageState extends State<HomePage> {
       newVersion.showUpdateDialog(
         context: context,
         versionStatus: status,
-        dialogTitle: 'Custom Title',
-        dialogText: 'Custom Text',
+        dialogTitle: 'Update App',
+        dialogText: 'Update App To Latest Release',
         launchModeVersion: LaunchModeVersion.external,
         allowDismissal: true,
       );
