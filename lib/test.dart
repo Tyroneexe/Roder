@@ -1,47 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:roder/search/search_page.dart';
-import 'package:roder/ui/home_page.dart';
 
-class Test extends StatelessWidget {
-  const Test({Key? key}) : super(key: key);
+class Test extends StatefulWidget {
+  const Test({super.key});
 
+  @override
+  State<Test> createState() => _TestState();
+}
+
+class _TestState extends State<Test> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            title: const Text('Near Me'),
-            backgroundColor: Theme.of(context).colorScheme.background,
+            backgroundColor: Colors.red,
+            expandedHeight: 200,
+            title: Text('Near Me'),
+            leading: Icon(Icons.arrow_back_ios),
             actions: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.settings),
+              Icon(Icons.settings),
+              SizedBox(
+                width: 12,
               ),
             ],
-          ),
-          SliverToBoxAdapter(
-            child: headerWidget(context),
-          ),
-          // SliverToBoxAdapter(
-          //   child: _getDBRides(),
-          // ),
+          )
         ],
-      ),
-    );
-  }
-
-  Widget headerWidget(BuildContext context) {
-    return Container(
-      color: Colors.blue,
-      child: Center(
-        child: Text(
-          "Rides",
-          style: Theme.of(context)
-              .textTheme
-              .titleLarge!
-              .copyWith(color: Colors.white),
-        ),
       ),
     );
   }
