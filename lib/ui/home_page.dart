@@ -107,71 +107,71 @@ class _HomePageState extends State<HomePage> {
   final databaseReference = FirebaseDatabase.instance.ref();
   //
   @override
-  void initState() {
-    super.initState();
+  // void initState() {
+  //   super.initState();
 
-    AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
-      if (!isAllowed) {
-        AwesomeNotifications().requestPermissionToSendNotifications();
-      }
-    });
+  //   AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+  //     if (!isAllowed) {
+  //       AwesomeNotifications().requestPermissionToSendNotifications();
+  //     }
+  //   });
 
-    // Instantiate NewVersion manager object (Using GCP Console app as example)
-    final newVersion = NewVersionPlus(
-        iOSId: 'com.tiaanb.roder',
-        androidId: 'com.tiaanb.roder',
-        androidPlayStoreCountry: "es_ES" //support country code
-        );
+  //   // Instantiate NewVersion manager object (Using GCP Console app as example)
+  //   final newVersion = NewVersionPlus(
+  //       iOSId: 'com.tb.roder',
+  //       androidId: 'com.tb.roder',
+  //       androidPlayStoreCountry: "es_ES" //support country code
+  //       );
 
-    final ver = VersionStatus(
-      appStoreLink: '',
-      localVersion: '',
-      storeVersion: '',
-      releaseNotes: '',
-      originalStoreVersion: '',
-    );
-    print(ver);
-    // const bool simpleBehavior = true;
+  //   final ver = VersionStatus(
+  //     appStoreLink: '',
+  //     localVersion: '',
+  //     storeVersion: '',
+  //     releaseNotes: '',
+  //     originalStoreVersion: '',
+  //   );
+  //   print(ver);
+  //   // const bool simpleBehavior = true;
 
-    // if (simpleBehavior) {
-    basicStatusCheck(newVersion);
-    // }
-    // else {
-    // advancedStatusCheck(newVersion);
-    // }
-  }
+  //   // if (simpleBehavior) {
+  //   basicStatusCheck(newVersion);
+  //   // }
+  //   // else {
+  //   // advancedStatusCheck(newVersion);
+  //   // }
+  // }
 
-  basicStatusCheck(NewVersionPlus newVersion) async {
-    final version = await newVersion.getVersionStatus();
-    if (version != null) {
-      release = version.releaseNotes ?? "";
-      setState(() {});
-    }
-    newVersion.showAlertIfNecessary(
-      context: context,
-      launchModeVersion: LaunchModeVersion.external,
-    );
-  }
+  // basicStatusCheck(NewVersionPlus newVersion) async {
+  //   final version = await newVersion.getVersionStatus();
+  //   if (version != null) {
+  //     release = version.releaseNotes ?? "";
+  //     setState(() {});
+  //   }
+  //   newVersion.showAlertIfNecessary(
+  //     context: context,
+  //     launchModeVersion: LaunchModeVersion.external,
+  //   );
+  // }
 
-  // Custom dialog for update check
-  advancedStatusCheck(NewVersionPlus newVersion) async {
-    final status = await newVersion.getVersionStatus();
-    if (status != null) {
-      debugPrint(status.releaseNotes);
-      debugPrint(status.appStoreLink);
-      debugPrint(status.localVersion);
-      debugPrint(status.storeVersion);
-      debugPrint(status.canUpdate.toString());
-      newVersion.showUpdateDialog(
-        context: context,
-        versionStatus: status,
-        dialogTitle: 'Update App',
-        dialogText: 'Update App To Latest Release',
-        launchModeVersion: LaunchModeVersion.external,
-        allowDismissal: true,
-      );
-    }
-  }
+  // // Custom dialog for update check
+  // advancedStatusCheck(NewVersionPlus newVersion) async {
+  //   final status = await newVersion.getVersionStatus();
+  //   if (status != null) {
+  //     debugPrint(status.releaseNotes);
+  //     debugPrint(status.appStoreLink);
+  //     debugPrint(status.localVersion);
+  //     debugPrint(status.storeVersion);
+  //     debugPrint(status.canUpdate.toString());
+  //     newVersion.showUpdateDialog(
+  //       context: context,
+  //       versionStatus: status,
+  //       dialogTitle: 'Update App',
+  //       dialogText: 'Update App To Latest Release',
+  //       launchModeVersion: LaunchModeVersion.external,
+  //       allowDismissal: true,
+  //     );
+  //   }
+  // }
 
   //
   @override

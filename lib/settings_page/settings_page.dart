@@ -83,7 +83,7 @@ class _SettingsState extends State<Settings> {
       colorOne: _getMainClr(
           Provider.of<ColorProvider>(context, listen: false).selectedColor),
       colorTwo: _getMainClr(
-          Provider.of<ColorProvider>(context, listen: false).selectedColor + 1),
+          Provider.of<ColorProvider>(context, listen: false).selectedColor),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

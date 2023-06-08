@@ -75,7 +75,8 @@ Future<void> loadFont() async {
 }
 
 Future<void> loadFontFromAsset(String fontPath) async {
-  final fontData = await rootBundle.load('fonts/OpenSans-VariableFont_wdth,wght.ttf');
+  final fontData =
+      await rootBundle.load('fonts/OpenSans-VariableFont_wdth,wght.ttf');
   final font = FontLoader('OpenSans');
   font.addFont(Future.value(fontData));
   await font.load();

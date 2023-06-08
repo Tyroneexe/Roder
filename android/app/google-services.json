@@ -8,28 +8,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:8501520045:android:83bdc83bef6ed09e808824",
+        "mobilesdk_app_id": "1:8501520045:android:67998f46edaad446808824",
         "android_client_info": {
-          "package_name": "com.tiaanb.roder"
+          "package_name": "com.tb.roder"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "8501520045-biuel5q0iladkemg9jshkhv81jr1ke1o.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.tiaanb.roder",
-            "certificate_hash": "8be61776185227f044cacf6288099957344036bf"
-          }
-        },
-        {
-          "client_id": "8501520045-fs83coflp3cboj3rb2c6c0upbbtjvoct.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.tiaanb.roder",
-            "certificate_hash": "85393bd59d6036685d86e97bd6f0c046c3b03e12"
-          }
-        },
         {
           "client_id": "8501520045-m3sulg770rbmi7d68b7udnh1si1qirf4.apps.googleusercontent.com",
           "client_type": 3
