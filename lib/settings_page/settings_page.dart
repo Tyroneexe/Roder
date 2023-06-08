@@ -78,12 +78,25 @@ class _SettingsState extends State<Settings> {
   }
 
   _chooseMainClr() {
+    int selectedColor =
+        Provider.of<ColorProvider>(context, listen: false).selectedColor;
+    int no;
+
+    if (selectedColor == 0) {
+      no = 3;
+    } else if (selectedColor == 1) {
+      no = 4;
+    } else {
+      no = 5;
+    }
+
+    Color colorOne = _getMainClr(no);
+    Color colorTwo = _getMainClr(selectedColor);
+
     return FlutterFancyContainer(
       height: 130,
-      colorOne: _getMainClr(
-          Provider.of<ColorProvider>(context, listen: false).selectedColor),
-      colorTwo: _getMainClr(
-          Provider.of<ColorProvider>(context, listen: false).selectedColor),
+      colorOne: colorOne,
+      colorTwo: colorTwo,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -91,16 +104,57 @@ class _SettingsState extends State<Settings> {
             child: Text(
               'Theme Color',
               style: TextStyle(
-                  fontFamily: 'OpenSans',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 28,
-                  color: Colors.white),
+                fontFamily: 'OpenSans',
+                fontWeight: FontWeight.bold,
+                fontSize: 28,
+                color: Colors.white,
+              ),
             ),
           ),
           _colorPallete(),
         ],
       ),
     );
+  }
+
+  _getMainClr(int no) {
+    switch (no) {
+      case 0:
+        setState(() {
+          _mainColor = blueClr;
+        });
+        return blueClr;
+      case 1:
+        setState(() {
+          _mainColor = oRange;
+        });
+        return oRange;
+      case 2:
+        setState(() {
+          _mainColor = themeRed;
+        });
+        return themeRed;
+      case 3:
+        setState(() {
+          _mainColor = lightBlueClr;
+        });
+        return lightBlueClr;
+      case 4:
+        setState(() {
+          _mainColor = Colors.orange;
+        });
+        return Colors.orange;
+      case 5:
+        setState(() {
+          _mainColor = Colors.red;
+        });
+        return Colors.red;
+      default:
+        setState(() {
+          _mainColor = blueClr;
+        });
+        return blueClr;
+    }
   }
 
   _colorPallete() {
@@ -301,31 +355,6 @@ class _SettingsState extends State<Settings> {
         );
       },
     );
-  }
-
-  _getMainClr(int no) {
-    switch (no) {
-      case 0:
-        setState(() {
-          _mainColor = blueClr;
-        });
-        return blueClr;
-      case 1:
-        setState(() {
-          _mainColor = oRange;
-        });
-        return oRange;
-      case 2:
-        setState(() {
-          _mainColor = themeRed;
-        });
-        return themeRed;
-      default:
-        setState(() {
-          _mainColor = blueClr;
-        });
-        return blueClr;
-    }
   }
 
   _appbar() {
