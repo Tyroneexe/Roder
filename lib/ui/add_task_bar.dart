@@ -276,11 +276,19 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
   _getTimeFromUser({required bool isStartTime}) async {
     var pickedTime = await _showTimePicker();
-    if (pickedTime != null) {
-      return pickedTime;
+    if (pickedTime == null) {
+      // User pressed cancel, do nothing
     } else {
-      // User pressed cancel, return null
-      return null;
+      String formatedTime = pickedTime.format(context);
+      if (isStartTime == true) {
+        setState(() {
+          _startTime = formatedTime;
+        });
+      } else if (isStartTime == false) {
+        setState(() {
+          _endTime = formatedTime;
+        });
+      }
     }
   }
 
@@ -288,7 +296,10 @@ class _AddTaskPageState extends State<AddTaskPage> {
     return showTimePicker(
       initialEntryMode: TimePickerEntryMode.input,
       context: context,
-      initialTime: TimeOfDay.now(),
+      initialTime: TimeOfDay(
+        hour: int.parse(_startTime.split(":")[0]),
+        minute: int.parse(_startTime.split(":")[1].split(" ")[0]),
+      ),
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: _getPickerTheme(context),

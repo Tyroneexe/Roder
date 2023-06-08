@@ -411,8 +411,9 @@ class _HomePageState extends State<HomePage> {
           //   ).createShader(Rect.fromLTWH(100, 100, 100, 100)),
         ),
       ),
-      iconTheme:
-          IconThemeData(color: Get.isDarkMode ? Colors.white : Colors.black),
+      iconTheme: IconThemeData(
+          color: _getMainClr(Provider.of<ColorProvider>(context, listen: false)
+              .selectedColor)),
       elevation: 0,
       backgroundColor: context.theme.colorScheme.background,
       actions: [
