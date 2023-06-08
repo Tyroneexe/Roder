@@ -1,91 +1,48 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:roder/search/search_page.dart';
+import 'package:roder/ui/home_page.dart';
 
-// class Test extends StatefulWidget {
-//   const Test({super.key});
+class Test extends StatelessWidget {
+  const Test({Key? key}) : super(key: key);
 
-//   @override
-//   State<Test> createState() => _TestState();
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            title: const Text('Near Me'),
+            backgroundColor: Theme.of(context).colorScheme.background,
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.settings),
+              ),
+            ],
+          ),
+          SliverToBoxAdapter(
+            child: headerWidget(context),
+          ),
+          // SliverToBoxAdapter(
+          //   child: _getDBRides(),
+          // ),
+        ],
+      ),
+    );
+  }
 
-// class _TestState extends State<Test> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Container(
-//         decoration: BoxDecoration(
-//           image: DecorationImage(
-//             image: AssetImage('assets/splash_screen.png'),
-//             fit: BoxFit.cover,
-//           ),
-//         ),
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.start,
-//           children: [
-//             SizedBox(
-//               height: 50,
-//             ),
-//             Center(
-//               child: Text(
-//                 'Roder',
-//                 style: TextStyle(
-//                   fontFamily: 'Audiowide',
-//                   fontWeight: FontWeight.bold,
-//                   fontSize: 70,
-//                   color: Colors.black,
-//                 ),
-//               ),
-//             ),
-//             SizedBox(
-//               height: 25,
-//             ),
-//             Spacer(),
-//             Center(
-//               child: ElevatedButton(
-//                 onPressed: () {},
-//                 child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.center,
-//                   children: [
-//                     SizedBox(
-//                       width: 10,
-//                     ),
-//                     Text(
-//                       'Sign in with Google',
-//                       style: TextStyle(
-//                         fontFamily: 'OpenSans',
-//                         fontWeight: FontWeight.bold,
-//                         fontSize: 18,
-//                         color: Colors.white,
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//                 style: ButtonStyle(
-//                   // Customize the button's background color
-//                   // Customize the button's foreground (text) color
-//                   foregroundColor:
-//                       MaterialStateProperty.all<Color>(Colors.white),
-//                   // Customize the button's padding
-//                   padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-//                     EdgeInsets.symmetric(
-//                       vertical: 16.0,
-//                     ),
-//                   ),
-//                   // Customize the button's shape (e.g., rounded corners)
-//                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-//                     RoundedRectangleBorder(
-//                       borderRadius: BorderRadius.circular(30.0),
-//                     ),
-//                   ),
-//                   fixedSize: MaterialStateProperty.all<Size>(Size(300, 60)),
-//                 ),
-//               ),
-//             ),
-//             SizedBox(
-//               height: 40,
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+  Widget headerWidget(BuildContext context) {
+    return Container(
+      color: Colors.blue,
+      child: Center(
+        child: Text(
+          "Rides",
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge!
+              .copyWith(color: Colors.white),
+        ),
+      ),
+    );
+  }
+}
