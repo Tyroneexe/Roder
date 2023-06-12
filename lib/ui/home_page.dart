@@ -329,13 +329,13 @@ class _HomePageState extends State<HomePage> {
   _getBGClr(int no) {
     switch (no) {
       case 0:
-        return blueClr;
+        return lightBlueClr;
       case 1:
         return iceCold;
       case 2:
         return vBlue;
       default:
-        return blueClr;
+        return lightBlueClr;
     }
   }
 
@@ -343,7 +343,7 @@ class _HomePageState extends State<HomePage> {
     switch (no) {
       case 0:
         setState(() {});
-        return blueClr;
+        return lightBlueClr;
       case 1:
         setState(() {});
         return oRange;
@@ -352,7 +352,7 @@ class _HomePageState extends State<HomePage> {
         return themeRed;
       default:
         setState(() {});
-        return blueClr;
+        return lightBlueClr;
     }
   }
 
@@ -405,7 +405,7 @@ class _HomePageState extends State<HomePage> {
           color: _getMainClr(Provider.of<ColorProvider>(context).selectedColor),
           // foreground: Paint()
           //   ..shader = LinearGradient(
-          //     colors: [blueClr, oRange],
+          //     colors: [lightBlueClr, oRange],
           //     begin: Alignment.topLeft,
           //     end: Alignment.bottomRight,
           //   ).createShader(Rect.fromLTWH(100, 100, 100, 100)),

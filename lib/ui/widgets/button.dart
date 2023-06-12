@@ -9,7 +9,7 @@ import '../../provider/clrProvider.dart';
 class MyButton extends StatelessWidget {
   final Function()? onTap;
   MyButton({Key? key, required this.onTap}) : super(key: key);
-  Color _mainColor = blueClr;
+  Color _mainColor = lightBlueClr;
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +36,8 @@ class MyButton extends StatelessWidget {
   _getMainClr(int no) {
     switch (no) {
       case 0:
-        _mainColor = blueClr;
-        return blueClr;
+        _mainColor = lightBlueClr;
+        return lightBlueClr;
       case 1:
         _mainColor = oRange;
         return oRange;
@@ -45,8 +45,8 @@ class MyButton extends StatelessWidget {
         _mainColor = themeRed;
         return themeRed;
       default:
-        _mainColor = blueClr;
-        return blueClr;
+        _mainColor = lightBlueClr;
+        return lightBlueClr;
     }
   }
 }

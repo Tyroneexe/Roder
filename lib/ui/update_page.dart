@@ -49,7 +49,7 @@ class _UpdatePageState extends State<UpdatePage> {
           : MediaQuery.of(context).size.width - 40,
       height: isExpanded2 ? 620 : 160,
       child: FlutterFancyContainer(
-        colorOne: blueClr,
+        colorOne: lightBlueClr,
         colorTwo: themeRed,
         onTap: () {
           setState(() {
@@ -106,6 +106,10 @@ class _UpdatePageState extends State<UpdatePage> {
                   "● Added a customization dropdown\n"
                   "● Latest Update page\n"
                   "● Implement ride deletion functionality",
+                  style: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white),
                 ),
               ),
             ),
@@ -170,10 +174,12 @@ class _UpdatePageState extends State<UpdatePage> {
               ),
               child: Container(
                 padding: EdgeInsets.only(left: 20, right: 20),
-                child: Expanded(
-                  child: Text(
-                    'Roder is a mobile application that allows you to create and join bike runs, and also create meetups with other bike riders. With Roder, you can easily plan your own rides or join other rides that are happening in your area.',
-                  ),
+                child: Text(
+                  'Roder is a mobile application that allows you to create and join bike runs, and also create meetups with other bike riders. With Roder, you can easily plan your own rides or join other rides that are happening in your area.',
+                  style: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white),
                 ),
               ),
             ),

@@ -39,7 +39,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
   //Color
   int _selectedColor = 0;
-  Color _mainColor = blueClr;
+  Color _mainColor = lightBlueClr;
   bool isColorVisible = false;
 
   @override
@@ -339,8 +339,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
   _getMainClr(int no) {
     switch (no) {
       case 0:
-        _mainColor = blueClr;
-        return blueClr;
+        _mainColor = lightBlueClr;
+        return lightBlueClr;
       case 1:
         _mainColor = oRange;
         return oRange;
@@ -348,8 +348,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
         _mainColor = themeRed;
         return themeRed;
       default:
-        _mainColor = blueClr;
-        return blueClr;
+        _mainColor = lightBlueClr;
+        return lightBlueClr;
     }
   }
 
@@ -419,7 +419,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
     // Create a copy of the current theme
     ThemeData pickerTheme = currentTheme.copyWith(
       colorScheme: currentTheme.colorScheme.copyWith(
-        primary: blueClr, // Customize the primary color
+        primary: lightBlueClr, // Customize the primary color
       ),
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(

@@ -99,8 +99,8 @@ class _NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
   _getMainClr(int no) {
     switch (no) {
       case 0:
-        _mainColor = blueClr;
-        return blueClr;
+        _mainColor = lightBlueClr;
+        return lightBlueClr;
       case 1:
         _mainColor = oRange;
         return oRange;

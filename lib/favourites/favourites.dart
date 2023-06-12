@@ -161,13 +161,13 @@ class _FavouritesState extends State<Favourites> {
   _getBGClr(int no) {
     switch (no) {
       case 0:
-        return blueClr;
+        return lightBlueClr;
       case 1:
         return iceCold;
       case 2:
         return vBlue;
       default:
-        return blueClr;
+        return lightBlueClr;
     }
   }
 

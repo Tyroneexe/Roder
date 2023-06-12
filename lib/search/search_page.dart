@@ -23,7 +23,7 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  Color _mainColor = blueClr;
+  Color _mainColor = lightBlueClr;
   bool isDateBarVisible = false;
   bool isArrowUp = true;
   DateTime _selectedDate = DateTime.now();
@@ -202,8 +202,8 @@ class _SearchState extends State<Search> {
   _getMainClr(int no) {
     switch (no) {
       case 0:
-        _mainColor = blueClr;
-        return blueClr;
+        _mainColor = lightBlueClr;
+        return lightBlueClr;
       case 1:
         _mainColor = oRange;
         return oRange;
@@ -211,8 +211,8 @@ class _SearchState extends State<Search> {
         _mainColor = themeRed;
         return themeRed;
       default:
-        _mainColor = blueClr;
-        return blueClr;
+        _mainColor = lightBlueClr;
+        return lightBlueClr;
     }
   }
 }
@@ -346,12 +346,12 @@ _addedToFav() {
 _getBGClr(int no) {
   switch (no) {
     case 0:
-      return blueClr;
+      return lightBlueClr;
     case 1:
       return iceCold;
     case 2:
       return vBlue;
     default:
-      return blueClr;
+      return lightBlueClr;
   }
 }

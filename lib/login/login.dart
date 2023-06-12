@@ -97,7 +97,7 @@ class LogIn extends StatelessWidget {
                 style: ButtonStyle(
                   // Customize the button's background color
                   backgroundColor:
-                      MaterialStateProperty.all<Color>(lightBlueClr),
+                      MaterialStateProperty.all<Color>(blueClr),
                   // Customize the button's foreground (text) color
                   foregroundColor:
                       MaterialStateProperty.all<Color>(Colors.white),

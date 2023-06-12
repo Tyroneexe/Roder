@@ -20,7 +20,7 @@ class MyInputField extends StatelessWidget {
     this.widget,
   });
 
-  Color _mainColor = blueClr;
+  Color _mainColor = lightBlueClr;
 
   @override
   Widget build(BuildContext context) {
@@ -76,8 +76,8 @@ class MyInputField extends StatelessWidget {
   _getMainClr(int no) {
     switch (no) {
       case 0:
-        _mainColor = blueClr;
-        return blueClr;
+        _mainColor = lightBlueClr;
+        return lightBlueClr;
       case 1:
         _mainColor = oRange;
         return oRange;
@@ -85,8 +85,8 @@ class MyInputField extends StatelessWidget {
         _mainColor = themeRed;
         return themeRed;
       default:
-        _mainColor = blueClr;
-        return blueClr;
+        _mainColor = lightBlueClr;
+        return lightBlueClr;
     }
   }
 }

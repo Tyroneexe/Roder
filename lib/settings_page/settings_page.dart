@@ -18,7 +18,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  Color _mainColor = blueClr;
+  Color _mainColor = lightBlueClr;
   int _selectedColor = 0;
 
   @override
@@ -121,9 +121,9 @@ class _SettingsState extends State<Settings> {
     switch (no) {
       case 0:
         setState(() {
-          _mainColor = blueClr;
+          _mainColor = lightBlueClr;
         });
-        return blueClr;
+        return lightBlueClr;
       case 1:
         setState(() {
           _mainColor = oRange;
@@ -136,9 +136,9 @@ class _SettingsState extends State<Settings> {
         return themeRed;
       case 3:
         setState(() {
-          _mainColor = lightBlueClr;
+          _mainColor = blueClr;
         });
-        return lightBlueClr;
+        return blueClr;
       case 4:
         setState(() {
           _mainColor = Colors.orange;
@@ -151,9 +151,9 @@ class _SettingsState extends State<Settings> {
         return Colors.red;
       default:
         setState(() {
-          _mainColor = blueClr;
+          _mainColor = lightBlueClr;
         });
-        return blueClr;
+        return lightBlueClr;
     }
   }
 
@@ -184,7 +184,7 @@ class _SettingsState extends State<Settings> {
                       CircleAvatar(
                         radius: 14,
                         backgroundColor: index == 0
-                            ? blueClr
+                            ? lightBlueClr
                             : index == 1
                                 ? oRange
                                 : themeRed,

@@ -39,7 +39,7 @@ class ColorProvider with ChangeNotifier {
   void _getMainClr(int no) {
     switch (no) {
       case 0:
-        _mainColor = blueClr;
+        _mainColor = lightBlueClr;
         break;
       case 1:
         _mainColor = oRange;
@@ -48,7 +48,7 @@ class ColorProvider with ChangeNotifier {
         _mainColor = themeRed;
         break;
       default:
-        _mainColor = blueClr;
+        _mainColor = lightBlueClr;
     }
   }
 }
