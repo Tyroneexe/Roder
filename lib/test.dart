@@ -15,6 +15,7 @@ class _TestState extends State<Test> {
         slivers: [
           SliverAppBar(
             expandedHeight: 150.0,
+            pinned: false,
             flexibleSpace: const FlexibleSpaceBar(
               title: Text('Available seats'),
             ),
@@ -28,24 +29,16 @@ class _TestState extends State<Test> {
               ),
             ],
           ),
-          SliverGrid(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200.0,
-              mainAxisSpacing: 10.0,
-              crossAxisSpacing: 10.0,
-              childAspectRatio: 4.0,
-            ),
+          SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return Container(
-                  alignment: Alignment.center,
-                  color: Colors.teal[100 * (index % 9)],
-                  child: Text('grid item $index'),
+                return ListTile(
+                  title: Text('Item $index'),
                 );
               },
-              childCount: 20,
+              childCount: 21,
             ),
-          )
+          ),
         ],
       ),
     );
