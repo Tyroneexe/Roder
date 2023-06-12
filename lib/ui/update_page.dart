@@ -49,7 +49,7 @@ class _UpdatePageState extends State<UpdatePage> {
           : MediaQuery.of(context).size.width - 40,
       height: isExpanded2 ? 620 : 160,
       child: FlutterFancyContainer(
-        colorOne: lightBlueClr,
+        colorOne: blueClr,
         colorTwo: themeRed,
         onTap: () {
           setState(() {
