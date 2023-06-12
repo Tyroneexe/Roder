@@ -14,16 +14,37 @@ class _TestState extends State<Test> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: Colors.red,
-            expandedHeight: 200,
-            title: Text('Near Me'),
-            leading: Icon(Icons.arrow_back_ios),
-            actions: [
-              Icon(Icons.settings),
-              SizedBox(
-                width: 12,
+            expandedHeight: 150.0,
+            flexibleSpace: const FlexibleSpaceBar(
+              title: Text('Available seats'),
+            ),
+            actions: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.add_circle),
+                tooltip: 'Add new entry',
+                onPressed: () {
+                  //empty for now
+                },
               ),
             ],
+          ),
+          SliverGrid(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200.0,
+              mainAxisSpacing: 10.0,
+              crossAxisSpacing: 10.0,
+              childAspectRatio: 4.0,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return Container(
+                  alignment: Alignment.center,
+                  color: Colors.teal[100 * (index % 9)],
+                  child: Text('grid item $index'),
+                );
+              },
+              childCount: 20,
+            ),
           )
         ],
       ),
