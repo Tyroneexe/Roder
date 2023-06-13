@@ -21,25 +21,6 @@ import 'add_task_bar.dart';
 
 Updates —>
 
-/ Tidy Up update
-| else show snackbar (you have already joined this ride)
-| Can select primary color
-| Settigns page can delete account
-| customization dropdown (just like the one in search page) can choose customization
-| fix google maps (search controller)
-| fix color of the dark mode 1 (this is first becuase if i use flutter's 
-|  default dark mode, there is no need for the color chagne of the nav bar)
-| fix color of the nav bar 2
-| container expands in update page
-| fix about page popup
-| fancy containers for latest update page
-| latest update page
-| Create main color at the start of the app
-| fix settings page containers
-| Fix font
-| Give each user a place in the database
-\
-
 / User update
 | Wrtie to Database 
 | Make host join ride when press on 'create ride'
@@ -186,154 +167,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: context.theme.colorScheme.background,
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            flexibleSpace: Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/splash_screen.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: 20,
-                        ),
-                        GestureDetector(
-                          child: FrostedGlassBox(
-                            theGradientColor: [
-                              rideFilter
-                                  ? Colors.white.withOpacity(0.15)
-                                  : _getMainClr(
-                                          Provider.of<ColorProvider>(context)
-                                              .selectedColor)
-                                      .withOpacity(0.4),
-                              rideFilter
-                                  ? Colors.white.withOpacity(0.05)
-                                  : _getMainClr(
-                                          Provider.of<ColorProvider>(context)
-                                              .selectedColor)
-                                      .withOpacity(0.3),
-                            ],
-                            theBorderColor: rideFilter
-                                ? Colors.white.withOpacity(0.13)
-                                : _getMainClr(
-                                    Provider.of<ColorProvider>(context)
-                                        .selectedColor),
-                            theWidth: 150.0,
-                            theHeight: 80.0,
-                            theChild: Text(
-                              'All Rides',
-                              style: TextStyle(
-                                  fontFamily: 'OpenSans',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 22,
-                                  color: Colors.black),
-                            ),
-                          ),
-                          onTap: () {
-                            setState(() {
-                              rideFilter = !rideFilter;
-                            });
-                          },
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        GestureDetector(
-                          child: FrostedGlassBox(
-                            theGradientColor: [
-                              _getMainClr(Provider.of<ColorProvider>(context)
-                                      .selectedColor)
-                                  .withOpacity(0.15),
-                              _getMainClr(Provider.of<ColorProvider>(context)
-                                      .selectedColor)
-                                  .withOpacity(0.05)
-                            ],
-                            theBorderColor: rideFilter2
-                                ? Colors.white.withOpacity(0.13)
-                                : _getMainClr(
-                                    Provider.of<ColorProvider>(context)
-                                        .selectedColor),
-                            theWidth: 150.0,
-                            theHeight: 80.0,
-                            theChild: Text(
-                              'Near Me',
-                              style: TextStyle(
-                                  fontFamily: 'OpenSans',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 22,
-                                  color: Colors.black),
-                            ),
-                          ),
-                          onTap: () {
-                            setState(() {
-                              rideFilter2 = !rideFilter2;
-                            });
-                          },
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        GestureDetector(
-                          child: FrostedGlassBox(
-                            theGradientColor: [
-                              _getMainClr(Provider.of<ColorProvider>(context)
-                                      .selectedColor)
-                                  .withOpacity(0.15),
-                              _getMainClr(Provider.of<ColorProvider>(context)
-                                      .selectedColor)
-                                  .withOpacity(0.05)
-                            ],
-                            theBorderColor: rideFilter3
-                                ? Colors.white.withOpacity(0.13)
-                                : _getMainClr(
-                                    Provider.of<ColorProvider>(context)
-                                        .selectedColor),
-                            theWidth: 150.0,
-                            theHeight: 80.0,
-                            theChild: Text(
-                              'Random',
-                              style: TextStyle(
-                                  fontFamily: 'OpenSans',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 22,
-                                  color: Colors.black),
-                            ),
-                          ),
-                          onTap: () {
-                            setState(() {
-                              rideFilter3 = !rideFilter3;
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                ],
-              ),
-            ),
-            expandedHeight: 150.0,
-            pinned: false,
-            actions: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.add_circle),
-                onPressed: () {
-                  Get.to(() => AddTaskPage());
-                },
-              ),
-            ],
-          ),
+          _appBar(context),
           SliverFillRemaining(
             child: Column(
               children: [
@@ -347,26 +181,202 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  SliverAppBar _appBar(BuildContext context) {
+    return SliverAppBar(
+      bottom: PreferredSize(
+        preferredSize: Size.fromHeight(24),
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(12),
+            ),
+            color: context.theme.colorScheme.background,
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/splash_screen.png'),
+            fit: BoxFit.fill,
+          ),
+        ),
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  GestureDetector(
+                    child: FrostedGlassBox(
+                      theGradientColor: [
+                        rideFilter
+                            ? Colors.white.withOpacity(0.15)
+                            : _getMainClr(Provider.of<ColorProvider>(context)
+                                    .selectedColor)
+                                .withOpacity(0.4),
+                        rideFilter
+                            ? Colors.white.withOpacity(0.05)
+                            : _getMainClr(Provider.of<ColorProvider>(context)
+                                    .selectedColor)
+                                .withOpacity(0.3),
+                      ],
+                      theBorderColor: rideFilter
+                          ? Colors.white.withOpacity(0.13)
+                          : _getMainClr(Provider.of<ColorProvider>(context)
+                              .selectedColor),
+                      theWidth: 150.0,
+                      theHeight: 80.0,
+                      theChild: Text(
+                        'All Rides',
+                        style: TextStyle(
+                            fontFamily: 'OpenSans',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                            color: Colors.black),
+                      ),
+                    ),
+                    onTap: () {
+                      setState(() {
+                        rideFilter = !rideFilter;
+                      });
+                    },
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  GestureDetector(
+                    child: FrostedGlassBox(
+                      theGradientColor: [
+                        rideFilter2
+                            ? Colors.white.withOpacity(0.15)
+                            : _getMainClr(Provider.of<ColorProvider>(context)
+                                    .selectedColor)
+                                .withOpacity(0.4),
+                        rideFilter2
+                            ? Colors.white.withOpacity(0.05)
+                            : _getMainClr(Provider.of<ColorProvider>(context)
+                                    .selectedColor)
+                                .withOpacity(0.3),
+                      ],
+                      theBorderColor: rideFilter2
+                          ? Colors.white.withOpacity(0.13)
+                          : _getMainClr(Provider.of<ColorProvider>(context)
+                              .selectedColor),
+                      theWidth: 150.0,
+                      theHeight: 80.0,
+                      theChild: Text(
+                        'Near Me',
+                        style: TextStyle(
+                            fontFamily: 'OpenSans',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                            color: Colors.black),
+                      ),
+                    ),
+                    onTap: () {
+                      setState(() {
+                        rideFilter2 = !rideFilter2;
+                      });
+                    },
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  GestureDetector(
+                    child: FrostedGlassBox(
+                      theGradientColor: [
+                        rideFilter3
+                            ? Colors.white.withOpacity(0.15)
+                            : _getMainClr(Provider.of<ColorProvider>(context)
+                                    .selectedColor)
+                                .withOpacity(0.4),
+                        rideFilter3
+                            ? Colors.white.withOpacity(0.05)
+                            : _getMainClr(Provider.of<ColorProvider>(context)
+                                    .selectedColor)
+                                .withOpacity(0.3),
+                      ],
+                      theBorderColor: rideFilter3
+                          ? Colors.white.withOpacity(0.13)
+                          : _getMainClr(Provider.of<ColorProvider>(context)
+                              .selectedColor),
+                      theWidth: 150.0,
+                      theHeight: 80.0,
+                      theChild: Text(
+                        'Random',
+                        style: TextStyle(
+                            fontFamily: 'OpenSans',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                            color: Colors.black),
+                      ),
+                    ),
+                    onTap: () {
+                      setState(() {
+                        rideFilter3 = !rideFilter3;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 35,
+            ),
+          ],
+        ),
+      ),
+      expandedHeight: 160.0,
+      pinned: false,
+      actions: <Widget>[
+        IconButton(
+          icon: const Icon(Icons.add_circle),
+          onPressed: () {
+            Get.to(() => AddTaskPage());
+          },
+        ),
+      ],
+    );
+  }
+
   _titleBar() {
     return Container(
       margin: const EdgeInsets.only(right: 20, top: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  'Near Me',
-                  style: TextStyle(
-                    fontFamily: 'OpenSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 35,
-                  ),
-                ),
-              ],
+          SizedBox(
+            width: 10,
+          ),
+          Text(
+            'All Rides',
+            style: TextStyle(
+              fontFamily: 'OpenSans',
+              fontWeight: FontWeight.bold,
+              fontSize: 35,
             ),
           ),
         ],
@@ -393,7 +403,7 @@ class _HomePageState extends State<HomePage> {
         break;
       default:
         setState(() {
-          Text('Near Me');
+          Text('All Rides');
         });
         break;
     }
