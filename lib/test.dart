@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:roder/ui/add_task_bar.dart';
 import 'package:roder/ui/home_page.dart';
 import 'package:roder/ui/theme.dart';
+import 'package:roder/ui/widgets/frosted_glass.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'favourites/favourites.dart';
 
@@ -32,7 +33,17 @@ class _TestState extends State<Test> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            // flexibleSpace:
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/appicon.png'),
+                  fit: BoxFit.fill,
+                ),
+              ),
+              alignment: Alignment.center,
+              child: const FrostedGlassBox(
+                  theWidth: 50.0, theHeight: 50.0, theChild: Text('Near Me')),
+            ),
             expandedHeight: 200.0,
             pinned: false,
             actions: <Widget>[
@@ -50,7 +61,7 @@ class _TestState extends State<Test> {
                 SizedBox(
                   height: 30,
                 ),
-                _getDBRides()
+                _getDBRides(),
               ],
             ),
           ),
@@ -106,7 +117,6 @@ class _TestState extends State<Test> {
               } else {
                 _alreadyJoined();
               }
-              // else show snackbar (you have already joined this ride)
             },
           ),
         ],
