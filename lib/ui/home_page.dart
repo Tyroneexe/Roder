@@ -189,7 +189,7 @@ class _HomePageState extends State<HomePage> {
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.vertical(
-              top: Radius.circular(12),
+              top: Radius.circular(30),
             ),
             color: context.theme.colorScheme.background,
           ),
