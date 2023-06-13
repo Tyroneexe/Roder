@@ -16,11 +16,12 @@ class FrostedGlassBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRect(
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(30),
       child: Container(
         width: theWidth,
         height: theHeight,
-        color: Colors.white,
+        color: Colors.transparent,
         child: Stack(
           children: [
             //blur effect
@@ -34,11 +35,25 @@ class FrostedGlassBox extends StatelessWidget {
             //gradient effect
             Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(color: Colors.white)),
-            )
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(
+                  color: Colors.white.withOpacity(0.13),
+                ),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Colors.white.withOpacity(0.15),
+                    Colors.white.withOpacity(0.05)
+                  ],
+                ),
+              ),
+            ),
 
             //child
+            Center(
+              child: theChild,
+            ),
           ],
         ),
       ),
