@@ -201,7 +201,8 @@ class _HomePageState extends State<HomePage> {
                   width: 40,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: Colors.black,
+                    color: _getMainClr(
+                        Provider.of<ColorProvider>(context).selectedColor),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -254,13 +255,15 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(
                             fontFamily: 'OpenSans',
                             fontWeight: FontWeight.bold,
-                            fontSize: 22,
+                            fontSize: 25,
                             color: Colors.black),
                       ),
                     ),
                     onTap: () {
                       setState(() {
                         rideFilter = !rideFilter;
+                        rideFilter2 = true;
+                        rideFilter3 = true;
                       });
                     },
                   ),
@@ -292,13 +295,15 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(
                             fontFamily: 'OpenSans',
                             fontWeight: FontWeight.bold,
-                            fontSize: 22,
+                            fontSize: 25,
                             color: Colors.black),
                       ),
                     ),
                     onTap: () {
                       setState(() {
                         rideFilter2 = !rideFilter2;
+                        rideFilter = true;
+                        rideFilter3 = true;
                       });
                     },
                   ),
@@ -330,13 +335,15 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(
                             fontFamily: 'OpenSans',
                             fontWeight: FontWeight.bold,
-                            fontSize: 22,
+                            fontSize: 25,
                             color: Colors.black),
                       ),
                     ),
                     onTap: () {
                       setState(() {
                         rideFilter3 = !rideFilter3;
+                        rideFilter = true;
+                        rideFilter2 = true;
                       });
                     },
                   ),
@@ -372,7 +379,13 @@ class _HomePageState extends State<HomePage> {
             width: 10,
           ),
           Text(
-            'All Rides',
+            !rideFilter
+                ? chooseTitleText(0)
+                : !rideFilter2
+                    ? chooseTitleText(1)
+                    : !rideFilter3
+                        ? chooseTitleText(2)
+                        : chooseTitleText(0),
             style: TextStyle(
               fontFamily: 'OpenSans',
               fontWeight: FontWeight.bold,
@@ -385,28 +398,23 @@ class _HomePageState extends State<HomePage> {
   }
 
   chooseTitleText(int nu) {
+    String titleText;
+
     switch (nu) {
       case 0:
-        setState(() {
-          Text('All');
-        });
+        titleText = 'All Rides';
         break;
       case 1:
-        setState(() {
-          Text('Near Me');
-        });
+        titleText = 'Near Me';
         break;
       case 2:
-        setState(() {
-          Text('Random');
-        });
+        titleText = 'Random';
         break;
       default:
-        setState(() {
-          Text('All Rides');
-        });
+        titleText = 'All Rides';
         break;
     }
+    return titleText;
   }
 
   _getBGClr(int no) {
@@ -449,8 +457,6 @@ class _HomePageState extends State<HomePage> {
           Map Rides = snapshot.value as Map;
           //unique key/id of each item in db
           Rides['key'] = snapshot.key;
-          Rides['ref'] = snapshot.child('Rides/${user.uid}');
-          print(Rides['key']);
           return listItem(Rides: Rides);
         },
       ),
