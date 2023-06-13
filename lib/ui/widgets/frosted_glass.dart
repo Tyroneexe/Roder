@@ -7,14 +7,16 @@ class FrostedGlassBox extends StatelessWidget {
       {Key? key,
       required this.theWidth,
       required this.theHeight,
-      required this.theColor,
+      required this.theBorderColor,
+      required this.theGradientColor,
       required this.theChild})
       : super(key: key);
 
   final theWidth;
   final theHeight;
   final theChild;
-  final theColor;
+  final List<Color> theGradientColor;
+  final theBorderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -40,18 +42,15 @@ class FrostedGlassBox extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30),
                 border: Border.all(
                     // color: Colors.white.withOpacity(0.13),
-                    color: theColor!),
+                    color: theBorderColor),
                 gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Colors.white.withOpacity(0.15),
-                    Colors.white.withOpacity(0.05)
-                  ],
-                ),
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: theGradientColor),
+                // Colors.white.withOpacity(0.15),
+                // Colors.white.withOpacity(0.05)
               ),
             ),
-
             //child
             Center(
               child: theChild,

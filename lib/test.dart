@@ -59,7 +59,15 @@ class _TestState extends State<Test> {
                         ),
                         GestureDetector(
                           child: FrostedGlassBox(
-                            theColor: rideFilter
+                            theGradientColor: [
+                              _getMainClr(Provider.of<ColorProvider>(context)
+                                      .selectedColor)
+                                  .withOpacity(0.15),
+                              _getMainClr(Provider.of<ColorProvider>(context)
+                                      .selectedColor)
+                                  .withOpacity(0.05)
+                            ],
+                            theBorderColor: rideFilter
                                 ? Colors.white.withOpacity(0.13)
                                 : _getMainClr(
                                     Provider.of<ColorProvider>(context)
@@ -76,7 +84,9 @@ class _TestState extends State<Test> {
                             ),
                           ),
                           onTap: () {
-                            rideFilter = true;
+                            setState(() {
+                              rideFilter = !rideFilter;
+                            });
                           },
                         ),
                         SizedBox(
@@ -84,7 +94,15 @@ class _TestState extends State<Test> {
                         ),
                         GestureDetector(
                           child: FrostedGlassBox(
-                            theColor: rideFilter2
+                            theGradientColor: [
+                              _getMainClr(Provider.of<ColorProvider>(context)
+                                      .selectedColor)
+                                  .withOpacity(0.15),
+                              _getMainClr(Provider.of<ColorProvider>(context)
+                                      .selectedColor)
+                                  .withOpacity(0.05)
+                            ],
+                            theBorderColor: rideFilter2
                                 ? Colors.white.withOpacity(0.13)
                                 : _getMainClr(
                                     Provider.of<ColorProvider>(context)
@@ -101,7 +119,9 @@ class _TestState extends State<Test> {
                             ),
                           ),
                           onTap: () {
-                            rideFilter2 = false;
+                            setState(() {
+                              rideFilter2 = !rideFilter2;
+                            });
                           },
                         ),
                         SizedBox(
@@ -109,7 +129,15 @@ class _TestState extends State<Test> {
                         ),
                         GestureDetector(
                           child: FrostedGlassBox(
-                            theColor: rideFilter3
+                            theGradientColor: [
+                              _getMainClr(Provider.of<ColorProvider>(context)
+                                      .selectedColor)
+                                  .withOpacity(0.15),
+                              _getMainClr(Provider.of<ColorProvider>(context)
+                                      .selectedColor)
+                                  .withOpacity(0.05)
+                            ],
+                            theBorderColor: rideFilter3
                                 ? Colors.white.withOpacity(0.13)
                                 : _getMainClr(
                                     Provider.of<ColorProvider>(context)
@@ -126,7 +154,9 @@ class _TestState extends State<Test> {
                             ),
                           ),
                           onTap: () {
-                            rideFilter3 = true;
+                            setState(() {
+                              rideFilter3 = !rideFilter3;
+                            });
                           },
                         ),
                       ],
