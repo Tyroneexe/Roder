@@ -7,14 +7,15 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:new_version_plus/new_version_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/favourites/favourites.dart';
 import 'package:roder/ui/theme.dart';
+import 'package:roder/ui/widgets/frosted_glass.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../drawer/nav_drawer.dart';
 import '../provider/clrProvider.dart';
+import 'add_task_bar.dart';
 
 /*To Do's —>
 
@@ -101,7 +102,12 @@ class HomePage extends StatefulWidget {
 final user = FirebaseAuth.instance.currentUser!;
 
 class _HomePageState extends State<HomePage> {
+  bool rideFilter = true;
+  bool rideFilter2 = true;
+  bool rideFilter3 = true;
+  //
   String release = "";
+  //
   Query dbRef = FirebaseDatabase.instance.ref().child('Rides');
   DatabaseReference reference = FirebaseDatabase.instance.ref().child('Rides');
   final databaseReference = FirebaseDatabase.instance.ref();
@@ -173,25 +179,260 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  //
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.theme.colorScheme.background,
       drawer: NavitionDrawer(),
-      appBar: _appbar(),
-      body: Column(
-        children: [
-          _titleBar(),
-          _getDBRides(),
+      backgroundColor: context.theme.colorScheme.background,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/splash_screen.png'),
+                  fit: BoxFit.fill,
+                ),
+              ),
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 20,
+                        ),
+                        GestureDetector(
+                          child: FrostedGlassBox(
+                            theGradientColor: [
+                              rideFilter
+                                  ? Colors.white.withOpacity(0.15)
+                                  : _getMainClr(
+                                          Provider.of<ColorProvider>(context)
+                                              .selectedColor)
+                                      .withOpacity(0.4),
+                              rideFilter
+                                  ? Colors.white.withOpacity(0.05)
+                                  : _getMainClr(
+                                          Provider.of<ColorProvider>(context)
+                                              .selectedColor)
+                                      .withOpacity(0.3),
+                            ],
+                            theBorderColor: rideFilter
+                                ? Colors.white.withOpacity(0.13)
+                                : _getMainClr(
+                                    Provider.of<ColorProvider>(context)
+                                        .selectedColor),
+                            theWidth: 150.0,
+                            theHeight: 80.0,
+                            theChild: Text(
+                              'All Rides',
+                              style: TextStyle(
+                                  fontFamily: 'OpenSans',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                  color: Colors.black),
+                            ),
+                          ),
+                          onTap: () {
+                            setState(() {
+                              rideFilter = !rideFilter;
+                            });
+                          },
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        GestureDetector(
+                          child: FrostedGlassBox(
+                            theGradientColor: [
+                              _getMainClr(Provider.of<ColorProvider>(context)
+                                      .selectedColor)
+                                  .withOpacity(0.15),
+                              _getMainClr(Provider.of<ColorProvider>(context)
+                                      .selectedColor)
+                                  .withOpacity(0.05)
+                            ],
+                            theBorderColor: rideFilter2
+                                ? Colors.white.withOpacity(0.13)
+                                : _getMainClr(
+                                    Provider.of<ColorProvider>(context)
+                                        .selectedColor),
+                            theWidth: 150.0,
+                            theHeight: 80.0,
+                            theChild: Text(
+                              'Near Me',
+                              style: TextStyle(
+                                  fontFamily: 'OpenSans',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                  color: Colors.black),
+                            ),
+                          ),
+                          onTap: () {
+                            setState(() {
+                              rideFilter2 = !rideFilter2;
+                            });
+                          },
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        GestureDetector(
+                          child: FrostedGlassBox(
+                            theGradientColor: [
+                              _getMainClr(Provider.of<ColorProvider>(context)
+                                      .selectedColor)
+                                  .withOpacity(0.15),
+                              _getMainClr(Provider.of<ColorProvider>(context)
+                                      .selectedColor)
+                                  .withOpacity(0.05)
+                            ],
+                            theBorderColor: rideFilter3
+                                ? Colors.white.withOpacity(0.13)
+                                : _getMainClr(
+                                    Provider.of<ColorProvider>(context)
+                                        .selectedColor),
+                            theWidth: 150.0,
+                            theHeight: 80.0,
+                            theChild: Text(
+                              'Random',
+                              style: TextStyle(
+                                  fontFamily: 'OpenSans',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                  color: Colors.black),
+                            ),
+                          ),
+                          onTap: () {
+                            setState(() {
+                              rideFilter3 = !rideFilter3;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ],
+              ),
+            ),
+            expandedHeight: 150.0,
+            pinned: false,
+            actions: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.add_circle),
+                onPressed: () {
+                  Get.to(() => AddTaskPage());
+                },
+              ),
+            ],
+          ),
+          SliverFillRemaining(
+            child: Column(
+              children: [
+                _titleBar(),
+                _getDBRides(),
+              ],
+            ),
+          ),
         ],
       ),
     );
   }
 
+  _titleBar() {
+    return Container(
+      margin: const EdgeInsets.only(right: 20, top: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  'Near Me',
+                  style: TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 35,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  chooseTitleText(int nu) {
+    switch (nu) {
+      case 0:
+        setState(() {
+          Text('All');
+        });
+        break;
+      case 1:
+        setState(() {
+          Text('Near Me');
+        });
+        break;
+      case 2:
+        setState(() {
+          Text('Random');
+        });
+        break;
+      default:
+        setState(() {
+          Text('Near Me');
+        });
+        break;
+    }
+  }
+
+  _getBGClr(int no) {
+    switch (no) {
+      case 0:
+        return lightBlueClr;
+      case 1:
+        return iceCold;
+      case 2:
+        return vBlue;
+      default:
+        return lightBlueClr;
+    }
+  }
+
+  _getMainClr(int no) {
+    switch (no) {
+      case 0:
+        setState(() {});
+        return lightBlueClr;
+      case 1:
+        setState(() {});
+        return oRange;
+      case 2:
+        setState(() {});
+        return themeRed;
+      default:
+        setState(() {});
+        return lightBlueClr;
+    }
+  }
+
   _getDBRides() {
     return Expanded(
       child: FirebaseAnimatedList(
+        physics: NeverScrollableScrollPhysics(),
         query: dbRef,
         itemBuilder: (BuildContext context, DataSnapshot snapshot,
             Animation<double> animation, int index) {
@@ -236,7 +477,6 @@ class _HomePageState extends State<HomePage> {
               } else {
                 _alreadyJoined();
               }
-              // else show snackbar (you have already joined this ride)
             },
           ),
         ],
@@ -326,36 +566,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _getBGClr(int no) {
-    switch (no) {
-      case 0:
-        return lightBlueClr;
-      case 1:
-        return iceCold;
-      case 2:
-        return vBlue;
-      default:
-        return lightBlueClr;
-    }
-  }
-
-  _getMainClr(int no) {
-    switch (no) {
-      case 0:
-        setState(() {});
-        return lightBlueClr;
-      case 1:
-        setState(() {});
-        return oRange;
-      case 2:
-        setState(() {});
-        return themeRed;
-      default:
-        setState(() {});
-        return lightBlueClr;
-    }
-  }
-
   _alreadyJoined() {
     Get.snackbar("RIDE ALREADY JOINED", "You have already joined this ride",
         snackPosition: SnackPosition.TOP,
@@ -364,66 +574,6 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
         colorText: sandyClr,
         icon: const Icon(Icons.access_time_filled_rounded));
-  }
-
-  _titleBar() {
-    return Container(
-      margin: const EdgeInsets.only(right: 20, top: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  'Near Me',
-                  style: TextStyle(
-                    fontFamily: 'OpenSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 35,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  _appbar() {
-    return AppBar(
-      centerTitle: true,
-      title: Text(
-        DateFormat.yMMMMd().format(DateTime.now()),
-        style: TextStyle(
-          fontFamily: 'OpenSans',
-          fontWeight: FontWeight.bold,
-          fontSize: 24,
-          color: _getMainClr(Provider.of<ColorProvider>(context).selectedColor),
-          // foreground: Paint()
-          //   ..shader = LinearGradient(
-          //     colors: [lightBlueClr, oRange],
-          //     begin: Alignment.topLeft,
-          //     end: Alignment.bottomRight,
-          //   ).createShader(Rect.fromLTWH(100, 100, 100, 100)),
-        ),
-      ),
-      iconTheme: IconThemeData(
-          color: _getMainClr(Provider.of<ColorProvider>(context, listen: false)
-              .selectedColor)),
-      elevation: 0,
-      backgroundColor: context.theme.colorScheme.background,
-      actions: [
-        // Icon(Icons.mail_outline,
-        //     size: 30, color: Get.isDarkMode ? Colors.white : Colors.black),
-        const SizedBox(
-          width: 7,
-        )
-      ],
-    );
   }
 
   _addedToFav() {

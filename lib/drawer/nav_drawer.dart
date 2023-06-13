@@ -11,7 +11,6 @@ import 'package:roder/ui/theme.dart';
 import 'package:roder/ui/update_page.dart';
 
 import '../provider/clrProvider.dart';
-import '../test.dart';
 
 class NavitionDrawer extends StatelessWidget {
   NavitionDrawer({super.key});
@@ -126,7 +125,7 @@ class NavitionDrawer extends StatelessWidget {
             ),
             onTap: () {
               _aboutRoder(context);
-              Get.to(() => Test());
+              // Get.to(() => Test());
             },
           ),
           Divider(
