@@ -60,12 +60,18 @@ class _TestState extends State<Test> {
                         GestureDetector(
                           child: FrostedGlassBox(
                             theGradientColor: [
-                              _getMainClr(Provider.of<ColorProvider>(context)
-                                      .selectedColor)
-                                  .withOpacity(0.15),
-                              _getMainClr(Provider.of<ColorProvider>(context)
-                                      .selectedColor)
-                                  .withOpacity(0.05)
+                              rideFilter
+                                  ? _getMainClr(
+                                          Provider.of<ColorProvider>(context)
+                                              .selectedColor)
+                                      .withOpacity(0.4)
+                                  : Colors.white.withOpacity(0.15),
+                              rideFilter
+                                  ? _getMainClr(
+                                          Provider.of<ColorProvider>(context)
+                                              .selectedColor)
+                                      .withOpacity(0.3)
+                                  : Colors.white.withOpacity(0.05),
                             ],
                             theBorderColor: rideFilter
                                 ? Colors.white.withOpacity(0.13)
