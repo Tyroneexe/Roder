@@ -226,8 +226,8 @@ class _HomePageState extends State<HomePage> {
       flexibleSpace: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/splash_screen.png'),
-            fit: BoxFit.fill,
+            image: AssetImage('assets/RoderHome.jpg'),
+            fit: BoxFit.cover,
           ),
         ),
         alignment: Alignment.center,
