@@ -265,7 +265,7 @@ class _HomePageState extends State<HomePage> {
                       theChild: Text(
                         'All Rides',
                         style: TextStyle(
-                            fontFamily: 'OpenSans',
+                            fontFamily: 'AudioWide',
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
                             color: Colors.black),
@@ -306,7 +306,7 @@ class _HomePageState extends State<HomePage> {
                       theChild: Text(
                         'Near Me',
                         style: TextStyle(
-                            fontFamily: 'OpenSans',
+                            fontFamily: 'AudioWide',
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
                             color: Colors.black),
@@ -345,9 +345,9 @@ class _HomePageState extends State<HomePage> {
                       theWidth: 150.0,
                       theHeight: 80.0,
                       theChild: Text(
-                        'Random',
+                        'Joined',
                         style: TextStyle(
-                            fontFamily: 'OpenSans',
+                            fontFamily: 'AudioWide',
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
                             color: Colors.black),
