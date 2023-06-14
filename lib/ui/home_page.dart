@@ -1,4 +1,6 @@
-// ignore_for_file: non_constant_identifier_names,
+// ignore_for_file: non_constant_identifier_names,, unnecessary_statements
+
+import 'dart:async';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -43,6 +45,7 @@ Updates —>
 | Customization dropdown in add page
 | update message popup
 =================================================
+| make dbrides load after button click
 | word counter on text fields in add ride page because people can add infinite text
 | Notifications
 | make search bar neon outburst
@@ -83,6 +86,21 @@ class HomePage extends StatefulWidget {
 final user = FirebaseAuth.instance.currentUser!;
 
 class _HomePageState extends State<HomePage> {
+  bool _isLoading = false;
+
+  void _startLoading() {
+    setState(() {
+      _isLoading = true;
+    });
+
+    Timer(Duration(milliseconds: 400), () {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+  }
+
+  //
   bool rideFilter = true;
   bool rideFilter2 = true;
   bool rideFilter3 = true;
@@ -172,7 +190,13 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 _titleBar(),
-                _getDBRides(),
+                if (_isLoading)
+                  CircularProgressIndicator(
+                    color: _getMainClr(
+                        Provider.of<ColorProvider>(context).selectedColor),
+                  ),
+                if (!_isLoading) _getDBRides(),
+                // _getDBRides(),
               ],
             ),
           ),
@@ -261,6 +285,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     onTap: () {
                       setState(() {
+                        if (!_isLoading) _startLoading();
                         rideFilter = !rideFilter;
                         rideFilter2 = true;
                         rideFilter3 = true;
@@ -301,6 +326,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     onTap: () {
                       setState(() {
+                        if (!_isLoading) _startLoading();
                         rideFilter2 = !rideFilter2;
                         rideFilter = true;
                         rideFilter3 = true;
@@ -341,6 +367,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     onTap: () {
                       setState(() {
+                        if (!_isLoading) _startLoading();
                         rideFilter3 = !rideFilter3;
                         rideFilter = true;
                         rideFilter2 = true;
@@ -455,7 +482,6 @@ class _HomePageState extends State<HomePage> {
         itemBuilder: (BuildContext context, DataSnapshot snapshot,
             Animation<double> animation, int index) {
           Map Rides = snapshot.value as Map;
-          //unique key/id of each item in db
           Rides['key'] = snapshot.key;
           return listItem(Rides: Rides);
         },
