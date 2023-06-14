@@ -62,7 +62,7 @@ class _SearchState extends State<Search> {
             child: TextFormField(
               controller: searchFilter,
               decoration: InputDecoration(
-                hintText: 'eg: BMW Breakfast Run',
+                hintText: 'eg: Sunday Breakfast Run',
                 //eg: BMW Breakfast Run
                 hintStyle: const TextStyle(
                     fontFamily: 'OpenSans', fontSize: 18, color: Colors.grey),
