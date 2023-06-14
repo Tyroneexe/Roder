@@ -84,7 +84,7 @@ class NavitionDrawer extends StatelessWidget {
               color: Get.isDarkMode ? Colors.white : Colors.grey[600],
             ),
             title: const Text(
-              'Latest Update',
+              'Patch Notes',
               style: TextStyle(
                   fontFamily: 'OpenSans',
                   fontWeight: FontWeight.bold,

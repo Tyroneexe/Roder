@@ -29,32 +29,20 @@ Updates —>
 | Delete ride
 \
 
-/ UI and UX Update
-| Use AI images to improve UI
-| navigation bar
-| use animated icons for navbar
-=================================================
-| change color and images for the theme (main color blue)
-| glas kit pub dev package for upadte pop up maybe
-| draggable home pub dev package (all / near me / outside sate)
-| remove food in about page popup
-\
-
-
 / Noti update
 | Customization dropdown in add page
 | update message popup
-=================================================
 | make dbrides load after button click
-| word counter on text fields in add ride page because people can add infinite text
 | Notifications
-| make search bar neon outburst
 | fix splash screen
-| Fix colors
+=================================================
+| word counter on text fields in add ride page because people can add infinite text
+| make search bar neon outburst
 | Make a Ride change-able when clicked
 | ai art for app
 | log in with facebook and instagram
 | Make Host Delete Ride
+| change color and images for the theme (main color blue)
 | be able to share links of rides
 | show app to BMW
 \

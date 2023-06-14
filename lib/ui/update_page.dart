@@ -11,8 +11,9 @@ class UpdatePage extends StatefulWidget {
 }
 
 class _UpdatePageState extends State<UpdatePage> {
-  bool isExpanded2 = false;
   bool isExpanded1 = false;
+  bool isExpanded2 = false;
+  bool isExpanded3 = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,14 +24,18 @@ class _UpdatePageState extends State<UpdatePage> {
           children: [
             Center(
               child: Text(
-                'Latest Update',
+                'Patch Notes',
                 style: headingStyle,
               ),
             ),
             SizedBox(
               height: 20,
             ),
-            _polishUpdate(),
+            _ver104(),
+            SizedBox(
+              height: 20,
+            ),
+            _ver101(),
             SizedBox(
               height: 20,
             ),
@@ -41,7 +46,81 @@ class _UpdatePageState extends State<UpdatePage> {
     );
   }
 
-  _polishUpdate() {
+  _ver104() {
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 200),
+      width: isExpanded3
+          ? MediaQuery.of(context).size.width
+          : MediaQuery.of(context).size.width - 40,
+      height: isExpanded3 ? 450 : 160,
+      child: FlutterFancyContainer(
+        colorOne: lightBlueClr,
+        colorTwo: darkbl50,
+        onTap: () {
+          setState(() {
+            isExpanded3 = !isExpanded3;
+          });
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 45,
+            ),
+            AnimatedDefaultTextStyle(
+              duration: Duration(milliseconds: 200),
+              style: TextStyle(
+                fontFamily: 'OpenSans',
+                fontWeight: FontWeight.bold,
+                fontSize: isExpanded3 ? 24 : 30,
+                color: Get.isDarkMode ? Colors.white : Colors.black,
+              ),
+              child: Text('Version 1.0.4'),
+            ),
+            AnimatedDefaultTextStyle(
+              duration: Duration(milliseconds: 200),
+              style: TextStyle(
+                fontFamily: 'OpenSans',
+                fontWeight: FontWeight.bold,
+                fontSize: isExpanded3 ? 14 : 20,
+                color: Get.isDarkMode ? Colors.white : Colors.black,
+              ),
+              child: Text('June 2023'),
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            AnimatedDefaultTextStyle(
+              duration: Duration(milliseconds: 200),
+              style: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontWeight: FontWeight.w400,
+                  fontSize: isExpanded3 ? 20 : 0,
+                  color: Get.isDarkMode ? Colors.white : Colors.black),
+              child: Container(
+                padding: EdgeInsets.only(left: 20, right: 20),
+                child: Text(
+                  "New Features:\n"
+                  "● Implemented a Notification System\n"
+                  "● Improved UI and design\n"
+                  "● Animated Navigation Bar\n"
+                  "● Notify Message for New Updates\n"
+                  "● Improved Home Page Layout\n",
+                  style: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _ver101() {
     return AnimatedContainer(
       duration: Duration(milliseconds: 200),
       width: isExpanded2
@@ -71,7 +150,7 @@ class _UpdatePageState extends State<UpdatePage> {
                 fontSize: isExpanded2 ? 24 : 30,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
               ),
-              child: Text('Polish Update'),
+              child: Text('Version 1.0.2'),
             ),
             AnimatedDefaultTextStyle(
               duration: Duration(milliseconds: 200),
@@ -81,7 +160,7 @@ class _UpdatePageState extends State<UpdatePage> {
                 fontSize: isExpanded2 ? 14 : 20,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
               ),
-              child: Text('30 May 2023'),
+              child: Text('May 2023'),
             ),
             SizedBox(
               height: 25,
@@ -100,7 +179,7 @@ class _UpdatePageState extends State<UpdatePage> {
                   "● Fix Google Maps search bar\n"
                   "● Fix Dark Mode color\n"
                   "● Fix About page popup\n\n"
-                  "New Features and Enhancements:\n"
+                  "New Features:\n"
                   "● Allow selection of primary color\n"
                   "● Ability to delete account\n"
                   "● Added a customization dropdown\n"
@@ -159,7 +238,7 @@ class _UpdatePageState extends State<UpdatePage> {
                 fontSize: isExpanded1 ? 14 : 20,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
               ),
-              child: Text('30 April 2023'),
+              child: Text('April 2023'),
             ),
             SizedBox(
               height: 25,
