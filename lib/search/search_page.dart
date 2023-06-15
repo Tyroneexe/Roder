@@ -1,6 +1,4 @@
 // ignore_for_file: non_constant_identifier_names, unused_local_variable, unused_field
-// import 'package:firebase_database/firebase_database.dart';
-// import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
@@ -63,7 +61,7 @@ class _SearchState extends State<Search> {
               controller: searchFilter,
               decoration: InputDecoration(
                 hintText: 'Sunday Breakfast Run',
-                //eg: BMW Breakfast Run
+                //Sunday Breakfast Run
                 hintStyle: const TextStyle(
                     fontFamily: 'OpenSans', fontSize: 18, color: Colors.grey),
                 enabledBorder: OutlineInputBorder(
