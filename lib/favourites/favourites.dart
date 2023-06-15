@@ -6,8 +6,8 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
+import 'package:roder/account/account_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../ui/theme.dart';
 
 class Favourites extends StatefulWidget {
@@ -230,9 +230,14 @@ class _FavouritesState extends State<Favourites> {
         elevation: 0,
         backgroundColor: context.theme.colorScheme.background,
         actions: [
-          CircleAvatar(
-            radius: 20,
-            backgroundImage: NetworkImage(user.photoURL!),
+          GestureDetector(
+            child: CircleAvatar(
+              radius: 22,
+              foregroundImage: NetworkImage(user.photoURL!),
+            ),
+            onTap: () {
+              Get.to(() => AccountPage());
+            },
           ),
           const SizedBox(
             width: 15,

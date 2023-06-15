@@ -44,6 +44,7 @@ Updates —>
 \
 
 / User update
+| Give each user a place in the database
 | Wrtie to Database 
 | Make host join ride when press on 'create ride'
 | Make Host Delete Ride
@@ -68,9 +69,6 @@ Updates —>
 
 /
 | Roder Marketplace
-\
-
-/ AI update
 \
 */
 

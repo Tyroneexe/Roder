@@ -41,7 +41,7 @@ class MyInputField extends StatelessWidget {
                 border: Border.all(
                     color: _getMainClr(
                         Provider.of<ColorProvider>(context).selectedColor),
-                    width: 1.0),
+                    width: 2.0),
                 borderRadius: BorderRadius.circular(12)),
             child: Row(children: [
               Expanded(
