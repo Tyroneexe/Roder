@@ -130,28 +130,26 @@ class _SearchState extends State<Search> {
                   Animation<double> animation, int index) {
                 final title = snapshot.child('Name').value.toString();
 
-                //if
-                if (searchFilter.text.isEmpty) {
+                if (searchFilter.text.isEmpty && isDateBarVisible == false) {
                   Map Rides = snapshot.value as Map;
                   Rides['key'] = snapshot.key;
+                  return listItem(Rides: Rides);
+                }
+                if (isDateBarVisible) {
+                  Map Rides = snapshot.value as Map;
                   if (Rides['Date'] ==
-                      DateFormat("d-MM-yyyy").format(_selectedDate)) {
+                      DateFormat("d MMMM yyyy").format(_selectedDate)) {
                     return listItem(Rides: Rides);
                   } else {
                     return Container();
                   }
-                }
-                //else if
-                else if (title
+                } else if (title
                     .toLowerCase()
                     .contains(searchFilter.text.toLowerCase().toString())) {
                   Map Rides = snapshot.value as Map;
                   Rides['key'] = snapshot.key;
-                  //if for update maybe
                   return listItem(Rides: Rides);
-                }
-                //else
-                else {
+                } else {
                   return Container();
                 }
               },

@@ -24,7 +24,7 @@ import 'add_task_bar.dart';
 Updates —>
 
 
-/ Noti update
+/
 | Customization dropdown in add page
 | update message popup
 | make dbrides load after button click
@@ -46,7 +46,7 @@ Updates —>
 | make rides expandable
 \
 
-/ User update
+/
 | Give each user a place in the database
 ===============================================
 | Wrtie to Database 
@@ -65,7 +65,7 @@ Updates —>
 | recommend a ride route based on previous ride routes (show friends(follows) rides)
 \
 
-/ iOs Update
+/
 | iOs compatible
 | log in with facebook and instagram
 | Let everyone see the polyline of the ride
