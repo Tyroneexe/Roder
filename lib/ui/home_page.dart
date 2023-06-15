@@ -33,7 +33,6 @@ Updates —>
 | ai art for app
 | Border of text fields
 =================================================
-| make search bar neon outburst
 | Feedback page in nav drawer
 | Red color of delete account
 | Fix image in home page

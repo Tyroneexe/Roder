@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:provider/provider.dart';
+import 'package:roder/account/account_page.dart';
 import 'package:roder/login/google_sign_in.dart';
 import 'package:roder/settings_page/settings_page.dart';
 import 'package:roder/ui/theme.dart';
 import 'package:roder/ui/update_page.dart';
 
+import '../feedback/feedback_page.dart';
 import '../provider/clrProvider.dart';
 
 class NavitionDrawer extends StatelessWidget {
@@ -95,21 +97,41 @@ class NavitionDrawer extends StatelessWidget {
               Get.to(() => UpdatePage());
             },
           ),
-          // ListTile(
-          //   leading: const Icon(
-          //     Icons.person,
-          //     size: 30,
-          //   ),
-          //   title: const Text(
-          //     'Account',
-          //     style: TextStyle(
-          //         fontFamily: 'OpenSans',
-          //         fontWeight: FontWeight.bold,
-          //         fontSize: 20,
-          //         color: Colors.grey),
-          //   ),
-          //   onTap: () {},
-          // ),
+          ListTile(
+            leading: const Icon(
+              Icons.person,
+              size: 30,
+            ),
+            title: const Text(
+              'Account',
+              style: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.grey),
+            ),
+            onTap: () {
+              Get.to(() => AccountPage());
+            },
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.feedback,
+              size: 30,
+              color: Get.isDarkMode ? Colors.white : Colors.grey[600],
+            ),
+            title: const Text(
+              'Feedback',
+              style: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.grey),
+            ),
+            onTap: () {
+              Get.to(() => FeedbackPage());
+            },
+          ),
           ListTile(
             leading: const Icon(
               Icons.info_rounded,
