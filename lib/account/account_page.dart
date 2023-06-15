@@ -75,7 +75,7 @@ class _AccountPageState extends State<AccountPage> {
                           ),
                           child: Center(
                             child: Text(
-                              'Logout',
+                              'Sign Out',
                               style: TextStyle(
                                 fontFamily: 'OpenSans',
                                 fontWeight: FontWeight.bold,
@@ -87,11 +87,8 @@ class _AccountPageState extends State<AccountPage> {
                             ),
                           ),
                         ),
-                        onTap: () async {
-                          final provider = Provider.of<GoogleSignInProvider>(
-                              context,
-                              listen: false);
-                          provider.logout();
+                        onTap: () {
+                          _showAlertDialog();
                         },
                       ),
                       SizedBox(
@@ -105,6 +102,60 @@ class _AccountPageState extends State<AccountPage> {
           ),
         ],
       ),
+    );
+  }
+
+  _showAlertDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Sign Out',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
+          content: Text(
+            'Are you sure you want to sign out of the existing account?',
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text(
+                'Yes',
+                style: TextStyle(
+                  color: rred,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () async {
+                final provider =
+                    Provider.of<GoogleSignInProvider>(context, listen: false);
+                provider.logout();
+              },
+            ),
+          ],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          elevation: 20,
+        );
+      },
     );
   }
 
