@@ -25,7 +25,6 @@ class _FavouritesState extends State<Favourites> {
   final user = FirebaseAuth.instance.currentUser!;
 
   Query dbRef = FirebaseDatabase.instance.ref().child('Rides');
-  // List<String> joinedRides = [];
 
   @override
   void initState() {
