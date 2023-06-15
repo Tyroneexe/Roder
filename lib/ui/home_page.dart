@@ -23,11 +23,6 @@ import 'add_task_bar.dart';
 
 Updates —>
 
-/ User update
-| Wrtie to Database 
-| Make host join ride when press on 'create ride'
-| Delete ride
-\
 
 / Noti update
 | Customization dropdown in add page
@@ -35,32 +30,47 @@ Updates —>
 | make dbrides load after button click
 | Notifications
 | fix splash screen
+| ai art for app
 =================================================
 | word counter on text fields in add ride page because people can add infinite text
+| Border of text fields
+| Find a way to add more images to the app to make it less boring
+| Look for inspiration on other apps
 | make search bar neon outburst
-| Make a Ride change-able when clicked
-| ai art for app
-| log in with facebook and instagram
-| Make Host Delete Ride
-| change color and images for the theme (main color blue)
 | be able to share links of rides
-| show app to BMW
+| Fix notifications
+| make more notifications (if someone has joined your ride, left etc)
+| PopUp when ride is clicked
+\
+
+/ User update
+| Wrtie to Database 
+| Make host join ride when press on 'create ride'
+| Make Host Delete Ride
+| Make a Ride change-able when clicked
+| Give people user names
+| Give people custom pfp
+| show who has joined the ride
+| Show app to BMW
+| Rides Near Me
+| Block users
+| Friends only can join (Accounts to follow(friend) someone)
+| recommend a ride route based on previous ride routes (show friends(follows) rides)
 \
 
 / iOs Update
-| iOs version
+| iOs compatible
+| log in with facebook and instagram
 | Let everyone see the polyline of the ride
-| add 'Detail' to the listItem of the ride widget
-| PopUp when ride is clicked
 | save polylines in database
-| make the splash screen the same font as the app
-| chage the font of the app
 | addvertisement to promote
 \
 
+/
+| Roder Marketplace
+\
+
 / AI update
-| In-app Purchases (Premium)
-| recommend a ride route based on previous ride routes
 \
 */
 
