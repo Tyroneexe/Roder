@@ -31,20 +31,19 @@ Updates —>
 | Notifications
 | fix splash screen
 | ai art for app
-=================================================
-| word counter on text fields in add ride page because people can add infinite text
 | Border of text fields
-| Find a way to add more images to the app to make it less boring
-| Look for inspiration on other apps
+=================================================
 | make search bar neon outburst
-| be able to share links of rides
+| Look for inspiration on other apps
 | Fix notifications
 | make more notifications (if someone has joined your ride, left etc)
+| Find a way to add more images to the app to make it less boring
 | PopUp when ride is clicked
 \
 
 / User update
 | Give each user a place in the database
+===============================================
 | Wrtie to Database 
 | Make host join ride when press on 'create ride'
 | Make Host Delete Ride
@@ -52,7 +51,8 @@ Updates —>
 | Give people user names
 | Give people custom pfp
 | show who has joined the ride
-| Show app to BMW
+| be able to share links of rides
+|||||| Show app to BMW
 | Rides Near Me
 | Block users
 | Friends only can join (Accounts to follow(friend) someone)

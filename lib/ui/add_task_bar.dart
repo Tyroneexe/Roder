@@ -82,7 +82,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     backgroundColor: _getMainClr(
                         Provider.of<ColorProvider>(context).selectedColor),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(18),
                     ),
                     elevation: 2,
                   ),

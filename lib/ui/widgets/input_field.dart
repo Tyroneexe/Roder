@@ -42,31 +42,36 @@ class MyInputField extends StatelessWidget {
                     color: _getMainClr(
                         Provider.of<ColorProvider>(context).selectedColor),
                     width: 2.0),
-                borderRadius: BorderRadius.circular(12)),
-            child: Row(children: [
-              Expanded(
+                borderRadius: BorderRadius.circular(18)),
+            child: Row(
+              children: [
+                Expanded(
                   child: TextFormField(
-                readOnly: widget == null ? false : true,
-                autofocus: false,
-                cursorColor:
-                    Get.isDarkMode ? Colors.grey[100] : Colors.grey[700],
-                controller: controller,
-                style: subTitleStyle,
-                decoration: InputDecoration(
-                  hintText: hint,
-                  hintStyle: subTitleStyle,
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                        color: context.theme.colorScheme.background, width: 0),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                        color: context.theme.colorScheme.background, width: 0),
+                    readOnly: widget == null ? false : true,
+                    autofocus: false,
+                    cursorColor:
+                        Get.isDarkMode ? Colors.grey[100] : Colors.grey[700],
+                    controller: controller,
+                    style: subTitleStyle,
+                    decoration: InputDecoration(
+                      hintText: hint,
+                      hintStyle: subTitleStyle,
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: context.theme.colorScheme.background,
+                            width: 0),
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: context.theme.colorScheme.background,
+                            width: 0),
+                      ),
+                    ),
                   ),
                 ),
-              )),
-              widget == null ? Container() : Container(child: widget)
-            ]),
+                if (widget != null) Container(child: widget),
+              ],
+            ),
           )
         ],
       ),
