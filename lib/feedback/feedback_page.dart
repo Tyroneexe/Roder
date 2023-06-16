@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:roder/ui/theme.dart';
 
 class FeedbackPage extends StatefulWidget {
   const FeedbackPage({super.key});
@@ -13,18 +14,25 @@ class _FeedbackPageState extends State<FeedbackPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(),
-      body: Container(
-          child: OutlinedButton(
-              child: Text(
-                'Send Email',
-                style: TextStyle(color: Colors.grey),
-              ),
-              onPressed: () {
-                //
-              })),
+      body: Center(
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: lightBlueClr,
+            padding: EdgeInsets.all(
+              20,
+            ),
+            textStyle: TextStyle(
+              fontSize: 24,
+            ),
+          ),
+          child: Text('Send Email'),
+          onPressed: () {},
+        ),
+      ),
     );
   }
 
+ 
   _appBar() {
     return AppBar(
       iconTheme:
@@ -33,4 +41,5 @@ class _FeedbackPageState extends State<FeedbackPage> {
       backgroundColor: context.theme.colorScheme.background,
     );
   }
+
 }

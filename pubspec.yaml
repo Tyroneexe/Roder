@@ -46,8 +46,7 @@ dependencies:
   awesome_notifications: ^0.7.4+1
   new_version_plus: ^0.0.10
   url_launcher: ^6.1.11
-  mailer: ^6.0.1
-
+  
   #storage
   provider: ^6.0.5
   shared_preferences: ^2.0.17
