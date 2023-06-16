@@ -9,11 +9,19 @@ class FeedbackPage extends StatefulWidget {
 }
 
 class _FeedbackPageState extends State<FeedbackPage> {
- 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(),
+      body: Container(
+          child: OutlinedButton(
+              child: Text(
+                'Send Email',
+                style: TextStyle(color: Colors.grey),
+              ),
+              onPressed: () {
+                //
+              })),
     );
   }
 
