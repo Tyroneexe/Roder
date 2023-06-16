@@ -267,7 +267,7 @@ class _SettingsState extends State<Settings> {
               child: Text(
                 'OK',
                 style: TextStyle(
-                  color: Colors.blue,
+                  color: rred,
                   fontWeight: FontWeight.bold,
                 ),
               ),

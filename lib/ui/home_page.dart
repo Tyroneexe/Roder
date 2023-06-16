@@ -32,16 +32,14 @@ Updates —>
 | fix splash screen
 | ai art for app
 | Border of text fields
+| Red color of delete account
+| Account page to Nav drawer
 =================================================
 | Feedback page in nav drawer
-| Red color of delete account
 | Fix image in home page
-| Account page to Nav drawer
-| Look for inspiration on other apps
 | Fix notifications
-| make more notifications (if someone has joined your ride, left etc)
 | Find a way to add more images to the app to make it less boring
-| PopUp when ride is clicked
+| Look for inspiration on other apps
 | make rides expandable
 \
 
@@ -56,6 +54,7 @@ Updates —>
 | Give people custom pfp
 | show who has joined the ride
 | Show who has made the ride when pressed on circle avatar of the rides
+| make more notifications (if someone has joined your ride, left etc)
 | be able to share links of rides
 |||||| Show app to BMW
 | Rides Near Me
