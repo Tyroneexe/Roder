@@ -377,7 +377,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
               backgroundColor: index == 0
                   ? primaryClr
                   : index == 1
-                      ? iceCold
+                      ? lightBlueClr
                       : vBlue,
               child: _selectedColor == index
                   ? const Icon(

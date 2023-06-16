@@ -34,12 +34,10 @@ Updates —>
 | Border of text fields
 | Red color of delete account
 | Account page to Nav drawer
+| Fix image in home page
 =================================================
 | Feedback page in nav drawer
-| Fix image in home page
 | Fix notifications
-| Find a way to add more images to the app to make it less boring
-| Look for inspiration on other apps
 | make rides expandable
 \
 
@@ -56,7 +54,7 @@ Updates —>
 | Show who has made the ride when pressed on circle avatar of the rides
 | make more notifications (if someone has joined your ride, left etc)
 | be able to share links of rides
-|||||| Show app to BMW
+======Show app to BMW
 | Rides Near Me
 | Block users
 | Friends only can join (Accounts to follow(friend) someone)
@@ -238,7 +236,7 @@ class _HomePageState extends State<HomePage> {
       flexibleSpace: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/Roderr.jpg'),
+            image: AssetImage('assets/splash_screen.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -449,13 +447,13 @@ class _HomePageState extends State<HomePage> {
   _getBGClr(int no) {
     switch (no) {
       case 0:
-        return lightBlueClr;
+        return blueClr;
       case 1:
-        return iceCold;
+        return lightBlueClr;
       case 2:
         return vBlue;
       default:
-        return lightBlueClr;
+        return blueClr;
     }
   }
 

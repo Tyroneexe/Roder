@@ -342,12 +342,12 @@ _addedToFav() {
 _getBGClr(int no) {
   switch (no) {
     case 0:
-      return lightBlueClr;
+      return blueClr;
     case 1:
-      return iceCold;
+      return lightBlueClr;
     case 2:
       return vBlue;
     default:
-      return lightBlueClr;
+      return blueClr;
   }
 }
