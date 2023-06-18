@@ -30,7 +30,6 @@ Updates —>
 | update message popup
 | make dbrides load after button click
 | Notifications
-
 | fix splash screen
 | Border of text fields
 | Red color of delete account
@@ -41,6 +40,7 @@ Updates —>
 | .slide for nav drawer
 | make rides expandable
 | Feedback page in nav drawer
+| Update Nav drawer
 \
 
 /
@@ -61,6 +61,14 @@ Updates —>
 | Block users
 | Friends only can join (Accounts to follow(friend) someone)
 | recommend a ride route based on previous ride routes (show friends(follows) rides)
+| Notification page for when people add you as fried, join, leave, create, etc.
+\
+
+/ Animation update
+| Use Rive to add animations to the app
+| Cool animation for opening nav drawer
+| MAYBE beter animations for rides appearing
+| Floating /maybe transparent\ nav bar
 \
 
 /
