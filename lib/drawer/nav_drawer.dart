@@ -60,7 +60,7 @@ class NavitionDrawer extends StatelessWidget {
             onTap: () {
               Get.to(() => Settings());
             },
-          ).animate().fadeIn(duration: 800.ms),
+          ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
           ListTile(
             leading: Icon(
               Icons.star,
@@ -78,7 +78,7 @@ class NavitionDrawer extends StatelessWidget {
             onTap: () {
               _openAppReview();
             },
-          ).animate().fadeIn(duration: 800.ms),
+          ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
           ListTile(
             leading: Icon(
               Icons.checklist_rounded,
@@ -96,7 +96,7 @@ class NavitionDrawer extends StatelessWidget {
             onTap: () {
               Get.to(() => UpdatePage());
             },
-          ).animate().fadeIn(duration: 800.ms),
+          ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
           ListTile(
             leading: const Icon(
               Icons.person,
@@ -113,7 +113,7 @@ class NavitionDrawer extends StatelessWidget {
             onTap: () {
               Get.to(() => AccountPage());
             },
-          ).animate().fadeIn(duration: 800.ms),
+          ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
           ListTile(
             leading: Icon(
               Icons.feedback,
@@ -131,7 +131,7 @@ class NavitionDrawer extends StatelessWidget {
             onTap: () {
               Get.to(() => FeedbackPage());
             },
-          ).animate().fadeIn(duration: 800.ms),
+          ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
           ListTile(
             leading: const Icon(
               Icons.info_rounded,
@@ -149,7 +149,7 @@ class NavitionDrawer extends StatelessWidget {
               _aboutRoder(context);
               // Get.to(() => Test());
             },
-          ).animate().fadeIn(duration: 800.ms),
+          ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
           Divider(
             color: Get.isDarkMode ? Colors.white : Colors.black,
             height: 10,
@@ -174,7 +174,7 @@ class NavitionDrawer extends StatelessWidget {
                   Provider.of<GoogleSignInProvider>(context, listen: false);
               provider.logout();
             },
-          ).animate().fadeIn(duration: 800.ms),
+          ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
         ],
       );
 
