@@ -1,5 +1,7 @@
 // ignore_for_file: unused_field
 
+import 'dart:async';
+
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -22,7 +24,8 @@ class AddTaskPage extends StatefulWidget {
   State<AddTaskPage> createState() => _AddTaskPageState();
 }
 
-class _AddTaskPageState extends State<AddTaskPage> {
+class _AddTaskPageState extends State<AddTaskPage>
+    with SingleTickerProviderStateMixin {
   //Database
   final referenceDatabase = FirebaseDatabase.instance;
   final user = FirebaseAuth.instance.currentUser!;
@@ -41,6 +44,36 @@ class _AddTaskPageState extends State<AddTaskPage> {
   int _selectedColor = 0;
   Color _mainColor = lightBlueClr;
   bool isColorVisible = false;
+
+  //animation
+  AnimationController? _animationController;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 700),
+    );
+    _startTimer();
+  }
+
+  @override
+  void dispose() {
+    _animationController?.dispose();
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 5), (_) {
+      if (_animationController!.isCompleted) {
+        _animationController!.reset();
+      }
+      _animationController!.forward();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,23 +109,51 @@ class _AddTaskPageState extends State<AddTaskPage> {
               Container(
                 width: double.infinity,
                 height: 52,
-                margin: const EdgeInsets.only(top: 8.0),
+                margin: const EdgeInsets.only(
+                  top: 8.0,
+                ),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: _getMainClr(
-                        Provider.of<ColorProvider>(context).selectedColor),
+                      Provider.of<ColorProvider>(context).selectedColor,
+                    ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
+                      borderRadius: BorderRadius.circular(
+                        18,
+                      ),
                     ),
                     elevation: 2,
                   ),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Mapp()));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Mapp(),
+                      ),
+                    );
                   },
-                  child: Text(
-                    'Google Maps',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 60,
+                      ),
+                      RotationTransition(
+                        turns: _animationController!,
+                        child: Icon(
+                          Icons.place_outlined,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(width: 8), // Adjust the width as needed
+                      Text(
+                        'Google Maps',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
