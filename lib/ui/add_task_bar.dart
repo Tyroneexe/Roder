@@ -370,6 +370,8 @@ class _AddTaskPageState extends State<AddTaskPage>
       // User pressed cancel, do nothing
     } else {
       String formatedTime = pickedTime.format(context);
+      String amPmIndicator = pickedTime.hour < 12 ? 'AM' : 'PM';
+      formatedTime = formatedTime + ' ' + amPmIndicator;
       if (isStartTime == true) {
         setState(() {
           _startTime = formatedTime;
