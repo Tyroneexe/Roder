@@ -46,33 +46,23 @@ class _AddTaskPageState extends State<AddTaskPage>
   bool isColorVisible = false;
 
   //animation
-  AnimationController? _animationController;
-  Timer? _timer;
+  late AnimationController _animationController;
+  late Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
     _animationController = AnimationController(
-      vsync: this,
       duration: Duration(milliseconds: 700),
-    );
-    _startTimer();
+      vsync: this,
+    )..repeat(reverse: true);
+    _animation = Tween(begin: -0.5, end: 0.5).animate(_animationController);
   }
 
   @override
   void dispose() {
-    _animationController?.dispose();
-    _timer?.cancel();
+    _animationController.dispose();
     super.dispose();
-  }
-
-  void _startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 5), (_) {
-      if (_animationController!.isCompleted) {
-        _animationController!.reset();
-      }
-      _animationController!.forward();
-    });
   }
 
   @override
@@ -138,12 +128,21 @@ class _AddTaskPageState extends State<AddTaskPage>
                       SizedBox(
                         width: 60,
                       ),
-                      RotationTransition(
-                        turns: _animationController!,
-                        child: Icon(
-                          Icons.place_outlined,
-                          color: Colors.white,
-                        ),
+                      AnimatedBuilder(
+                        animation: _animationController,
+                        builder: (context, child) {
+                          return Transform.translate(
+                            offset: Offset(
+                                0.0,
+                                6.0 *
+                                    _animation
+                                        .value), // Adjust the bounce height as needed
+                            child: Icon(
+                              Icons.place_outlined,
+                              color: Colors.white,
+                            ),
+                          );
+                        },
                       ),
                       SizedBox(width: 8), // Adjust the width as needed
                       Text(
