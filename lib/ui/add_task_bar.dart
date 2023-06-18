@@ -1,6 +1,5 @@
 // ignore_for_file: unused_field
 
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -209,7 +208,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         _addedRideBar();
                         //join ride when click on button
                       }
-                      _scheduleNotification();
                     },
                   ),
                 ],
@@ -221,28 +219,28 @@ class _AddTaskPageState extends State<AddTaskPage> {
     );
   }
 
-  DateTime? _selectedDateTime;
+  // DateTime? _selectedDateTime;
 
-  _scheduleNotification() async {
-    DateTime scheduleDateTime = _selectedDateTime ?? DateTime.now();
-    //
-    DateTime notificationDateTime =
-        scheduleDateTime.subtract(Duration(days: 1));
-    if (_selectedDateTime != null) {
-      await AwesomeNotifications().createNotification(
-          content: NotificationContent(
-            id: -1,
-            channelKey: 'basic_channel',
-            title: 'There is a Ride Tomorrow!',
-            body: "Full up your bike and be ready",
-          ),
-          schedule: NotificationCalendar.fromDate(date: notificationDateTime),
-          actionButtons: [
-            NotificationActionButton(
-                key: 'ACTION_BUTTON_OPEN', label: 'Open', autoDismissible: true)
-          ]);
-    }
-  }
+  // _scheduleNotification() async {
+  //   DateTime scheduleDateTime = _selectedDateTime ?? DateTime.now();
+  //   //
+  //   DateTime notificationDateTime =
+  //       scheduleDateTime.subtract(Duration(days: 1));
+  //   if (_selectedDateTime != null) {
+  //     await AwesomeNotifications().createNotification(
+  //         content: NotificationContent(
+  //           id: -1,
+  //           channelKey: 'basic_channel',
+  //           title: 'There is a Ride Tomorrow!',
+  //           body: "Fill up your bike and be ready",
+  //         ),
+  //         schedule: NotificationCalendar.fromDate(date: notificationDateTime),
+  //         actionButtons: [
+  //           NotificationActionButton(
+  //               key: 'ACTION_BUTTON_OPEN', label: 'Open', autoDismissible: true)
+  //         ]);
+  //   }
+  // }
 
   _getDateFromUser() async {
     DateTime? pickerDate = await showDatePicker(
@@ -261,13 +259,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
     if (pickerDate != null) {
       setState(() {
         _selectedDate = DateFormat("d MMMM yyyy").format(pickerDate);
-      });
-      setState(() {
-        _selectedDateTime = DateTime(
-          pickerDate.year,
-          pickerDate.month,
-          pickerDate.day,
-        );
       });
     } else {
       // Cancel action

@@ -2,7 +2,6 @@
 
 import 'dart:async';
 
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
@@ -36,9 +35,9 @@ Updates —>
 | Account page to Nav drawer
 | Fix image in home page
 =================================================
-| Feedback page in nav drawer
 | Fix notifications
 | make rides expandable
+| Feedback page in nav drawer
 \
 
 /
@@ -112,12 +111,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-
-    AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
-      if (!isAllowed) {
-        AwesomeNotifications().requestPermissionToSendNotifications();
-      }
-    });
 
     // Instantiate NewVersion manager object (Using GCP Console app as example)
     final newVersion = NewVersionPlus(
