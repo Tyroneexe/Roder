@@ -30,15 +30,15 @@ Updates —>
 | update message popup
 | make dbrides load after button click
 | Notifications
+
 | fix splash screen
-| ai art for app
 | Border of text fields
 | Red color of delete account
-| Account page to Nav drawer
 | Fix image in home page
 | modify notifictations
+| Fixed time picker in add page
 =================================================
-| see if time picker works on real phone
+| .slide for nav drawer
 | make rides expandable
 | Feedback page in nav drawer
 \
@@ -487,12 +487,18 @@ class _HomePageState extends State<HomePage> {
           Rides['key'] = snapshot.key;
           if (rideFilter3 == false) {
             if (joinedRides.contains(Rides['key'])) {
-              return listItemFav(Rides: Rides).animate().fade();
+              return listItemFav(Rides: Rides)
+                  .animate()
+                  .slideX(duration: 300.ms)
+                  .fade(duration: 400.ms);
             } else {
               return Container();
             }
           } else {
-            return listItem(Rides: Rides).animate().fade();
+            return listItem(Rides: Rides)
+                .animate()
+                .slideX(duration: 300.ms)
+                .fade(duration: 400.ms);
           }
         },
       ),

@@ -132,13 +132,19 @@ class _SearchState extends State<Search> {
                 if (searchFilter.text.isEmpty && isDateBarVisible == false) {
                   Map Rides = snapshot.value as Map;
                   Rides['key'] = snapshot.key;
-                  return listItem(Rides: Rides).animate().fade();
+                  return listItem(Rides: Rides)
+                      .animate()
+                      .slideX(duration: 300.ms)
+                      .fade(duration: 400.ms);
                 }
                 if (isDateBarVisible) {
                   Map Rides = snapshot.value as Map;
                   if (Rides['Date'] ==
                       DateFormat("d MMMM yyyy").format(_selectedDate)) {
-                    return listItem(Rides: Rides).animate().fade();
+                    return listItem(Rides: Rides)
+                        .animate()
+                        .slideX(duration: 300.ms)
+                        .fade(duration: 400.ms);
                   } else {
                     return Container();
                   }
@@ -147,7 +153,10 @@ class _SearchState extends State<Search> {
                     .contains(searchFilter.text.toLowerCase().toString())) {
                   Map Rides = snapshot.value as Map;
                   Rides['key'] = snapshot.key;
-                  return listItem(Rides: Rides).animate().fade();
+                  return listItem(Rides: Rides)
+                      .animate()
+                      .slideX(duration: 300.ms)
+                      .fade(duration: 400.ms);
                 } else {
                   return Container();
                 }

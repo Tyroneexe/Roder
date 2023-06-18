@@ -11,9 +11,8 @@ class UpdatePage extends StatefulWidget {
 }
 
 class _UpdatePageState extends State<UpdatePage> {
-  bool isExpanded1 = false;
-  bool isExpanded2 = false;
-  bool isExpanded3 = false;
+  bool isExpanded = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +27,10 @@ class _UpdatePageState extends State<UpdatePage> {
                 style: headingStyle,
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
+            _ver105(),
             SizedBox(
               height: 20,
             ),
@@ -46,19 +49,19 @@ class _UpdatePageState extends State<UpdatePage> {
     );
   }
 
-  _ver104() {
+  _ver105() {
     return AnimatedContainer(
       duration: Duration(milliseconds: 200),
-      width: isExpanded3
+      width: isExpanded
           ? MediaQuery.of(context).size.width
           : MediaQuery.of(context).size.width - 40,
-      height: isExpanded3 ? 450 : 160,
+      height: isExpanded ? 520 : 160,
       child: FlutterFancyContainer(
-        colorOne: lightBlueClr,
-        colorTwo: darkbl50,
+        colorOne: themeRed,
+        colorTwo: vBlue,
         onTap: () {
           setState(() {
-            isExpanded3 = !isExpanded3;
+            isExpanded = !isExpanded;
           });
         },
         child: Column(
@@ -73,17 +76,17 @@ class _UpdatePageState extends State<UpdatePage> {
               style: TextStyle(
                 fontFamily: 'OpenSans',
                 fontWeight: FontWeight.bold,
-                fontSize: isExpanded3 ? 24 : 30,
+                fontSize: isExpanded ? 24 : 30,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
               ),
-              child: Text('Version 1.0.4'),
+              child: Text('Version 1.0.5'),
             ),
             AnimatedDefaultTextStyle(
               duration: Duration(milliseconds: 200),
               style: TextStyle(
                 fontFamily: 'OpenSans',
                 fontWeight: FontWeight.bold,
-                fontSize: isExpanded3 ? 14 : 20,
+                fontSize: isExpanded ? 14 : 20,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
               ),
               child: Text('June 2023'),
@@ -96,7 +99,85 @@ class _UpdatePageState extends State<UpdatePage> {
               style: TextStyle(
                   fontFamily: 'OpenSans',
                   fontWeight: FontWeight.w400,
-                  fontSize: isExpanded3 ? 20 : 0,
+                  fontSize: isExpanded ? 20 : 0,
+                  color: Get.isDarkMode ? Colors.white : Colors.black),
+              child: Container(
+                padding: EdgeInsets.only(left: 20, right: 20),
+                child: Text(
+                  //animations added for ui
+                  //Feedback
+                  "Bug Fixes:\n"
+                  "● Fixed the Notification System\n"
+                  "● Fixed the Time Picker in Add Page\n"
+                  "● Fixed the Splash Screen\n\n"
+                  "New Features:\n"
+                  "● Expandable Rides\n"
+                  "● Improved the design of the app\n"
+                  "● Improved Home Page\n",
+                  style: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _ver104() {
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 200),
+      width: isExpanded
+          ? MediaQuery.of(context).size.width
+          : MediaQuery.of(context).size.width - 40,
+      height: isExpanded ? 450 : 160,
+      child: FlutterFancyContainer(
+        colorOne: lightBlueClr,
+        colorTwo: darkbl50,
+        onTap: () {
+          setState(() {
+            isExpanded = !isExpanded;
+          });
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 45,
+            ),
+            AnimatedDefaultTextStyle(
+              duration: Duration(milliseconds: 200),
+              style: TextStyle(
+                fontFamily: 'OpenSans',
+                fontWeight: FontWeight.bold,
+                fontSize: isExpanded ? 24 : 30,
+                color: Get.isDarkMode ? Colors.white : Colors.black,
+              ),
+              child: Text('Version 1.0.4'),
+            ),
+            AnimatedDefaultTextStyle(
+              duration: Duration(milliseconds: 200),
+              style: TextStyle(
+                fontFamily: 'OpenSans',
+                fontWeight: FontWeight.bold,
+                fontSize: isExpanded ? 14 : 20,
+                color: Get.isDarkMode ? Colors.white : Colors.black,
+              ),
+              child: Text('June 2023'),
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            AnimatedDefaultTextStyle(
+              duration: Duration(milliseconds: 200),
+              style: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontWeight: FontWeight.w400,
+                  fontSize: isExpanded ? 20 : 0,
                   color: Get.isDarkMode ? Colors.white : Colors.black),
               child: Container(
                 padding: EdgeInsets.only(left: 20, right: 20),
@@ -123,16 +204,16 @@ class _UpdatePageState extends State<UpdatePage> {
   _ver101() {
     return AnimatedContainer(
       duration: Duration(milliseconds: 200),
-      width: isExpanded2
+      width: isExpanded
           ? MediaQuery.of(context).size.width
           : MediaQuery.of(context).size.width - 40,
-      height: isExpanded2 ? 620 : 160,
+      height: isExpanded ? 620 : 160,
       child: FlutterFancyContainer(
         colorOne: blueClr,
         colorTwo: themeRed,
         onTap: () {
           setState(() {
-            isExpanded2 = !isExpanded2;
+            isExpanded = !isExpanded;
           });
         },
         child: Column(
@@ -147,17 +228,17 @@ class _UpdatePageState extends State<UpdatePage> {
               style: TextStyle(
                 fontFamily: 'OpenSans',
                 fontWeight: FontWeight.bold,
-                fontSize: isExpanded2 ? 24 : 30,
+                fontSize: isExpanded ? 24 : 30,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
               ),
-              child: Text('Version 1.0.2'),
+              child: Text('Version 1.0.1'),
             ),
             AnimatedDefaultTextStyle(
               duration: Duration(milliseconds: 200),
               style: TextStyle(
                 fontFamily: 'OpenSans',
                 fontWeight: FontWeight.bold,
-                fontSize: isExpanded2 ? 14 : 20,
+                fontSize: isExpanded ? 14 : 20,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
               ),
               child: Text('May 2023'),
@@ -170,7 +251,7 @@ class _UpdatePageState extends State<UpdatePage> {
               style: TextStyle(
                   fontFamily: 'OpenSans',
                   fontWeight: FontWeight.w400,
-                  fontSize: isExpanded2 ? 20 : 0,
+                  fontSize: isExpanded ? 20 : 0,
                   color: Get.isDarkMode ? Colors.white : Colors.black),
               child: Container(
                 padding: EdgeInsets.only(left: 20, right: 20),
@@ -201,16 +282,16 @@ class _UpdatePageState extends State<UpdatePage> {
   _launchApp() {
     return AnimatedContainer(
       duration: Duration(milliseconds: 200),
-      width: isExpanded1
+      width: isExpanded
           ? MediaQuery.of(context).size.width
           : MediaQuery.of(context).size.width - 40,
-      height: isExpanded1 ? 550 : 160,
+      height: isExpanded ? 550 : 160,
       child: FlutterFancyContainer(
         colorOne: darkbl50,
         colorTwo: iceCold,
         onTap: () {
           setState(() {
-            isExpanded1 = !isExpanded1;
+            isExpanded = !isExpanded;
           });
         },
         child: Column(
@@ -225,7 +306,7 @@ class _UpdatePageState extends State<UpdatePage> {
               style: TextStyle(
                 fontFamily: 'OpenSans',
                 fontWeight: FontWeight.bold,
-                fontSize: isExpanded1 ? 24 : 30,
+                fontSize: isExpanded ? 24 : 30,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
               ),
               child: Text('Launch of the App'),
@@ -235,7 +316,7 @@ class _UpdatePageState extends State<UpdatePage> {
               style: TextStyle(
                 fontFamily: 'OpenSans',
                 fontWeight: FontWeight.bold,
-                fontSize: isExpanded1 ? 14 : 20,
+                fontSize: isExpanded ? 14 : 20,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
               ),
               child: Text('April 2023'),
@@ -248,7 +329,7 @@ class _UpdatePageState extends State<UpdatePage> {
               style: TextStyle(
                 fontFamily: 'OpenSans',
                 fontWeight: FontWeight.bold,
-                fontSize: isExpanded1 ? 24 : 0,
+                fontSize: isExpanded ? 24 : 0,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
               ),
               child: Container(

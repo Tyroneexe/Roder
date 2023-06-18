@@ -204,7 +204,10 @@ class _FavouritesState extends State<Favourites> {
                       //
                       //
                       if (joinedRides.contains(Rides['key'])) {
-                        return listItem(Rides: Rides).animate().fade();
+                        return listItem(Rides: Rides)
+                            .animate()
+                            .slideX(duration: 300.ms)
+                            .fade(duration: 400.ms);
                       } else {
                         return Container();
                       }
