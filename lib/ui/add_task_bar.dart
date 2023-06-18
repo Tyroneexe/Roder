@@ -207,7 +207,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         }).asStream();
                         _titleController.clear();
                         _addedRideBar();
-                        //join ride when click on button
                       }
                       _scheduleNotification();
                     },
@@ -221,15 +220,19 @@ class _AddTaskPageState extends State<AddTaskPage> {
     );
   }
 
-  DateTime? _selectedDateTime;
+  // _selectedDate is for when the ride is happening (completly seperate from the notificaitons)
+  // _selectedDateTime is the raw date for the notification
+  // notificationDateTime is the day before the ride for the notification (the actual notifiaction)
+  // scheduleDateTime is just there for null checking, it is pretty much unneccasssary
+
+  DateTime _selectedDateTime = DateTime.now();
 
   _scheduleNotification() async {
-    DateTime scheduleDateTime = _selectedDateTime ?? DateTime.now();
+    DateTime scheduleDateTime = _selectedDateTime;
     DateTime notificationDateTime =
         scheduleDateTime.subtract(Duration(days: 1));
 
     if (scheduleDateTime.day == DateTime.now().day) {
-      // Create the notification for today
       await AwesomeNotifications().createNotification(
         content: NotificationContent(
           id: -1,
@@ -242,8 +245,20 @@ class _AddTaskPageState extends State<AddTaskPage> {
               key: 'ACTION_BUTTON_OPEN', label: 'Open', autoDismissible: true)
         ],
       );
+    } else if (scheduleDateTime.day == DateTime.now().day + 1) {
+      await AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: -1,
+          channelKey: 'channelKey',
+          title: 'There is a Ride Tomorrow!',
+          body: "Fill up your bike and be ready",
+        ),
+        actionButtons: [
+          NotificationActionButton(
+              key: 'ACTION_BUTTON_OPEN', label: 'Open', autoDismissible: true)
+        ],
+      );
     } else {
-      // Create the notification for a different date
       await AwesomeNotifications().createNotification(
         content: NotificationContent(
           id: -1,
@@ -277,7 +292,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
     if (pickerDate != null) {
       setState(() {
         _selectedDate = DateFormat("d MMMM yyyy").format(pickerDate);
-        _selectedDateTime = pickerDate;
       });
       setState(() {
         _selectedDateTime = DateTime(
@@ -286,8 +300,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
           pickerDate.day,
         );
       });
-    } else {
-      // Cancel action
     }
   }
 

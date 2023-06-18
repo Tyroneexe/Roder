@@ -41,7 +41,6 @@ Updates —>
 | Feedback page in nav drawer
 | see if time picker works on real phone
 | modify notifictations
-| 
 \
 
 /
