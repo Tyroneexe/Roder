@@ -2,6 +2,7 @@
 import 'dart:typed_data';
 import 'dart:ui';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,6 +27,17 @@ Future<void> main() async {
   //
   await GetStorage.init();
   //
+  AwesomeNotifications().initialize(
+    null,
+    [
+      NotificationChannel(
+        channelKey: 'channelKey',
+        channelName: 'channelName',
+        channelDescription: 'channelDescription',
+      )
+    ],
+    debug: true,
+  );
   //
 
   //

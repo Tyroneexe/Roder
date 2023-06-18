@@ -1,5 +1,6 @@
 // ignore_for_file: unused_field
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/googlemaps/maps.dart';
-import 'package:roder/services/notification_services.dart';
 import 'package:roder/ui/theme.dart';
 import 'package:roder/ui/widgets/button.dart';
 import 'package:roder/ui/widgets/input_field.dart';
@@ -23,8 +23,6 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
-  //Noti
-  NotificationServices notificationServices = NotificationServices();
   //Database
   final referenceDatabase = FirebaseDatabase.instance;
   final user = FirebaseAuth.instance.currentUser!;
@@ -211,8 +209,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         _addedRideBar();
                         //join ride when click on button
                       }
-                      notificationServices.sendNofitcations(
-                          "Test", 'This is a test');
+                      _scheduleNotification();
                     },
                   ),
                 ],
@@ -224,28 +221,28 @@ class _AddTaskPageState extends State<AddTaskPage> {
     );
   }
 
-  // DateTime? _selectedDateTime;
+  DateTime? _selectedDateTime;
 
-  // _scheduleNotification() async {
-  //   DateTime scheduleDateTime = _selectedDateTime ?? DateTime.now();
-  //   //
-  //   DateTime notificationDateTime =
-  //       scheduleDateTime.subtract(Duration(days: 1));
-  //   if (_selectedDateTime != null) {
-  //     await AwesomeNotifications().createNotification(
-  //         content: NotificationContent(
-  //           id: -1,
-  //           channelKey: 'basic_channel',
-  //           title: 'There is a Ride Tomorrow!',
-  //           body: "Fill up your bike and be ready",
-  //         ),
-  //         schedule: NotificationCalendar.fromDate(date: notificationDateTime),
-  //         actionButtons: [
-  //           NotificationActionButton(
-  //               key: 'ACTION_BUTTON_OPEN', label: 'Open', autoDismissible: true)
-  //         ]);
-  //   }
-  // }
+  _scheduleNotification() async {
+    DateTime scheduleDateTime = _selectedDateTime ?? DateTime.now();
+    //
+    DateTime notificationDateTime =
+        scheduleDateTime.subtract(Duration(days: 1));
+    if (_selectedDateTime != null) {
+      await AwesomeNotifications().createNotification(
+          content: NotificationContent(
+            id: -1,
+            channelKey: 'channelKey',
+            title: 'There is a Ride Tomorrow!',
+            body: "Full up your bike and be ready",
+          ),
+          schedule: NotificationCalendar.fromDate(date: notificationDateTime),
+          actionButtons: [
+            NotificationActionButton(
+                key: 'ACTION_BUTTON_OPEN', label: 'Open', autoDismissible: true)
+          ]);
+    }
+  }
 
   _getDateFromUser() async {
     DateTime? pickerDate = await showDatePicker(
@@ -264,6 +261,13 @@ class _AddTaskPageState extends State<AddTaskPage> {
     if (pickerDate != null) {
       setState(() {
         _selectedDate = DateFormat("d MMMM yyyy").format(pickerDate);
+      });
+      setState(() {
+        _selectedDateTime = DateTime(
+          pickerDate.year,
+          pickerDate.month,
+          pickerDate.day,
+        );
       });
     } else {
       // Cancel action
@@ -296,6 +300,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
         hour: int.parse(_startTime.split(":")[0]),
         minute: int.parse(_startTime.split(":")[1].split(" ")[0]),
       ),
+      useRootNavigator: false,
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: _getPickerTheme(context),
@@ -311,7 +316,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
     if (_titleController.text.isNotEmpty &&
         controllerProvider.fromController.text.isNotEmpty &&
         controllerProvider.toController.text.isNotEmpty) {
-      // Get.to(() => const NavBar());
+      // Get.to(() => const HomePage());
       AppPage.gethome();
       return true;
     } else if (_titleController.text.isEmpty ||

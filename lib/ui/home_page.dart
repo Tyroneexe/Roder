@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
@@ -11,7 +12,6 @@ import 'package:get/get.dart';
 import 'package:new_version_plus/new_version_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/favourites/favourites.dart';
-import 'package:roder/services/notification_services.dart';
 import 'package:roder/ui/theme.dart';
 import 'package:roder/ui/widgets/frosted_glass.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,6 +39,8 @@ Updates —>
 | Fix notifications
 | make rides expandable
 | Feedback page in nav drawer
+| see if time picker works on real phone
+| Work on notifiactions for the app
 \
 
 /
@@ -109,13 +111,15 @@ class _HomePageState extends State<HomePage> {
   DatabaseReference reference = FirebaseDatabase.instance.ref().child('Rides');
   final databaseReference = FirebaseDatabase.instance.ref();
   //
-  NotificationServices notificationServices = NotificationServices();
-  //
   @override
   void initState() {
     super.initState();
 
-    notificationServices.initNotifications();
+    AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+      if (!isAllowed) {
+        AwesomeNotifications().requestPermissionToSendNotifications();
+      }
+    });
 
     // Instantiate NewVersion manager object (Using GCP Console app as example)
     final newVersion = NewVersionPlus(
