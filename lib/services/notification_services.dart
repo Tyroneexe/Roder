@@ -5,7 +5,7 @@ class NotificationServices {
       FlutterLocalNotificationsPlugin();
 
   final AndroidInitializationSettings _androidInitializationSettings =
-      AndroidInitializationSettings('assets/appicon.png');
+      AndroidInitializationSettings('splash');
 
   void initNotifications() async {
     InitializationSettings initializationSettings = InitializationSettings(

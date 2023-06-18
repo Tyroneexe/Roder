@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:new_version_plus/new_version_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/favourites/favourites.dart';
+import 'package:roder/services/notification_services.dart';
 import 'package:roder/ui/theme.dart';
 import 'package:roder/ui/widgets/frosted_glass.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -108,9 +109,13 @@ class _HomePageState extends State<HomePage> {
   DatabaseReference reference = FirebaseDatabase.instance.ref().child('Rides');
   final databaseReference = FirebaseDatabase.instance.ref();
   //
+  NotificationServices notificationServices = NotificationServices();
+  //
   @override
   void initState() {
     super.initState();
+
+    notificationServices.initNotifications();
 
     // Instantiate NewVersion manager object (Using GCP Console app as example)
     final newVersion = NewVersionPlus(

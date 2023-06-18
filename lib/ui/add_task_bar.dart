@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/googlemaps/maps.dart';
+import 'package:roder/services/notification_services.dart';
 import 'package:roder/ui/theme.dart';
 import 'package:roder/ui/widgets/button.dart';
 import 'package:roder/ui/widgets/input_field.dart';
@@ -22,6 +23,8 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
+  //Noti
+  NotificationServices notificationServices = NotificationServices();
   //Database
   final referenceDatabase = FirebaseDatabase.instance;
   final user = FirebaseAuth.instance.currentUser!;
@@ -208,6 +211,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         _addedRideBar();
                         //join ride when click on button
                       }
+                      notificationServices.sendNofitcations(
+                          "Test", 'This is a test');
                     },
                   ),
                 ],
