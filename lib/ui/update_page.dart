@@ -112,7 +112,7 @@ class _UpdatePageState extends State<UpdatePage> {
                   "● Fixed the Splash Screen\n\n"
                   "New Features:\n"
                   "● Expandable Rides\n"
-                  "● Improved the design of the app\n"
+                  "● Improved the design and flow of Roder\n"
                   "● Improved Home Page\n",
                   style: TextStyle(
                       fontFamily: 'OpenSans',

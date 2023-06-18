@@ -36,11 +36,11 @@ Updates —>
 | Fix image in home page
 | modify notifictations
 | Fixed time picker in add page
+| Update Nav drawer
 =================================================
 | .slide for nav drawer
 | make rides expandable
 | Feedback page in nav drawer
-| Update Nav drawer
 \
 
 /
