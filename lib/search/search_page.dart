@@ -3,6 +3,7 @@ import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -131,13 +132,13 @@ class _SearchState extends State<Search> {
                 if (searchFilter.text.isEmpty && isDateBarVisible == false) {
                   Map Rides = snapshot.value as Map;
                   Rides['key'] = snapshot.key;
-                  return listItem(Rides: Rides);
+                  return listItem(Rides: Rides).animate().fade();
                 }
                 if (isDateBarVisible) {
                   Map Rides = snapshot.value as Map;
                   if (Rides['Date'] ==
                       DateFormat("d MMMM yyyy").format(_selectedDate)) {
-                    return listItem(Rides: Rides);
+                    return listItem(Rides: Rides).animate().fade();
                   } else {
                     return Container();
                   }
@@ -146,7 +147,7 @@ class _SearchState extends State<Search> {
                     .contains(searchFilter.text.toLowerCase().toString())) {
                   Map Rides = snapshot.value as Map;
                   Rides['key'] = snapshot.key;
-                  return listItem(Rides: Rides);
+                  return listItem(Rides: Rides).animate().fade();
                 } else {
                   return Container();
                 }

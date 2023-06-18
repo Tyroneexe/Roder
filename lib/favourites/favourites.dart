@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:roder/account/account_page.dart';
@@ -203,7 +204,7 @@ class _FavouritesState extends State<Favourites> {
                       //
                       //
                       if (joinedRides.contains(Rides['key'])) {
-                        return listItem(Rides: Rides);
+                        return listItem(Rides: Rides).animate().fade();
                       } else {
                         return Container();
                       }

@@ -46,6 +46,7 @@ dependencies:
   awesome_notifications: ^0.7.4+1
   new_version_plus: ^0.0.10
   url_launcher: ^6.1.11
+  flutter_animate: ^4.1.1+1
   
   #storage
   provider: ^6.0.5

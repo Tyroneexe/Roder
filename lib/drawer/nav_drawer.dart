@@ -1,7 +1,10 @@
 // ignore_for_file: must_be_immutable, unused_field
 
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:provider/provider.dart';
@@ -60,7 +63,7 @@ class NavitionDrawer extends StatelessWidget {
             onTap: () {
               Get.to(() => Settings());
             },
-          ),
+          ).animate().fadeIn(duration: 800.ms),
           ListTile(
             leading: Icon(
               Icons.star,
@@ -78,7 +81,7 @@ class NavitionDrawer extends StatelessWidget {
             onTap: () {
               _openAppReview();
             },
-          ),
+          ).animate().fadeIn(duration: 800.ms),
           ListTile(
             leading: Icon(
               Icons.checklist_rounded,
@@ -96,7 +99,7 @@ class NavitionDrawer extends StatelessWidget {
             onTap: () {
               Get.to(() => UpdatePage());
             },
-          ),
+          ).animate().fadeIn(duration: 800.ms),
           ListTile(
             leading: const Icon(
               Icons.person,
@@ -113,7 +116,7 @@ class NavitionDrawer extends StatelessWidget {
             onTap: () {
               Get.to(() => AccountPage());
             },
-          ),
+          ).animate().fadeIn(duration: 800.ms),
           ListTile(
             leading: Icon(
               Icons.feedback,
@@ -131,7 +134,7 @@ class NavitionDrawer extends StatelessWidget {
             onTap: () {
               Get.to(() => FeedbackPage());
             },
-          ),
+          ).animate().fadeIn(duration: 800.ms),
           ListTile(
             leading: const Icon(
               Icons.info_rounded,
@@ -149,7 +152,7 @@ class NavitionDrawer extends StatelessWidget {
               _aboutRoder(context);
               // Get.to(() => Test());
             },
-          ),
+          ).animate().fadeIn(duration: 800.ms),
           Divider(
             color: Get.isDarkMode ? Colors.white : Colors.black,
             height: 10,
@@ -174,7 +177,7 @@ class NavitionDrawer extends StatelessWidget {
                   Provider.of<GoogleSignInProvider>(context, listen: false);
               provider.logout();
             },
-          ),
+          ).animate().fadeIn(duration: 800.ms),
         ],
       );
 

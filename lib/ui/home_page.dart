@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:new_version_plus/new_version_plus.dart';
@@ -35,12 +36,11 @@ Updates —>
 | Red color of delete account
 | Account page to Nav drawer
 | Fix image in home page
+| modify notifictations
 =================================================
-| Fix notifications
+| see if time picker works on real phone
 | make rides expandable
 | Feedback page in nav drawer
-| see if time picker works on real phone
-| modify notifictations
 \
 
 /
@@ -487,12 +487,12 @@ class _HomePageState extends State<HomePage> {
           Rides['key'] = snapshot.key;
           if (rideFilter3 == false) {
             if (joinedRides.contains(Rides['key'])) {
-              return listItemFav(Rides: Rides);
+              return listItemFav(Rides: Rides).animate().fade();
             } else {
               return Container();
             }
           } else {
-            return listItem(Rides: Rides);
+            return listItem(Rides: Rides).animate().fade();
           }
         },
       ),
