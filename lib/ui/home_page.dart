@@ -40,7 +40,8 @@ Updates —>
 | make rides expandable
 | Feedback page in nav drawer
 | see if time picker works on real phone
-| Work on notifiactions for the app
+| modify notifictations
+| 
 \
 
 /
