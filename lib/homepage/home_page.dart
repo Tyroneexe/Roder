@@ -40,9 +40,8 @@ Updates —>
 | .slide for nav drawer
 =================================================
 | make rides expandable
-| change the listItem to a page and use it like that (test it for one return listItem first, before changing everything to that page and it not working)
 | contact page in nav bar instead of feedback
-| See if you can change the _getBGColor and _bgcolor to also seperate page for beter and more readible code
+| Change color of picture based on theme
 \
 
 /

@@ -10,9 +10,8 @@ import 'package:roder/login/google_sign_in.dart';
 import 'package:roder/settings_page/settings_page.dart';
 import 'package:roder/themes/theme.dart';
 import 'package:roder/ui/update_page.dart';
-
-import '../feedback/feedback_page.dart';
 import '../provider/clrProvider.dart';
+import '../ui/contact_page.dart';
 
 class NavitionDrawer extends StatelessWidget {
   NavitionDrawer({super.key});
@@ -116,12 +115,12 @@ class NavitionDrawer extends StatelessWidget {
           ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
           ListTile(
             leading: Icon(
-              Icons.feedback,
+              Icons.contact_support,
               size: 30,
               color: Get.isDarkMode ? Colors.white : Colors.grey[600],
             ),
             title: const Text(
-              'Feedback',
+              'Contact',
               style: TextStyle(
                   fontFamily: 'OpenSans',
                   fontWeight: FontWeight.bold,
@@ -129,7 +128,7 @@ class NavitionDrawer extends StatelessWidget {
                   color: Colors.grey),
             ),
             onTap: () {
-              Get.to(() => FeedbackPage());
+              Get.to(() => ContactPage());
             },
           ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
           ListTile(
