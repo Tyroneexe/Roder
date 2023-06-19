@@ -42,6 +42,7 @@ Updates —>
 | make rides expandable
 | contact page in nav bar instead of feedback
 | Change color of picture based on theme
+| Settings page change /Like Contanct page\ (change color then change image and change theme then chagne image maybe something like that )
 \
 
 /
