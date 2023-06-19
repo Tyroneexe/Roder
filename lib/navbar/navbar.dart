@@ -8,8 +8,8 @@ import 'package:roder/controllers/barcontroller.dart';
 import 'package:roder/favourites/favourites.dart';
 import 'package:roder/search/search_page.dart';
 import 'package:roder/ui/add_task_bar.dart';
-import 'package:roder/ui/home_page.dart';
-import 'package:roder/ui/theme.dart';
+import 'package:roder/homepage/home_page.dart';
+import 'package:roder/themes/theme.dart';
 
 import '../provider/clrProvider.dart';
 

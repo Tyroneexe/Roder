@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/navbar/navbar.dart';
-import 'package:roder/ui/theme.dart';
+import 'package:roder/themes/theme.dart';
 
 import 'google_sign_in.dart';
 

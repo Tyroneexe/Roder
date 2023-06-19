@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:roder/ui/theme.dart';
+import 'package:roder/themes/theme.dart';
 
 class FeedbackPage extends StatefulWidget {
   const FeedbackPage({super.key});

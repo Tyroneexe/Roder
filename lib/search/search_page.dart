@@ -8,7 +8,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:roder/ui/theme.dart';
+import 'package:roder/themes/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../favourites/favourites.dart';

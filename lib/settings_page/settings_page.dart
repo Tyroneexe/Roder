@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/provider/clrProvider.dart';
-import 'package:roder/ui/theme.dart';
-import '../services/theme_services.dart';
+import 'package:roder/themes/theme.dart';
+import '../themes/theme_services.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});

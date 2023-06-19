@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:roder/ui/theme.dart';
+import 'package:roder/themes/theme.dart';
 
 import '../login/google_sign_in.dart';
-import '../ui/home_page.dart';
+import '../homepage/home_page.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});

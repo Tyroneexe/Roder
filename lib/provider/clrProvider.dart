@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../ui/theme.dart';
+import '../themes/theme.dart';
 
 class ColorProvider with ChangeNotifier {
   int _selectedColor = 0;

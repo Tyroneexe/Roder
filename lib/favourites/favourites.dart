@@ -9,7 +9,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:roder/account/account_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../ui/theme.dart';
+import '../themes/theme.dart';
 
 class Favourites extends StatefulWidget {
   const Favourites({super.key});

@@ -3,7 +3,7 @@ import 'package:roder/favourites/favourites.dart';
 import 'package:roder/navbar/navbar.dart';
 import 'package:roder/search/search_page.dart';
 import 'package:roder/ui/add_task_bar.dart';
-import 'package:roder/ui/home_page.dart';
+import 'package:roder/homepage/home_page.dart';
 
 class AppPage {
   static List<GetPage> routes = [

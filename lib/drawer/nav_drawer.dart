@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:roder/account/account_page.dart';
 import 'package:roder/login/google_sign_in.dart';
 import 'package:roder/settings_page/settings_page.dart';
-import 'package:roder/ui/theme.dart';
+import 'package:roder/themes/theme.dart';
 import 'package:roder/ui/update_page.dart';
 
 import '../feedback/feedback_page.dart';

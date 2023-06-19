@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:roder/ui/theme.dart';
+import 'package:roder/themes/theme.dart';
 
-import '../../provider/clrProvider.dart';
+import '../provider/clrProvider.dart';
 
 class MyButton extends StatelessWidget {
   final Function()? onTap;
