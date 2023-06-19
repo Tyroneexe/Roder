@@ -38,11 +38,9 @@ Updates —>
 | Fixed time picker in add page
 | Update Nav drawer
 | .slide for nav drawer
+| contact page in nav bar instead of feedback
 =================================================
 | make rides expandable
-| contact page in nav bar instead of feedback
-| Change color of picture based on theme
-| Settings page change /Like Contanct page\ (change color then change image and change theme then chagne image maybe something like that )
 \
 
 /
@@ -67,11 +65,13 @@ Updates —>
 \
 
 / Animation update
+| Settings page change /Like Contanct page\ (change color then change image and change theme then chagne image maybe something like that )
 | Use Rive to add animations to the app
 | Cool animation for opening nav drawer
 | MAYBE beter animations for rides appearing
 | Floating /maybe transparent\ nav bar
 | Splash screen and loading screen for bike animation 
+| Change color of picture based on theme
 \
 
 /
