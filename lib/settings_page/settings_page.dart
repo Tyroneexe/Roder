@@ -117,6 +117,57 @@ class _SettingsState extends State<Settings> {
     );
   }
 
+  _colorPallete() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(
+          height: 8.0,
+        ),
+        Wrap(
+          children: List<Widget>.generate(
+            3,
+            (int index) {
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    Provider.of<ColorProvider>(context, listen: false)
+                        .selectedColor = index;
+                    _getMainClr(index);
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Stack(
+                    children: [
+                      CircleAvatar(
+                        radius: 17,
+                        backgroundColor: index == 0
+                            ? lightBlueClr
+                            : index == 1
+                                ? oRange
+                                : themeRed,
+                      ),
+                      if (Provider.of<ColorProvider>(context).selectedColor ==
+                          index)
+                        Positioned.fill(
+                          child: Icon(
+                            Icons.close,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
   _getMainClr(int no) {
     switch (no) {
       case 0:
@@ -141,72 +192,20 @@ class _SettingsState extends State<Settings> {
         return blueClr;
       case 4:
         setState(() {
-          _mainColor = Colors.orange;
+          _mainColor = Colors.orange.shade800;
         });
-        return Colors.orange;
+        return Colors.orange.shade800;
       case 5:
         setState(() {
-          _mainColor = Colors.red;
+          _mainColor = Colors.red.shade800;
         });
-        return Colors.red;
+        return Colors.red.shade800;
       default:
         setState(() {
           _mainColor = lightBlueClr;
         });
         return lightBlueClr;
     }
-  }
-
-  _colorPallete() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(
-          height: 8.0,
-        ),
-        Wrap(
-          children: List<Widget>.generate(
-            3,
-            (int index) {
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    Provider.of<ColorProvider>(context, listen: false)
-                        .selectedColor = index;
-                    _getMainClr(index);
-                    // _saveColor();
-                  });
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: Stack(
-                    children: [
-                      CircleAvatar(
-                        radius: 14,
-                        backgroundColor: index == 0
-                            ? lightBlueClr
-                            : index == 1
-                                ? oRange
-                                : themeRed,
-                      ),
-                      if (Provider.of<ColorProvider>(context).selectedColor ==
-                          index)
-                        Positioned.fill(
-                          child: Icon(
-                            Icons.done,
-                            color: Colors.white,
-                            size: 16,
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-      ],
-    );
   }
 
   _deleteAcc() {
