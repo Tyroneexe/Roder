@@ -1,9 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:roder/themes/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/services.dart';
+
+import '../provider/clrProvider.dart';
 
 class ContactPage extends StatefulWidget {
   const ContactPage({super.key});
@@ -15,8 +18,6 @@ class ContactPage extends StatefulWidget {
 class _ContactPageState extends State<ContactPage> {
   final Uri _urlInsta = Uri.parse(
       'https://www.instagram.com/roderbiker/?igshid=MzNlNGNkZWQ4Mg%3D%3D');
-
-  final Uri _urlEmail = Uri.parse('https://mail.google.com/mail/u/0/#inbox');
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +114,8 @@ class _ContactPageState extends State<ContactPage> {
                     ),
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all<double>(8.0),
-                      backgroundColor: MaterialStateProperty.all<Color>(purple),
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(blueClr),
                       foregroundColor:
                           MaterialStateProperty.all<Color>(Colors.white),
                       padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
@@ -161,12 +163,6 @@ class _ContactPageState extends State<ContactPage> {
     }
   }
 
-  Future<void> _launchEmail() async {
-    if (!await launchUrl(_urlEmail)) {
-      throw Exception('Could not launch $_urlEmail');
-    }
-  }
-
   _showEmailPopup() {
     showDialog(
       context: context,
@@ -190,17 +186,17 @@ class _ContactPageState extends State<ContactPage> {
                   text: 'Message the Developer of Roder with this Email:\n\n',
                 ),
                 TextSpan(
-                  text: 'tvzbothma@gmail.com',
+                  text: 'roderteam@gmail.com',
                   style: TextStyle(
                     fontSize: 18,
-                    color: lightBlueClr,
+                    color: _getMainClr(
+                        Provider.of<ColorProvider>(context).selectedColor),
                     decoration: TextDecoration.underline,
                   ),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
                       //copy the email to the clipboard of the user
-                      final email =
-                          'tvzbothma@gmail.com'; // Replace with your actual email
+                      final email = 'roderteam@gmail.com';
                       Clipboard.setData(ClipboardData(text: email));
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Email copied to Clipboard')),
@@ -224,14 +220,20 @@ class _ContactPageState extends State<ContactPage> {
             ),
             TextButton(
               child: Text(
-                'Go to Email',
+                'OK',
                 style: TextStyle(
                   color: lightBlueClr,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              onPressed: () async {
-                _launchEmail();
+              onPressed: () {
+                //copy the email to the clipboard of the user
+                final email = 'roderteam@gmail.com';
+                Clipboard.setData(ClipboardData(text: email));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Email copied to Clipboard')),
+                );
+                Navigator.pop(context);
               },
             ),
           ],
@@ -278,7 +280,8 @@ class _ContactPageState extends State<ContactPage> {
               child: Text(
                 'Go to Instagram',
                 style: TextStyle(
-                  color: purple,
+                  color: _getMainClr(
+                      Provider.of<ColorProvider>(context).selectedColor),
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -294,5 +297,18 @@ class _ContactPageState extends State<ContactPage> {
         );
       },
     );
+  }
+
+  _getMainClr(int no) {
+    switch (no) {
+      case 0:
+        return lightBlueClr;
+      case 1:
+        return oRange;
+      case 2:
+        return themeRed;
+      default:
+        return lightBlueClr;
+    }
   }
 }
