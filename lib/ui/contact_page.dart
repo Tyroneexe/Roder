@@ -71,6 +71,7 @@ class _ContactPageState extends State<ContactPage> {
                       ],
                     ),
                     style: ButtonStyle(
+                      elevation: MaterialStateProperty.all<double>(8.0),
                       backgroundColor:
                           MaterialStateProperty.all<Color>(blueClr),
                       foregroundColor:
@@ -111,6 +112,7 @@ class _ContactPageState extends State<ContactPage> {
                       ],
                     ),
                     style: ButtonStyle(
+                      elevation: MaterialStateProperty.all<double>(8.0),
                       backgroundColor: MaterialStateProperty.all<Color>(purple),
                       foregroundColor:
                           MaterialStateProperty.all<Color>(Colors.white),
@@ -142,9 +144,8 @@ class _ContactPageState extends State<ContactPage> {
 
   _appBar() {
     return AppBar(
-      backgroundColor:
-          Colors.transparent, 
-      elevation: 0, 
+      backgroundColor: Colors.transparent,
+      elevation: 0,
       leading: IconButton(
         icon: Icon(Icons.arrow_back_ios),
         onPressed: () {
