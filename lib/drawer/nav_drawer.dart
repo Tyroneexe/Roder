@@ -248,7 +248,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
       case 0:
         return AssetImage('assets/RoderNavD.jpg');
       case 1:
-        return AssetImage('assets/RoderNavD.jpg');
+        return AssetImage('assets/NavYell.png');
       case 2:
         return AssetImage('assets/NavRed.jpg');
       default:
