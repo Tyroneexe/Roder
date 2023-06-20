@@ -14,9 +14,18 @@ import '../provider/clrProvider.dart';
 import '../test.dart';
 import '../ui/contact_page.dart';
 
-class NavitionDrawer extends StatelessWidget {
+class NavitionDrawer extends StatefulWidget {
   NavitionDrawer({super.key});
+
+  @override
+  State<NavitionDrawer> createState() => _NavitionDrawerState();
+}
+
+class _NavitionDrawerState extends State<NavitionDrawer> {
   final user = FirebaseAuth.instance.currentUser!;
+  //
+  int noImg = 0;
+  //
   Color _mainColor = lightBlueClr;
 
   @override
@@ -28,18 +37,18 @@ class NavitionDrawer extends StatelessWidget {
           ),
         ),
       );
-  //
+
   //
   Widget buildHeader(BuildContext context) => Container(
         height: 340,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/RoderNavD.jpg'),
+            image: _themeImage(noImg),
             fit: BoxFit.cover,
           ),
         ),
       );
-  //
+
   //
   Widget buildMenuItems(BuildContext context) => Column(
         children: [
@@ -221,6 +230,29 @@ class NavitionDrawer extends StatelessWidget {
 
     if (await inAppReview.isAvailable()) {
       inAppReview.openStoreListing(appStoreId: '...', microsoftStoreId: '...');
+    }
+  }
+
+  _themeImage(int no) {
+    if (Provider.of<ColorProvider>(context).selectedColor == 0) {
+      no = 0;
+    } else if (Provider.of<ColorProvider>(context).selectedColor == 1) {
+      no = 1;
+    } else if (Provider.of<ColorProvider>(context).selectedColor == 2) {
+      no = 2;
+    } else {
+      no = 0;
+    }
+
+    switch (no) {
+      case 0:
+        return AssetImage('assets/RoderNavD.jpg');
+      case 1:
+        return AssetImage('assets/RoderNavD.jpg');
+      case 2:
+        return AssetImage('assets/NavRed.jpg');
+      default:
+        return AssetImage('assets/RoderNavD.jpg');
     }
   }
 
