@@ -19,6 +19,8 @@ class _ContactPageState extends State<ContactPage> {
   final Uri _urlInsta = Uri.parse(
       'https://www.instagram.com/roderbiker/?igshid=MzNlNGNkZWQ4Mg%3D%3D');
 
+  int noImg = 0;
+  int noClr = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +30,7 @@ class _ContactPageState extends State<ContactPage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/RoderContactPage.jpg'),
+            image: _themeImage(noImg),
             fit: BoxFit.cover,
           ),
         ),
@@ -45,7 +47,7 @@ class _ContactPageState extends State<ContactPage> {
                   fontFamily: 'Audiowide',
                   fontWeight: FontWeight.bold,
                   fontSize: 60,
-                  color: Colors.black,
+                  color: _getTxtClr(noClr),
                 ),
               ),
             ),
@@ -73,8 +75,9 @@ class _ContactPageState extends State<ContactPage> {
                     ),
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all<double>(8.0),
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(blueClr),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          _getMainClr(Provider.of<ColorProvider>(context)
+                              .selectedColor)),
                       foregroundColor:
                           MaterialStateProperty.all<Color>(Colors.white),
                       padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
@@ -114,8 +117,9 @@ class _ContactPageState extends State<ContactPage> {
                     ),
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all<double>(8.0),
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(blueClr),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          _getMainClr(Provider.of<ColorProvider>(context)
+                              .selectedColor)),
                       foregroundColor:
                           MaterialStateProperty.all<Color>(Colors.white),
                       padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
@@ -222,7 +226,8 @@ class _ContactPageState extends State<ContactPage> {
               child: Text(
                 'OK',
                 style: TextStyle(
-                  color: lightBlueClr,
+                  color: _getMainClr(
+                      Provider.of<ColorProvider>(context).selectedColor),
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -299,16 +304,62 @@ class _ContactPageState extends State<ContactPage> {
     );
   }
 
+  _themeImage(int no) {
+    if (Provider.of<ColorProvider>(context).selectedColor == 0) {
+      no = 0;
+    } else if (Provider.of<ColorProvider>(context).selectedColor == 1) {
+      no = 1;
+    } else if (Provider.of<ColorProvider>(context).selectedColor == 2) {
+      no = 2;
+    } else {
+      no = 0;
+    }
+
+    switch (no) {
+      case 0:
+        return AssetImage('assets/RoderContactPage.jpg');
+      case 1:
+        return AssetImage('assets/RoderContactPage.jpg');
+      case 2:
+        return AssetImage('assets/RoderThemeRed.jpg');
+      default:
+        return AssetImage('assets/RoderContactPage.jpg');
+    }
+  }
+
+  _getTxtClr(int no) {
+    if (Provider.of<ColorProvider>(context).selectedColor == 0) {
+      no = 0;
+    } else if (Provider.of<ColorProvider>(context).selectedColor == 1) {
+      no = 1;
+    } else if (Provider.of<ColorProvider>(context).selectedColor == 2) {
+      no = 2;
+    } else {
+      no = 0;
+    }
+
+    switch (no) {
+      case 0:
+        return Colors.black;
+      case 1:
+        return Colors.black;
+      case 2:
+        return Colors.white;
+      default:
+        return Colors.black;
+    }
+  }
+
   _getMainClr(int no) {
     switch (no) {
       case 0:
-        return lightBlueClr;
+        return blueClr;
       case 1:
         return oRange;
       case 2:
         return themeRed;
       default:
-        return lightBlueClr;
+        return blueClr;
     }
   }
 }
