@@ -4,6 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart';
 import 'package:roder/themes/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -55,17 +56,7 @@ class _TestState extends State<Test> {
   Widget listItem({
     required Map Rides,
   }) {
-    saveprefs() async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setStringList("joined_rides", joinedRides);
-    }
-
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          isExpanded = !isExpanded;
-        });
-      },
       child: Slidable(
         startActionPane: ActionPane(
           motion: const BehindMotion(),
@@ -76,18 +67,7 @@ class _TestState extends State<Test> {
               icon: Icons.add,
               label: 'JOIN',
               onPressed: (context) async {
-                print(Rides['key']);
-                if (!joinedRides.contains(Rides['key'])) {
-                  joinedRides.add(Rides['key']);
-                  saveprefs();
-                  databaseReference
-                      .child('Rides/${Rides['key']}')
-                      .update({'Joined': Rides['Joined'] + 1});
-                  // _addedToFav();
-                  setState(() {});
-                } else {
-                  // _alreadyJoined();
-                }
+                //
               },
             ),
           ],
@@ -96,14 +76,10 @@ class _TestState extends State<Test> {
           clipBehavior: Clip.none,
           alignment: Alignment.topRight,
           children: [
-            AnimatedContainer(
-              duration: Duration(milliseconds: 200),
+            Container(
               margin: const EdgeInsets.all(10),
               padding: const EdgeInsets.all(20),
-              height: isExpanded ? 520 : 200,
-              width: isExpanded
-                  ? MediaQuery.of(context).size.width
-                  : MediaQuery.of(context).size.width - 20,
+              height: 200,
               decoration: BoxDecoration(
                 color: joinedRides.contains(Rides['key'])
                     ? darkGr
@@ -112,14 +88,6 @@ class _TestState extends State<Test> {
               ),
               child: Stack(
                 children: [
-                  Container(
-                    // color: Colors.red.withOpacity(0.2),
-                    padding: EdgeInsets.only(left: 205, top: 100),
-                    child: Text(
-                      "Joined: ${Rides['Joined'].toString()}",
-                      style: tyStyle,
-                    ),
-                  ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,7 +114,7 @@ class _TestState extends State<Test> {
                         child: FittedBox(
                           fit: BoxFit.contain,
                           child: Text(
-                            Rides['Origin'] + '  to  ' + Rides['Destination'],
+                            Rides['Origin'],
                             style: TextStyle(
                                 fontFamily: 'OpenSans',
                                 fontWeight: FontWeight.w400,
@@ -179,6 +147,11 @@ class _TestState extends State<Test> {
         ),
         closeOnScroll: true,
       ),
+      onTap: () {
+        setState(() {
+          isExpanded = !isExpanded;
+        });
+      },
     );
   }
 
