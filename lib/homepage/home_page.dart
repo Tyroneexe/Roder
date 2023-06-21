@@ -97,6 +97,8 @@ class HomePage extends StatefulWidget {
 final user = FirebaseAuth.instance.currentUser!;
 
 class _HomePageState extends State<HomePage> {
+  //
+  int noImg = 0;
   //Loading animation
   bool _isLoading = false;
 
@@ -252,9 +254,9 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       flexibleSpace: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/splash_screen.png'),
+            image: _themeImage(noImg),
             fit: BoxFit.cover,
           ),
         ),
@@ -412,6 +414,29 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
     );
+  }
+
+  _themeImage(int no) {
+    if (Provider.of<ColorProvider>(context).selectedColor == 0) {
+      no = 0;
+    } else if (Provider.of<ColorProvider>(context).selectedColor == 1) {
+      no = 1;
+    } else if (Provider.of<ColorProvider>(context).selectedColor == 2) {
+      no = 2;
+    } else {
+      no = 0;
+    }
+
+    switch (no) {
+      case 0:
+        return AssetImage('assets/splash_screen.png');
+      case 1:
+        return AssetImage('assets/splash_screen.png');
+      case 2:
+        return AssetImage('assets/RedHomePage.jpg');
+      default:
+        return AssetImage('assets/splash_screen.png');
+    }
   }
 
   _titleBar() {
