@@ -318,7 +318,7 @@ class _ContactPageState extends State<ContactPage> {
       case 0:
         return AssetImage('assets/RoderContactPage.jpg');
       case 1:
-        return AssetImage('assets/RoderContactPage.jpg');
+        return AssetImage('assets/RoderYellow.jpg');
       case 2:
         return AssetImage('assets/RoderThemeRed.jpg');
       default:
@@ -341,7 +341,7 @@ class _ContactPageState extends State<ContactPage> {
       case 0:
         return Colors.black;
       case 1:
-        return Colors.black;
+        return Colors.white;
       case 2:
         return Colors.white;
       default:

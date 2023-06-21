@@ -4,10 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:get/get.dart';
 import 'package:roder/themes/theme.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'favourites/favourites.dart';
 
 class Test extends StatefulWidget {
@@ -58,6 +55,7 @@ class _TestState extends State<Test> {
   }) {
     return GestureDetector(
       child: Slidable(
+        
         startActionPane: ActionPane(
           motion: const BehindMotion(),
           extentRatio: 1 / 5,
@@ -84,54 +82,50 @@ class _TestState extends State<Test> {
                 color: joinedRides.contains(Rides['key'])
                     ? darkGr
                     : _getBGClr(Rides['Color']),
-                borderRadius: BorderRadius.circular(20.0),
+                borderRadius: BorderRadius.circular(12.0),
               ),
-              child: Stack(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(
-                          bottom: 20,
-                        ),
-                        child: Center(
-                          child: Text(
-                            Rides['Name'],
-                            style: const TextStyle(
-                                fontFamily: 'OpenSans',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 24,
-                                color: Colors.white),
-                          ),
-                        ),
+                  Container(
+                    margin: const EdgeInsets.only(
+                      bottom: 20,
+                    ),
+                    child: Center(
+                      child: Text(
+                        Rides['Name'],
+                        style: const TextStyle(
+                            fontFamily: 'OpenSans',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                            color: Colors.white),
                       ),
-                      const SizedBox(
-                        height: 5,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Center(
+                    child: FittedBox(
+                      fit: BoxFit.contain,
+                      child: Text(
+                        Rides['Origin'],
+                        style: TextStyle(
+                            fontFamily: 'OpenSans',
+                            fontWeight: FontWeight.w400,
+                            fontSize: 15,
+                            color: Colors.white),
                       ),
-                      Center(
-                        child: FittedBox(
-                          fit: BoxFit.contain,
-                          child: Text(
-                            Rides['Origin'],
-                            style: TextStyle(
-                                fontFamily: 'OpenSans',
-                                fontWeight: FontWeight.w400,
-                                fontSize: 15,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Text(Rides['Date'], style: tyStyle),
-                      Text(
-                        Rides['Start Time'] + '  to  ' + Rides['End Time'],
-                        style: tyStyle,
-                      ),
-                    ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Text(Rides['Date'], style: tyStyle),
+                  Text(
+                    Rides['Start Time'] + '  to  ' + Rides['End Time'],
+                    style: tyStyle,
                   ),
                 ],
               ),
