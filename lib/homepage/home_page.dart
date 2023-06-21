@@ -431,11 +431,48 @@ class _HomePageState extends State<HomePage> {
       case 0:
         return AssetImage('assets/splash_screen.png');
       case 1:
-        return AssetImage('assets/splash_screen.png');
+        return AssetImage('assets/YellowHomePage.jpg');
       case 2:
         return AssetImage('assets/RedHomePage.jpg');
       default:
         return AssetImage('assets/splash_screen.png');
+    }
+  }
+
+  _getBGClr(int no) {
+    if (Provider.of<ColorProvider>(context).selectedColor == 0) {
+      switch (no) {
+        case 0:
+          return blueClr;
+        case 1:
+          return lightBlueClr;
+        case 2:
+          return vBlue;
+        default:
+          return blueClr;
+      }
+    } else if (Provider.of<ColorProvider>(context).selectedColor == 1) {
+      switch (no) {
+        case 0:
+          return blueClr;
+        case 1:
+          return lightBlueClr;
+        case 2:
+          return vBlue;
+        default:
+          return blueClr;
+      }
+    } else {
+      switch (no) {
+      case 0:
+        return blueClr;
+      case 1:
+        return lightBlueClr;
+      case 2:
+        return vBlue;
+      default:
+        return blueClr;
+    }
     }
   }
 
@@ -485,19 +522,6 @@ class _HomePageState extends State<HomePage> {
         break;
     }
     return titleText;
-  }
-
-  _getBGClr(int no) {
-    switch (no) {
-      case 0:
-        return blueClr;
-      case 1:
-        return lightBlueClr;
-      case 2:
-        return vBlue;
-      default:
-        return blueClr;
-    }
   }
 
   _getMainClr(int no) {
