@@ -58,7 +58,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
               color: Get.isDarkMode ? Colors.white : Colors.grey[600],
             ),
             title: const Text(
-              'Settingssdfs',
+              'Settings',
               style: TextStyle(
                   fontFamily: 'OpenSans',
                   fontWeight: FontWeight.bold,
