@@ -17,10 +17,13 @@ const Color rred = Color(0xFFFF2400);
 const Color darkGr = Color(0xFF1d855e);
 const Color sandyClr = Color(0xFFD0B59A);
 const Color purple = Color(0xFF7c14ff);
-// Theme Colors
+// Yellow Theme Colors
 const Color oRange = Color(0xFFf9be0d);
-const Color themeRed = Color(0xFFef6448);
+const Color lightOrange = Color(0xFFFFB952);
+const Color skinOrange = Color(0xFFFFBA84);
 
+// Red Theme Colors
+const Color themeRed = Color(0xFFef6448);
 //
 const primaryClr = blueClr;
 

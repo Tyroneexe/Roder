@@ -454,6 +454,17 @@ class _HomePageState extends State<HomePage> {
     } else if (Provider.of<ColorProvider>(context).selectedColor == 1) {
       switch (no) {
         case 0:
+          return oRange;
+        case 1:
+          return lightOrange;
+        case 2:
+          return skinOrange;
+        default:
+          return oRange;
+      }
+    } else {
+      switch (no) {
+        case 0:
           return blueClr;
         case 1:
           return lightBlueClr;
@@ -462,17 +473,6 @@ class _HomePageState extends State<HomePage> {
         default:
           return blueClr;
       }
-    } else {
-      switch (no) {
-      case 0:
-        return blueClr;
-      case 1:
-        return lightBlueClr;
-      case 2:
-        return vBlue;
-      default:
-        return blueClr;
-    }
     }
   }
 
