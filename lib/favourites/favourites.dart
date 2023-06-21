@@ -7,8 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:roder/account/account_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../provider/clrProvider.dart';
 import '../themes/theme.dart';
 
 class Favourites extends StatefulWidget {
@@ -159,15 +161,39 @@ class _FavouritesState extends State<Favourites> {
   }
 
   _getBGClr(int no) {
-    switch (no) {
-      case 0:
-        return blueClr;
-      case 1:
-        return lightBlueClr;
-      case 2:
-        return vBlue;
-      default:
-        return blueClr;
+    if (Provider.of<ColorProvider>(context).selectedColor == 0) {
+      switch (no) {
+        case 0:
+          return blueClr;
+        case 1:
+          return lightBlueClr;
+        case 2:
+          return vBlue;
+        default:
+          return blueClr;
+      }
+    } else if (Provider.of<ColorProvider>(context).selectedColor == 1) {
+      switch (no) {
+        case 0:
+          return oRange;
+        case 1:
+          return lightOrange;
+        case 2:
+          return skinOrange;
+        default:
+          return oRange;
+      }
+    } else {
+      switch (no) {
+        case 0:
+          return themeRed;
+        case 1:
+          return rred;
+        case 2:
+          return darkRed;
+        default:
+          return themeRed;
+      }
     }
   }
 

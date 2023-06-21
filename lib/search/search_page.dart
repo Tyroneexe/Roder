@@ -221,143 +221,180 @@ class _SearchState extends State<Search> {
         return lightBlueClr;
     }
   }
-}
 
-final databaseReference = FirebaseDatabase.instance.ref();
-
-Widget listItem({
-  required Map Rides,
-  // required rideKey,
-}) {
-  saveprefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList("joined_rides", joinedRides);
+  _getBGClr(int no) {
+    if (Provider.of<ColorProvider>(context).selectedColor == 0) {
+      switch (no) {
+        case 0:
+          return blueClr;
+        case 1:
+          return lightBlueClr;
+        case 2:
+          return vBlue;
+        default:
+          return blueClr;
+      }
+    } else if (Provider.of<ColorProvider>(context).selectedColor == 1) {
+      switch (no) {
+        case 0:
+          return oRange;
+        case 1:
+          return lightOrange;
+        case 2:
+          return skinOrange;
+        default:
+          return oRange;
+      }
+    } else {
+      switch (no) {
+        case 0:
+          return themeRed;
+        case 1:
+          return rred;
+        case 2:
+          return darkRed;
+        default:
+          return themeRed;
+      }
+    }
   }
 
-  return Slidable(
-    startActionPane: ActionPane(
-      motion: const BehindMotion(),
-      extentRatio: 1 / 5,
-      children: [
-        SlidableAction(
-          backgroundColor: _getBGClr(Rides['Color']),
-          icon: Icons.add,
-          label: 'JOIN',
-          onPressed: (context) async {
-            if (!joinedRides.contains(Rides['key'])) {
-              joinedRides.add(Rides['key']);
-              saveprefs();
-              databaseReference
-                  .child('Rides/${Rides['key']}')
-                  .update({'Joined': Rides['Joined'] + 1});
-              _addedToFav();
-            }
-          },
-        ),
-      ],
-    ),
-    child: Stack(
-      clipBehavior: Clip.none,
-      alignment: Alignment.topRight,
-      children: [
-        Container(
-          margin: const EdgeInsets.all(10),
-          padding: const EdgeInsets.all(20),
-          height: 200,
-          decoration: BoxDecoration(
-            color: joinedRides.contains(Rides['key'])
-                ? darkGr
-                : _getBGClr(Rides['Color']),
-            borderRadius: BorderRadius.circular(20.0),
+  final databaseReference = FirebaseDatabase.instance.ref();
+
+  Widget listItem({
+    required Map Rides,
+    // required rideKey,
+  }) {
+    saveprefs() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setStringList("joined_rides", joinedRides);
+    }
+
+    return Slidable(
+      startActionPane: ActionPane(
+        motion: const BehindMotion(),
+        extentRatio: 1 / 5,
+        children: [
+          SlidableAction(
+            backgroundColor: _getBGClr(Rides['Color']),
+            icon: Icons.add,
+            label: 'JOIN',
+            onPressed: (context) async {
+              if (!joinedRides.contains(Rides['key'])) {
+                joinedRides.add(Rides['key']);
+                saveprefs();
+                databaseReference
+                    .child('Rides/${Rides['key']}')
+                    .update({'Joined': Rides['Joined'] + 1});
+                _addedToFav();
+              }
+            },
           ),
-          child: Stack(children: [
-            Container(
-              // color: Colors.red.withOpacity(0.2),
-              padding: EdgeInsets.only(left: 205, top: 100),
-              child: Text(
-                "Joined: ${Rides['Joined'].toString()}",
-                style: tyStyle,
-              ),
+        ],
+      ),
+      child: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.topRight,
+        children: [
+          Container(
+            margin: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(20),
+            height: 200,
+            decoration: BoxDecoration(
+              color: joinedRides.contains(Rides['key'])
+                  ? darkGr
+                  : _getBGClr(Rides['Color']),
+              borderRadius: BorderRadius.circular(20.0),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(
-                    bottom: 20,
-                  ),
-                  child: Center(
-                    child: Text(
-                      Rides['Name'],
-                      style: const TextStyle(
-                          fontFamily: 'OpenSans',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                          color: Colors.white),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Center(
-                  child: FittedBox(
-                    fit: BoxFit.contain,
-                    child: Text(
-                      Rides['Origin'] + '  to  ' + Rides['Destination'],
-                      style: TextStyle(
-                          fontFamily: 'OpenSans',
-                          fontWeight: FontWeight.w400,
-                          fontSize: 15,
-                          color: Colors.white),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Text(Rides['Date'], style: tyStyle),
-                Text(
-                  Rides['Start Time'] + '  to  ' + Rides['End Time'],
+            child: Stack(children: [
+              Container(
+                // color: Colors.red.withOpacity(0.2),
+                padding: EdgeInsets.only(left: 205, top: 100),
+                child: Text(
+                  "Joined: ${Rides['Joined'].toString()}",
                   style: tyStyle,
                 ),
-              ],
-            ),
-          ]),
-        ),
-        Positioned(
-          right: 0,
-          child: CircleAvatar(
-            radius: 25,
-            backgroundImage: NetworkImage(Rides['GPhoto']),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(
+                      bottom: 20,
+                    ),
+                    child: Center(
+                      child: Text(
+                        Rides['Name'],
+                        style: const TextStyle(
+                            fontFamily: 'OpenSans',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                            color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Center(
+                    child: FittedBox(
+                      fit: BoxFit.contain,
+                      child: Text(
+                        Rides['Origin'] + '  to  ' + Rides['Destination'],
+                        style: TextStyle(
+                            fontFamily: 'OpenSans',
+                            fontWeight: FontWeight.w400,
+                            fontSize: 15,
+                            color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Text(Rides['Date'], style: tyStyle),
+                  Text(
+                    Rides['Start Time'] + '  to  ' + Rides['End Time'],
+                    style: tyStyle,
+                  ),
+                ],
+              ),
+            ]),
           ),
-        ),
-      ],
-    ),
-    closeOnScroll: true,
-  );
-}
-
-_addedToFav() {
-  Get.snackbar("RIDE ADDED", "Ride added to Favorites",
-      snackPosition: SnackPosition.TOP,
-      borderWidth: 5,
-      borderColor: Colors.green[600],
-      backgroundColor: Colors.white,
-      colorText: Colors.green[600],
-      icon: const Icon(Icons.add));
-}
-
-_getBGClr(int no) {
-  switch (no) {
-    case 0:
-      return blueClr;
-    case 1:
-      return lightBlueClr;
-    case 2:
-      return vBlue;
-    default:
-      return blueClr;
+          Positioned(
+            right: 0,
+            child: CircleAvatar(
+              radius: 25,
+              backgroundImage: NetworkImage(Rides['GPhoto']),
+            ),
+          ),
+        ],
+      ),
+      closeOnScroll: true,
+    );
   }
+
+  _addedToFav() {
+    Get.snackbar("RIDE ADDED", "Ride added to Favorites",
+        snackPosition: SnackPosition.TOP,
+        borderWidth: 5,
+        borderColor: Colors.green[600],
+        backgroundColor: Colors.white,
+        colorText: Colors.green[600],
+        icon: const Icon(Icons.add));
+  }
+
+// _getBGClr(int no) {
+//   switch (no) {
+//     case 0:
+//       return blueClr;
+//     case 1:
+//       return lightBlueClr;
+//     case 2:
+//       return vBlue;
+//     default:
+//       return blueClr;
+//   }
+// }
 }
