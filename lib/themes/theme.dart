@@ -24,6 +24,9 @@ const Color skinOrange = Color(0xFFFFBA84);
 
 // Red Theme Colors
 const Color themeRed = Color(0xFFef6448);
+//const Color rred = Color(0xFFFF2400);
+const Color darkRed = Color(0xFF660000);
+
 //
 const primaryClr = blueClr;
 

@@ -465,13 +465,13 @@ class _HomePageState extends State<HomePage> {
     } else {
       switch (no) {
         case 0:
-          return blueClr;
+          return themeRed;
         case 1:
-          return lightBlueClr;
+          return rred;
         case 2:
-          return vBlue;
+          return darkRed;
         default:
-          return blueClr;
+          return themeRed;
       }
     }
   }
