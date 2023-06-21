@@ -444,43 +444,87 @@ class _AddTaskPageState extends State<AddTaskPage>
   }
 
   _colorPicker() {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(
-        "Color",
-        style: titleStyle,
-      ),
-      const SizedBox(
-        height: 8.0,
-      ),
-      Wrap(
-          children: List<Widget>.generate(3, (int index) {
-        return GestureDetector(
-          onTap: () {
-            setState(() {
-              _selectedColor = index;
-            });
-          },
-          child: Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: CircleAvatar(
-              radius: 14,
-              backgroundColor: index == 0
-                  ? primaryClr
-                  : index == 1
-                      ? lightBlueClr
-                      : vBlue,
-              child: _selectedColor == index
-                  ? const Icon(
-                      Icons.done,
-                      color: Colors.white,
-                      size: 16,
-                    )
-                  : Container(),
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Color",
+          style: titleStyle,
+        ),
+        const SizedBox(
+          height: 8.0,
+        ),
+        Wrap(
+          children: List<Widget>.generate(
+            3,
+            (int index) {
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _selectedColor = index;
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: CircleAvatar(
+                    radius: 15,
+                    backgroundColor: index == 0
+                        ? _getBGClr(0)
+                        : index == 1
+                            ? _getBGClr(1)
+                            : _getBGClr(2),
+                    child: _selectedColor == index
+                        ? const Icon(
+                            Icons.close,
+                            color: Colors.white,
+                            size: 20,
+                          )
+                        : Container(),
+                  ),
+                ),
+              );
+            },
           ),
-        );
-      })),
-    ]);
+        ),
+      ],
+    );
+  }
+
+  _getBGClr(int no) {
+    if (Provider.of<ColorProvider>(context).selectedColor == 0) {
+      switch (no) {
+        case 0:
+          return blueClr;
+        case 1:
+          return lightBlueClr;
+        case 2:
+          return vBlue;
+        default:
+          return blueClr;
+      }
+    } else if (Provider.of<ColorProvider>(context).selectedColor == 1) {
+      switch (no) {
+        case 0:
+          return oRange;
+        case 1:
+          return lightOrange;
+        case 2:
+          return skinOrange;
+        default:
+          return oRange;
+      }
+    } else {
+      switch (no) {
+        case 0:
+          return themeRed;
+        case 1:
+          return rred;
+        case 2:
+          return darkRed;
+        default:
+          return themeRed;
+      }
+    }
   }
 
   _addedRideBar() {
