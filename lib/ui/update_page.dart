@@ -55,7 +55,7 @@ class _UpdatePageState extends State<UpdatePage> {
       width: isExpanded
           ? MediaQuery.of(context).size.width
           : MediaQuery.of(context).size.width - 40,
-      height: isExpanded ? 520 : 160,
+      height: isExpanded ? 580 : 160,
       child: FlutterFancyContainer(
         colorOne: themeRed,
         colorTwo: vBlue,
@@ -113,7 +113,8 @@ class _UpdatePageState extends State<UpdatePage> {
                   "New Features:\n"
                   "● Expandable Rides\n"
                   "● Improved the design and flow of Roder\n"
-                  "● Improved Home Page\n",
+                  "● Improved Home Page\n"
+                  "● Enhanced Theme Changes",
                   style: TextStyle(
                       fontFamily: 'OpenSans',
                       fontWeight: FontWeight.w400,
