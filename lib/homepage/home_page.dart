@@ -544,6 +544,7 @@ class _HomePageState extends State<HomePage> {
   _getDBRides() {
     return Expanded(
       child: FirebaseAnimatedList(
+        physics: BouncingScrollPhysics(),
         query: dbRef,
         itemBuilder: (BuildContext context, DataSnapshot snapshot,
             Animation<double> animation, int index) {

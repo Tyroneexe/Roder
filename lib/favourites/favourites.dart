@@ -222,6 +222,7 @@ class _FavouritesState extends State<Favourites> {
                   strokeWidth: 3,
                   onRefresh: _refresh,
                   child: FirebaseAnimatedList(
+                    physics: BouncingScrollPhysics(),
                     query: dbRef,
                     itemBuilder: (BuildContext context, DataSnapshot snapshot,
                         Animation<double> animation, int index) {

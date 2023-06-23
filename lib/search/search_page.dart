@@ -124,6 +124,7 @@ class _SearchState extends State<Search> {
           if (isDateBarVisible) _addDateBar(),
           Expanded(
             child: FirebaseAnimatedList(
+              physics: BouncingScrollPhysics(),
               query: dbRef,
               itemBuilder: (BuildContext context, DataSnapshot snapshot,
                   Animation<double> animation, int index) {
