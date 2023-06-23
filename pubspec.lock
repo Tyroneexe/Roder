@@ -97,30 +97,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
-  cloud_firestore:
-    dependency: transitive
-    description:
-      name: cloud_firestore
-      sha256: "095a8c0e67da96610b6f4e6da7ac5853bc86d7664409ab71d7b934469ca99c6f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.8.0"
-  cloud_firestore_platform_interface:
-    dependency: transitive
-    description:
-      name: cloud_firestore_platform_interface
-      sha256: dd5d1c3ed9a09e620ac59351f20fa635e112101bdc6f90e84b29c5a19fa1bf59
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.15.0"
-  cloud_firestore_web:
-    dependency: transitive
-    description:
-      name: cloud_firestore_web
-      sha256: "51f22dfbe07638075287e171b469ef545bee9f5fa0f8d0ed4aa98aceb0259a5d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.6.0"
   collection:
     dependency: transitive
     description:
@@ -281,14 +257,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.3+2"
-  firestore_ui:
-    dependency: "direct main"
-    description:
-      name: firestore_ui
-      sha256: "22f144d92303beebf4e00bbdad0470c88f7cae3bbbd6b3cc25ce816afb0dd9f5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.25.1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -358,14 +326,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
-  flutter_staggered_grid_view:
-    dependency: transitive
-    description:
-      name: flutter_staggered_grid_view
-      sha256: f0b6d8c0fa7b4b444985cdde68492c0138a4fb6fc57a641b24cb234b7ee0f5c4
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
