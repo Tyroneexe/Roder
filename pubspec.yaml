@@ -79,7 +79,6 @@ dependencies:
   flutter_slidable: ^2.0.0
   search_page: ^2.3.0
   firebase_core: ^2.6.1
-  # firestore_ui: ^1.25.1
   firebase_auth: ^4.6.1
 
 
@@ -87,12 +86,13 @@ dependencies:
   flutter_native_splash: ^2.3.1
 
 flutter_native_splash:
-  image: "assets/appicon.png"
-  background_image: "assets/splash_screen.png"
-
   android: true
   ios: true
   web: true
+
+  image: "assets/Icon.png"
+  color: "#FFFFFF"
+
 
 
 
@@ -106,7 +106,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/appicon.png"
+  image_path: "assets/Icon.png"
 
   
   # The "flutter_lints" package below contains a set of recommended lints to

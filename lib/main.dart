@@ -39,16 +39,7 @@ Future<void> main() async {
     debug: true,
   );
   //
-
-  //
   await Firebase.initializeApp();
-  //
-  // await Firebase.initializeApp(
-  //     options: FirebaseOptions(
-  //         apiKey: 'AIzaSyAlsT32J7nusGT0sCYqfd1AJU9LMN18Bps',
-  //         appId: '1:8501520045:android:39e9ef269710ee30808824',
-  //         messagingSenderId: '8501520045',
-  //         projectId: 'ride-40a27'));
   //
   runApp(
     MultiProvider(
