@@ -1,10 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/navbar/navbar.dart';
-import 'package:roder/themes/theme.dart';
 
 import 'google_sign_in.dart';
 
@@ -116,7 +114,7 @@ class LogIn extends StatelessWidget {
                         fontFamily: 'OpenSans',
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        color: Colors.blue,
+                        color: Color(0xFF3F66C1),
                       ),
                     ),
                   ],
