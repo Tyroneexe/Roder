@@ -18,6 +18,7 @@ class _TestState extends State<Test> {
       appBar: AppBar(
         backgroundColor: context.theme.colorScheme.background,
         elevation: 0,
+        foregroundColor: Get.isDarkMode ? Colors.white : Colors.black,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
