@@ -30,7 +30,8 @@ const Color darkRed = Color(0xFF660000);
 //
 const primaryClr = blueClr;
 
-//
+const bkgClr = Color.fromARGB(250, 250, 250, 255);
+
 class Themes {
   static final light = ThemeData(
     brightness: Brightness.light,
@@ -39,7 +40,7 @@ class Themes {
           primary: primaryClr,
         )
         .copyWith(
-          background: Colors.white,
+          background: bkgClr,
         ),
   );
 

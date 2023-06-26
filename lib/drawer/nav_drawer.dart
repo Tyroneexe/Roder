@@ -11,6 +11,7 @@ import 'package:roder/settings_page/settings_page.dart';
 import 'package:roder/themes/theme.dart';
 import 'package:roder/ui/update_page.dart';
 import '../provider/clrProvider.dart';
+import '../test.dart';
 import '../ui/contact_page.dart';
 
 class NavitionDrawer extends StatefulWidget {
@@ -155,7 +156,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             ),
             onTap: () {
               _aboutRoder(context);
-              // Get.to(() => Test());
+              Get.to(() => Test());
             },
           ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
           Divider(
