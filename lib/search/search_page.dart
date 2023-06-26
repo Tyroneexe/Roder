@@ -47,7 +47,7 @@ class _SearchState extends State<Search> {
               'Search for a Ride',
               //Search for a Ride
               style: TextStyle(
-                  fontFamily: 'OpenSans',
+                  fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
                   color: Get.isDarkMode ? Colors.white : Colors.black),
@@ -64,7 +64,7 @@ class _SearchState extends State<Search> {
                 hintText: 'Sunday Breakfast Run',
                 //Sunday Breakfast Run
                 hintStyle: const TextStyle(
-                    fontFamily: 'OpenSans', fontSize: 18, color: Colors.grey),
+                    fontFamily: 'Roboto', fontSize: 18, color: Colors.grey),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25),
                   borderSide: const BorderSide(color: Colors.grey),
@@ -100,7 +100,7 @@ class _SearchState extends State<Search> {
                   Text(
                     'Select a Date',
                     style: TextStyle(
-                      fontFamily: 'OpenSans',
+                      fontFamily: 'Roboto',
                       fontWeight: FontWeight.w400,
                       fontSize: 14,
                       color: _getMainClr(
@@ -183,17 +183,17 @@ class _SearchState extends State<Search> {
             _getMainClr(Provider.of<ColorProvider>(context).selectedColor),
         selectedTextColor: Colors.white,
         dateTextStyle: const TextStyle(
-            fontFamily: 'OpenSans',
+            fontFamily: 'Roboto',
             fontWeight: FontWeight.w600,
             fontSize: 22,
             color: Colors.grey),
         dayTextStyle: const TextStyle(
-            fontFamily: 'OpenSans',
+            fontFamily: 'Roboto',
             fontWeight: FontWeight.w600,
             fontSize: 14,
             color: Colors.grey),
         monthTextStyle: const TextStyle(
-            fontFamily: 'OpenSans',
+            fontFamily: 'Roboto',
             fontWeight: FontWeight.w600,
             fontSize: 14,
             color: Colors.grey),
@@ -328,7 +328,7 @@ class _SearchState extends State<Search> {
                       child: Text(
                         Rides['Name'],
                         style: const TextStyle(
-                            fontFamily: 'OpenSans',
+                            fontFamily: 'Roboto',
                             fontWeight: FontWeight.bold,
                             fontSize: 24,
                             color: Colors.white),
@@ -344,7 +344,7 @@ class _SearchState extends State<Search> {
                       child: Text(
                         Rides['Origin'] + '  to  ' + Rides['Destination'],
                         style: TextStyle(
-                            fontFamily: 'OpenSans',
+                            fontFamily: 'Roboto',
                             fontWeight: FontWeight.w400,
                             fontSize: 15,
                             color: Colors.white),

@@ -494,7 +494,7 @@ class _HomePageState extends State<HomePage> {
                         ? chooseTitleText(2)
                         : chooseTitleText(0),
             style: TextStyle(
-              fontFamily: 'OpenSans',
+              fontFamily: 'Roboto',
               fontWeight: FontWeight.bold,
               fontSize: 35,
             ),
@@ -640,7 +640,7 @@ class _HomePageState extends State<HomePage> {
                         child: Text(
                           Rides['Name'],
                           style: const TextStyle(
-                              fontFamily: 'OpenSans',
+                              fontFamily: 'Roboto',
                               fontWeight: FontWeight.bold,
                               fontSize: 24,
                               color: Colors.white),
@@ -656,7 +656,7 @@ class _HomePageState extends State<HomePage> {
                         child: Text(
                           Rides['Origin'] + '  to  ' + Rides['Destination'],
                           style: TextStyle(
-                              fontFamily: 'OpenSans',
+                              fontFamily: 'Roboto',
                               fontWeight: FontWeight.w400,
                               fontSize: 15,
                               color: Colors.white),
@@ -760,7 +760,7 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         Rides['Name'],
                         style: const TextStyle(
-                            fontFamily: 'OpenSans',
+                            fontFamily: 'Roboto',
                             fontWeight: FontWeight.bold,
                             fontSize: 24,
                             color: Colors.white),
@@ -776,7 +776,7 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         Rides['Origin'] + '  to  ' + Rides['Destination'],
                         style: TextStyle(
-                            fontFamily: 'OpenSans',
+                            fontFamily: 'Roboto',
                             fontWeight: FontWeight.w400,
                             fontSize: 15,
                             color: Colors.white),

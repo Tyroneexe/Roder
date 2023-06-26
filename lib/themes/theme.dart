@@ -57,7 +57,7 @@ class Themes {
 
 TextStyle get headingStyle {
   return TextStyle(
-      fontFamily: 'OpenSans',
+      fontFamily: 'Roboto',
       fontWeight: FontWeight.bold,
       fontSize: 35,
       color: Get.isDarkMode ? Colors.white : Colors.black);
@@ -65,7 +65,7 @@ TextStyle get headingStyle {
 
 TextStyle get subHeadingStyle {
   return TextStyle(
-      fontFamily: 'OpenSans',
+      fontFamily: 'Roboto',
       fontWeight: FontWeight.bold,
       fontSize: 24,
       color: Get.isDarkMode ? Colors.grey[400] : Colors.grey);
@@ -73,7 +73,7 @@ TextStyle get subHeadingStyle {
 
 TextStyle get titleStyle {
   return TextStyle(
-      fontFamily: 'OpenSans',
+      fontFamily: 'Roboto',
       fontWeight: FontWeight.w400,
       fontSize: 20,
       color: Get.isDarkMode ? Colors.white : Colors.black);
@@ -81,7 +81,7 @@ TextStyle get titleStyle {
 
 TextStyle get tyStyle {
   return const TextStyle(
-      fontFamily: 'OpenSans',
+      fontFamily: 'Roboto',
       fontWeight: FontWeight.w400,
       fontSize: 17,
       color: Colors.white);
@@ -89,7 +89,7 @@ TextStyle get tyStyle {
 
 TextStyle get subTitleStyle {
   return TextStyle(
-      fontFamily: 'OpenSans',
+      fontFamily: 'Roboto',
       fontWeight: FontWeight.w400,
       fontSize: 14,
       color: Get.isDarkMode ? Colors.grey[100] : Colors.grey[600]);

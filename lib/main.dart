@@ -61,14 +61,14 @@ Future<void> main() async {
 
 Future<void> loadFont() async {
   await Future.wait([
-    loadFontFromAsset('fonts/OpenSans-VariableFont_wdth,wght.ttf'),
+    loadFontFromAsset('fonts/Roboto-VariableFont_wdth,wght.ttf'),
   ]);
 }
 
 Future<void> loadFontFromAsset(String fontPath) async {
   final fontData =
-      await rootBundle.load('fonts/OpenSans-VariableFont_wdth,wght.ttf');
-  final font = FontLoader('OpenSans');
+      await rootBundle.load('fonts/Roboto-VariableFont_wdth,wght.ttf');
+  final font = FontLoader('Roboto');
   font.addFont(Future.value(fontData));
   await font.load();
 }

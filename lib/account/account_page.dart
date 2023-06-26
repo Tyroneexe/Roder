@@ -27,7 +27,7 @@ class _AccountPageState extends State<AccountPage> {
             child: Text(
               'Account Details',
               style: TextStyle(
-                fontFamily: 'OpenSans',
+                fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
                 fontSize: 35,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
@@ -58,7 +58,7 @@ class _AccountPageState extends State<AccountPage> {
                       Text(
                         user.email!,
                         style: TextStyle(
-                          fontFamily: 'OpenSans',
+                          fontFamily: 'Roboto',
                           fontWeight: FontWeight.bold,
                           fontSize: 24,
                           color: Get.isDarkMode ? Colors.white : Colors.black,
@@ -77,7 +77,7 @@ class _AccountPageState extends State<AccountPage> {
                             child: Text(
                               'Sign Out',
                               style: TextStyle(
-                                fontFamily: 'OpenSans',
+                                fontFamily: 'Roboto',
                                 fontWeight: FontWeight.bold,
                                 fontSize: 13,
                                 color: Get.isDarkMode

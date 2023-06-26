@@ -68,7 +68,7 @@ class _SettingsState extends State<Settings> {
         child: Text(
           'Switch Theme',
           style: TextStyle(
-              fontFamily: 'OpenSans',
+              fontFamily: 'Roboto',
               fontWeight: FontWeight.bold,
               fontSize: 35,
               color: Get.isDarkMode ? Colors.black : Colors.white),
@@ -104,7 +104,7 @@ class _SettingsState extends State<Settings> {
             child: Text(
               'Theme Color',
               style: TextStyle(
-                fontFamily: 'OpenSans',
+                fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
                 fontSize: 28,
                 color: Colors.white,
@@ -219,7 +219,7 @@ class _SettingsState extends State<Settings> {
           child: Text(
             'Delete Account',
             style: TextStyle(
-                fontFamily: 'OpenSans',
+                fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
                 fontSize: 13,
                 color: Get.isDarkMode ? Colors.white : Colors.white),

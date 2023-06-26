@@ -222,7 +222,7 @@ class _AddTaskPageState extends State<AddTaskPage>
                         Text(
                           'Customize',
                           style: TextStyle(
-                              fontFamily: 'OpenSans',
+                              fontFamily: 'Roboto',
                               fontWeight: FontWeight.w400,
                               fontSize: 14,
                               color: _getMainClr(

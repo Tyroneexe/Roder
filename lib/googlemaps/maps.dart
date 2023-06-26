@@ -316,7 +316,7 @@ class MappState extends State<Mapp> {
       title: Text(
         'Google Maps',
         style: TextStyle(
-            fontFamily: 'OpenSans',
+            fontFamily: 'Roboto',
             fontWeight: FontWeight.bold,
             fontSize: 24,
             color: Get.isDarkMode ? Colors.white : Colors.black),

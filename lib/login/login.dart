@@ -56,9 +56,9 @@ class LogIn extends StatelessWidget {
                   child: Text(
                     'Explore your\nfavorite journey',
                     style: TextStyle(
-                      fontFamily: 'OpenSans',
+                      fontFamily: 'Roboto',
                       fontWeight: FontWeight.bold,
-                      fontSize: 30,
+                      fontSize: 37,
                       color: Colors.white,
                     ),
                   ),
@@ -76,7 +76,7 @@ class LogIn extends StatelessWidget {
                   child: Text(
                     'Life is all about journey.\nFind yours.',
                     style: TextStyle(
-                      fontFamily: 'OpenSans',
+                      fontFamily: 'Roboto',
                       // fontWeight: FontWeight.,
                       fontSize: 18,
                       color: Colors.white,
@@ -98,8 +98,8 @@ class LogIn extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: 30,
-                      height: 30,
+                      width: 40,
+                      height: 40,
                       child: Image.asset(
                         'assets/GoogleLogo.png',
                         fit: BoxFit.cover,
@@ -111,28 +111,19 @@ class LogIn extends StatelessWidget {
                     Text(
                       'Login with Google',
                       style: TextStyle(
-                        fontFamily: 'OpenSans',
+                        fontFamily: 'Roboto',
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                        fontSize: 18,
                         color: Color(0xFF3F66C1),
                       ),
                     ),
                   ],
                 ),
                 style: ButtonStyle(
-                  // Customize the button's background color
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.white),
-                  // Customize the button's foreground (text) color
                   foregroundColor:
                       MaterialStateProperty.all<Color>(Colors.white),
-                  // Customize the button's padding
-                  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                    EdgeInsets.symmetric(
-                      vertical: 16.0,
-                    ),
-                  ),
-                  // Customize the button's shape (e.g., rounded corners)
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(

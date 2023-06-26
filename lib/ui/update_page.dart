@@ -74,7 +74,7 @@ class _UpdatePageState extends State<UpdatePage> {
             AnimatedDefaultTextStyle(
               duration: Duration(milliseconds: 200),
               style: TextStyle(
-                fontFamily: 'OpenSans',
+                fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
                 fontSize: isExpanded ? 24 : 30,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
@@ -84,7 +84,7 @@ class _UpdatePageState extends State<UpdatePage> {
             AnimatedDefaultTextStyle(
               duration: Duration(milliseconds: 200),
               style: TextStyle(
-                fontFamily: 'OpenSans',
+                fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
                 fontSize: isExpanded ? 14 : 20,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
@@ -97,7 +97,7 @@ class _UpdatePageState extends State<UpdatePage> {
             AnimatedDefaultTextStyle(
               duration: Duration(milliseconds: 200),
               style: TextStyle(
-                  fontFamily: 'OpenSans',
+                  fontFamily: 'Roboto',
                   fontWeight: FontWeight.w400,
                   fontSize: isExpanded ? 20 : 0,
                   color: Get.isDarkMode ? Colors.white : Colors.black),
@@ -116,7 +116,7 @@ class _UpdatePageState extends State<UpdatePage> {
                   "● Improved Home Page\n"
                   "● Enhanced Theme Changes",
                   style: TextStyle(
-                      fontFamily: 'OpenSans',
+                      fontFamily: 'Roboto',
                       fontWeight: FontWeight.w400,
                       color: Colors.white),
                 ),
@@ -153,7 +153,7 @@ class _UpdatePageState extends State<UpdatePage> {
             AnimatedDefaultTextStyle(
               duration: Duration(milliseconds: 200),
               style: TextStyle(
-                fontFamily: 'OpenSans',
+                fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
                 fontSize: isExpanded ? 24 : 30,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
@@ -163,7 +163,7 @@ class _UpdatePageState extends State<UpdatePage> {
             AnimatedDefaultTextStyle(
               duration: Duration(milliseconds: 200),
               style: TextStyle(
-                fontFamily: 'OpenSans',
+                fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
                 fontSize: isExpanded ? 14 : 20,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
@@ -176,7 +176,7 @@ class _UpdatePageState extends State<UpdatePage> {
             AnimatedDefaultTextStyle(
               duration: Duration(milliseconds: 200),
               style: TextStyle(
-                  fontFamily: 'OpenSans',
+                  fontFamily: 'Roboto',
                   fontWeight: FontWeight.w400,
                   fontSize: isExpanded ? 20 : 0,
                   color: Get.isDarkMode ? Colors.white : Colors.black),
@@ -190,7 +190,7 @@ class _UpdatePageState extends State<UpdatePage> {
                   "● Notify Message for New Updates\n"
                   "● Improved Home Page Layout\n",
                   style: TextStyle(
-                      fontFamily: 'OpenSans',
+                      fontFamily: 'Roboto',
                       fontWeight: FontWeight.w400,
                       color: Colors.white),
                 ),
@@ -227,7 +227,7 @@ class _UpdatePageState extends State<UpdatePage> {
             AnimatedDefaultTextStyle(
               duration: Duration(milliseconds: 200),
               style: TextStyle(
-                fontFamily: 'OpenSans',
+                fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
                 fontSize: isExpanded ? 24 : 30,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
@@ -237,7 +237,7 @@ class _UpdatePageState extends State<UpdatePage> {
             AnimatedDefaultTextStyle(
               duration: Duration(milliseconds: 200),
               style: TextStyle(
-                fontFamily: 'OpenSans',
+                fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
                 fontSize: isExpanded ? 14 : 20,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
@@ -250,7 +250,7 @@ class _UpdatePageState extends State<UpdatePage> {
             AnimatedDefaultTextStyle(
               duration: Duration(milliseconds: 200),
               style: TextStyle(
-                  fontFamily: 'OpenSans',
+                  fontFamily: 'Roboto',
                   fontWeight: FontWeight.w400,
                   fontSize: isExpanded ? 20 : 0,
                   color: Get.isDarkMode ? Colors.white : Colors.black),
@@ -268,7 +268,7 @@ class _UpdatePageState extends State<UpdatePage> {
                   "● Latest Update page\n"
                   "● Implement ride deletion functionality",
                   style: TextStyle(
-                      fontFamily: 'OpenSans',
+                      fontFamily: 'Roboto',
                       fontWeight: FontWeight.w400,
                       color: Colors.white),
                 ),
@@ -305,7 +305,7 @@ class _UpdatePageState extends State<UpdatePage> {
             AnimatedDefaultTextStyle(
               duration: Duration(milliseconds: 200),
               style: TextStyle(
-                fontFamily: 'OpenSans',
+                fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
                 fontSize: isExpanded ? 24 : 30,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
@@ -315,7 +315,7 @@ class _UpdatePageState extends State<UpdatePage> {
             AnimatedDefaultTextStyle(
               duration: Duration(milliseconds: 200),
               style: TextStyle(
-                fontFamily: 'OpenSans',
+                fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
                 fontSize: isExpanded ? 14 : 20,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
@@ -328,7 +328,7 @@ class _UpdatePageState extends State<UpdatePage> {
             AnimatedDefaultTextStyle(
               duration: Duration(milliseconds: 200),
               style: TextStyle(
-                fontFamily: 'OpenSans',
+                fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
                 fontSize: isExpanded ? 24 : 0,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
@@ -338,7 +338,7 @@ class _UpdatePageState extends State<UpdatePage> {
                 child: Text(
                   'Roder is a mobile application that allows you to create and join bike runs, and also create meetups with other bike riders. With Roder, you can easily plan your own rides or join other rides that are happening in your area.',
                   style: TextStyle(
-                      fontFamily: 'OpenSans',
+                      fontFamily: 'Roboto',
                       fontWeight: FontWeight.w400,
                       color: Colors.white),
                 ),

@@ -112,7 +112,7 @@ class _FavouritesState extends State<Favourites> {
                       child: Text(
                         Rides['Name'],
                         style: const TextStyle(
-                            fontFamily: 'OpenSans',
+                            fontFamily: 'Roboto',
                             fontWeight: FontWeight.bold,
                             fontSize: 24,
                             color: Colors.white),
@@ -128,7 +128,7 @@ class _FavouritesState extends State<Favourites> {
                       child: Text(
                         Rides['Origin'] + '  to  ' + Rides['Destination'],
                         style: TextStyle(
-                            fontFamily: 'OpenSans',
+                            fontFamily: 'Roboto',
                             fontWeight: FontWeight.w400,
                             fontSize: 15,
                             color: Colors.white),
@@ -210,7 +210,7 @@ class _FavouritesState extends State<Favourites> {
                 child: Text(
                   'You Have Joined:',
                   style: TextStyle(
-                      fontFamily: 'OpenSans',
+                      fontFamily: 'Roboto',
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
                       color: Get.isDarkMode ? Colors.white : Colors.black),

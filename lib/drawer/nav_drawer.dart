@@ -60,7 +60,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             title: const Text(
               'Settings',
               style: TextStyle(
-                  fontFamily: 'OpenSans',
+                  fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                   color: Colors.grey),
@@ -78,7 +78,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             title: const Text(
               'Review App',
               style: TextStyle(
-                  fontFamily: 'OpenSans',
+                  fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                   color: Colors.grey),
@@ -96,7 +96,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             title: const Text(
               'Patch Notes',
               style: TextStyle(
-                  fontFamily: 'OpenSans',
+                  fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                   color: Colors.grey),
@@ -113,7 +113,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             title: const Text(
               'Account',
               style: TextStyle(
-                  fontFamily: 'OpenSans',
+                  fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                   color: Colors.grey),
@@ -131,7 +131,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             title: const Text(
               'Contact',
               style: TextStyle(
-                  fontFamily: 'OpenSans',
+                  fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                   color: Colors.grey),
@@ -148,7 +148,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             title: const Text(
               'About',
               style: TextStyle(
-                  fontFamily: 'OpenSans',
+                  fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                   color: Colors.grey),
@@ -172,7 +172,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             title: const Text(
               'Sign Out',
               style: TextStyle(
-                  fontFamily: 'OpenSans',
+                  fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                   color: Colors.grey),
@@ -198,7 +198,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
           content: Text(
             "Our app was created with a simple goal in mind: to provide a platform for riders to discover new routes and enjoy delicious breakfasts at the same time!\n\nOur team of dedicated developers and motorcycle enthusiasts have created an app that is easy to use. With Roder, you can:\n\n●Plan your ride: Once you've found a great breakfast spot, use our app to plan your ride.\n\n●Connect with other riders: Our app allows you to connect with other bikers who share your passion for breakfast runs.",
             style: TextStyle(
-                fontFamily: 'OpenSans',
+                fontFamily: 'Roboto',
                 fontWeight: FontWeight.w400,
                 fontSize: 14,
                 color: Get.isDarkMode ? Colors.white : Colors.black),
