@@ -40,7 +40,7 @@ class LogIn extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/Roderr.jpg'),
+            image: AssetImage('assets/LandingPageRoder.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -50,19 +50,42 @@ class LogIn extends StatelessWidget {
             SizedBox(
               height: 50,
             ),
-            Center(
-              child: Text(
-                'Roder',
-                style: TextStyle(
-                  fontFamily: 'Audiowide',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 70,
-                  color: Colors.black,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 20),
+                  child: Text(
+                    'Explore your\nfavorite journey',
+                    style: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
             SizedBox(
-              height: 25,
+              height: 20,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 20),
+                  child: Text(
+                    'Life is all about journey.\nFind yours.',
+                    style: TextStyle(
+                      fontFamily: 'OpenSans',
+                      // fontWeight: FontWeight.,
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
             ),
             Spacer(),
             Center(
@@ -76,20 +99,24 @@ class LogIn extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    FaIcon(
-                      FontAwesomeIcons.google,
-                      color: darkbl50,
+                    Container(
+                      width: 30,
+                      height: 30,
+                      child: Image.asset(
+                        'assets/GoogleLogo.png',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     Text(
-                      'Sign in with Google',
+                      'Login with Google',
                       style: TextStyle(
                         fontFamily: 'OpenSans',
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                        color: Colors.white,
+                        fontSize: 20,
+                        color: Colors.blue,
                       ),
                     ),
                   ],
@@ -97,7 +124,7 @@ class LogIn extends StatelessWidget {
                 style: ButtonStyle(
                   // Customize the button's background color
                   backgroundColor:
-                      MaterialStateProperty.all<Color>(lightBlueClr),
+                      MaterialStateProperty.all<Color>(Colors.white),
                   // Customize the button's foreground (text) color
                   foregroundColor:
                       MaterialStateProperty.all<Color>(Colors.white),
@@ -110,10 +137,15 @@ class LogIn extends StatelessWidget {
                   // Customize the button's shape (e.g., rounded corners)
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(0),
+                        bottomLeft: Radius.circular(0),
+                        bottomRight: Radius.circular(20),
+                      ),
                     ),
                   ),
-                  fixedSize: MaterialStateProperty.all<Size>(Size(300, 60)),
+                  fixedSize: MaterialStateProperty.all<Size>(Size(330, 50)),
                 ),
               ),
             ),
