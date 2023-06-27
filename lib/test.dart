@@ -47,7 +47,7 @@ class _TestState extends State<Test> {
               Padding(
                 padding: EdgeInsets.only(left: 20),
                 child: Text(
-                  'Morning ${user.displayName},',
+                  'Hey ${user.displayName},',
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     fontWeight: FontWeight.bold,
