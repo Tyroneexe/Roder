@@ -21,14 +21,14 @@ const Color purple = Color(0xFF7c14ff);
 const Color oRange = Color(0xFFf9be0d);
 const Color lightOrange = Color(0xFFFFB952);
 const Color skinOrange = Color(0xFFFFBA84);
-
 // Red Theme Colors
 const Color themeRed = Color(0xFFef6448);
 //const Color rred = Color(0xFFFF2400);
 const Color darkRed = Color(0xFF660000);
-// Button for Home Page
+// Filter Button for Home Page
 const Color btnBlueClr = Color(0xFF315099);
 const Color outlineBtnClr = Color(0xFF6A92F0);
+const Color unselectedBtnClr = Color(0xFFD8E0F2);
 //
 const primaryClr = blueClr;
 

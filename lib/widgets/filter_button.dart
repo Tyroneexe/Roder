@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../themes/theme.dart';
 
-bool isFilter1 = true;
-bool isFilter2 = false;
-bool isFilter3 = false;
-bool isFilter4 = false;
-
 class FilterButton extends StatelessWidget {
   final Function()? onPressed;
   final Widget child;

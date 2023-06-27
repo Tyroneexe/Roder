@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roder/widgets/filter_button.dart';
+import 'package:roder/widgets/unfilter_button.dart';
 import 'drawer/nav_drawer.dart';
+import 'homepage/home_page.dart';
 
 class Test extends StatefulWidget {
   const Test({super.key});
@@ -11,6 +13,11 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
+  bool isFilter1 = true;
+  bool isFilter2 = false;
+  bool isFilter3 = false;
+  bool isFilter4 = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +36,7 @@ class _TestState extends State<Test> {
               Padding(
                 padding: EdgeInsets.only(left: 20),
                 child: Text(
-                  'Morning Ryan,',
+                  'Morning ${user.displayName},',
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     fontWeight: FontWeight.bold,
@@ -61,7 +68,7 @@ class _TestState extends State<Test> {
             ],
           ),
           SizedBox(
-            height: 10,
+            height: 20,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -70,14 +77,50 @@ class _TestState extends State<Test> {
                 padding: const EdgeInsets.only(
                   left: 10.0,
                 ),
-                child: FilterButton(
-                  onPressed: () {},
-                  child: Text('All Rides'),
-                ),
+                child: isFilter1
+                    ? FilterButton(
+                        onPressed: () {
+                          setState(() {
+                            isFilter1 = !isFilter1;
+                          });
+                        },
+                        child: Text(
+                          'All Rides',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
+                    : UnFilterButton(
+                        onPressed: () {
+                          setState(() {
+                            isFilter1 = !isFilter1;
+                          });
+                        },
+                        child: Text(
+                          'All Rides',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                            color: Colors.white,
+                          ),
+                        )),
               ),
               FilterButton(
                 onPressed: () {},
-                child: Text('Near Me'),
+                child: Text(
+                  'Near Me',
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ],
           )
