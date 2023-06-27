@@ -10,9 +10,10 @@ import 'drawer/nav_drawer.dart';
 import 'homepage/home_page.dart';
 
 // Save the Place and State of the place in the database
-//   using the polyline decode
+//    using the polyline decode
 //
-// Save the Total time and
+// Save the Total time and and kilometers and polyline in the database
+//    using the polyline decode
 
 class Test extends StatefulWidget {
   const Test({super.key});
