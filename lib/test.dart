@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:roder/widgets/filter_button.dart';
 import 'drawer/nav_drawer.dart';
 
 class Test extends StatefulWidget {
@@ -60,6 +60,27 @@ class _TestState extends State<Test> {
               ),
             ],
           ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 10.0,
+                ),
+                child: FilterButton(
+                  onPressed: () {},
+                  child: Text('All Rides'),
+                ),
+              ),
+              FilterButton(
+                onPressed: () {},
+                child: Text('Near Me'),
+              ),
+            ],
+          )
         ],
       ),
     );

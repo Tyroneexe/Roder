@@ -26,7 +26,9 @@ const Color skinOrange = Color(0xFFFFBA84);
 const Color themeRed = Color(0xFFef6448);
 //const Color rred = Color(0xFFFF2400);
 const Color darkRed = Color(0xFF660000);
-
+// Button for Home Page
+const Color btnBlueClr = Color(0xFF315099);
+const Color outlineBtnClr = Color(0xFF6A92F0);
 //
 const primaryClr = blueClr;
 

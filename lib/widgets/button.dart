@@ -9,6 +9,7 @@ import '../provider/clrProvider.dart';
 class MyButton extends StatelessWidget {
   final Function()? onTap;
   MyButton({Key? key, required this.onTap}) : super(key: key);
+  
   Color _mainColor = lightBlueClr;
 
   @override
