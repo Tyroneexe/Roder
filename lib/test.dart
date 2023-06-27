@@ -1,9 +1,18 @@
+// ignore_for_file: non_constant_identifier_names
+
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roder/widgets/filter_button.dart';
 import 'package:roder/widgets/unfilter_button.dart';
 import 'drawer/nav_drawer.dart';
 import 'homepage/home_page.dart';
+
+// Save the Place and State of the place in the database
+//   using the polyline decode
+//
+// Save the Total time and
 
 class Test extends StatefulWidget {
   const Test({super.key});
@@ -17,6 +26,11 @@ class _TestState extends State<Test> {
   bool isFilter2 = false;
   bool isFilter3 = false;
   bool isFilter4 = false;
+  //
+  //Database
+  Query dbRef = FirebaseDatabase.instance.ref().child('Rides');
+  DatabaseReference reference = FirebaseDatabase.instance.ref().child('Rides');
+  final databaseReference = FirebaseDatabase.instance.ref();
 
   @override
   Widget build(BuildContext context) {
@@ -255,7 +269,62 @@ class _TestState extends State<Test> {
               ],
             ),
           ),
+          SizedBox(
+            height: 20,
+          ),
+          _getDBRides(),
         ],
+      ),
+    );
+  }
+
+  _getDBRides() {
+    return Expanded(
+      child: FirebaseAnimatedList(
+        physics: BouncingScrollPhysics(),
+        query: dbRef,
+        itemBuilder: (BuildContext context, DataSnapshot snapshot,
+            Animation<double> animation, int index) {
+          Map Rides = snapshot.value as Map;
+          Rides['key'] = snapshot.key;
+          return listItem(Rides: Rides);
+        },
+      ),
+    );
+  }
+
+  Widget listItem({
+    required Map Rides,
+  }) {
+    return Padding(
+      //padding for spacing between rides
+      padding:
+          const EdgeInsets.only(left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
+      //this container is for the image
+      child: Container(
+        height: 170,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          image: DecorationImage(
+            image: AssetImage(
+              'assets/image 14.png',
+            ),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Stack(
+          children: [
+            //this container is for the black hue
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.black.withOpacity(
+                  0.6,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

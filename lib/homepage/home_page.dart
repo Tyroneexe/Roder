@@ -120,7 +120,6 @@ class _HomePageState extends State<HomePage> {
   bool rideFilter3 = true;
 
   //Expandable
-  bool isRideExpanded = false;
 
   //Update popup for updates
   String release = "";
