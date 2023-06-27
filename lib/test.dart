@@ -22,11 +22,7 @@ class _TestState extends State<Test> {
   Widget build(BuildContext context) {
     return Scaffold(
       endDrawer: NavitionDrawer(),
-      appBar: AppBar(
-        backgroundColor: context.theme.colorScheme.background,
-        elevation: 0,
-        foregroundColor: Get.isDarkMode ? Colors.white : Colors.black,
-      ),
+      appBar: _appBar(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -70,22 +66,78 @@ class _TestState extends State<Test> {
           SizedBox(
             height: 20,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 10.0,
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 10.0,
+                  ),
+                  child: isFilter1
+                      ? FilterButton(
+                          onPressed: () {
+                            setState(() {
+                              if (isFilter2 == false &&
+                                  isFilter3 == false &&
+                                  isFilter4 == false) {
+                                isFilter1 = true;
+                              } else {
+                                isFilter1 = !isFilter1;
+                                isFilter4 = false;
+                                isFilter2 = false;
+                                isFilter3 = false;
+                              }
+                            });
+                          },
+                          child: Text(
+                            'All Rides',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                          ),
+                        )
+                      : UnFilterButton(
+                          onPressed: () {
+                            setState(() {
+                              isFilter1 = !isFilter1;
+                              isFilter4 = false;
+                              isFilter2 = false;
+                              isFilter3 = false;
+                            });
+                          },
+                          child: Text(
+                            'All Rides',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
                 ),
-                child: isFilter1
+                isFilter2
                     ? FilterButton(
                         onPressed: () {
                           setState(() {
-                            isFilter1 = !isFilter1;
+                            if (isFilter1 == false &&
+                                isFilter3 == false &&
+                                isFilter4 == false) {
+                              isFilter2 = true;
+                            } else {
+                              isFilter2 = !isFilter2;
+                              isFilter4 = false;
+                              isFilter1 = false;
+                              isFilter3 = false;
+                            }
                           });
                         },
                         child: Text(
-                          'All Rides',
+                          'Near Me',
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             fontWeight: FontWeight.w700,
@@ -97,35 +149,122 @@ class _TestState extends State<Test> {
                     : UnFilterButton(
                         onPressed: () {
                           setState(() {
-                            isFilter1 = !isFilter1;
+                            isFilter2 = !isFilter2;
+                            isFilter1 = false;
+                            isFilter4 = false;
+                            isFilter3 = false;
                           });
                         },
                         child: Text(
-                          'All Rides',
+                          'Near Me',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                isFilter3
+                    ? FilterButton(
+                        onPressed: () {
+                          setState(() {
+                            if (isFilter2 == false &&
+                                isFilter1 == false &&
+                                isFilter4 == false) {
+                              isFilter3 = true;
+                            } else {
+                              isFilter3 = !isFilter3;
+                              isFilter4 = false;
+                              isFilter2 = false;
+                              isFilter1 = false;
+                            }
+                          });
+                        },
+                        child: Text(
+                          'Joined',
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             fontWeight: FontWeight.w700,
                             fontSize: 14,
                             color: Colors.white,
                           ),
-                        )),
-              ),
-              FilterButton(
-                onPressed: () {},
-                child: Text(
-                  'Near Me',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 14,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ],
-          )
+                        ),
+                      )
+                    : UnFilterButton(
+                        onPressed: () {
+                          setState(() {
+                            isFilter3 = !isFilter3;
+                            isFilter1 = false;
+                            isFilter2 = false;
+                            isFilter4 = false;
+                          });
+                        },
+                        child: Text(
+                          'Joined',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                isFilter4
+                    ? FilterButton(
+                        onPressed: () {
+                          setState(() {
+                            if (isFilter2 == false &&
+                                isFilter3 == false &&
+                                isFilter1 == false) {
+                              isFilter4 = true;
+                            } else {
+                              isFilter4 = !isFilter4;
+                              isFilter1 = false;
+                              isFilter2 = false;
+                              isFilter3 = false;
+                            }
+                          });
+                        },
+                        child: Text(
+                          'Events',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
+                    : UnFilterButton(
+                        onPressed: () {
+                          setState(() {
+                            isFilter4 = !isFilter4;
+                            isFilter1 = false;
+                            isFilter2 = false;
+                            isFilter3 = false;
+                          });
+                        },
+                        child: Text(
+                          'Events',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+              ],
+            ),
+          ),
         ],
       ),
+    );
+  }
+
+  _appBar() {
+    return AppBar(
+      backgroundColor: context.theme.colorScheme.background,
+      elevation: 0,
+      foregroundColor: Get.isDarkMode ? Colors.white : Colors.black,
     );
   }
 }
