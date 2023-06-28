@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/controllers/barcontroller.dart';
-import 'package:roder/favourites/favourites.dart';
 import 'package:roder/search/search_page.dart';
 import 'package:roder/themes/theme.dart';
 import 'package:roder/ui/add_task_bar.dart';
+import 'package:roder/ui/notification_page.dart';
 
 import '../homepage/home_page.dart';
 import '../provider/clrProvider.dart';
@@ -21,7 +21,7 @@ class NavBar extends StatefulWidget {
 
 class _NavBarState extends State<NavBar> {
   final controller = Get.put(NavBarController());
-  Color _mainColor = blueClr;
+  static const Color navBarBkgClr = Color(0xFFE7EEFF);
 
   @override
   void initState() {
@@ -36,22 +36,27 @@ class _NavBarState extends State<NavBar> {
         return Scaffold(
           body: IndexedStack(
             index: controller.tabIndex,
-            children: const [HomePage(), Search(), Favourites(), AddTaskPage()],
+            children: const [HomePage(), NotiPage(), Search(), AddTaskPage()],
           ),
           bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: navBarBkgClr,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
             elevation: 0,
             selectedItemColor: btnBlueClr,
             unselectedItemColor: Colors.black,
-            selectedFontSize: 16,
             currentIndex: controller.tabIndex,
             onTap: controller.changeTabIndex,
+            selectedFontSize: 0,
+            selectedIconTheme: IconThemeData(size: 0),
+            unselectedIconTheme: IconThemeData(size: 0),
             items: [
-              _bottombarItem(Icons.home, "Home"),
-              _bottombarItem(Icons.notifications, "Search"),
-              _bottombarItem(Icons.search_rounded, "Joined"),
+              _bottombarItem(Icons.home, ""),
+              _bottombarItem(Icons.notifications, ""),
+              _bottombarItem(Icons.search_rounded, ""),
               _bottombarItem(
                 Icons.add_circle_outline,
-                "Add",
+                "",
               ),
             ],
           ),
@@ -65,7 +70,7 @@ _bottombarItem(IconData icon, String label) {
   return BottomNavigationBarItem(
     icon: Icon(
       icon,
-      size: 24,
+      size: 26,
     ),
     label: label,
   );
