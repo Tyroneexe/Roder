@@ -36,6 +36,7 @@ class _TestState extends State<Test> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.theme.colorScheme.background,
       endDrawer: NavitionDrawer(),
       appBar: _appBar(),
       body: Column(

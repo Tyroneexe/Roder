@@ -1,18 +1,7 @@
-// ignore_for_file: non_constant_identifier_names, unused_local_variable, unused_field
-import 'package:date_picker_timeline/date_picker_widget.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-import 'package:roder/themes/theme.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../favourites/favourites.dart';
-import '../provider/clrProvider.dart';
+import '../themes/theme.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -22,380 +11,76 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  Color _mainColor = lightBlueClr;
-  bool isDateBarVisible = false;
-  bool isArrowUp = true;
-  DateTime _selectedDate = DateTime.now();
-  Query dbRef = FirebaseDatabase.instance.ref().child('Rides');
-  DatabaseReference reference = FirebaseDatabase.instance.ref().child('Rides');
   final searchFilter = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
         backgroundColor: context.theme.colorScheme.background,
+        elevation: 0,
       ),
       backgroundColor: context.theme.colorScheme.background,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Center(
-            child: Text(
-              'Search for a Ride',
-              //Search for a Ride
-              style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
-                  color: Get.isDarkMode ? Colors.white : Colors.black),
-            ),
-          ),
-          const SizedBox(
-            height: 7,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 16, right: 16, left: 16),
-            child: TextFormField(
-              controller: searchFilter,
-              decoration: InputDecoration(
-                hintText: 'Sunday Breakfast Run',
-                //Sunday Breakfast Run
-                hintStyle: const TextStyle(
-                    fontFamily: 'Roboto', fontSize: 18, color: Colors.grey),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25),
-                  borderSide: const BorderSide(color: Colors.grey),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25),
-                  borderSide: BorderSide(
-                      color: _getMainClr(
-                          Provider.of<ColorProvider>(context).selectedColor)),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25),
-                  borderSide: const BorderSide(color: Colors.grey),
-                ),
-              ),
-              onChanged: (String value) {
-                setState(() {});
-              },
-            ),
-          ),
-          Center(
-            child: SizedBox(
-              width: 140,
-              height: 50,
-              child: TextButton(
-                onPressed: () {
-                  setState(() {
-                    isDateBarVisible = !isDateBarVisible;
-                  });
-                },
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text(
-                    'Select a Date',
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14,
-                      color: _getMainClr(
-                          Provider.of<ColorProvider>(context).selectedColor),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 2,
-                  ),
-                  Icon(
-                    isDateBarVisible
-                        ? Icons.keyboard_arrow_up
-                        : Icons.keyboard_arrow_down,
-                    color: _getMainClr(
-                        Provider.of<ColorProvider>(context).selectedColor),
-                  ),
-                ]),
-              ),
-            ),
-          ),
-          if (isDateBarVisible) _addDateBar(),
-          Expanded(
-            child: FirebaseAnimatedList(
-              physics: BouncingScrollPhysics(),
-              query: dbRef,
-              itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                  Animation<double> animation, int index) {
-                final title = snapshot.child('Name').value.toString();
-
-                if (searchFilter.text.isEmpty && isDateBarVisible == false) {
-                  Map Rides = snapshot.value as Map;
-                  Rides['key'] = snapshot.key;
-                  return listItem(Rides: Rides)
-                      .animate()
-                      .slideX(duration: 300.ms)
-                      .fade(duration: 400.ms);
-                }
-                if (isDateBarVisible) {
-                  Map Rides = snapshot.value as Map;
-                  if (Rides['Date'] ==
-                      DateFormat("d MMMM yyyy").format(_selectedDate)) {
-                    return listItem(Rides: Rides)
-                        .animate()
-                        .slideX(duration: 300.ms)
-                        .fade(duration: 400.ms);
-                  } else {
-                    return Container();
-                  }
-                } else if (title
-                    .toLowerCase()
-                    .contains(searchFilter.text.toLowerCase().toString())) {
-                  Map Rides = snapshot.value as Map;
-                  Rides['key'] = snapshot.key;
-                  return listItem(Rides: Rides)
-                      .animate()
-                      .slideX(duration: 300.ms)
-                      .fade(duration: 400.ms);
-                } else {
-                  return Container();
-                }
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  _addDateBar() {
-    return Container(
-      margin: const EdgeInsets.only(
-        left: 20,
-      ),
-      child: DatePicker(
-        DateTime.now(),
-        height: 100,
-        width: 80,
-        initialSelectedDate: DateTime.now(),
-        selectionColor:
-            _getMainClr(Provider.of<ColorProvider>(context).selectedColor),
-        selectedTextColor: Colors.white,
-        dateTextStyle: const TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w600,
-            fontSize: 22,
-            color: Colors.grey),
-        dayTextStyle: const TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w600,
-            fontSize: 14,
-            color: Colors.grey),
-        monthTextStyle: const TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w600,
-            fontSize: 14,
-            color: Colors.grey),
-        onDateChange: (date) {
-          setState(() {
-            _selectedDate = date;
-          });
-        },
-      ),
-    );
-  }
-
-  _getMainClr(int no) {
-    switch (no) {
-      case 0:
-        _mainColor = lightBlueClr;
-        return lightBlueClr;
-      case 1:
-        _mainColor = oRange;
-        return oRange;
-      case 2:
-        _mainColor = themeRed;
-        return themeRed;
-      default:
-        _mainColor = lightBlueClr;
-        return lightBlueClr;
-    }
-  }
-
-  _getBGClr(int no) {
-    if (Provider.of<ColorProvider>(context).selectedColor == 0) {
-      switch (no) {
-        case 0:
-          return blueClr;
-        case 1:
-          return lightBlueClr;
-        case 2:
-          return vBlue;
-        default:
-          return blueClr;
-      }
-    } else if (Provider.of<ColorProvider>(context).selectedColor == 1) {
-      switch (no) {
-        case 0:
-          return oRange;
-        case 1:
-          return lightOrange;
-        case 2:
-          return skinOrange;
-        default:
-          return oRange;
-      }
-    } else {
-      switch (no) {
-        case 0:
-          return themeRed;
-        case 1:
-          return rred;
-        case 2:
-          return darkRed;
-        default:
-          return themeRed;
-      }
-    }
-  }
-
-  final databaseReference = FirebaseDatabase.instance.ref();
-
-  Widget listItem({
-    required Map Rides,
-    // required rideKey,
-  }) {
-    saveprefs() async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setStringList("joined_rides", joinedRides);
-    }
-
-    return Slidable(
-      startActionPane: ActionPane(
-        motion: const BehindMotion(),
-        extentRatio: 1 / 5,
-        children: [
-          SlidableAction(
-            backgroundColor: _getBGClr(Rides['Color']),
-            icon: Icons.add,
-            label: 'JOIN',
-            onPressed: (context) async {
-              if (!joinedRides.contains(Rides['key'])) {
-                joinedRides.add(Rides['key']);
-                saveprefs();
-                databaseReference
-                    .child('Rides/${Rides['key']}')
-                    .update({'Joined': Rides['Joined'] + 1});
-                _addedToFav();
-              }
-            },
-          ),
-        ],
-      ),
-      child: Stack(
-        clipBehavior: Clip.none,
-        alignment: Alignment.topRight,
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            margin: const EdgeInsets.all(10),
-            padding: const EdgeInsets.all(20),
-            height: 200,
+            width: MediaQuery.of(context).size.width - 40,
+            height: 45,
             decoration: BoxDecoration(
-              color: joinedRides.contains(Rides['key'])
-                  ? darkGr
-                  : _getBGClr(Rides['Color']),
-              borderRadius: BorderRadius.circular(20.0),
+              color: searchBarClr,
+              borderRadius: BorderRadius.circular(6),
             ),
-            child: Stack(children: [
-              Container(
-                // color: Colors.red.withOpacity(0.2),
-                padding: EdgeInsets.only(left: 205, top: 100),
-                child: Text(
-                  "Joined: ${Rides['Joined'].toString()}",
-                  style: tyStyle,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: context.theme.colorScheme.background, width: 0),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: context.theme.colorScheme.background, width: 0),
+                  ),
+                  hintText: "Search",
+                  hintStyle: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18,
+                    color: searchBarTxtClr,
+                  ),
                 ),
+                controller: searchFilter,
+                onChanged: (String value) {
+                  setState(() {});
+                },
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(
-                      bottom: 20,
-                    ),
-                    child: Center(
-                      child: Text(
-                        Rides['Name'],
-                        style: const TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                            color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Center(
-                    child: FittedBox(
-                      fit: BoxFit.contain,
-                      child: Text(
-                        Rides['Origin'] + '  to  ' + Rides['Destination'],
-                        style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15,
-                            color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Text(Rides['Date'], style: tyStyle),
-                  Text(
-                    Rides['Start Time'] + '  to  ' + Rides['End Time'],
-                    style: tyStyle,
-                  ),
-                ],
-              ),
-            ]),
-          ),
-          Positioned(
-            right: 0,
-            child: CircleAvatar(
-              radius: 25,
-              backgroundImage: NetworkImage(Rides['GPhoto']),
             ),
           ),
         ],
       ),
-      closeOnScroll: true,
     );
   }
-
-  _addedToFav() {
-    Get.snackbar("RIDE ADDED", "Ride added to Favorites",
-        snackPosition: SnackPosition.TOP,
-        borderWidth: 5,
-        borderColor: Colors.green[600],
-        backgroundColor: Colors.white,
-        colorText: Colors.green[600],
-        icon: const Icon(Icons.add));
-  }
-
-// _getBGClr(int no) {
-//   switch (no) {
-//     case 0:
-//       return blueClr;
-//     case 1:
-//       return lightBlueClr;
-//     case 2:
-//       return vBlue;
-//     default:
-//       return blueClr;
-//   }
-// }
 }
+
+        // Container(
+        //     height: 45,
+        //     width: MediaQuery.of(context).size.width - 40,
+        //     decoration: BoxDecoration(
+        //       color: searchBarClr,
+        //       borderRadius: BorderRadius.circular(6),
+        //     ),
+        //     child: Padding(
+        //       padding: const EdgeInsets.all(8.0),
+        //       child: Text(
+        //         'Search',
+        //         style: TextStyle(
+        //           fontFamily: 'Roboto',
+        //           fontWeight: FontWeight.w700,
+        //           fontSize: 18,
+        //           color: searchBarTxtClr,
+        //         ),
+        //       ),
+        //     ),
+        //   ),    

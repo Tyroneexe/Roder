@@ -33,6 +33,9 @@ const Color unselectedBtnClr = Color(0xFFD8E0F2);
 const Color oldNotis = Color(0xFFF5F8FF);
 const Color newNotis = Color(0xFFE9EEFB);
 const Color textNotis = Color(0xFF5F6677);
+// Search Page
+const Color searchBarClr = Color(0xFFE2EAFA);
+const Color searchBarTxtClr = Color(0xFFAEC3EE);
 //
 const primaryClr = blueClr;
 
