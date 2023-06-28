@@ -87,62 +87,59 @@ class LogIn extends StatelessWidget {
             ),
             Spacer(),
             Center(
-              child: ElevatedButton(
-                onPressed: () async {
-                  final provider =
-                      Provider.of<GoogleSignInProvider>(context, listen: false);
-                  await provider.googleLogIn();
-                  // assignUserID();
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      child: Image.asset(
-                        'assets/GoogleLogo.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'Login with Google',
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                        color: Color(0xFF3F66C1),
-                      ),
-                    ),
-                  ],
-                ),
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(0),
-                        bottomLeft: Radius.circular(0),
-                        bottomRight: Radius.circular(20),
-                      ),
-                    ),
-                  ),
-                  fixedSize: MaterialStateProperty.all<Size>(Size(330, 50)),
-                ),
-              ),
+              child: logInBtn(context),
             ),
             SizedBox(
               height: 40,
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  ElevatedButton logInBtn(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () async {
+        final provider =
+            Provider.of<GoogleSignInProvider>(context, listen: false);
+        await provider.googleLogIn();
+        // assignUserID();
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 40,
+            height: 40,
+            child: Image.asset(
+              'assets/GoogleLogo.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          Text(
+            'Login with Google',
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              color: Color(0xFF3F66C1),
+            ),
+          ),
+        ],
+      ),
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(6),
+          ),
+        ),
+        fixedSize: MaterialStateProperty.all<Size>(Size(330, 50)),
       ),
     );
   }
