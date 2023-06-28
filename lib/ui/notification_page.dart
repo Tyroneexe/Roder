@@ -62,113 +62,118 @@ class _NotiPageState extends State<NotiPage> {
           ),
           GoogleSignInProvider().isSignedIn
               ? SizedBox()
-              : _welcomeNotification()
+              : _welcomeNotification(),
         ],
       ),
     );
   }
 
   _welcomeNotification() {
-    return Stack(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 90,
-              width: 10,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(
+    return GestureDetector(
+      onTap: () {},
+      child: Stack(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 90,
+                width: 10,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(
+                      4,
+                    ),
+                    bottomLeft: Radius.circular(
+                      4,
+                    ),
+                  ),
+                  color: btnBlueClr,
+                ),
+              ),
+              Container(
+                height: 90,
+                width: MediaQuery.of(context).size.width - 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
                     4,
                   ),
-                  bottomLeft: Radius.circular(
-                    4,
-                  ),
+                  color: newNotis,
                 ),
-                color: btnBlueClr,
               ),
-            ),
-            Container(
-              height: 90,
-              width: MediaQuery.of(context).size.width - 40,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  4,
-                ),
-                color: newNotis,
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 18,
               ),
-            ),
-          ],
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 18,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Icon(
-                          Icons.waving_hand_rounded,
-                          color: btnBlueClr,
-                          size: 36,
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                  ],
-                ),
-                RichText(
-                  text: TextSpan(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      TextSpan(
-                        text: 'Welcome to ',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w700,
-                          fontSize: 22,
-                          color: textNotis,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.waving_hand_rounded,
+                            color: btnBlueClr,
+                            size: 36,
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                        ],
                       ),
-                      TextSpan(
-                        text: 'Roder',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22,
-                          color: btnBlueClr,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '\nFind your Ride, your Way.',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w700,
-                          fontSize: 22,
-                          color: textNotis,
-                        ),
+                      SizedBox(
+                        height: 20,
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          ],
-        )
-      ],
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Welcome to ',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 22,
+                            color: textNotis,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Roder',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                            color: btnBlueClr,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '\nFind your Ride, your Way.',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 22,
+                            color: textNotis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                ],
+              ),
+              //Text date
+            ],
+          )
+        ],
+      ),
     );
   }
 
