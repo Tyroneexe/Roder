@@ -36,9 +36,13 @@ class _TestState extends State<Test> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.theme.colorScheme.background,
+      // backgroundColor: context.theme.colorScheme.background,
       endDrawer: NavitionDrawer(),
-      appBar: _appBar(),
+      appBar: AppBar(
+        backgroundColor: context.theme.colorScheme.background,
+        elevation: 0,
+        foregroundColor: Get.isDarkMode ? Colors.white : Colors.black,
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -328,14 +332,6 @@ class _TestState extends State<Test> {
           ],
         ),
       ),
-    );
-  }
-
-  _appBar() {
-    return AppBar(
-      backgroundColor: context.theme.colorScheme.background,
-      elevation: 0,
-      foregroundColor: Get.isDarkMode ? Colors.white : Colors.black,
     );
   }
 }
