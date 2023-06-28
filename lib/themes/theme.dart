@@ -29,6 +29,10 @@ const Color darkRed = Color(0xFF660000);
 const Color btnBlueClr = Color(0xFF315099);
 const Color outlineBtnClr = Color(0xFF6A92F0);
 const Color unselectedBtnClr = Color(0xFFD8E0F2);
+// Notifications
+const Color oldNotis = Color(0xFFF5F8FF);
+const Color newNotis = Color(0xFFE9EEFB);
+const Color textNotis = Color(0xFF5F6677);
 //
 const primaryClr = blueClr;
 

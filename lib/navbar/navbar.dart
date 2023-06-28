@@ -21,7 +21,7 @@ class NavBar extends StatefulWidget {
 
 class _NavBarState extends State<NavBar> {
   final controller = Get.put(NavBarController());
-  static const Color navBarBkgClr = Color(0xFFE7EEFF);
+  static const Color navBarBkgClr = Color(0xFFe7eeff);
 
   @override
   void initState() {
@@ -39,7 +39,7 @@ class _NavBarState extends State<NavBar> {
             children: const [HomePage(), NotiPage(), Search(), AddTaskPage()],
           ),
           bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.shifting,
+            type: BottomNavigationBarType.fixed,
             backgroundColor: navBarBkgClr,
             showSelectedLabels: false,
             showUnselectedLabels: false,
