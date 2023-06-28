@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:roder/controllers/barcontroller.dart';
+import 'package:roder/navbar/barcontroller.dart';
 import 'package:roder/search/search_page.dart';
 import 'package:roder/themes/theme.dart';
 import 'package:roder/ui/add_task_bar.dart';
@@ -39,6 +39,7 @@ class _NavBarState extends State<NavBar> {
             children: const [HomePage(), NotiPage(), Search(), AddTaskPage()],
           ),
           bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.shifting,
             backgroundColor: navBarBkgClr,
             showSelectedLabels: false,
             showUnselectedLabels: false,
