@@ -35,7 +35,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   font_awesome_flutter: ^10.4.0
   iconly: ^1.0.1
-  akar_icons_flutter: ^1.1.16
   fancy_bar: ^2.0.0
   line_icons: ^2.0.1
   flutter_staggered_animations:
