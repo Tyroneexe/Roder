@@ -5,34 +5,21 @@ import 'package:roder/themes/theme.dart';
 
 import 'login/google_sign_in.dart';
 
-void main() => runApp(NotificationApp());
-
-class NotificationApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Notification App',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: NotificationPage(),
-    );
-  }
-}
-
 class NotificationPage extends StatefulWidget {
   @override
   _NotificationPageState createState() => _NotificationPageState();
 }
 
-bool hasBeenUpdated = false;
+bool hasBeenUpdated = true;
 bool eventOneHasOccurred = false;
-bool eventTwoHasOccurred = true;
+bool eventTwoHasOccurred = false;
 
 class _NotificationPageState extends State<NotificationPage> {
   List<NotificationItem> notifications = [
     NotificationItem(
-      title: "Roder: 2.0.0 has been released, take a look around",
+      title:
+          "Roder: 2.0.0 patch update has been installed. With new additional features.",
       time: "",
-      icon: Icons.notifications,
       event: "patchnotes",
       viewed: false,
     ),
@@ -250,6 +237,7 @@ class NotificationCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        width: MediaQuery.of(context).size.width - 35,
         height: 90,
         margin: EdgeInsets.symmetric(
           horizontal: 20,
@@ -277,7 +265,9 @@ class NotificationCard extends StatelessWidget {
                       color: btnBlueClr,
                     ),
                   ),
-            SizedBox(width: 10),
+            SizedBox(
+              width: 10,
+            ),
             Icon(
               notification.icon,
               color: btnBlueClr,
@@ -325,14 +315,14 @@ class NotificationCard extends StatelessWidget {
 class NotificationItem {
   final String title;
   final String time;
-  final IconData icon;
+  final IconData? icon;
   final String event;
   bool viewed;
 
   NotificationItem({
     required this.title,
     required this.time,
-    required this.icon,
+    this.icon,
     required this.event,
     required this.viewed,
   });
