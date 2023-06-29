@@ -93,7 +93,10 @@ class _SearchState extends State<Search> {
                         Spacer(),
                         GestureDetector(
                           onTap: () {
-                            //
+                            setState(() {
+                              recentHistory.removeAt(index);
+                            });
+                            saveRecentHistory();
                           },
                           child: Icon(
                             Icons.close_rounded,
