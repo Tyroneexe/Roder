@@ -143,8 +143,7 @@ class _HomePageState extends State<HomePage> {
     final newVersion = NewVersionPlus(
         iOSId: 'com.tb.roder',
         androidId: 'com.tb.roder',
-        androidPlayStoreCountry: "es_ES" //support country code
-        );
+        androidPlayStoreCountry: "es_ES");
 
     final ver = VersionStatus(
       appStoreLink: '',
@@ -167,8 +166,10 @@ class _HomePageState extends State<HomePage> {
   basicStatusCheck(NewVersionPlus newVersion) async {
     final version = await newVersion.getVersionStatus();
     if (version != null) {
+      if (version.canUpdate) {
+        hasBeenUpdated = true;
+      }
       release = version.releaseNotes ?? "";
-      hasBeenUpdated = true;
       setState(() {});
     }
     newVersion.showAlertIfNecessary(
