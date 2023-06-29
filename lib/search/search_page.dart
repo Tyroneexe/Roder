@@ -1,5 +1,8 @@
+// ignore_for_file: unnecessary_null_comparison, unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../themes/theme.dart';
 
@@ -11,8 +14,14 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  final searchFilter = TextEditingController();
+  TextEditingController searchFilter = TextEditingController();
   List<String> recentHistory = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadRecentHistory();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,12 +63,50 @@ class _SearchState extends State<Search> {
             child: ListView.builder(
               itemCount: recentHistory.length,
               itemBuilder: (context, index) {
-                return Row(
-                  children: [
-                    Text(
-                      recentHistory[index],
+                return Padding(
+                  padding: const EdgeInsets.only(top: 5, bottom: 5),
+                  child: GestureDetector(
+                    onTap: () {
+                      searchFilter.text = recentHistory[index];
+                    },
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Icon(
+                          Icons.history,
+                          color: recentTxtClr,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          recentHistory[index],
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                            color: recentTxtClr,
+                          ),
+                        ),
+                        Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            //
+                          },
+                          child: Icon(
+                            Icons.close_rounded,
+                            color: recentTxtClr,
+                            size: 22,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 );
               },
             ),
@@ -67,6 +114,21 @@ class _SearchState extends State<Search> {
         ],
       ),
     );
+  }
+
+  void saveRecentHistory() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs != null) {
+      prefs.setStringList('recentHistory', recentHistory);
+    }
+  }
+
+  void loadRecentHistory() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    if (prefs != null) {
+      recentHistory = prefs.getStringList('recentHistory') ?? [];
+    }
   }
 
   Container searchBar(BuildContext context) {
@@ -134,6 +196,7 @@ class _SearchState extends State<Search> {
                   recentHistory.insert(0, searchText);
                   searchFilter.clear();
                   setState(() {});
+                  saveRecentHistory();
                 }
               },
             ),
