@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:roder/drawer/nav_drawer.dart';
 import 'package:roder/themes/theme.dart';
 
 void main() => runApp(NotificationApp());
@@ -19,29 +21,29 @@ class NotificationPage extends StatefulWidget {
   _NotificationPageState createState() => _NotificationPageState();
 }
 
-class _NotificationPageState extends State<NotificationPage> {
-  bool eventOneHasOccurred =
-      false; // Update this based on your event conditions
-  bool eventTwoHasOccurred = true; // Update this based on your event conditions
+bool hasBeenUpdated = false;
+bool eventOneHasOccurred = false;
+bool eventTwoHasOccurred = true;
 
+class _NotificationPageState extends State<NotificationPage> {
   List<NotificationItem> notifications = [
     NotificationItem(
-      title: "Notification 1",
-      content: "This is the first notification",
+      title: "Roder: 2.0.0 has been released, take a look around",
+      time: "",
       icon: Icons.notifications,
-      event: "eventOne",
+      event: "patchnotes",
       viewed: false,
     ),
     NotificationItem(
       title: "Notification 2",
-      content: "This is the second notification",
+      time: "This is the second notification",
       icon: Icons.notifications,
       event: "eventTwo",
       viewed: false,
     ),
     NotificationItem(
       title: "Notification 3",
-      content: "This is the third notification",
+      time: "This is the third notification",
       icon: Icons.notifications,
       event: "eventOne",
       viewed: false,
@@ -51,7 +53,7 @@ class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     List<NotificationItem> filteredNotifications = notifications.where((n) {
-      if (n.event == "eventOne" && eventOneHasOccurred) {
+      if (n.event == "patchnotes" && hasBeenUpdated) {
         return true;
       } else if (n.event == "eventTwo" && eventTwoHasOccurred) {
         return true;
@@ -60,10 +62,8 @@ class _NotificationPageState extends State<NotificationPage> {
     }).toList();
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Notifications'),
-        backgroundColor: btnBlueClr,
-      ),
+      endDrawer: NavitionDrawer(),
+      appBar: _appBar(),
       body: ListView.builder(
         itemCount: filteredNotifications.length,
         itemBuilder: (BuildContext context, int index) {
@@ -77,6 +77,14 @@ class _NotificationPageState extends State<NotificationPage> {
           );
         },
       ),
+    );
+  }
+
+  _appBar() {
+    return AppBar(
+      backgroundColor: context.theme.colorScheme.background,
+      elevation: 0,
+      foregroundColor: Get.isDarkMode ? Colors.white : Colors.black,
     );
   }
 }
@@ -96,31 +104,41 @@ class NotificationCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: 90,
-        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        margin: EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 10,
+        ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4),
-          color: 
-          notification.viewed ? Colors.grey[300] : Colors.white,
+          borderRadius: BorderRadius.circular(4), color: newNotis,
+          // notification.viewed ? Colors.grey[300] : Colors.white,
         ),
         child: Row(
           children: [
-            Container(
-              width: 10,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(4),
-                  bottomLeft: Radius.circular(4),
-                ),
-                color: btnBlueClr,
-              ),
-            ),
+            notification.viewed
+                ? SizedBox()
+                : Container(
+                    width: 10,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(
+                          4,
+                        ),
+                        bottomLeft: Radius.circular(
+                          4,
+                        ),
+                      ),
+                      color: btnBlueClr,
+                    ),
+                  ),
             SizedBox(width: 10),
             Icon(
               notification.icon,
               color: btnBlueClr,
               size: 36,
             ),
-            SizedBox(width: 20),
+            SizedBox(
+              width: 20,
+            ),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -129,14 +147,23 @@ class NotificationCard extends StatelessWidget {
                   Text(
                     notification.title,
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: textNotis,
                     ),
                   ),
-                  SizedBox(height: 4),
+                  SizedBox(
+                    height: 4,
+                  ),
                   Text(
-                    notification.content,
-                    style: TextStyle(fontSize: 14),
+                    notification.time,
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: textNotis,
+                    ),
                   ),
                 ],
               ),
@@ -150,14 +177,14 @@ class NotificationCard extends StatelessWidget {
 
 class NotificationItem {
   final String title;
-  final String content;
+  final String time;
   final IconData icon;
   final String event;
   bool viewed;
 
   NotificationItem({
     required this.title,
-    required this.content,
+    required this.time,
     required this.icon,
     required this.event,
     required this.viewed,
