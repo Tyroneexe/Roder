@@ -10,9 +10,9 @@ class NotificationPage extends StatefulWidget {
   _NotificationPageState createState() => _NotificationPageState();
 }
 
-bool hasBeenUpdated = true;
+bool hasBeenUpdated = false;
 bool eventOneHasOccurred = false;
-bool eventTwoHasOccurred = false;
+bool eventTwoHasOccurred = true;
 
 class _NotificationPageState extends State<NotificationPage> {
   List<NotificationItem> notifications = [
@@ -41,14 +41,18 @@ class _NotificationPageState extends State<NotificationPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<NotificationItem> filteredNotifications = notifications.where((n) {
-      if (n.event == "patchnotes" && hasBeenUpdated) {
-        return true;
-      } else if (n.event == "eventTwo" && eventTwoHasOccurred) {
-        return true;
-      }
-      return false;
-    }).toList();
+    List<NotificationItem> filteredNotifications = notifications
+        .where((n) {
+          if (n.event == "patchnotes" && hasBeenUpdated) {
+            return true;
+          } else if (n.event == "eventTwo" && eventTwoHasOccurred) {
+            return true;
+          }
+          return false;
+        })
+        .toList()
+        .reversed
+        .toList();
 
     return Scaffold(
       endDrawer: NavitionDrawer(),
@@ -240,7 +244,7 @@ class NotificationCard extends StatelessWidget {
         height: 90,
         margin: EdgeInsets.symmetric(
           horizontal: 15,
-          vertical: 1,
+          vertical: 5,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
@@ -254,7 +258,7 @@ class NotificationCard extends StatelessWidget {
             notification.viewed
                 ? SizedBox()
                 : Container(
-                    width: 10,
+                    width: 8,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(

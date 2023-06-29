@@ -19,6 +19,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../drawer/nav_drawer.dart';
 import '../provider/clrProvider.dart';
 import '../ui/add_task_bar.dart';
+import '../ui/notification_page.dart';
 
 /*To Do's —>
 
@@ -167,6 +168,7 @@ class _HomePageState extends State<HomePage> {
     final version = await newVersion.getVersionStatus();
     if (version != null) {
       release = version.releaseNotes ?? "";
+      hasBeenUpdated = true;
       setState(() {});
     }
     newVersion.showAlertIfNecessary(
