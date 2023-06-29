@@ -5,30 +5,60 @@ import 'package:roder/themes/theme.dart';
 
 import '../login/google_sign_in.dart';
 
-class NotiPage extends StatefulWidget {
-  const NotiPage({super.key});
-
+class NotificationPage extends StatefulWidget {
   @override
-  State<NotiPage> createState() => _NotiPageState();
+  _NotificationPageState createState() => _NotificationPageState();
 }
 
-class _NotiPageState extends State<NotiPage> {
-  bool welcomeViwed = false;
+bool hasBeenUpdated = true;
+bool eventOneHasOccurred = false;
+bool eventTwoHasOccurred = false;
+
+class _NotificationPageState extends State<NotificationPage> {
+  List<NotificationItem> notifications = [
+    NotificationItem(
+      title:
+          "Roder: 2.0.0 patch update has been installed. With new additional features.",
+      time: "",
+      event: "patchnotes",
+      viewed: false,
+    ),
+    NotificationItem(
+      title: "Notification 2",
+      time: "This is the second notification",
+      icon: Icons.notifications,
+      event: "eventTwo",
+      viewed: false,
+    ),
+    NotificationItem(
+      title: "Notification 3",
+      time: "This is the third notification",
+      icon: Icons.notifications,
+      event: "eventOne",
+      viewed: false,
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
+    List<NotificationItem> filteredNotifications = notifications.where((n) {
+      if (n.event == "patchnotes" && hasBeenUpdated) {
+        return true;
+      } else if (n.event == "eventTwo" && eventTwoHasOccurred) {
+        return true;
+      }
+      return false;
+    }).toList();
+
     return Scaffold(
-      appBar: _appBar(),
       endDrawer: NavitionDrawer(),
-      backgroundColor: context.theme.colorScheme.background,
+      appBar: _appBar(),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 20.0,
-                ),
+                padding: const EdgeInsets.only(left: 20.0),
                 child: Text(
                   'Notifications',
                   style: TextStyle(
@@ -40,14 +70,10 @@ class _NotiPageState extends State<NotiPage> {
               ),
             ],
           ),
-          SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: 20),
           Row(
             children: [
-              SizedBox(
-                width: 20,
-              ),
+              SizedBox(width: 20),
               Text(
                 'Recently',
                 style: TextStyle(
@@ -58,14 +84,36 @@ class _NotiPageState extends State<NotiPage> {
               ),
             ],
           ),
-          SizedBox(
-            height: 15,
-          ),
+          SizedBox(height: 15),
           GoogleSignInProvider().isSignedIn
               ? SizedBox()
               : _welcomeNotification(),
+          SizedBox(height: 20),
+          Expanded(
+            child: ListView.builder(
+              itemCount: filteredNotifications.length,
+              itemBuilder: (BuildContext context, int index) {
+                return NotificationCard(
+                  notification: filteredNotifications[index],
+                  onTap: () {
+                    setState(() {
+                      filteredNotifications[index].viewed = true;
+                    });
+                  },
+                );
+              },
+            ),
+          ),
         ],
       ),
+    );
+  }
+
+  _appBar() {
+    return AppBar(
+      backgroundColor: context.theme.colorScheme.background,
+      elevation: 0,
+      foregroundColor: Get.isDarkMode ? Colors.white : Colors.black,
     );
   }
 
@@ -173,12 +221,110 @@ class _NotiPageState extends State<NotiPage> {
       ],
     );
   }
+}
 
-  _appBar() {
-    return AppBar(
-      backgroundColor: context.theme.colorScheme.background,
-      elevation: 0,
-      foregroundColor: Get.isDarkMode ? Colors.white : Colors.black,
+class NotificationCard extends StatelessWidget {
+  final NotificationItem notification;
+  final Function()? onTap;
+
+  const NotificationCard({
+    required this.notification,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 90,
+        margin: EdgeInsets.symmetric(
+          horizontal: 15,
+          vertical: 1,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(
+            4,
+          ),
+          color: newNotis,
+          // notification.viewed ? Colors.grey[300] : Colors.white,
+        ),
+        child: Row(
+          children: [
+            notification.viewed
+                ? SizedBox()
+                : Container(
+                    width: 10,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(
+                          4,
+                        ),
+                        bottomLeft: Radius.circular(
+                          4,
+                        ),
+                      ),
+                      color: btnBlueClr,
+                    ),
+                  ),
+            SizedBox(
+              width: 10,
+            ),
+            if (notification.icon != null)
+              Icon(
+                notification.icon,
+                color: btnBlueClr,
+                size: 36,
+              ),
+            if (notification.icon != null) SizedBox(width: 20),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    notification.title,
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: textNotis,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    notification.time,
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: textNotis,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
+}
+
+class NotificationItem {
+  final String title;
+  final String time;
+  final IconData? icon;
+  final String event;
+  bool viewed;
+
+  NotificationItem({
+    required this.title,
+    required this.time,
+    this.icon,
+    required this.event,
+    required this.viewed,
+  });
 }

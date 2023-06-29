@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:roder/account/account_page.dart';
 import 'package:roder/login/google_sign_in.dart';
 import 'package:roder/settings_page/settings_page.dart';
-import 'package:roder/test2.dart';
 import 'package:roder/themes/theme.dart';
 import 'package:roder/ui/update_page.dart';
 import '../provider/clrProvider.dart';
@@ -157,7 +156,6 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             onTap: () {
               _aboutRoder(context);
               // Get.to(() => Test());
-              Get.to(() => NotificationPage());
             },
           ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
           Divider(

@@ -9,7 +9,7 @@ class AppPage {
   static List<GetPage> routes = [
     GetPage(name: navbar, page: () => const NavBar()),
     GetPage(name: home, page: () => const HomePage()),
-    GetPage(name: noti, page: () => const NotiPage()),
+    GetPage(name: noti, page: () => NotificationPage()),
     GetPage(name: search, page: () => const Search()),
     GetPage(name: task, page: () => const AddTaskPage()),
   ];

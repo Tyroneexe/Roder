@@ -36,7 +36,7 @@ class _NavBarState extends State<NavBar> {
         return Scaffold(
           body: IndexedStack(
             index: controller.tabIndex,
-            children: const [HomePage(), NotiPage(), Search(), AddTaskPage()],
+            children:  [HomePage(), NotificationPage(), Search(), AddTaskPage()],
           ),
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
