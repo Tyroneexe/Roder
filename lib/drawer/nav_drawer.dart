@@ -1,15 +1,15 @@
 // ignore_for_file: must_be_immutable, unused_field
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:in_app_review/in_app_review.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/account/account_page.dart';
 import 'package:roder/login/google_sign_in.dart';
 import 'package:roder/settings_page/settings_page.dart';
 import 'package:roder/themes/theme.dart';
 import 'package:roder/ui/update_page.dart';
+import '../homepage/home_page.dart';
 import '../provider/clrProvider.dart';
 import '../ui/contact_page.dart';
 
@@ -21,31 +21,114 @@ class NavitionDrawer extends StatefulWidget {
 }
 
 class _NavitionDrawerState extends State<NavitionDrawer> {
-  final user = FirebaseAuth.instance.currentUser!;
   //
   int noImg = 0;
-  //
   Color _mainColor = lightBlueClr;
+  //
 
   @override
-  Widget build(BuildContext context) => Drawer(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[buildHeader(context), buildMenuItems(context)],
-          ),
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(
+          25,
         ),
-      );
+        bottomLeft: Radius.circular(
+          25,
+        ),
+      ),
+      child: Drawer(
+        width: 290,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            buildHeader(context),
+            buildMenuItems(context),
+          ],
+        ),
+      ),
+    );
+  }
 
   //
   Widget buildHeader(BuildContext context) {
     return Container(
-      height: 340,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: _themeImage(noImg),
-          fit: BoxFit.cover,
-        ),
+      height: 240,
+      child: Stack(
+        children: [
+          Positioned(
+            top: 28,
+            left: 16,
+            child: IconButton(
+              icon: Text(
+                String.fromCharCode(Icons.close_rounded.codePoint),
+                style: TextStyle(
+                  inherit: false,
+                  color: btnBlueClr,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w700,
+                  fontFamily: Icons.close_rounded.fontFamily,
+                  package: Icons.close_rounded.fontPackage,
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 100,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 25,
+                  ),
+                  Container(
+                    width: 60,
+                    height: 60,
+                    child: CircleAvatar(
+                      radius: 32,
+                      backgroundImage: NetworkImage(
+                        user.photoURL!,
+                      ),
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        user.displayName!,
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w700,
+                          fontSize: 14,
+                          color: Colors.black,
+                        ),
+                      ),
+                      FutureBuilder<PackageInfo>(
+                        future: PackageInfo.fromPlatform(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<PackageInfo> snapshot) {
+                          if (snapshot.hasData) {
+                            return Text(
+                                'Software Patch: ${snapshot.data?.version}');
+                          } else {
+                            return CircularProgressIndicator();
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -71,7 +154,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
           onTap: () {
             Get.to(() => Settings());
           },
-        ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
+        ),
         ListTile(
           leading: Icon(
             Icons.star,
@@ -89,7 +172,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
           onTap: () {
             _openAppReview();
           },
-        ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
+        ),
         ListTile(
           leading: Icon(
             Icons.checklist_rounded,
@@ -107,7 +190,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
           onTap: () {
             Get.to(() => UpdatePage());
           },
-        ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
+        ),
         ListTile(
           leading: const Icon(
             Icons.person,
@@ -124,7 +207,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
           onTap: () {
             Get.to(() => AccountPage());
           },
-        ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
+        ),
         ListTile(
           leading: Icon(
             Icons.contact_support,
@@ -142,7 +225,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
           onTap: () {
             Get.to(() => ContactPage());
           },
-        ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
+        ),
         ListTile(
           leading: const Icon(
             Icons.info_rounded,
@@ -160,7 +243,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             _aboutRoder(context);
             // Get.to(() => Test());
           },
-        ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
+        ),
         Divider(
           color: Get.isDarkMode ? Colors.white : Colors.black,
           height: 10,
@@ -185,7 +268,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                 Provider.of<GoogleSignInProvider>(context, listen: false);
             provider.logout();
           },
-        ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
+        ),
       ],
     );
   }
