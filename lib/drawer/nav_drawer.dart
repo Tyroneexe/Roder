@@ -52,84 +52,88 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
 
   //
   Widget buildHeader(BuildContext context) {
-    return Container(
-      height: 240,
-      child: Stack(
-        children: [
-          Positioned(
-            top: 28,
-            left: 16,
-            child: IconButton(
-              icon: Text(
-                String.fromCharCode(Icons.close_rounded.codePoint),
-                style: TextStyle(
-                  inherit: false,
-                  color: btnBlueClr,
-                  fontSize: 28,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: Icons.close_rounded.fontFamily,
-                  package: Icons.close_rounded.fontPackage,
-                ),
+    return Stack(
+      children: [
+        Positioned(
+          top: 28,
+          left: 16,
+          child: IconButton(
+            icon: Text(
+              String.fromCharCode(Icons.close_rounded.codePoint),
+              style: TextStyle(
+                inherit: false,
+                color: btnBlueClr,
+                fontSize: 28,
+                fontWeight: FontWeight.w700,
+                fontFamily: Icons.close_rounded.fontFamily,
+                package: Icons.close_rounded.fontPackage,
               ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
             ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 100,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 25,
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 100,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 25,
+                ),
+                CircleAvatar(
+                  radius: 32,
+                  backgroundImage: NetworkImage(
+                    user.photoURL!,
                   ),
-                  Container(
-                    width: 60,
-                    height: 60,
-                    child: CircleAvatar(
-                      radius: 32,
-                      backgroundImage: NetworkImage(
-                        user.photoURL!,
+                ),
+                SizedBox(width: 10),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      user.displayName!,
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16,
+                        color: Colors.black,
                       ),
                     ),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        user.displayName!,
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w700,
-                          fontSize: 14,
-                          color: Colors.black,
-                        ),
-                      ),
-                      FutureBuilder<PackageInfo>(
-                        future: PackageInfo.fromPlatform(),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<PackageInfo> snapshot) {
-                          if (snapshot.hasData) {
-                            return Text(
-                                'Software Patch: ${snapshot.data?.version}');
-                          } else {
-                            return CircularProgressIndicator();
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
+                    FutureBuilder<PackageInfo>(
+                      future: PackageInfo.fromPlatform(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<PackageInfo> snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                            'Software Patch ${snapshot.data?.version}',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: 12,
+                              color: Colors.black,
+                            ),
+                          );
+                        } else {
+                          return CircularProgressIndicator();
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+          ],
+        ),
+      ],
     );
   }
 
@@ -137,107 +141,106 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
   Widget buildMenuItems(BuildContext context) {
     return Column(
       children: [
-        ListTile(
-          leading: Icon(
-            Icons.settings,
-            size: 30,
-            color: Get.isDarkMode ? Colors.white : Colors.grey[600],
-          ),
-          title: const Text(
-            'Settings',
-            style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.grey),
-          ),
-          onTap: () {
-            Get.to(() => Settings());
-          },
+        Divider(
+          thickness: 2,
+          color: dividerClr,
+          height: 20,
+          indent: 20,
+          endIndent: 20,
         ),
         ListTile(
-          leading: Icon(
-            Icons.star,
-            size: 30,
-            color: Get.isDarkMode ? Colors.white : Colors.grey[600],
-          ),
+          leading: Icon(Icons.home, size: 30, color: btnBlueClr),
           title: const Text(
-            'Review App',
+            'Home',
             style: TextStyle(
                 fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.grey),
+                fontSize: 16,
+                color: Colors.black),
           ),
           onTap: () {
             _openAppReview();
           },
         ),
         ListTile(
-          leading: Icon(
-            Icons.checklist_rounded,
-            size: 30,
-            color: Get.isDarkMode ? Colors.white : Colors.grey[600],
+          leading: Icon(Icons.settings, size: 30, color: btnBlueClr),
+          title: const Text(
+            'Settings',
+            style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Colors.black),
           ),
+          onTap: () {
+            Get.to(() => Settings());
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.star, size: 30, color: btnBlueClr),
+          title: const Text(
+            'Review App',
+            style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Colors.black),
+          ),
+          onTap: () {
+            _openAppReview();
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.checklist_rounded, size: 30, color: btnBlueClr),
           title: const Text(
             'Patch Notes',
             style: TextStyle(
                 fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.grey),
+                fontSize: 16,
+                color: Colors.black),
           ),
           onTap: () {
             Get.to(() => UpdatePage());
           },
         ),
         ListTile(
-          leading: const Icon(
-            Icons.person,
-            size: 30,
-          ),
+          leading: const Icon(Icons.person, size: 30, color: btnBlueClr),
           title: const Text(
             'Account',
             style: TextStyle(
                 fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.grey),
+                fontSize: 16,
+                color: Colors.black),
           ),
           onTap: () {
             Get.to(() => AccountPage());
           },
         ),
         ListTile(
-          leading: Icon(
-            Icons.contact_support,
-            size: 30,
-            color: Get.isDarkMode ? Colors.white : Colors.grey[600],
-          ),
+          leading: Icon(Icons.contact_support, size: 30, color: btnBlueClr),
           title: const Text(
             'Contact',
             style: TextStyle(
                 fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.grey),
+                fontSize: 16,
+                color: Colors.black),
           ),
           onTap: () {
             Get.to(() => ContactPage());
           },
         ),
         ListTile(
-          leading: const Icon(
-            Icons.info_rounded,
-            size: 30,
-          ),
+          leading: const Icon(Icons.info_rounded, size: 30, color: btnBlueClr),
           title: const Text(
             'About',
             style: TextStyle(
                 fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.grey),
+                fontSize: 16,
+                color: Colors.black),
           ),
           onTap: () {
             _aboutRoder(context);
@@ -245,8 +248,9 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
           },
         ),
         Divider(
-          color: Get.isDarkMode ? Colors.white : Colors.black,
-          height: 10,
+          thickness: 2,
+          color: dividerClr,
+          height: 20,
           indent: 20,
           endIndent: 20,
         ),
@@ -316,29 +320,6 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
 
     if (await inAppReview.isAvailable()) {
       inAppReview.openStoreListing(appStoreId: '...', microsoftStoreId: '...');
-    }
-  }
-
-  _themeImage(int no) {
-    if (Provider.of<ColorProvider>(context).selectedColor == 0) {
-      no = 0;
-    } else if (Provider.of<ColorProvider>(context).selectedColor == 1) {
-      no = 1;
-    } else if (Provider.of<ColorProvider>(context).selectedColor == 2) {
-      no = 2;
-    } else {
-      no = 0;
-    }
-
-    switch (no) {
-      case 0:
-        return AssetImage('assets/RoderNavD.jpg');
-      case 1:
-        return AssetImage('assets/NavYell.png');
-      case 2:
-        return AssetImage('assets/NavRed.jpg');
-      default:
-        return AssetImage('assets/RoderNavD.jpg');
     }
   }
 
