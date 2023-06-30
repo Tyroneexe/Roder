@@ -168,7 +168,95 @@ class _AccountPageState extends State<AccountPage> {
                   height: 10,
                 ),
                 bikeForm(context),
-                // Spacer()
+                SizedBox(
+                  height: 50,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: TextButton(
+                        onPressed: () {
+                          // save to the database that is yet to be created
+                        },
+                        style: ButtonStyle(
+                          textStyle: MaterialStateProperty.all<TextStyle>(
+                            TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                          ),
+                          foregroundColor: MaterialStateProperty.all<Color>(
+                            btnBlueClr,
+                          ),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            Colors.white,
+                          ),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                6,
+                              ),
+                              side: BorderSide(
+                                color: btnBlueClr, // Set the border color here
+                                width: 1.5, // Set the border width here
+                              ),
+                            ),
+                          ),
+                          minimumSize: MaterialStateProperty.all<Size>(
+                            Size(
+                              (MediaQuery.of(context).size.width / 2) - 20,
+                              38,
+                            ),
+                          ),
+                        ),
+                        child: Text('Cancel'),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 8), // Adjust the padding as needed
+                      child: TextButton(
+                        onPressed: () {
+                          // save to the database that is yet to be created
+                        },
+                        style: ButtonStyle(
+                          textStyle: MaterialStateProperty.all<TextStyle>(
+                            TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                          ),
+                          foregroundColor: MaterialStateProperty.all<Color>(
+                            Colors.white,
+                          ),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            btnBlueClr,
+                          ),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                          ),
+                          minimumSize: MaterialStateProperty.all<Size>(
+                            Size(
+                              (MediaQuery.of(context).size.width / 2) - 20,
+                              38,
+                            ),
+                          ),
+                        ),
+                        child: Text('Save'),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ],
