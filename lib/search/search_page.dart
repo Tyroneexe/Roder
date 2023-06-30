@@ -58,7 +58,9 @@ class _SearchState extends State<Search> {
               ),
             ],
           ),
-          SizedBox(height: 10),
+          SizedBox(
+            height: 10,
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: recentHistory.length,

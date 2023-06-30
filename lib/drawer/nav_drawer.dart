@@ -38,153 +38,157 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
       );
 
   //
-  Widget buildHeader(BuildContext context) => Container(
-        height: 340,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: _themeImage(noImg),
-            fit: BoxFit.cover,
-          ),
+  Widget buildHeader(BuildContext context) {
+    return Container(
+      height: 340,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: _themeImage(noImg),
+          fit: BoxFit.cover,
         ),
-      );
+      ),
+    );
+  }
 
   //
-  Widget buildMenuItems(BuildContext context) => Column(
-        children: [
-          ListTile(
-            leading: Icon(
-              Icons.settings,
-              size: 30,
-              color: Get.isDarkMode ? Colors.white : Colors.grey[600],
-            ),
-            title: const Text(
-              'Settings',
-              style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.grey),
-            ),
-            onTap: () {
-              Get.to(() => Settings());
-            },
-          ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
-          ListTile(
-            leading: Icon(
-              Icons.star,
-              size: 30,
-              color: Get.isDarkMode ? Colors.white : Colors.grey[600],
-            ),
-            title: const Text(
-              'Review App',
-              style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.grey),
-            ),
-            onTap: () {
-              _openAppReview();
-            },
-          ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
-          ListTile(
-            leading: Icon(
-              Icons.checklist_rounded,
-              size: 30,
-              color: Get.isDarkMode ? Colors.white : Colors.grey[600],
-            ),
-            title: const Text(
-              'Patch Notes',
-              style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.grey),
-            ),
-            onTap: () {
-              Get.to(() => UpdatePage());
-            },
-          ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
-          ListTile(
-            leading: const Icon(
-              Icons.person,
-              size: 30,
-            ),
-            title: const Text(
-              'Account',
-              style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.grey),
-            ),
-            onTap: () {
-              Get.to(() => AccountPage());
-            },
-          ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
-          ListTile(
-            leading: Icon(
-              Icons.contact_support,
-              size: 30,
-              color: Get.isDarkMode ? Colors.white : Colors.grey[600],
-            ),
-            title: const Text(
-              'Contact',
-              style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.grey),
-            ),
-            onTap: () {
-              Get.to(() => ContactPage());
-            },
-          ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
-          ListTile(
-            leading: const Icon(
-              Icons.info_rounded,
-              size: 30,
-            ),
-            title: const Text(
-              'About',
-              style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.grey),
-            ),
-            onTap: () {
-              _aboutRoder(context);
-              // Get.to(() => Test());
-            },
-          ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
-          Divider(
-            color: Get.isDarkMode ? Colors.white : Colors.black,
-            height: 10,
-            indent: 20,
-            endIndent: 20,
+  Widget buildMenuItems(BuildContext context) {
+    return Column(
+      children: [
+        ListTile(
+          leading: Icon(
+            Icons.settings,
+            size: 30,
+            color: Get.isDarkMode ? Colors.white : Colors.grey[600],
           ),
-          ListTile(
-            leading: const Icon(
-              Icons.logout,
-              size: 30,
-            ),
-            title: const Text(
-              'Sign Out',
-              style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.grey),
-            ),
-            onTap: () async {
-              final provider =
-                  Provider.of<GoogleSignInProvider>(context, listen: false);
-              provider.logout();
-            },
-          ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
-        ],
-      );
+          title: const Text(
+            'Settings',
+            style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Colors.grey),
+          ),
+          onTap: () {
+            Get.to(() => Settings());
+          },
+        ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
+        ListTile(
+          leading: Icon(
+            Icons.star,
+            size: 30,
+            color: Get.isDarkMode ? Colors.white : Colors.grey[600],
+          ),
+          title: const Text(
+            'Review App',
+            style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Colors.grey),
+          ),
+          onTap: () {
+            _openAppReview();
+          },
+        ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
+        ListTile(
+          leading: Icon(
+            Icons.checklist_rounded,
+            size: 30,
+            color: Get.isDarkMode ? Colors.white : Colors.grey[600],
+          ),
+          title: const Text(
+            'Patch Notes',
+            style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Colors.grey),
+          ),
+          onTap: () {
+            Get.to(() => UpdatePage());
+          },
+        ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
+        ListTile(
+          leading: const Icon(
+            Icons.person,
+            size: 30,
+          ),
+          title: const Text(
+            'Account',
+            style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Colors.grey),
+          ),
+          onTap: () {
+            Get.to(() => AccountPage());
+          },
+        ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
+        ListTile(
+          leading: Icon(
+            Icons.contact_support,
+            size: 30,
+            color: Get.isDarkMode ? Colors.white : Colors.grey[600],
+          ),
+          title: const Text(
+            'Contact',
+            style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Colors.grey),
+          ),
+          onTap: () {
+            Get.to(() => ContactPage());
+          },
+        ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
+        ListTile(
+          leading: const Icon(
+            Icons.info_rounded,
+            size: 30,
+          ),
+          title: const Text(
+            'About',
+            style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Colors.grey),
+          ),
+          onTap: () {
+            _aboutRoder(context);
+            // Get.to(() => Test());
+          },
+        ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
+        Divider(
+          color: Get.isDarkMode ? Colors.white : Colors.black,
+          height: 10,
+          indent: 20,
+          endIndent: 20,
+        ),
+        ListTile(
+          leading: const Icon(
+            Icons.logout,
+            size: 30,
+          ),
+          title: const Text(
+            'Sign Out',
+            style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Colors.grey),
+          ),
+          onTap: () async {
+            final provider =
+                Provider.of<GoogleSignInProvider>(context, listen: false);
+            provider.logout();
+          },
+        ).animate().slideX(duration: 300.ms, begin: 1).fade(duration: 500.ms),
+      ],
+    );
+  }
 
   Future<dynamic> _aboutRoder(BuildContext context) {
     return showDialog(

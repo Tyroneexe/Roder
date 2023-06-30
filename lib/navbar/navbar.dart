@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:roder/navbar/barcontroller.dart';
 import 'package:roder/search/search_page.dart';
 import 'package:roder/themes/theme.dart';
-import 'package:roder/ui/add_task_bar.dart';
+import 'package:roder/ui/add_ride.dart';
 import 'package:roder/ui/notification_page.dart';
 
 import '../homepage/home_page.dart';
