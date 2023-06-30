@@ -161,7 +161,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                 ),
               ),
               onTap: () {
-                // ...
+                Navigator.pop(context);
               },
             ),
           ),

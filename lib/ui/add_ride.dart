@@ -13,7 +13,6 @@ import 'package:roder/widgets/button.dart';
 import 'package:roder/widgets/input_field.dart';
 import '../googlemaps/maps_provider.dart';
 import '../provider/clrProvider.dart';
-import '../navbar/routes.dart';
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({super.key});
@@ -406,7 +405,6 @@ class _AddTaskPageState extends State<AddTaskPage>
         controllerProvider.fromController.text.isNotEmpty &&
         controllerProvider.toController.text.isNotEmpty) {
       // Get.to(() => const HomePage());
-      AppPage.gethome();
       return true;
     } else if (_titleController.text.isEmpty ||
         controllerProvider.fromController.text.isEmpty ||
