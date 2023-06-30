@@ -23,36 +23,6 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
   int noImg = 0;
   Color _mainColor = lightBlueClr;
   //
-  final MaterialStateProperty<Color?> trackColor =
-      MaterialStateProperty.resolveWith<Color?>(
-    (Set<MaterialState> states) {
-      // Track color when the switch is selected.
-      if (states.contains(MaterialState.selected)) {
-        return Colors.amber;
-      }
-      // Otherwise return null to set default track color
-      // for remaining states such as when the switch is
-      // hovered, focused, or disabled.
-      return null;
-    },
-  );
-  final MaterialStateProperty<Color?> overlayColor =
-      MaterialStateProperty.resolveWith<Color?>(
-    (Set<MaterialState> states) {
-      // Material color when switch is selected.
-      if (states.contains(MaterialState.selected)) {
-        return Colors.amber.withOpacity(0.54);
-      }
-      // Material color when switch is disabled.
-      if (states.contains(MaterialState.disabled)) {
-        return Colors.grey.shade400;
-      }
-      // Otherwise return null to set default material color
-      // for remaining states such as when the switch is
-      // hovered, or focused.
-      return null;
-    },
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -176,75 +146,101 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
           indent: 25,
           endIndent: 25,
         ),
-        ListTile(
-          leading: Icon(Icons.home, size: 30, color: btnBlueClr),
-          title: const Text(
-            'Home',
-            style: TextStyle(
+        Padding(
+          padding: EdgeInsets.only(left: 5),
+          child: ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 20),
+            leading: Icon(Icons.home, size: 30, color: btnBlueClr),
+            title: const Text(
+              'Home',
+              style: TextStyle(
                 fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
-                color: Colors.black),
+                color: Colors.black,
+              ),
+            ),
+            onTap: () {
+              // ...
+            },
           ),
-          onTap: () {
-            //
-          },
         ),
-        ListTile(
-          leading: const Icon(Icons.person, size: 30, color: btnBlueClr),
-          title: const Text(
-            'Account',
-            style: TextStyle(
+        Padding(
+          padding: EdgeInsets.only(left: 5),
+          child: ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 20),
+            leading: const Icon(Icons.person, size: 30, color: btnBlueClr),
+            title: const Text(
+              'Account',
+              style: TextStyle(
                 fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
-                color: Colors.black),
+                color: Colors.black,
+              ),
+            ),
+            onTap: () {
+              Get.to(() => AccountPage());
+            },
           ),
-          onTap: () {
-            Get.to(() => AccountPage());
-          },
         ),
-        ListTile(
-          leading: Icon(Icons.settings, size: 30, color: btnBlueClr),
-          title: const Text(
-            'App Settings',
-            style: TextStyle(
+        Padding(
+          padding: EdgeInsets.only(left: 5),
+          child: ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 20),
+            leading: Icon(Icons.settings, size: 30, color: btnBlueClr),
+            title: const Text(
+              'App Settings',
+              style: TextStyle(
                 fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
-                color: Colors.black),
+                color: Colors.black,
+              ),
+            ),
+            onTap: () {
+              Get.to(() => Settings());
+            },
           ),
-          onTap: () {
-            Get.to(() => Settings());
-          },
         ),
-        ListTile(
-          leading: Icon(Icons.phone, size: 30, color: btnBlueClr),
-          title: const Text(
-            'Contact Us',
-            style: TextStyle(
+        Padding(
+          padding: EdgeInsets.only(left: 5),
+          child: ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 20),
+            leading: Icon(Icons.phone, size: 30, color: btnBlueClr),
+            title: const Text(
+              'Contact Us',
+              style: TextStyle(
                 fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
-                color: Colors.black),
+                color: Colors.black,
+              ),
+            ),
+            onTap: () {
+              Get.to(() => ContactPage());
+            },
           ),
-          onTap: () {
-            Get.to(() => ContactPage());
-          },
         ),
-        ListTile(
-          leading: const Icon(Icons.info_rounded, size: 30, color: btnBlueClr),
-          title: const Text(
-            'About Us',
-            style: TextStyle(
+        Padding(
+          padding: EdgeInsets.only(left: 5),
+          child: ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 20),
+            leading:
+                const Icon(Icons.info_rounded, size: 30, color: btnBlueClr),
+            title: const Text(
+              'About Us',
+              style: TextStyle(
                 fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
-                color: Colors.black),
+                color: Colors.black,
+              ),
+            ),
+            onTap: () {
+              // Get.to(() => Test());
+            },
           ),
-          onTap: () {
-            // Get.to(() => Test());
-          },
         ),
         Divider(
           thickness: 2,
@@ -253,24 +249,8 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
           indent: 25,
           endIndent: 25,
         ),
-        Switch(
-          // This bool value toggles the switch.
-          value: Get.isDarkMode,
-          overlayColor: overlayColor,
-          trackColor: trackColor,
-          thumbColor: const MaterialStatePropertyAll<Color>(Colors.black),
-          onChanged: (bool value) {
-            // This is called when the user toggles the switch.
-            setState(() {
-              ThemeService().switchTheme();
-            });
-          },
-        ),
         Padding(
-          padding: const EdgeInsets.only(
-            left: 20,
-            right: 20,
-          ),
+          padding: const EdgeInsets.only(left: 20, right: 20),
           child: TextButton(
             onPressed: () async {
               final provider =
@@ -294,14 +274,14 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
               ),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                    6,
-                  ),
+                  borderRadius: BorderRadius.circular(6),
                 ),
               ),
               minimumSize: MaterialStateProperty.all<Size>(
-                Size(MediaQuery.of(context).size.width,
-                    38), // Set the desired width and height
+                Size(
+                  MediaQuery.of(context).size.width,
+                  38,
+                ),
               ),
             ),
             child: Text('Log Out'),

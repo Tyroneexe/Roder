@@ -39,6 +39,7 @@ const Color searchBarTxtClr = Color(0xFFAEC3EE);
 const Color recentTxtClr = Color(0xFF757575);
 // Nav Drawer
 const Color dividerClr = Color(0xFFD1DEFA);
+const Color switchClr = Color(0xFFADB6CC);
 //
 const primaryClr = blueClr;
 
