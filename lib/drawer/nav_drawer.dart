@@ -8,7 +8,6 @@ import 'package:roder/login/google_sign_in.dart';
 import 'package:roder/settings_page/settings_page.dart';
 import 'package:roder/themes/theme.dart';
 import '../homepage/home_page.dart';
-import '../themes/theme_services.dart';
 import '../ui/contact_page.dart';
 
 class NavitionDrawer extends StatefulWidget {
@@ -137,157 +136,163 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
 
   //
   Widget buildMenuItems(BuildContext context) {
-    return Column(
-      children: [
-        Divider(
-          thickness: 2,
-          color: dividerClr,
-          height: 20,
-          indent: 25,
-          endIndent: 25,
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: 5),
-          child: ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 20),
-            leading: Icon(Icons.home, size: 30, color: btnBlueClr),
-            title: const Text(
-              'Home',
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Colors.black,
-              ),
-            ),
-            onTap: () {
-              // ...
-            },
+    return Expanded(
+      child: Column(
+        children: [
+          Divider(
+            thickness: 2,
+            color: dividerClr,
+            height: 20,
+            indent: 25,
+            endIndent: 25,
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: 5),
-          child: ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 20),
-            leading: const Icon(Icons.person, size: 30, color: btnBlueClr),
-            title: const Text(
-              'Account',
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Colors.black,
-              ),
-            ),
-            onTap: () {
-              Get.to(() => AccountPage());
-            },
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: 5),
-          child: ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 20),
-            leading: Icon(Icons.settings, size: 30, color: btnBlueClr),
-            title: const Text(
-              'App Settings',
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Colors.black,
-              ),
-            ),
-            onTap: () {
-              Get.to(() => Settings());
-            },
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: 5),
-          child: ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 20),
-            leading: Icon(Icons.phone, size: 30, color: btnBlueClr),
-            title: const Text(
-              'Contact Us',
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Colors.black,
-              ),
-            ),
-            onTap: () {
-              Get.to(() => ContactPage());
-            },
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: 5),
-          child: ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 20),
-            leading:
-                const Icon(Icons.info_rounded, size: 30, color: btnBlueClr),
-            title: const Text(
-              'About Us',
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Colors.black,
-              ),
-            ),
-            onTap: () {
-              // Get.to(() => Test());
-            },
-          ),
-        ),
-        Divider(
-          thickness: 2,
-          color: dividerClr,
-          height: 20,
-          indent: 25,
-          endIndent: 25,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20),
-          child: TextButton(
-            onPressed: () async {
-              final provider =
-                  Provider.of<GoogleSignInProvider>(context, listen: false);
-              provider.logout();
-            },
-            style: ButtonStyle(
-              textStyle: MaterialStateProperty.all<TextStyle>(
-                TextStyle(
+          Padding(
+            padding: EdgeInsets.only(left: 5),
+            child: ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 20),
+              leading: Icon(Icons.home, size: 30, color: btnBlueClr),
+              title: const Text(
+                'Home',
+                style: TextStyle(
                   fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14,
-                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.black,
                 ),
               ),
-              foregroundColor: MaterialStateProperty.all<Color>(
-                Colors.white,
-              ),
-              backgroundColor: MaterialStateProperty.all<Color>(
-                btnBlueClr,
-              ),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(6),
-                ),
-              ),
-              minimumSize: MaterialStateProperty.all<Size>(
-                Size(
-                  MediaQuery.of(context).size.width,
-                  38,
-                ),
-              ),
+              onTap: () {
+                // ...
+              },
             ),
-            child: Text('Log Out'),
           ),
-        ),
-      ],
+          Padding(
+            padding: EdgeInsets.only(left: 5),
+            child: ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 20),
+              leading: const Icon(Icons.person, size: 30, color: btnBlueClr),
+              title: const Text(
+                'Account',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.black,
+                ),
+              ),
+              onTap: () {
+                Get.to(() => AccountPage());
+              },
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 5),
+            child: ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 20),
+              leading: Icon(Icons.settings, size: 30, color: btnBlueClr),
+              title: const Text(
+                'App Settings',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.black,
+                ),
+              ),
+              onTap: () {
+                Get.to(() => Settings());
+              },
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 5),
+            child: ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 20),
+              leading: Icon(Icons.phone, size: 30, color: btnBlueClr),
+              title: const Text(
+                'Contact Us',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.black,
+                ),
+              ),
+              onTap: () {
+                Get.to(() => ContactPage());
+              },
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 5),
+            child: ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 20),
+              leading:
+                  const Icon(Icons.info_rounded, size: 30, color: btnBlueClr),
+              title: const Text(
+                'About Us',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.black,
+                ),
+              ),
+              onTap: () {
+                // Get.to(() => Test());
+              },
+            ),
+          ),
+          Divider(
+            thickness: 2,
+            color: dividerClr,
+            height: 20,
+            indent: 25,
+            endIndent: 25,
+          ),
+          Spacer(),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: TextButton(
+              onPressed: () async {
+                final provider =
+                    Provider.of<GoogleSignInProvider>(context, listen: false);
+                provider.logout();
+              },
+              style: ButtonStyle(
+                textStyle: MaterialStateProperty.all<TextStyle>(
+                  TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    color: Colors.white,
+                  ),
+                ),
+                foregroundColor: MaterialStateProperty.all<Color>(
+                  Colors.white,
+                ),
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  btnBlueClr,
+                ),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                ),
+                minimumSize: MaterialStateProperty.all<Size>(
+                  Size(
+                    MediaQuery.of(context).size.width,
+                    38,
+                  ),
+                ),
+              ),
+              child: Text('Log Out'),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+        ],
+      ),
     );
   }
 }
