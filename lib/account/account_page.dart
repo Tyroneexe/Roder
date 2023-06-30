@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:roder/themes/theme.dart';
 import '../homepage/home_page.dart';
 
@@ -13,6 +14,8 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   TextEditingController titleCtrl = TextEditingController();
   TextEditingController nuController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,57 +81,7 @@ class _AccountPageState extends State<AccountPage> {
               SizedBox(
                 height: 10,
               ),
-              Container(
-                width: MediaQuery.of(context).size.width - 40,
-                height: 40,
-                child: TextFormField(
-                  style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: Colors.black),
-                  controller: titleCtrl,
-                  decoration: InputDecoration(
-                    hintText: user.displayName,
-                    hintStyle: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: Colors.black,
-                    ),
-                    contentPadding: EdgeInsets.only(
-                      left: 20,
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: btnBlueClr,
-                        width: 1.5,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        6,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: btnBlueClr,
-                        width: 1.5,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        6,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: btnBlueClr,
-                        width: 1.5,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        6,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              userNameForm(context),
               SizedBox(
                 height: 20,
               ),
@@ -147,54 +100,196 @@ class _AccountPageState extends State<AccountPage> {
               SizedBox(
                 height: 10,
               ),
-              Container(
-                width: MediaQuery.of(context).size.width - 40,
-                height: 40,
-                child: TextFormField(
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w100,
-                    fontSize: 14,
-                    color: Colors.black,
+              numberForm(context),
+              // SizedBox(
+              //   height: 5,
+              // ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 20,
                   ),
-                  controller: nuController,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(
-                      left: 20,
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: btnBlueClr,
-                        width: 1.5,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        6,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: btnBlueClr,
-                        width: 1.5,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        6,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: btnBlueClr,
-                        width: 1.5,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        6,
-                      ),
-                    ),
+                  Text(
+                    'Email',
+                    style: actPageTxt,
                   ),
-                ),
+                ],
               ),
+              SizedBox(
+                height: 10,
+              ),
+              emailForm(context)
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  Container emailForm(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width - 40,
+      height: 40,
+      child: TextFormField(
+        style: TextStyle(
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w100,
+            fontSize: 14,
+            color: Colors.black),
+        controller: emailController,
+        decoration: InputDecoration(
+          hintText: user.email,
+          hintStyle: TextStyle(
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w100,
+            fontSize: 14,
+            color: Colors.black,
+          ),
+          contentPadding: EdgeInsets.only(
+            left: 20,
+          ),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: btnBlueClr,
+              width: 1.5,
+            ),
+            borderRadius: BorderRadius.circular(
+              6,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: btnBlueClr,
+              width: 1.5,
+            ),
+            borderRadius: BorderRadius.circular(
+              6,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: btnBlueClr,
+              width: 1.5,
+            ),
+            borderRadius: BorderRadius.circular(
+              6,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Container numberForm(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width - 40,
+      height: 60,
+      child: IntlPhoneField(
+        flagsButtonPadding: EdgeInsets.only(
+          left: 20,
+        ),
+        dropdownIcon: Icon(
+          Icons.arrow_drop_down,
+          color: btnBlueClr,
+        ),
+        disableLengthCheck: false,
+        dropdownIconPosition: IconPosition.trailing,
+        style: TextStyle(
+          fontFamily: 'Roboto',
+          fontWeight: FontWeight.w100,
+          fontSize: 14,
+          color: Colors.black,
+        ),
+        controller: nuController,
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.only(
+            left: 20,
+          ),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: btnBlueClr,
+              width: 1.5,
+            ),
+            borderRadius: BorderRadius.circular(
+              6,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: btnBlueClr,
+              width: 1.5,
+            ),
+            borderRadius: BorderRadius.circular(
+              6,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: btnBlueClr,
+              width: 1.5,
+            ),
+            borderRadius: BorderRadius.circular(
+              6,
+            ),
+          ),
+        ),
+        initialCountryCode: 'US',
+        // onChanged: (phone) {},
+      ),
+    );
+  }
+
+  Container userNameForm(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width - 40,
+      height: 40,
+      child: TextFormField(
+        style: TextStyle(
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w100,
+            fontSize: 14,
+            color: Colors.black),
+        controller: titleCtrl,
+        decoration: InputDecoration(
+          hintText: user.displayName,
+          hintStyle: TextStyle(
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w100,
+            fontSize: 14,
+            color: Colors.black,
+          ),
+          contentPadding: EdgeInsets.only(
+            left: 20,
+          ),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: btnBlueClr,
+              width: 1.5,
+            ),
+            borderRadius: BorderRadius.circular(
+              6,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: btnBlueClr,
+              width: 1.5,
+            ),
+            borderRadius: BorderRadius.circular(
+              6,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: btnBlueClr,
+              width: 1.5,
+            ),
+            borderRadius: BorderRadius.circular(
+              6,
+            ),
+          ),
+        ),
       ),
     );
   }
