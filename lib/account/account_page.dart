@@ -12,6 +12,7 @@ class AccountPage extends StatefulWidget {
 
 class _AccountPageState extends State<AccountPage> {
   TextEditingController titleCtrl = TextEditingController();
+  TextEditingController nuController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +37,7 @@ class _AccountPageState extends State<AccountPage> {
                   child: Icon(
                     Icons.edit,
                     color: btnBlueClr,
-                    size: 26,
+                    size: 24,
                   ),
                 ),
                 Positioned(
@@ -60,18 +61,136 @@ class _AccountPageState extends State<AccountPage> {
           SizedBox(
             height: 20,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+          Column(
             children: [
-              SizedBox(
-                width: 20,
-              ),
-              Text(
-                'User Name',
-                style: actPageTxt,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    'User Name',
+                    style: actPageTxt,
+                  ),
+                ],
               ),
               SizedBox(
                 height: 10,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width - 40,
+                height: 40,
+                child: TextFormField(
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.black),
+                  controller: titleCtrl,
+                  decoration: InputDecoration(
+                    hintText: user.displayName,
+                    hintStyle: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.black,
+                    ),
+                    contentPadding: EdgeInsets.only(
+                      left: 20,
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: btnBlueClr,
+                        width: 1.5,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        6,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: btnBlueClr,
+                        width: 1.5,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        6,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: btnBlueClr,
+                        width: 1.5,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        6,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    'Contact Number',
+                    style: actPageTxt,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width - 40,
+                height: 40,
+                child: TextFormField(
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w100,
+                    fontSize: 14,
+                    color: Colors.black,
+                  ),
+                  controller: nuController,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(
+                      left: 20,
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: btnBlueClr,
+                        width: 1.5,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        6,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: btnBlueClr,
+                        width: 1.5,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        6,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: btnBlueClr,
+                        width: 1.5,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        6,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

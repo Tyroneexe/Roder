@@ -176,34 +176,34 @@ class _SearchState extends State<Search> {
                     fontSize: 18,
                     color: searchBarTxtClr,
                   ),
+                  suffixIcon: IconButton(
+                    icon: Text(
+                      String.fromCharCode(Icons.close_rounded.codePoint),
+                      style: TextStyle(
+                        inherit: false,
+                        color: btnBlueClr,
+                        fontSize: 28,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: Icons.close_rounded.fontFamily,
+                        package: Icons.close_rounded.fontPackage,
+                      ),
+                    ),
+                    onPressed: () {
+                      final searchText = searchFilter.text;
+                      if (searchText.isNotEmpty) {
+                        recentHistory.insert(0, searchText);
+                        searchFilter.clear();
+                        setState(() {});
+                        saveRecentHistory();
+                      }
+                    },
+                  ),
                 ),
                 controller: searchFilter,
                 onChanged: (String value) {
                   setState(() {});
                 },
               ),
-            ),
-            IconButton(
-              icon: Text(
-                String.fromCharCode(Icons.close_rounded.codePoint),
-                style: TextStyle(
-                  inherit: false,
-                  color: btnBlueClr,
-                  fontSize: 28,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: Icons.close_rounded.fontFamily,
-                  package: Icons.close_rounded.fontPackage,
-                ),
-              ),
-              onPressed: () {
-                final searchText = searchFilter.text;
-                if (searchText.isNotEmpty) {
-                  recentHistory.insert(0, searchText);
-                  searchFilter.clear();
-                  setState(() {});
-                  saveRecentHistory();
-                }
-              },
             ),
           ],
         ),
