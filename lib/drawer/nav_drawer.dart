@@ -1,16 +1,14 @@
 // ignore_for_file: must_be_immutable, unused_field
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:in_app_review/in_app_review.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/account/account_page.dart';
 import 'package:roder/login/google_sign_in.dart';
 import 'package:roder/settings_page/settings_page.dart';
 import 'package:roder/themes/theme.dart';
-import 'package:roder/ui/update_page.dart';
 import '../homepage/home_page.dart';
-import '../provider/clrProvider.dart';
+import '../themes/theme_services.dart';
 import '../ui/contact_page.dart';
 
 class NavitionDrawer extends StatefulWidget {
@@ -25,6 +23,36 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
   int noImg = 0;
   Color _mainColor = lightBlueClr;
   //
+  final MaterialStateProperty<Color?> trackColor =
+      MaterialStateProperty.resolveWith<Color?>(
+    (Set<MaterialState> states) {
+      // Track color when the switch is selected.
+      if (states.contains(MaterialState.selected)) {
+        return Colors.amber;
+      }
+      // Otherwise return null to set default track color
+      // for remaining states such as when the switch is
+      // hovered, focused, or disabled.
+      return null;
+    },
+  );
+  final MaterialStateProperty<Color?> overlayColor =
+      MaterialStateProperty.resolveWith<Color?>(
+    (Set<MaterialState> states) {
+      // Material color when switch is selected.
+      if (states.contains(MaterialState.selected)) {
+        return Colors.amber.withOpacity(0.54);
+      }
+      // Material color when switch is disabled.
+      if (states.contains(MaterialState.disabled)) {
+        return Colors.grey.shade400;
+      }
+      // Otherwise return null to set default material color
+      // for remaining states such as when the switch is
+      // hovered, or focused.
+      return null;
+    },
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -145,8 +173,8 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
           thickness: 2,
           color: dividerClr,
           height: 20,
-          indent: 20,
-          endIndent: 20,
+          indent: 25,
+          endIndent: 25,
         ),
         ListTile(
           leading: Icon(Icons.home, size: 30, color: btnBlueClr),
@@ -159,49 +187,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                 color: Colors.black),
           ),
           onTap: () {
-            _openAppReview();
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.settings, size: 30, color: btnBlueClr),
-          title: const Text(
-            'Settings',
-            style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Colors.black),
-          ),
-          onTap: () {
-            Get.to(() => Settings());
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.star, size: 30, color: btnBlueClr),
-          title: const Text(
-            'Review App',
-            style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Colors.black),
-          ),
-          onTap: () {
-            _openAppReview();
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.checklist_rounded, size: 30, color: btnBlueClr),
-          title: const Text(
-            'Patch Notes',
-            style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Colors.black),
-          ),
-          onTap: () {
-            Get.to(() => UpdatePage());
+            //
           },
         ),
         ListTile(
@@ -219,9 +205,23 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
           },
         ),
         ListTile(
-          leading: Icon(Icons.contact_support, size: 30, color: btnBlueClr),
+          leading: Icon(Icons.settings, size: 30, color: btnBlueClr),
           title: const Text(
-            'Contact',
+            'App Settings',
+            style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Colors.black),
+          ),
+          onTap: () {
+            Get.to(() => Settings());
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.phone, size: 30, color: btnBlueClr),
+          title: const Text(
+            'Contact Us',
             style: TextStyle(
                 fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
@@ -235,7 +235,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
         ListTile(
           leading: const Icon(Icons.info_rounded, size: 30, color: btnBlueClr),
           title: const Text(
-            'About',
+            'About Us',
             style: TextStyle(
                 fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
@@ -243,7 +243,6 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                 color: Colors.black),
           ),
           onTap: () {
-            _aboutRoder(context);
             // Get.to(() => Test());
           },
         ),
@@ -251,92 +250,64 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
           thickness: 2,
           color: dividerClr,
           height: 20,
-          indent: 20,
-          endIndent: 20,
+          indent: 25,
+          endIndent: 25,
         ),
-        ListTile(
-          leading: const Icon(
-            Icons.logout,
-            size: 30,
-          ),
-          title: const Text(
-            'Sign Out',
-            style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.grey),
-          ),
-          onTap: () async {
-            final provider =
-                Provider.of<GoogleSignInProvider>(context, listen: false);
-            provider.logout();
+        Switch(
+          // This bool value toggles the switch.
+          value: Get.isDarkMode,
+          overlayColor: overlayColor,
+          trackColor: trackColor,
+          thumbColor: const MaterialStatePropertyAll<Color>(Colors.black),
+          onChanged: (bool value) {
+            // This is called when the user toggles the switch.
+            setState(() {
+              ThemeService().switchTheme();
+            });
           },
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+            left: 20,
+            right: 20,
+          ),
+          child: TextButton(
+            onPressed: () async {
+              final provider =
+                  Provider.of<GoogleSignInProvider>(context, listen: false);
+              provider.logout();
+            },
+            style: ButtonStyle(
+              textStyle: MaterialStateProperty.all<TextStyle>(
+                TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w700,
+                  fontSize: 14,
+                  color: Colors.white,
+                ),
+              ),
+              foregroundColor: MaterialStateProperty.all<Color>(
+                Colors.white,
+              ),
+              backgroundColor: MaterialStateProperty.all<Color>(
+                btnBlueClr,
+              ),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                    6,
+                  ),
+                ),
+              ),
+              minimumSize: MaterialStateProperty.all<Size>(
+                Size(MediaQuery.of(context).size.width,
+                    38), // Set the desired width and height
+              ),
+            ),
+            child: Text('Log Out'),
+          ),
         ),
       ],
     );
-  }
-
-  Future<dynamic> _aboutRoder(BuildContext context) {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(
-            'Roder\nYour Ride, Your Way',
-            style: subHeadingStyle,
-          ),
-          content: Text(
-            "Our app was created with a simple goal in mind: to provide a platform for riders to discover new routes and enjoy delicious breakfasts at the same time!\n\nOur team of dedicated developers and motorcycle enthusiasts have created an app that is easy to use. With Roder, you can:\n\n●Plan your ride: Once you've found a great breakfast spot, use our app to plan your ride.\n\n●Connect with other riders: Our app allows you to connect with other bikers who share your passion for breakfast runs.",
-            style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w400,
-                fontSize: 14,
-                color: Get.isDarkMode ? Colors.white : Colors.black),
-          ),
-          actions: [
-            TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(
-                  'GREAT',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: _getMainClr(
-                        Provider.of<ColorProvider>(context).selectedColor),
-                  ),
-                ))
-          ],
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          elevation: 20,
-        );
-      },
-    );
-  }
-
-  void _openAppReview() async {
-    final InAppReview inAppReview = InAppReview.instance;
-
-    if (await inAppReview.isAvailable()) {
-      inAppReview.openStoreListing(appStoreId: '...', microsoftStoreId: '...');
-    }
-  }
-
-  _getMainClr(int no) {
-    switch (no) {
-      case 0:
-        _mainColor = lightBlueClr;
-        return lightBlueClr;
-      case 1:
-        _mainColor = oRange;
-        return oRange;
-      case 2:
-        _mainColor = themeRed;
-        return themeRed;
-      default:
-        _mainColor = lightBlueClr;
-        return lightBlueClr;
-    }
   }
 }
