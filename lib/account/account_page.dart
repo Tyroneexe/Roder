@@ -19,26 +19,59 @@ class _AccountPageState extends State<AccountPage> {
       body: Column(
         children: [
           Center(
-            child: CircleAvatar(
-              radius: 60,
-              backgroundImage: NetworkImage(
-                user.photoURL!,
-              ),
+            child: Stack(
+              alignment: Alignment.bottomRight,
+              children: [
+                CircleAvatar(
+                  radius: 60,
+                  backgroundImage: NetworkImage(user.photoURL!),
+                ),
+                Container(
+                  width: 36,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: searchBarClr,
+                  ),
+                  child: Icon(
+                    Icons.edit,
+                    color: btnBlueClr,
+                    size: 26,
+                  ),
+                ),
+                Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: Container(
+                    width: 36,
+                    height: 36,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 2,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           SizedBox(
             height: 20,
           ),
-          Column(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 20,
-                  ),
-                ],
+              SizedBox(
+                width: 20,
+              ),
+              Text(
+                'User Name',
+                style: actPageTxt,
+              ),
+              SizedBox(
+                height: 10,
               ),
             ],
           ),
