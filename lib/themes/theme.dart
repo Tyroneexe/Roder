@@ -37,9 +37,11 @@ const Color textNotis = Color(0xFF5F6677);
 const Color searchBarClr = Color(0xFFE2EAFA);
 const Color searchBarTxtClr = Color(0xFFAEC3EE);
 const Color recentTxtClr = Color(0xFF757575);
-// Nav Drawer
+// Nav
 const Color dividerClr = Color(0xFFD1DEFA);
 const Color switchClr = Color(0xFFADB6CC);
+const Color navBarBkgClr = Color(0xFFe7eeff);
+
 //
 const primaryClr = blueClr;
 

@@ -21,7 +21,6 @@ class NavBar extends StatefulWidget {
 
 class _NavBarState extends State<NavBar> {
   final controller = Get.put(NavBarController());
-  static const Color navBarBkgClr = Color(0xFFe7eeff);
 
   @override
   void initState() {
