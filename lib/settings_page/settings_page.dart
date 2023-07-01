@@ -267,9 +267,10 @@ class _SettingsState extends State<Settings> {
                 ),
                 child: Switch(
                   value: isNotificationsEnabled,
-                  trackColor: MaterialStatePropertyAll<Color>(switchClr),
+                  activeTrackColor: switchClr,
+                  inactiveTrackColor: Colors.grey,
                   inactiveThumbColor: Colors.white,
-                  thumbColor: const MaterialStatePropertyAll<Color>(btnBlueClr),
+                  activeColor: btnBlueClr,
                   onChanged: (bool value) {
                     setState(() {
                       isNotificationsEnabled = !isNotificationsEnabled;
@@ -286,6 +287,93 @@ class _SettingsState extends State<Settings> {
                       }
                     });
                     _saveNotificationPreference(isNotificationsEnabled);
+                  },
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 20,
+                ),
+                child: Text(
+                  'News For You',
+                  style: roRegular14,
+                ),
+              ),
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(
+                  right: 20,
+                ),
+                child: Switch(
+                  value: isNotificationsEnabled,
+                  activeTrackColor: switchClr,
+                  inactiveTrackColor: Colors.grey,
+                  inactiveThumbColor: Colors.white,
+                  activeColor: btnBlueClr,
+                  onChanged: (bool value) {
+                    //
+                  },
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 20,
+                ),
+                child: Text(
+                  'Group Activity',
+                  style: roRegular14,
+                ),
+              ),
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(
+                  right: 20,
+                ),
+                child: Switch(
+                  value: isNotificationsEnabled,
+                  activeTrackColor: switchClr,
+                  inactiveTrackColor: Colors.grey,
+                  inactiveThumbColor: Colors.white,
+                  activeColor: btnBlueClr,
+                  onChanged: (bool value) {
+                    //
+                  },
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 20,
+                ),
+                child: Text(
+                  'Account Activity',
+                  style: roRegular14,
+                ),
+              ),
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(
+                  right: 20,
+                ),
+                child: Switch(
+                  value: isNotificationsEnabled,
+                  activeTrackColor: switchClr,
+                  inactiveTrackColor: Colors.grey,
+                  inactiveThumbColor: Colors.white,
+                  activeColor: btnBlueClr,
+                  onChanged: (bool value) {
+                    //
                   },
                 ),
               ),
