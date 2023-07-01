@@ -1,6 +1,7 @@
 // ignore_for_file: unused_field
 
 import 'package:app_settings/app_settings.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roder/themes/theme.dart';
@@ -247,49 +248,123 @@ class _SettingsState extends State<Settings> {
           SizedBox(
             height: 10,
           ),
-          GestureDetector(
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                  ),
-                  child: Text(
-                    'Push Notifications',
-                    style: roRegular14,
-                  ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 20,
                 ),
-                Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    right: 20,
-                    top: 10,
-                  ),
-                  child: Switch(
-                    value: isNotificationsEnabled,
-                    trackColor: MaterialStatePropertyAll<Color>(switchClr),
-                    inactiveThumbColor: Colors.white,
-                    thumbColor:
-                        const MaterialStatePropertyAll<Color>(btnBlueClr),
-                    onChanged: (bool value) {
-                      setState(() {
-                        isNotificationsEnabled = !isNotificationsEnabled;
-                        if (isNotificationsEnabled == true) {
-                          //
-                        } else {
-                          _disableNotifications();
-                        }
-                      });
-                      _saveNotificationPreference(isNotificationsEnabled);
-                    },
-                  ),
+                child: Text(
+                  'Push Notifications',
+                  style: roRegular14,
                 ),
-              ],
-            ),
-            onTap: () {},
+              ),
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(
+                  right: 20,
+                  top: 10,
+                ),
+                child: Switch(
+                  value: isNotificationsEnabled,
+                  trackColor: MaterialStatePropertyAll<Color>(switchClr),
+                  inactiveThumbColor: Colors.white,
+                  thumbColor: const MaterialStatePropertyAll<Color>(btnBlueClr),
+                  onChanged: (bool value) {
+                    setState(() {
+                      isNotificationsEnabled = !isNotificationsEnabled;
+                      if (isNotificationsEnabled == true) {
+                        AwesomeNotifications()
+                            .isNotificationAllowed()
+                            .then((isAllowed) {
+                          if (!isAllowed) {
+                            _enableNotifications();
+                          }
+                        });
+                      } else {
+                        _disableNotifications();
+                      }
+                    });
+                    _saveNotificationPreference(isNotificationsEnabled);
+                  },
+                ),
+              ),
+            ],
           ),
         ],
       ),
+    );
+  }
+
+  _enableNotifications() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: navBarBkgClr,
+          title: Text(
+            'Enable Notifications',
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Colors.black,
+            ),
+          ),
+          content: Text(
+            'Go to Notifications Settings to enable notifications?',
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w100,
+              fontSize: 16,
+              color: Colors.black,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w200,
+                  fontSize: 16,
+                  color: recentTxtClr,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text(
+                'Yes',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: btnBlueClr,
+                ),
+              ),
+              onPressed: () {
+                setState(() {
+                  AwesomeNotifications()
+                      .isNotificationAllowed()
+                      .then((isAllowed) {
+                    if (!isAllowed) {
+                      AwesomeNotifications()
+                          .requestPermissionToSendNotifications();
+                    }
+                  });
+                });
+              },
+            ),
+          ],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          elevation: 20,
+        );
+      },
     );
   }
 
