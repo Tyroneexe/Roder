@@ -1,9 +1,13 @@
 // ignore_for_file: unused_field
 
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roder/themes/theme.dart';
 import 'package:roder/ui/update_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../homepage/home_page.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -13,6 +17,19 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  @override
+  void initState() {
+    super.initState();
+    _initPreferences();
+  }
+
+  void _initPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isNotificationsEnabled = prefs.getBool('notification_preference') ?? true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -248,10 +265,23 @@ class _SettingsState extends State<Settings> {
                     right: 20,
                     top: 10,
                   ),
-                  child: Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    size: 18,
-                    color: btnBlueClr,
+                  child: Switch(
+                    value: isNotificationsEnabled,
+                    trackColor: MaterialStatePropertyAll<Color>(switchClr),
+                    inactiveThumbColor: Colors.white,
+                    thumbColor:
+                        const MaterialStatePropertyAll<Color>(btnBlueClr),
+                    onChanged: (bool value) {
+                      setState(() {
+                        isNotificationsEnabled = !isNotificationsEnabled;
+                        if (isNotificationsEnabled == true) {
+                          //
+                        } else {
+                          _disableNotifications();
+                        }
+                      });
+                      _saveNotificationPreference(isNotificationsEnabled);
+                    },
                   ),
                 ),
               ],
@@ -261,6 +291,76 @@ class _SettingsState extends State<Settings> {
         ],
       ),
     );
+  }
+
+  _disableNotifications() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: navBarBkgClr,
+          title: Text(
+            'Disable Notifications',
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Colors.black,
+            ),
+          ),
+          content: Text(
+            'Go to Notifications Settings to disable notifications?',
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w100,
+              fontSize: 16,
+              color: Colors.black,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w200,
+                  fontSize: 16,
+                  color: recentTxtClr,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text(
+                'Yes',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: btnBlueClr,
+                ),
+              ),
+              onPressed: () {
+                setState(() {
+                  AppSettings.openNotificationSettings();
+                });
+              },
+            ),
+          ],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          elevation: 20,
+        );
+      },
+    );
+  }
+
+  void _saveNotificationPreference(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('notification_preference', value);
   }
 
   _appbar() {

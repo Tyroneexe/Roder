@@ -293,7 +293,7 @@ class _AddTaskPageState extends State<AddTaskPage>
       await AwesomeNotifications().createNotification(
         content: NotificationContent(
           id: -1,
-          channelKey: 'channelKey',
+          channelKey: 'channelName',
           title: 'There is a Ride Today!',
           body: "Fill up your bike and be ready",
         ),

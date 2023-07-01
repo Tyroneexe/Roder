@@ -97,6 +97,7 @@ class HomePage extends StatefulWidget {
 }
 
 final user = FirebaseAuth.instance.currentUser!;
+bool isNotificationsEnabled = true;
 
 class _HomePageState extends State<HomePage> {
   //
