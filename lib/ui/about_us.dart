@@ -177,7 +177,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
             right: 20,
           ),
           child: Text(
-            "Plan your ride: Once you've found a\ngreat breakfast spot. Use our app to\nplan Your ride.",
+            "Plan your ride: Once you've found\na great breakfast spot. Use our app\nto plan Your ride.",
             style: TextStyle(
               fontFamily: 'Roboto',
               fontWeight: FontWeight.w100,
