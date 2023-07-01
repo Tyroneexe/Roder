@@ -41,6 +41,8 @@ const Color recentTxtClr = Color(0xFF757575);
 const Color dividerClr = Color(0xFFD1DEFA);
 const Color switchClr = Color(0xFFADB6CC);
 const Color navBarBkgClr = Color(0xFFe7eeff);
+// About Us
+const Color infoPopUpClr = Color(0xFFF6F9FF);
 
 //
 const primaryClr = blueClr;
