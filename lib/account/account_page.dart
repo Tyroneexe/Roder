@@ -202,8 +202,8 @@ class _AccountPageState extends State<AccountPage> {
                                 6,
                               ),
                               side: BorderSide(
-                                color: btnBlueClr, // Set the border color here
-                                width: 1.5, // Set the border width here
+                                color: btnBlueClr,
+                                width: 1.5,
                               ),
                             ),
                           ),
@@ -218,8 +218,7 @@ class _AccountPageState extends State<AccountPage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(
-                          left: 8), // Adjust the padding as needed
+                      padding: const EdgeInsets.only(left: 8),
                       child: TextButton(
                         onPressed: () {
                           // save to the database that is yet to be created
