@@ -226,6 +226,143 @@ class _AddTaskPageState extends State<AddTaskPage>
               ),
             ),
             SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                  ),
+                  child: Container(
+                    width: (MediaQuery.of(context).size.width / 2) - 42,
+                    height: 40,
+                    child: TextFormField(
+                      readOnly: true,
+                      onTap: () {
+                        _getTimeFromUser(isStartTime: true);
+                      },
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w100,
+                          fontSize: 14,
+                          color: Colors.black),
+                      decoration: InputDecoration(
+                        hintText: _startTime,
+                        hintStyle: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w100,
+                          fontSize: 14,
+                          color: Colors.grey,
+                        ),
+                        contentPadding: EdgeInsets.only(
+                          left: 20,
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: btnBlueClr,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.circular(
+                            6,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: btnBlueClr,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.circular(
+                            6,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: btnBlueClr,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.circular(
+                            6,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 10,
+                    left: 15,
+                  ),
+                  child: Text(
+                    'to',
+                    style: roRegular14,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 15,
+                  ),
+                  child: Container(
+                    width: (MediaQuery.of(context).size.width / 2) - 42,
+                    height: 40,
+                    child: TextFormField(
+                      readOnly: true,
+                      onTap: () {
+                        _getTimeFromUser(isStartTime: false);
+                      },
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w100,
+                          fontSize: 14,
+                          color: Colors.black),
+                      decoration: InputDecoration(
+                        hintText: _endTime,
+                        hintStyle: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w100,
+                          fontSize: 14,
+                          color: Colors.grey,
+                        ),
+                        contentPadding: EdgeInsets.only(
+                          left: 20,
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: btnBlueClr,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.circular(
+                            6,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: btnBlueClr,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.circular(
+                            6,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: btnBlueClr,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.circular(
+                            6,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
               height: 16,
             ),
             Text(
