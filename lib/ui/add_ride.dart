@@ -69,109 +69,268 @@ class _AddTaskPageState extends State<AddTaskPage>
     return Scaffold(
       backgroundColor: context.theme.colorScheme.background,
       appBar: _appbar(),
-      body: Container(
-        padding: const EdgeInsets.only(left: 20, right: 20),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Your Ride, Your Way',
-                style: headingStyle,
-              ),
-              MyInputField(
-                title: "Ride Name",
-                hint: "Give Your Ride A Name",
-                controller: _titleController,
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              Text(
-                'Begin to End',
-                style: titleStyle,
-              ),
-              Container(
-                width: double.infinity,
-                height: 52,
-                margin: const EdgeInsets.only(
-                  top: 8.0,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 20,
                 ),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: _getMainClr(
-                      Provider.of<ColorProvider>(context).selectedColor,
+                Text(
+                  'Ride Name',
+                  style: actPageTxt,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 20,
+              ),
+              child: Container(
+                width: MediaQuery.of(context).size.width - 40,
+                height: 40,
+                child: TextFormField(
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.black),
+                  controller: _titleController,
+                  decoration: InputDecoration(
+                    hintText: 'Enter Details',
+                    hintStyle: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.grey,
                     ),
-                    shape: RoundedRectangleBorder(
+                    contentPadding: EdgeInsets.only(
+                      left: 20,
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: btnBlueClr,
+                        width: 1.5,
+                      ),
                       borderRadius: BorderRadius.circular(
-                        18,
+                        6,
                       ),
                     ),
-                    elevation: 2,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Mapp(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: btnBlueClr,
+                        width: 1.5,
                       ),
-                    );
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 60,
+                      borderRadius: BorderRadius.circular(
+                        6,
                       ),
-                      AnimatedBuilder(
-                        animation: _animationController,
-                        builder: (context, child) {
-                          return Transform.translate(
-                            offset: Offset(
-                                0.0,
-                                6.0 *
-                                    _animation
-                                        .value), // Adjust the bounce height as needed
-                            child: Icon(
-                              Icons.place_outlined,
-                              color: Colors.white,
-                            ),
-                          );
-                        },
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: btnBlueClr,
+                        width: 1.5,
                       ),
-                      SizedBox(width: 8), // Adjust the width as needed
-                      Text(
-                        'Google Maps',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
+                      borderRadius: BorderRadius.circular(
+                        6,
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),
-              MyInputField(
-                title: "Date",
-                hint: _selectedDate,
-                widget: IconButton(
-                  icon: Icon(Icons.calendar_today_outlined,
-                      color: _getMainClr(
-                          Provider.of<ColorProvider>(context).selectedColor)),
-                  onPressed: () {
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  'Date',
+                  style: actPageTxt,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 20,
+              ),
+              child: Container(
+                width: MediaQuery.of(context).size.width - 40,
+                height: 40,
+                child: TextFormField(
+                  readOnly: true,
+                  onTap: () {
                     _getDateFromUser();
                   },
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.black),
+                  controller: _titleController,
+                  decoration: InputDecoration(
+                    hintText: _selectedDate,
+                    hintStyle: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.grey,
+                    ),
+                    contentPadding: EdgeInsets.only(
+                      left: 20,
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: btnBlueClr,
+                        width: 1.5,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        6,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: btnBlueClr,
+                        width: 1.5,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        6,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: btnBlueClr,
+                        width: 1.5,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        6,
+                      ),
+                    ),
+                  ),
                 ),
               ),
-              Row(
-                children: [
-                  Expanded(
-                      child: MyInputField(
-                    title: "Start Time",
-                    hint: _startTime,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Text(
+              'Begin to End',
+              style: titleStyle,
+            ),
+            Container(
+              width: double.infinity,
+              height: 52,
+              margin: const EdgeInsets.only(
+                top: 8.0,
+              ),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: _getMainClr(
+                    Provider.of<ColorProvider>(context).selectedColor,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                      18,
+                    ),
+                  ),
+                  elevation: 2,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Mapp(),
+                    ),
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 60,
+                    ),
+                    AnimatedBuilder(
+                      animation: _animationController,
+                      builder: (context, child) {
+                        return Transform.translate(
+                          offset: Offset(
+                              0.0,
+                              6.0 *
+                                  _animation
+                                      .value), // Adjust the bounce height as needed
+                          child: Icon(
+                            Icons.place_outlined,
+                            color: Colors.white,
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(width: 8), // Adjust the width as needed
+                    Text(
+                      'Google Maps',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            MyInputField(
+              title: "Date",
+              hint: _selectedDate,
+              widget: IconButton(
+                icon: Icon(Icons.calendar_today_outlined,
+                    color: _getMainClr(
+                        Provider.of<ColorProvider>(context).selectedColor)),
+                onPressed: () {
+                  _getDateFromUser();
+                },
+              ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                    child: MyInputField(
+                  title: "Start Time",
+                  hint: _startTime,
+                  widget: IconButton(
+                    onPressed: () {
+                      _getTimeFromUser(isStartTime: true);
+                    },
+                    icon: Icon(
+                      Icons.access_time_rounded,
+                      color: _getMainClr(
+                          Provider.of<ColorProvider>(context).selectedColor),
+                    ),
+                  ),
+                )),
+                const SizedBox(
+                  width: 12,
+                ),
+                Expanded(
+                  child: MyInputField(
+                    title: "End Time",
+                    hint: _endTime,
                     widget: IconButton(
                       onPressed: () {
-                        _getTimeFromUser(isStartTime: true);
+                        _getTimeFromUser(isStartTime: false);
                       },
                       icon: Icon(
                         Icons.access_time_rounded,
@@ -179,96 +338,75 @@ class _AddTaskPageState extends State<AddTaskPage>
                             Provider.of<ColorProvider>(context).selectedColor),
                       ),
                     ),
-                  )),
+                  ),
+                )
+              ],
+            ),
+            // const SizedBox(
+            //   height: 18,
+            // ),
+            Container(
+              width: 140,
+              height: 50,
+              child: TextButton(
+                onPressed: () {
+                  setState(() {
+                    isColorVisible = !isColorVisible;
+                  });
+                },
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  Text(
+                    'Customize',
+                    style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                        color: _getMainClr(
+                            Provider.of<ColorProvider>(context).selectedColor)),
+                  ),
                   const SizedBox(
-                    width: 12,
+                    height: 2,
                   ),
-                  Expanded(
-                    child: MyInputField(
-                      title: "End Time",
-                      hint: _endTime,
-                      widget: IconButton(
-                        onPressed: () {
-                          _getTimeFromUser(isStartTime: false);
-                        },
-                        icon: Icon(
-                          Icons.access_time_rounded,
-                          color: _getMainClr(Provider.of<ColorProvider>(context)
-                              .selectedColor),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
+                  Icon(
+                    isColorVisible
+                        ? Icons.keyboard_arrow_up
+                        : Icons.keyboard_arrow_down,
+                    color: _getMainClr(
+                        Provider.of<ColorProvider>(context).selectedColor),
+                  ),
+                ]),
               ),
-              // const SizedBox(
-              //   height: 18,
-              // ),
-              Container(
-                width: 140,
-                height: 50,
-                child: TextButton(
-                  onPressed: () {
-                    setState(() {
-                      isColorVisible = !isColorVisible;
-                    });
+            ),
+            if (isColorVisible) _colorPicker(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                MyButton(
+                  onTap: () {
+                    if (_validateDate() == true) {
+                      ref.child('Rides').push().set({
+                        'Name': _titleController.text,
+                        'Date': _selectedDate,
+                        'Start Time': _startTime,
+                        'End Time': _endTime,
+                        'Color': _selectedColor,
+                        'Person': user.displayName!,
+                        'GPhoto': user.photoURL!,
+                        'Joined': 0,
+                        'Origin': controllerProvider.fromController.text,
+                        'Destination': controllerProvider.toController.text,
+                      }).asStream();
+                      _titleController.clear();
+                      _addedRideBar();
+                    }
+                    _scheduleNotification();
                   },
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Customize',
-                          style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w400,
-                              fontSize: 14,
-                              color: _getMainClr(
-                                  Provider.of<ColorProvider>(context)
-                                      .selectedColor)),
-                        ),
-                        const SizedBox(
-                          height: 2,
-                        ),
-                        Icon(
-                          isColorVisible
-                              ? Icons.keyboard_arrow_up
-                              : Icons.keyboard_arrow_down,
-                          color: _getMainClr(Provider.of<ColorProvider>(context)
-                              .selectedColor),
-                        ),
-                      ]),
                 ),
-              ),
-              if (isColorVisible) _colorPicker(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  MyButton(
-                    onTap: () {
-                      if (_validateDate() == true) {
-                        ref.child('Rides').push().set({
-                          'Name': _titleController.text,
-                          'Date': _selectedDate,
-                          'Start Time': _startTime,
-                          'End Time': _endTime,
-                          'Color': _selectedColor,
-                          'Person': user.displayName!,
-                          'GPhoto': user.photoURL!,
-                          'Joined': 0,
-                          'Origin': controllerProvider.fromController.text,
-                          'Destination': controllerProvider.toController.text,
-                        }).asStream();
-                        _titleController.clear();
-                        _addedRideBar();
-                      }
-                      _scheduleNotification();
-                    },
-                  ),
-                ],
-              ),
-            ],
-          ),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -536,7 +674,19 @@ class _AddTaskPageState extends State<AddTaskPage>
 
   _appbar() {
     return AppBar(
+      iconTheme: IconThemeData(
+        color: btnBlueClr,
+      ),
       elevation: 0,
+      title: Text(
+        'Create A Ride',
+        style: TextStyle(
+          fontFamily: 'Roboto',
+          fontWeight: FontWeight.w700,
+          fontSize: 25,
+          color: Colors.black,
+        ),
+      ),
       backgroundColor: context.theme.colorScheme.background,
     );
   }

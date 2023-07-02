@@ -1,9 +1,11 @@
 // ignore_for_file: unrelated_type_equality_checks, non_constant_identifier_names
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:roder/themes/theme.dart';
 import '../homepage/home_page.dart';
@@ -579,6 +581,147 @@ class _AccountPageState extends State<AccountPage> {
       elevation: 0,
       backgroundColor: context.theme.colorScheme.background,
       foregroundColor: btnBlueClr,
+      actions: [
+        IconButton(
+          icon: Icon(
+            Icons.delete_forever_rounded,
+            color: rred,
+          ),
+          onPressed: () {
+            _deleteAccountAlert();
+          },
+        ),
+      ],
+    );
+  }
+
+  _deleteAccountAlert() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: navBarBkgClr,
+          title: Text(
+            'Delete Account',
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Colors.black,
+            ),
+          ),
+          content: Text(
+            'Are you sure you want to permanently delete the existing account?',
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w100,
+              fontSize: 16,
+              color: Colors.black,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w200,
+                  fontSize: 16,
+                  color: recentTxtClr,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text(
+                'Yes',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: rred,
+                ),
+              ),
+              onPressed: () async {
+                try {
+                  User? user = FirebaseAuth.instance.currentUser;
+                  // Prompt the user to reauthenticate with Google
+                  GoogleSignIn googleSignIn = GoogleSignIn();
+                  GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+                  if (googleUser != null) {
+                    GoogleSignInAuthentication googleAuth =
+                        await googleUser.authentication;
+                    AuthCredential credential = GoogleAuthProvider.credential(
+                      accessToken: googleAuth.accessToken,
+                      idToken: googleAuth.idToken,
+                    );
+                    // Reauthenticate the user
+                    await user!.reauthenticateWithCredential(credential);
+                    // User has been successfully reauthenticated
+                    // Proceed with deleting the account
+                    await user.delete();
+                    // Account deleted successfully
+                    Navigator.of(context).pop();
+                  } else {
+                    _errorMsg();
+                  }
+                  // Account deleted successfully
+                  Navigator.of(context).pop();
+                } catch (e) {
+                  _errorMsg();
+                }
+              },
+            ),
+          ],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          elevation: 20,
+        );
+      },
+    );
+  }
+
+  _errorMsg() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'An Error Has Occurred',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
+          content: Text(
+            "Could not delete account.",
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'Try Again',
+                style: TextStyle(
+                  color: rred,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          elevation: 20,
+        );
+      },
     );
   }
 }
