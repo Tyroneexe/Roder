@@ -9,10 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/googlemaps/maps.dart';
 import 'package:roder/themes/theme.dart';
-import 'package:roder/widgets/button.dart';
-import 'package:roder/widgets/input_field.dart';
 import '../googlemaps/maps_provider.dart';
-import '../provider/clrProvider.dart';
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({super.key});
@@ -21,8 +18,7 @@ class AddTaskPage extends StatefulWidget {
   State<AddTaskPage> createState() => _AddTaskPageState();
 }
 
-class _AddTaskPageState extends State<AddTaskPage>
-    with SingleTickerProviderStateMixin {
+class _AddTaskPageState extends State<AddTaskPage> {
   //Database
   final referenceDatabase = FirebaseDatabase.instance;
   final user = FirebaseAuth.instance.currentUser!;
@@ -39,26 +35,6 @@ class _AddTaskPageState extends State<AddTaskPage>
   int _selectedColor = 0;
   Color _mainColor = lightBlueClr;
   bool isColorVisible = false;
-
-  //animation
-  late AnimationController _animationController;
-  late Animation<double> _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      duration: Duration(milliseconds: 700),
-      vsync: this,
-    )..repeat(reverse: true);
-    _animation = Tween(begin: -0.5, end: 0.5).animate(_animationController);
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -157,6 +133,90 @@ class _AddTaskPageState extends State<AddTaskPage>
                   width: 20,
                 ),
                 Text(
+                  'Location',
+                  style: actPageTxt,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 20,
+              ),
+              child: Container(
+                width: MediaQuery.of(context).size.width - 40,
+                height: 40,
+                child: TextFormField(
+                  readOnly: true,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Mapp(),
+                      ),
+                    );
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Choose Location',
+                    hintStyle: (controllerProvider.fromController.text == '')
+                        ? TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w100,
+                            fontSize: 14,
+                            color: Colors.grey,
+                          )
+                        : TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w100,
+                            fontSize: 14,
+                            color: Colors.black,
+                          ),
+                    contentPadding: EdgeInsets.only(
+                      left: 20,
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: btnBlueClr,
+                        width: 1.5,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        6,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: btnBlueClr,
+                        width: 1.5,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        6,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: btnBlueClr,
+                        width: 1.5,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        6,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 20,
+                ),
+                Text(
                   'Date',
                   style: actPageTxt,
                 ),
@@ -177,11 +237,6 @@ class _AddTaskPageState extends State<AddTaskPage>
                   onTap: () {
                     _getDateFromUser();
                   },
-                  style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: Colors.black),
                   controller: _titleController,
                   decoration: InputDecoration(
                     hintText: _selectedDate,
@@ -189,7 +244,7 @@ class _AddTaskPageState extends State<AddTaskPage>
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.w100,
                       fontSize: 14,
-                      color: Colors.grey,
+                      color: Colors.black,
                     ),
                     contentPadding: EdgeInsets.only(
                       left: 20,
@@ -244,18 +299,13 @@ class _AddTaskPageState extends State<AddTaskPage>
                       onTap: () {
                         _getTimeFromUser(isStartTime: true);
                       },
-                      style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w100,
-                          fontSize: 14,
-                          color: Colors.black),
                       decoration: InputDecoration(
                         hintText: _startTime,
                         hintStyle: TextStyle(
                           fontFamily: 'Roboto',
                           fontWeight: FontWeight.w100,
                           fontSize: 14,
-                          color: Colors.grey,
+                          color: Colors.black,
                         ),
                         contentPadding: EdgeInsets.only(
                           left: 20,
@@ -313,18 +363,13 @@ class _AddTaskPageState extends State<AddTaskPage>
                       onTap: () {
                         _getTimeFromUser(isStartTime: false);
                       },
-                      style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w100,
-                          fontSize: 14,
-                          color: Colors.black),
                       decoration: InputDecoration(
                         hintText: _endTime,
                         hintStyle: TextStyle(
                           fontFamily: 'Roboto',
                           fontWeight: FontWeight.w100,
                           fontSize: 14,
-                          color: Colors.grey,
+                          color: Colors.black,
                         ),
                         contentPadding: EdgeInsets.only(
                           left: 20,
@@ -359,187 +404,6 @@ class _AddTaskPageState extends State<AddTaskPage>
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              'Begin to End',
-              style: titleStyle,
-            ),
-            Container(
-              width: double.infinity,
-              height: 52,
-              margin: const EdgeInsets.only(
-                top: 8.0,
-              ),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: _getMainClr(
-                    Provider.of<ColorProvider>(context).selectedColor,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      18,
-                    ),
-                  ),
-                  elevation: 2,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Mapp(),
-                    ),
-                  );
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 60,
-                    ),
-                    AnimatedBuilder(
-                      animation: _animationController,
-                      builder: (context, child) {
-                        return Transform.translate(
-                          offset: Offset(
-                              0.0,
-                              6.0 *
-                                  _animation
-                                      .value), // Adjust the bounce height as needed
-                          child: Icon(
-                            Icons.place_outlined,
-                            color: Colors.white,
-                          ),
-                        );
-                      },
-                    ),
-                    SizedBox(width: 8), // Adjust the width as needed
-                    Text(
-                      'Google Maps',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            MyInputField(
-              title: "Date",
-              hint: _selectedDate,
-              widget: IconButton(
-                icon: Icon(Icons.calendar_today_outlined,
-                    color: _getMainClr(
-                        Provider.of<ColorProvider>(context).selectedColor)),
-                onPressed: () {
-                  _getDateFromUser();
-                },
-              ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                    child: MyInputField(
-                  title: "Start Time",
-                  hint: _startTime,
-                  widget: IconButton(
-                    onPressed: () {
-                      _getTimeFromUser(isStartTime: true);
-                    },
-                    icon: Icon(
-                      Icons.access_time_rounded,
-                      color: _getMainClr(
-                          Provider.of<ColorProvider>(context).selectedColor),
-                    ),
-                  ),
-                )),
-                const SizedBox(
-                  width: 12,
-                ),
-                Expanded(
-                  child: MyInputField(
-                    title: "End Time",
-                    hint: _endTime,
-                    widget: IconButton(
-                      onPressed: () {
-                        _getTimeFromUser(isStartTime: false);
-                      },
-                      icon: Icon(
-                        Icons.access_time_rounded,
-                        color: _getMainClr(
-                            Provider.of<ColorProvider>(context).selectedColor),
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-            // const SizedBox(
-            //   height: 18,
-            // ),
-            Container(
-              width: 140,
-              height: 50,
-              child: TextButton(
-                onPressed: () {
-                  setState(() {
-                    isColorVisible = !isColorVisible;
-                  });
-                },
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Text(
-                    'Customize',
-                    style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                        color: _getMainClr(
-                            Provider.of<ColorProvider>(context).selectedColor)),
-                  ),
-                  const SizedBox(
-                    height: 2,
-                  ),
-                  Icon(
-                    isColorVisible
-                        ? Icons.keyboard_arrow_up
-                        : Icons.keyboard_arrow_down,
-                    color: _getMainClr(
-                        Provider.of<ColorProvider>(context).selectedColor),
-                  ),
-                ]),
-              ),
-            ),
-            if (isColorVisible) _colorPicker(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                MyButton(
-                  onTap: () {
-                    if (_validateDate() == true) {
-                      ref.child('Rides').push().set({
-                        'Name': _titleController.text,
-                        'Date': _selectedDate,
-                        'Start Time': _startTime,
-                        'End Time': _endTime,
-                        'Color': _selectedColor,
-                        'Person': user.displayName!,
-                        'GPhoto': user.photoURL!,
-                        'Joined': 0,
-                        'Origin': controllerProvider.fromController.text,
-                        'Destination': controllerProvider.toController.text,
-                      }).asStream();
-                      _titleController.clear();
-                      _addedRideBar();
-                    }
-                    _scheduleNotification();
-                  },
                 ),
               ],
             ),
@@ -610,12 +474,6 @@ class _AddTaskPageState extends State<AddTaskPage>
       initialDate: DateTime.now(),
       firstDate: DateTime(2015),
       lastDate: DateTime(2121),
-      builder: (BuildContext context, Widget? child) {
-        return Theme(
-          data: _getPickerTheme(context), // Apply the customized theme
-          child: child!,
-        );
-      },
     );
 
     if (pickerDate != null) {
@@ -661,12 +519,6 @@ class _AddTaskPageState extends State<AddTaskPage>
         minute: int.parse(_startTime.split(":")[1].split(" ")[0]),
       ),
       useRootNavigator: false,
-      builder: (BuildContext context, Widget? child) {
-        return Theme(
-          data: _getPickerTheme(context),
-          child: child!,
-        );
-      },
     );
   }
 
@@ -696,116 +548,13 @@ class _AddTaskPageState extends State<AddTaskPage>
     return false;
   }
 
-  _getMainClr(int no) {
-    switch (no) {
-      case 0:
-        _mainColor = lightBlueClr;
-        return lightBlueClr;
-      case 1:
-        _mainColor = oRange;
-        return oRange;
-      case 2:
-        _mainColor = themeRed;
-        return themeRed;
-      default:
-        _mainColor = lightBlueClr;
-        return lightBlueClr;
-    }
-  }
-
-  _colorPicker() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Color",
-          style: titleStyle,
-        ),
-        const SizedBox(
-          height: 8.0,
-        ),
-        Wrap(
-          children: List<Widget>.generate(
-            3,
-            (int index) {
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _selectedColor = index;
-                  });
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: CircleAvatar(
-                    radius: 15,
-                    backgroundColor: index == 0
-                        ? _getBGClr(0)
-                        : index == 1
-                            ? _getBGClr(1)
-                            : _getBGClr(2),
-                    child: _selectedColor == index
-                        ? const Icon(
-                            Icons.close,
-                            color: Colors.white,
-                            size: 20,
-                          )
-                        : Container(),
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  _getBGClr(int no) {
-    if (Provider.of<ColorProvider>(context).selectedColor == 0) {
-      switch (no) {
-        case 0:
-          return blueClr;
-        case 1:
-          return lightBlueClr;
-        case 2:
-          return vBlue;
-        default:
-          return blueClr;
-      }
-    } else if (Provider.of<ColorProvider>(context).selectedColor == 1) {
-      switch (no) {
-        case 0:
-          return oRange;
-        case 1:
-          return lightOrange;
-        case 2:
-          return skinOrange;
-        default:
-          return oRange;
-      }
-    } else {
-      switch (no) {
-        case 0:
-          return themeRed;
-        case 1:
-          return rred;
-        case 2:
-          return darkRed;
-        default:
-          return themeRed;
-      }
-    }
-  }
-
   _addedRideBar() {
     Get.snackbar("CREATED RIDE", "Ride has been created",
         snackPosition: SnackPosition.TOP,
         borderWidth: 2,
-        borderColor: _getMainClr(
-            Provider.of<ColorProvider>(context, listen: false).selectedColor),
+        borderColor: btnBlueClr,
         backgroundColor: Colors.white,
-        colorText: _getMainClr(
-            Provider.of<ColorProvider>(context, listen: false).selectedColor),
+        colorText: btnBlueClr,
         icon: const Icon(Icons.add_location_outlined));
   }
 
@@ -826,33 +575,5 @@ class _AddTaskPageState extends State<AddTaskPage>
       ),
       backgroundColor: context.theme.colorScheme.background,
     );
-  }
-
-  ThemeData _getPickerTheme(BuildContext context) {
-    // Retrieve the current theme
-    ThemeData currentTheme = Theme.of(context);
-
-    // Create a copy of the current theme
-    ThemeData pickerTheme = currentTheme.copyWith(
-      colorScheme: currentTheme.colorScheme.copyWith(
-        primary: lightBlueClr, // Customize the primary color
-      ),
-      textButtonTheme: TextButtonThemeData(
-        style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.pressed)) {
-                return _getMainClr(Provider.of<ColorProvider>(context)
-                    .selectedColor); // Customize the button text color when pressed
-              }
-              return _getMainClr(Provider.of<ColorProvider>(context)
-                  .selectedColor); // Customize the default button text color
-            },
-          ),
-        ),
-      ),
-    );
-
-    return pickerTheme;
   }
 }
