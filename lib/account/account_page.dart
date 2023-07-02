@@ -28,6 +28,7 @@ class _AccountPageState extends State<AccountPage> {
   @override
   void initState() {
     super.initState();
+    checkLocationPermission();
     _getCurrentLocation();
   }
 
@@ -723,5 +724,24 @@ class _AccountPageState extends State<AccountPage> {
         );
       },
     );
+  }
+
+  Future<void> checkLocationPermission() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      // Permission has not been granted
+      await requestLocationPermission();
+    } else if (permission == LocationPermission.deniedForever) {
+      await requestLocationPermission();
+    }
+  }
+
+  Future<void> requestLocationPermission() async {
+    LocationPermission permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      await Geolocator.openAppSettings();
+      await Geolocator.openLocationSettings();
+    }
   }
 }

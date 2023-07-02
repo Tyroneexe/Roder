@@ -228,17 +228,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                     builder: (BuildContext context) {
                       return Container(
                         height: MediaQuery.of(context).size.height / 4,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(
-                              20,
-                            ),
-                            topRight: Radius.circular(
-                              20,
-                            ),
-                          ),
-                          color: Colors.white,
-                        ),
+                        color: navBarBkgClr,
                         child: Column(
                           children: [
                             SizedBox(

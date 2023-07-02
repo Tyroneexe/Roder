@@ -9,7 +9,6 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:new_version_plus/new_version_plus.dart';
 import 'package:provider/provider.dart';
@@ -142,7 +141,6 @@ class _HomePageState extends State<HomePage> {
       }
     });
 
-    checkLocationPermission();
 
     final newVersion = NewVersionPlus(
         iOSId: 'com.tb.roder',
@@ -845,22 +843,5 @@ class _HomePageState extends State<HomePage> {
         icon: const Icon(Icons.add));
   }
 
-  Future<void> checkLocationPermission() async {
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      // Permission has not been granted
-      await requestLocationPermission();
-    } else if (permission == LocationPermission.deniedForever) {
-      await requestLocationPermission();
-    }
-  }
 
-  Future<void> requestLocationPermission() async {
-    LocationPermission permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied ||
-        permission == LocationPermission.deniedForever) {
-      await Geolocator.openAppSettings();
-      await Geolocator.openLocationSettings();
-    }
-  }
 }
