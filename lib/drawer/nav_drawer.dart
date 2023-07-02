@@ -463,22 +463,33 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: navBarBkgClr,
           title: Text(
             'Contact Email',
             style: TextStyle(
-              fontWeight: FontWeight.bold,
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w700,
               fontSize: 20,
+              color: Colors.black,
             ),
           ),
           content: RichText(
             text: TextSpan(
               style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w100,
                 fontSize: 18,
-                color: Colors.white, // Default color for the text
+                color: Colors.black,
               ),
               children: [
                 TextSpan(
                   text: 'Message the Developer of Roder with this Email:\n\n',
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w100,
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
                 ),
                 TextSpan(
                   text: 'roderteam@gmail.com',
@@ -545,17 +556,23 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: navBarBkgClr,
           title: Text(
             'Contact Instagram',
             style: TextStyle(
-              fontWeight: FontWeight.bold,
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w700,
               fontSize: 20,
+              color: Colors.black,
             ),
           ),
           content: Text(
             'Visit the Roder Instagram Page',
             style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w100,
               fontSize: 16,
+              color: Colors.black,
             ),
           ),
           actions: <Widget>[
