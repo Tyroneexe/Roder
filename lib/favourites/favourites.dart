@@ -8,7 +8,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:roder/account/account_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../provider/clrProvider.dart';
 import '../themes/theme.dart';
@@ -267,7 +266,7 @@ class _FavouritesState extends State<Favourites> {
               foregroundImage: NetworkImage(user.photoURL!),
             ),
             onTap: () {
-              Get.to(() => AccountPage());
+              // Get.to(() => AccountPage());
             },
           ),
           const SizedBox(

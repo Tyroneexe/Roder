@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, unused_field
+// ignore_for_file: must_be_immutable, unused_field, non_constant_identifier_names
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -169,21 +169,20 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
           Padding(
             padding: EdgeInsets.only(left: 5),
             child: ListTile(
-              contentPadding: EdgeInsets.symmetric(horizontal: 20),
-              leading: const Icon(Icons.person, size: 30, color: btnBlueClr),
-              title: const Text(
-                'Account',
-                style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.black,
+                contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                leading: const Icon(Icons.person, size: 30, color: btnBlueClr),
+                title: const Text(
+                  'Account',
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-              onTap: () {
-                Get.to(() => AccountPage());
-              },
-            ),
+                onTap: () {
+                  Get.to(() => AccountPage());
+                }),
           ),
           Padding(
             padding: EdgeInsets.only(left: 5),

@@ -26,8 +26,6 @@ class _AddTaskPageState extends State<AddTaskPage>
   //Database
   final referenceDatabase = FirebaseDatabase.instance;
   final user = FirebaseAuth.instance.currentUser!;
-  DatabaseReference refDb =
-      FirebaseDatabase.instance.ref().child('Rides').push();
 
   //Texts
   final TextEditingController _titleController = TextEditingController();
@@ -249,7 +247,6 @@ class _AddTaskPageState extends State<AddTaskPage>
                   MyButton(
                     onTap: () {
                       if (_validateDate() == true) {
-                        //ref.child('Rides/${user.uid}').push().set({
                         ref.child('Rides').push().set({
                           'Name': _titleController.text,
                           'Date': _selectedDate,

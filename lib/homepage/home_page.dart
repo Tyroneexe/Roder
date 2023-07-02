@@ -135,13 +135,14 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    checkLocationPermission();
 
     AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
       if (!isAllowed) {
         AwesomeNotifications().requestPermissionToSendNotifications();
       }
     });
+
+    checkLocationPermission();
 
     final newVersion = NewVersionPlus(
         iOSId: 'com.tb.roder',

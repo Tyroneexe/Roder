@@ -31,8 +31,6 @@ class LogIn extends StatelessWidget {
         ),
       );
 
-  final referenceDatabase = FirebaseDatabase.instance;
-
   Widget logInPage(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -146,19 +144,19 @@ class LogIn extends StatelessWidget {
 
   void assignUserID() async {
     final user = FirebaseAuth.instance.currentUser;
+    final referenceDatabase = FirebaseDatabase.instance;
     final ref = referenceDatabase.ref();
 
     if (user != null) {
-      ref.child('Users').child(user.uid).set({
+      ref.child('Users').push().set({
         'name': user.displayName!,
         'email': user.email!,
-      }).then((_) {
-        print('User added to the database with ID: ${user.uid}');
-      }).catchError((error) {
-        print('Failed to add user: $error');
-      });
+        'contact': '',
+        'location': '',
+        'bike': ''
+      }).asStream();
     } else {
-      print('The user is null');
+      print('Error');
     }
   }
 }

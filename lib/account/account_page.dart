@@ -1,4 +1,4 @@
-// ignore_for_file: unrelated_type_equality_checks
+// ignore_for_file: unrelated_type_equality_checks, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
@@ -16,6 +16,7 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
+  //
   TextEditingController titleController = TextEditingController();
   TextEditingController nuController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -225,7 +226,7 @@ class _AccountPageState extends State<AccountPage> {
                       ),
                       child: TextButton(
                         onPressed: () {
-                          // save to the database that is yet to be created
+                          //
                         },
                         style: ButtonStyle(
                           textStyle: MaterialStateProperty.all<TextStyle>(
