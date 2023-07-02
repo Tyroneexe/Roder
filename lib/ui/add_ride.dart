@@ -6,10 +6,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-import 'package:roder/googlemaps/maps.dart';
 import 'package:roder/themes/theme.dart';
-import '../googlemaps/maps_provider.dart';
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({super.key});
@@ -24,7 +21,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
   final user = FirebaseAuth.instance.currentUser!;
 
   //Texts
-  final TextEditingController _titleController = TextEditingController();
+  TextEditingController titleController = TextEditingController();
+  TextEditingController locationController = TextEditingController();
+
   String? selectedRadio;
 
   //Date and Time
@@ -39,8 +38,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
   @override
   Widget build(BuildContext context) {
-    ControllerProvider controllerProvider =
-        Provider.of<ControllerProvider>(context);
     final ref = referenceDatabase.ref();
 
     return Scaffold(
@@ -83,7 +80,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         fontWeight: FontWeight.w100,
                         fontSize: 14,
                         color: Colors.black),
-                    controller: _titleController,
+                    controller: titleController,
                     decoration: InputDecoration(
                       hintText: 'Enter Details',
                       hintStyle: TextStyle(
@@ -136,7 +133,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     width: 20,
                   ),
                   Text(
-                    'Location',
+                    'Meetup Location',
                     style: actPageTxt,
                   ),
                 ],
@@ -152,30 +149,19 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   width: MediaQuery.of(context).size.width - 40,
                   height: 40,
                   child: TextFormField(
+                    controller: locationController,
                     readOnly: true,
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Mapp(),
-                        ),
-                      );
+                      //
                     },
                     decoration: InputDecoration(
-                      hintText: 'Choose Location',
-                      hintStyle: (controllerProvider.fromController.text == '')
-                          ? TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w100,
-                              fontSize: 14,
-                              color: Colors.grey,
-                            )
-                          : TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w100,
-                              fontSize: 14,
-                              color: Colors.black,
-                            ),
+                      hintText: 'Choose Meetup Location',
+                      hintStyle: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w100,
+                        fontSize: 14,
+                        color: Colors.grey,
+                      ),
                       contentPadding: EdgeInsets.only(
                         left: 20,
                       ),
@@ -240,7 +226,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     onTap: () {
                       _getDateFromUser();
                     },
-                    controller: _titleController,
                     decoration: InputDecoration(
                       hintText: _selectedDate,
                       hintStyle: TextStyle(
@@ -573,7 +558,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     onPressed: () {
                       if (_validateDate() == true) {
                         ref.child('Rides').push().set({
-                          'Name': _titleController.text,
+                          'Name': titleController.text,
                           'Date': _selectedDate,
                           'Start Time': _startTime,
                           'End Time': _endTime,
@@ -581,11 +566,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           'Person': user.displayName!,
                           'GPhoto': user.photoURL!,
                           'Joined': 0,
-                          'Origin': controllerProvider.fromController.text,
-                          'Destination': controllerProvider.toController.text,
+                          'Meetup': locationController.text,
                           'Riders': selectedRadio,
                         }).asStream();
-                        _titleController.clear();
+                        titleController.clear();
+                        selectedRadio = '';
                         _addedRideBar();
                       }
                       _scheduleNotification();
@@ -741,16 +726,10 @@ class _AddTaskPageState extends State<AddTaskPage> {
   }
 
   _validateDate() {
-    ControllerProvider controllerProvider =
-        Provider.of<ControllerProvider>(context, listen: false);
-    if (_titleController.text.isNotEmpty &&
-        controllerProvider.fromController.text.isNotEmpty &&
-        controllerProvider.toController.text.isNotEmpty) {
-      // Get.to(() => const HomePage());
+    if (titleController.text.isNotEmpty && locationController.text.isNotEmpty) {
       return true;
-    } else if (_titleController.text.isEmpty ||
-        controllerProvider.fromController.text.isEmpty ||
-        controllerProvider.toController.text.isEmpty) {
+    } else if (titleController.text.isEmpty ||
+        locationController.text.isEmpty) {
       Get.snackbar("Required", "All fields are required!",
           snackPosition: SnackPosition.TOP,
           borderWidth: 2,
