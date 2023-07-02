@@ -1,5 +1,8 @@
 // ignore_for_file: must_be_immutable, unused_field, non_constant_identifier_names
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
@@ -8,8 +11,8 @@ import 'package:roder/login/google_sign_in.dart';
 import 'package:roder/settings_page/settings_page.dart';
 import 'package:roder/themes/theme.dart';
 import 'package:roder/ui/about_us.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../homepage/home_page.dart';
-import '../ui/contact_page.dart';
 
 class NavitionDrawer extends StatefulWidget {
   NavitionDrawer({super.key});
@@ -23,6 +26,8 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
   int noImg = 0;
   Color _mainColor = lightBlueClr;
   //
+  final Uri _urlInsta = Uri.parse(
+      'https://www.instagram.com/roderbiker/?igshid=MzNlNGNkZWQ4Mg%3D%3D');
 
   @override
   Widget build(BuildContext context) {
@@ -218,12 +223,100 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                 ),
               ),
               onTap: () {
-                Get.to(() => ContactPage());
+                showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Container(
+                        height: MediaQuery.of(context).size.height / 4,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(
+                              20,
+                            ),
+                            topRight: Radius.circular(
+                              20,
+                            ),
+                          ),
+                          color: Colors.white,
+                        ),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              'Contact Us Via',
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    _showEmailPopup();
+                                  },
+                                  child: Icon(
+                                    Icons.email_outlined,
+                                    color: Colors.white,
+                                    size: 40,
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: btnBlueClr,
+                                    elevation: 8.0,
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 16.0),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                    minimumSize: Size(130, 80),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 40,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    _showInstaPopup();
+                                  },
+                                  child: Icon(
+                                    FontAwesomeIcons.instagram,
+                                    color: Colors.white,
+                                    size: 40,
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: btnBlueClr,
+                                    elevation: 8.0,
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 16.0),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                    minimumSize: Size(130, 80),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    });
               },
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 5),
+            padding: EdgeInsets.only(
+              left: 5,
+            ),
             child: ListTile(
               contentPadding: EdgeInsets.symmetric(horizontal: 20),
               leading:
@@ -347,6 +440,146 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                 final provider =
                     Provider.of<GoogleSignInProvider>(context, listen: false);
                 provider.logout();
+              },
+            ),
+          ],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          elevation: 20,
+        );
+      },
+    );
+  }
+
+  Future<void> _launchInsta() async {
+    if (!await launchUrl(_urlInsta)) {
+      throw Exception('Could not launch $_urlInsta');
+    }
+  }
+
+  _showEmailPopup() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Contact Email',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
+          content: RichText(
+            text: TextSpan(
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white, // Default color for the text
+              ),
+              children: [
+                TextSpan(
+                  text: 'Message the Developer of Roder with this Email:\n\n',
+                ),
+                TextSpan(
+                  text: 'roderteam@gmail.com',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: btnBlueClr,
+                    decoration: TextDecoration.underline,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      //copy the email to the clipboard of the user
+                      final email = 'roderteam@gmail.com';
+                      Clipboard.setData(ClipboardData(text: email));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Email copied to Clipboard')),
+                      );
+                    },
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+            TextButton(
+              child: Text(
+                'OK',
+                style: TextStyle(
+                  color: btnBlueClr,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () {
+                //copy the email to the clipboard of the user
+                final email = 'roderteam@gmail.com';
+                Clipboard.setData(ClipboardData(text: email));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Email copied to Clipboard')),
+                );
+                Navigator.pop(context);
+              },
+            ),
+          ],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          elevation: 20,
+        );
+      },
+    );
+  }
+
+  _showInstaPopup() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Contact Instagram',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
+          content: Text(
+            'Visit the Roder Instagram Page',
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+            TextButton(
+              child: Text(
+                'Go to Instagram',
+                style: TextStyle(
+                  color: btnBlueClr,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () async {
+                _launchInsta();
               },
             ),
           ],
