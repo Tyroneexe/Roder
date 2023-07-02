@@ -47,582 +47,585 @@ class _AddTaskPageState extends State<AddTaskPage> {
       backgroundColor: context.theme.colorScheme.background,
       appBar: _appbar(),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  'Ride Name',
-                  style: actPageTxt,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 20,
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height - 160,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 20,
               ),
-              child: Container(
-                width: MediaQuery.of(context).size.width - 40,
-                height: 40,
-                child: TextFormField(
-                  style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: Colors.black),
-                  controller: _titleController,
-                  decoration: InputDecoration(
-                    hintText: 'Enter Details',
-                    hintStyle: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: Colors.grey,
-                    ),
-                    contentPadding: EdgeInsets.only(
-                      left: 20,
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: btnBlueClr,
-                        width: 1.5,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    'Ride Name',
+                    style: actPageTxt,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 20,
+                ),
+                child: Container(
+                  width: MediaQuery.of(context).size.width - 40,
+                  height: 40,
+                  child: TextFormField(
+                    style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w100,
+                        fontSize: 14,
+                        color: Colors.black),
+                    controller: _titleController,
+                    decoration: InputDecoration(
+                      hintText: 'Enter Details',
+                      hintStyle: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w100,
+                        fontSize: 14,
+                        color: Colors.grey,
                       ),
-                      borderRadius: BorderRadius.circular(
-                        6,
+                      contentPadding: EdgeInsets.only(
+                        left: 20,
                       ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: btnBlueClr,
-                        width: 1.5,
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
                       ),
-                      borderRadius: BorderRadius.circular(
-                        6,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
                       ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: btnBlueClr,
-                        width: 1.5,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        6,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  'Location',
-                  style: actPageTxt,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 20,
+              SizedBox(
+                height: 20,
               ),
-              child: Container(
-                width: MediaQuery.of(context).size.width - 40,
-                height: 40,
-                child: TextFormField(
-                  readOnly: true,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Mapp(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    'Location',
+                    style: actPageTxt,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 20,
+                ),
+                child: Container(
+                  width: MediaQuery.of(context).size.width - 40,
+                  height: 40,
+                  child: TextFormField(
+                    readOnly: true,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Mapp(),
+                        ),
+                      );
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Choose Location',
+                      hintStyle: (controllerProvider.fromController.text == '')
+                          ? TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w100,
+                              fontSize: 14,
+                              color: Colors.grey,
+                            )
+                          : TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w100,
+                              fontSize: 14,
+                              color: Colors.black,
+                            ),
+                      contentPadding: EdgeInsets.only(
+                        left: 20,
                       ),
-                    );
-                  },
-                  decoration: InputDecoration(
-                    hintText: 'Choose Location',
-                    hintStyle: (controllerProvider.fromController.text == '')
-                        ? TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w100,
-                            fontSize: 14,
-                            color: Colors.grey,
-                          )
-                        : TextStyle(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    'Date',
+                    style: actPageTxt,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 20,
+                ),
+                child: Container(
+                  width: MediaQuery.of(context).size.width - 40,
+                  height: 40,
+                  child: TextFormField(
+                    readOnly: true,
+                    onTap: () {
+                      _getDateFromUser();
+                    },
+                    controller: _titleController,
+                    decoration: InputDecoration(
+                      hintText: _selectedDate,
+                      hintStyle: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w100,
+                        fontSize: 14,
+                        color: Colors.black,
+                      ),
+                      contentPadding: EdgeInsets.only(
+                        left: 20,
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 20,
+                    ),
+                    child: Container(
+                      width: (MediaQuery.of(context).size.width / 2) - 42,
+                      height: 40,
+                      child: TextFormField(
+                        readOnly: true,
+                        onTap: () {
+                          _getTimeFromUser(isStartTime: true);
+                        },
+                        decoration: InputDecoration(
+                          hintText: _startTime,
+                          hintStyle: TextStyle(
                             fontFamily: 'Roboto',
                             fontWeight: FontWeight.w100,
                             fontSize: 14,
                             color: Colors.black,
                           ),
-                    contentPadding: EdgeInsets.only(
+                          contentPadding: EdgeInsets.only(
+                            left: 20,
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: btnBlueClr,
+                              width: 1.5,
+                            ),
+                            borderRadius: BorderRadius.circular(
+                              6,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: btnBlueClr,
+                              width: 1.5,
+                            ),
+                            borderRadius: BorderRadius.circular(
+                              6,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: btnBlueClr,
+                              width: 1.5,
+                            ),
+                            borderRadius: BorderRadius.circular(
+                              6,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 10,
+                      left: 15,
+                    ),
+                    child: Text(
+                      'to',
+                      style: roRegular14,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 15,
+                    ),
+                    child: Container(
+                      width: (MediaQuery.of(context).size.width / 2) - 42,
+                      height: 40,
+                      child: TextFormField(
+                        readOnly: true,
+                        onTap: () {
+                          _getTimeFromUser(isStartTime: false);
+                        },
+                        decoration: InputDecoration(
+                          hintText: _endTime,
+                          hintStyle: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w100,
+                            fontSize: 14,
+                            color: Colors.black,
+                          ),
+                          contentPadding: EdgeInsets.only(
+                            left: 20,
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: btnBlueClr,
+                              width: 1.5,
+                            ),
+                            borderRadius: BorderRadius.circular(
+                              6,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: btnBlueClr,
+                              width: 1.5,
+                            ),
+                            borderRadius: BorderRadius.circular(
+                              6,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: btnBlueClr,
+                              width: 1.5,
+                            ),
+                            borderRadius: BorderRadius.circular(
+                              6,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    'Riders',
+                    style: actPageTxt,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
                       left: 20,
                     ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: btnBlueClr,
-                        width: 1.5,
+                    child: Container(
+                      width: (MediaQuery.of(context).size.width / 3) - 17,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                        border: Border.all(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
                       ),
-                      borderRadius: BorderRadius.circular(
-                        6,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: btnBlueClr,
-                        width: 1.5,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        6,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: btnBlueClr,
-                        width: 1.5,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        6,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  'Date',
-                  style: actPageTxt,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 20,
-              ),
-              child: Container(
-                width: MediaQuery.of(context).size.width - 40,
-                height: 40,
-                child: TextFormField(
-                  readOnly: true,
-                  onTap: () {
-                    _getDateFromUser();
-                  },
-                  controller: _titleController,
-                  decoration: InputDecoration(
-                    hintText: _selectedDate,
-                    hintStyle: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: Colors.black,
-                    ),
-                    contentPadding: EdgeInsets.only(
-                      left: 20,
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: btnBlueClr,
-                        width: 1.5,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        6,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: btnBlueClr,
-                        width: 1.5,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        6,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: btnBlueClr,
-                        width: 1.5,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        6,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Radio(
+                            value: 'Solo',
+                            groupValue: selectedRadio,
+                            onChanged: (value) {
+                              setState(() {
+                                selectedRadio = value!;
+                              });
+                            },
+                            activeColor: btnBlueClr,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 9,
+                            ),
+                            child: Text(
+                              'Solo',
+                              style: roRegular14,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 5,
+                    ),
+                    child: Container(
+                      width: (MediaQuery.of(context).size.width / 3) - 17,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                        border: Border.all(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Radio(
+                            value: 'Invite',
+                            groupValue: selectedRadio,
+                            onChanged: (value) {
+                              setState(() {
+                                selectedRadio = value!;
+                              });
+                            },
+                            activeColor: btnBlueClr,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 9,
+                            ),
+                            child: Text(
+                              'Invite',
+                              style: roRegular14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                  child: Container(
-                    width: (MediaQuery.of(context).size.width / 2) - 42,
-                    height: 40,
-                    child: TextFormField(
-                      readOnly: true,
-                      onTap: () {
-                        _getTimeFromUser(isStartTime: true);
-                      },
-                      decoration: InputDecoration(
-                        hintText: _startTime,
-                        hintStyle: TextStyle(
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      right: 20,
+                      left: 5,
+                    ),
+                    child: Container(
+                      width: (MediaQuery.of(context).size.width / 3) - 17,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                        border: Border.all(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Radio(
+                            value: 'Anyone',
+                            groupValue: selectedRadio,
+                            onChanged: (value) {
+                              setState(() {
+                                selectedRadio = value!;
+                              });
+                            },
+                            activeColor: btnBlueClr,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 9,
+                            ),
+                            child: Text(
+                              'Anyone',
+                              style: roRegular14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Spacer(),
+              //if inviter show users
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      if (_validateDate() == true) {
+                        ref.child('Rides').push().set({
+                          'Name': _titleController.text,
+                          'Date': _selectedDate,
+                          'Start Time': _startTime,
+                          'End Time': _endTime,
+                          'Color': _selectedColor,
+                          'Person': user.displayName!,
+                          'GPhoto': user.photoURL!,
+                          'Joined': 0,
+                          'Origin': controllerProvider.fromController.text,
+                          'Destination': controllerProvider.toController.text,
+                          'Riders': selectedRadio,
+                        }).asStream();
+                        _titleController.clear();
+                        _addedRideBar();
+                      }
+                      _scheduleNotification();
+                    },
+                    style: ButtonStyle(
+                      textStyle: MaterialStateProperty.all<TextStyle>(
+                        TextStyle(
                           fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w100,
+                          fontWeight: FontWeight.w700,
                           fontSize: 14,
-                          color: Colors.black,
+                          color: Colors.white,
                         ),
-                        contentPadding: EdgeInsets.only(
-                          left: 20,
+                      ),
+                      foregroundColor: MaterialStateProperty.all<Color>(
+                        Colors.white,
+                      ),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        btnBlueClr,
+                      ),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
                         ),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: btnBlueClr,
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            6,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: btnBlueClr,
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            6,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: btnBlueClr,
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            6,
-                          ),
+                      ),
+                      minimumSize: MaterialStateProperty.all<Size>(
+                        Size(
+                          MediaQuery.of(context).size.width / 2,
+                          38,
                         ),
                       ),
                     ),
+                    child: Text('Create Ride'),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 10,
-                    left: 15,
-                  ),
-                  child: Text(
-                    'to',
-                    style: roRegular14,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 15,
-                  ),
-                  child: Container(
-                    width: (MediaQuery.of(context).size.width / 2) - 42,
-                    height: 40,
-                    child: TextFormField(
-                      readOnly: true,
-                      onTap: () {
-                        _getTimeFromUser(isStartTime: false);
-                      },
-                      decoration: InputDecoration(
-                        hintText: _endTime,
-                        hintStyle: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w100,
-                          fontSize: 14,
-                          color: Colors.black,
-                        ),
-                        contentPadding: EdgeInsets.only(
-                          left: 20,
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: btnBlueClr,
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            6,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: btnBlueClr,
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            6,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: btnBlueClr,
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            6,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  'Riders',
-                  style: actPageTxt,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                  ),
-                  child: Container(
-                    width: (MediaQuery.of(context).size.width / 3) - 17,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        6,
-                      ),
-                      border: Border.all(
-                        color: btnBlueClr,
-                        width: 1.5,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Radio(
-                          value: 'Solo',
-                          groupValue: selectedRadio,
-                          onChanged: (value) {
-                            setState(() {
-                              selectedRadio = value!;
-                            });
-                          },
-                          activeColor: btnBlueClr,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 9,
-                          ),
-                          child: Text(
-                            'Solo',
-                            style: roRegular14,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 5,
-                  ),
-                  child: Container(
-                    width: (MediaQuery.of(context).size.width / 3) - 17,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        6,
-                      ),
-                      border: Border.all(
-                        color: btnBlueClr,
-                        width: 1.5,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Radio(
-                          value: 'Invite',
-                          groupValue: selectedRadio,
-                          onChanged: (value) {
-                            setState(() {
-                              selectedRadio = value!;
-                            });
-                          },
-                          activeColor: btnBlueClr,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 9,
-                          ),
-                          child: Text(
-                            'Invite',
-                            style: roRegular14,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    right: 20,
-                    left: 5,
-                  ),
-                  child: Container(
-                    width: (MediaQuery.of(context).size.width / 3) - 17,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        6,
-                      ),
-                      border: Border.all(
-                        color: btnBlueClr,
-                        width: 1.5,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Radio(
-                          value: 'Anyone',
-                          groupValue: selectedRadio,
-                          onChanged: (value) {
-                            setState(() {
-                              selectedRadio = value!;
-                            });
-                          },
-                          activeColor: btnBlueClr,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 9,
-                          ),
-                          child: Text(
-                            'Anyone',
-                            style: roRegular14,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-            //if inviter show users
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    if (_validateDate() == true) {
-                      ref.child('Rides').push().set({
-                        'Name': _titleController.text,
-                        'Date': _selectedDate,
-                        'Start Time': _startTime,
-                        'End Time': _endTime,
-                        'Color': _selectedColor,
-                        'Person': user.displayName!,
-                        'GPhoto': user.photoURL!,
-                        'Joined': 0,
-                        'Origin': controllerProvider.fromController.text,
-                        'Destination': controllerProvider.toController.text,
-                        'Riders': selectedRadio,
-                      }).asStream();
-                      _titleController.clear();
-                      _addedRideBar();
-                    }
-                    _scheduleNotification();
-                  },
-                  style: ButtonStyle(
-                    textStyle: MaterialStateProperty.all<TextStyle>(
-                      TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                        color: Colors.white,
-                      ),
-                    ),
-                    foregroundColor: MaterialStateProperty.all<Color>(
-                      Colors.white,
-                    ),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      btnBlueClr,
-                    ),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                    ),
-                    minimumSize: MaterialStateProperty.all<Size>(
-                      Size(
-                        MediaQuery.of(context).size.width / 2,
-                        38,
-                      ),
-                    ),
-                  ),
-                  child: Text('Create Ride'),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-          ],
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+            ],
+          ),
         ),
       ),
     );

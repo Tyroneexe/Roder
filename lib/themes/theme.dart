@@ -13,8 +13,8 @@ const Color catalinaBlue = Color(0xFF042A73);
 const Color iceCold = Color(0xFFA4EAF4);
 const Color vBlue = Color(0xFF055777);
 // Construction Colors
-const Color rred = Color(0xFFFF2400);
-const Color darkGr = Color(0xFF1d855e);
+const Color rred = Color(0xFFFE0000);
+const Color successClr = Color(0xFF52C833);
 const Color sandyClr = Color(0xFFD0B59A);
 const Color purple = Color(0xFF7c14ff);
 // Yellow Theme Colors

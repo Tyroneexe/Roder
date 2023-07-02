@@ -620,7 +620,7 @@ class _HomePageState extends State<HomePage> {
             height: 200,
             decoration: BoxDecoration(
               color: joinedRides.contains(Rides['key'])
-                  ? darkGr
+                  ? successClr
                   : _getBGClr(Rides['Color']),
               borderRadius: BorderRadius.circular(20.0),
             ),
@@ -741,7 +741,7 @@ class _HomePageState extends State<HomePage> {
             height: 200,
             decoration: BoxDecoration(
               color: joinedRides.contains(Rides['key'])
-                  ? darkGr
+                  ? successClr
                   : _getBGClr(Rides['Color']),
               borderRadius: BorderRadius.circular(20.0),
             ),

@@ -4,9 +4,11 @@ import 'package:app_settings/app_settings.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:roder/account/account_page.dart';
 import 'package:roder/themes/theme.dart';
 import 'package:roder/ui/update_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../homepage/home_page.dart';
 
@@ -29,6 +31,15 @@ class _SettingsState extends State<Settings> {
     setState(() {
       isNotificationsEnabled = prefs.getBool('notification_preference') ?? true;
     });
+  }
+
+  final Uri _url = Uri.parse(
+      'https://github.com/Tyroneexe/Roder-privacy/blob/main/privacy-policy.md');
+
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
   }
 
   @override
@@ -108,38 +119,9 @@ class _SettingsState extends State<Settings> {
                 ),
               ],
             ),
-            onTap: () {},
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          GestureDetector(
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                  ),
-                  child: Text(
-                    'Language',
-                    style: roRegular14,
-                  ),
-                ),
-                Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    right: 20,
-                    top: 10,
-                  ),
-                  child: Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    size: 18,
-                    color: btnBlueClr,
-                  ),
-                ),
-              ],
-            ),
-            onTap: () {},
+            onTap: () {
+              Get.to(() => AccountPage());
+            },
           ),
           SizedBox(
             height: 5,
@@ -170,7 +152,9 @@ class _SettingsState extends State<Settings> {
                 ),
               ],
             ),
-            onTap: () {},
+            onTap: () {
+              _privacyPolicyAlert();
+            },
           ),
           SizedBox(
             height: 5,
@@ -381,6 +365,69 @@ class _SettingsState extends State<Settings> {
           ),
         ],
       ),
+    );
+  }
+
+  _privacyPolicyAlert() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: navBarBkgClr,
+          title: Text(
+            'Privacy Policy',
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Colors.black,
+            ),
+          ),
+          content: Text(
+            'Do you want to view our Privacy Policy?',
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w100,
+              fontSize: 16,
+              color: Colors.black,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w200,
+                  fontSize: 16,
+                  color: recentTxtClr,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text(
+                'Yes',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: btnBlueClr,
+                ),
+              ),
+              onPressed: () {
+                _launchUrl();
+              },
+            ),
+          ],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          elevation: 20,
+        );
+      },
     );
   }
 
