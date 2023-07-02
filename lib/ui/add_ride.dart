@@ -407,11 +407,167 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 ),
               ],
             ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  'Riders',
+                  style: actPageTxt,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                  ),
+                  child: Container(
+                    width: (MediaQuery.of(context).size.width / 3) - 17,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        6,
+                      ),
+                      border: Border.all(
+                        color: btnBlueClr,
+                        width: 1.5,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Radio(
+                          value: 'solo',
+                          groupValue: groupValue,
+                          onChanged: (value) {
+                            setState(() {
+                              groupValue = value!;
+                            });
+                          },
+                          activeColor: btnBlueClr,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 9,
+                          ),
+                          child: Text(
+                            'Solo',
+                            style: roRegular14,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 5,
+                  ),
+                  child: Container(
+                    width: (MediaQuery.of(context).size.width / 3) - 17,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        6,
+                      ),
+                      border: Border.all(
+                        color: btnBlueClr,
+                        width: 1.5,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Radio(
+                          value: 'invite',
+                          groupValue: groupValue,
+                          onChanged: (value) {
+                            setState(() {
+                              groupValue = value!;
+                            });
+                          },
+                          activeColor: btnBlueClr,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 9,
+                          ),
+                          child: Text(
+                            'Invite',
+                            style: roRegular14,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    right: 20,
+                    left: 5,
+                  ),
+                  child: Container(
+                    width: (MediaQuery.of(context).size.width / 3) - 17,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        6,
+                      ),
+                      border: Border.all(
+                        color: btnBlueClr,
+                        width: 1.5,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Radio(
+                          value: 'anyone',
+                          groupValue: groupValue,
+                          onChanged: (value) {
+                            setState(() {
+                              groupValue = value!;
+                            });
+                          },
+                          activeColor: btnBlueClr,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 9,
+                          ),
+                          child: Text(
+                            'Anyone',
+                            style: roRegular14,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
     );
   }
+
+  String groupValue = 'option1';
 
   // _selectedDate is for when the ride is happening (completly seperate from the notificaitons)
   // _selectedDateTime is the raw date for the notification
