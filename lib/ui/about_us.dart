@@ -45,7 +45,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                       right: 20,
                     ),
                     child: Container(
-                      height: 450,
+                      // height: 450,
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(
@@ -81,7 +81,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                               right: 20,
                             ),
                             child: Text(
-                              'Our app was created with a single goal in mind: to provide for riders to discover new routes and enjoy delicious breakfasts at the same time!\n\nOur team of dedicated developers and motorcycle enthusiasts have created an app that is easy to use. With Roder, you can:',
+                              'Our app was created with a single goal in mind: to provide for riders to discover new routes and enjoy delicious breakfasts at the same time!  Our team of dedicated developers and motorcycle enthusiasts have created an app that is easy to use. With Roder, you can:',
                               style: TextStyle(
                                 fontFamily: 'Roboto',
                                 fontWeight: FontWeight.w100,
@@ -108,13 +108,16 @@ class _AboutUsPageState extends State<AboutUsPage> {
                             ),
                           ),
                           SizedBox(
-                            height: 5,
+                            height: 20,
                           ),
                           firstBullet(),
                           SizedBox(
                             height: 20,
                           ),
                           secondBullet(),
+                          SizedBox(
+                            height: 20,
+                          ),
                         ],
                       ),
                     ),
@@ -128,7 +131,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
     );
   }
 
-  Row secondBullet() {
+  secondBullet() {
     return Row(
       children: [
         SizedBox(
@@ -140,18 +143,20 @@ class _AboutUsPageState extends State<AboutUsPage> {
           ),
           child: Text('●'),
         ),
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 20,
-            right: 20,
-          ),
-          child: Text(
-            "Connect with other riders: Our app\nallows you to connect with other\nbikers who share your passion for\nbreakfast runs.",
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontWeight: FontWeight.w100,
-              fontSize: 14,
-              color: Colors.black,
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 20,
+              right: 20,
+            ),
+            child: Text(
+              "Connect with other riders: Our app allows you to connect with other bikers who share your passion for breakfast runs.",
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w100,
+                fontSize: 14,
+                color: Colors.black,
+              ),
             ),
           ),
         ),
@@ -159,7 +164,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
     );
   }
 
-  Row firstBullet() {
+  firstBullet() {
     return Row(
       children: [
         SizedBox(
@@ -171,18 +176,20 @@ class _AboutUsPageState extends State<AboutUsPage> {
           ),
           child: Text('●'),
         ),
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 20,
-            right: 20,
-          ),
-          child: Text(
-            "Plan your ride: Once you've found\na great breakfast spot. Use our app\nto plan Your ride.",
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontWeight: FontWeight.w100,
-              fontSize: 14,
-              color: Colors.black,
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 20,
+              right: 20,
+            ),
+            child: Text(
+              "Plan your ride: Once you've found a great breakfast spot. Use our app to plan Your ride.",
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w100,
+                fontSize: 14,
+                color: Colors.black,
+              ),
             ),
           ),
         ),
