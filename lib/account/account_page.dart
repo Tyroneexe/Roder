@@ -159,7 +159,7 @@ class _AccountPageState extends State<AccountPage> {
                       width: 20,
                     ),
                     Text(
-                      'Bike',
+                      'Your Bike',
                       style: actPageTxt,
                     ),
                   ],
@@ -175,7 +175,9 @@ class _AccountPageState extends State<AccountPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 20),
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                      ),
                       child: TextButton(
                         onPressed: () {
                           // save to the database that is yet to be created
@@ -203,13 +205,13 @@ class _AccountPageState extends State<AccountPage> {
                               ),
                               side: BorderSide(
                                 color: btnBlueClr,
-                                width: 1.5,
+                                width: 2,
                               ),
                             ),
                           ),
                           minimumSize: MaterialStateProperty.all<Size>(
                             Size(
-                              (MediaQuery.of(context).size.width / 2) - 20,
+                              (MediaQuery.of(context).size.width / 2) - 25,
                               38,
                             ),
                           ),
@@ -218,7 +220,9 @@ class _AccountPageState extends State<AccountPage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 8),
+                      padding: const EdgeInsets.only(
+                        left: 10,
+                      ),
                       child: TextButton(
                         onPressed: () {
                           // save to the database that is yet to be created
@@ -246,7 +250,7 @@ class _AccountPageState extends State<AccountPage> {
                           ),
                           minimumSize: MaterialStateProperty.all<Size>(
                             Size(
-                              (MediaQuery.of(context).size.width / 2) - 20,
+                              (MediaQuery.of(context).size.width / 2) - 25,
                               38,
                             ),
                           ),
