@@ -9,7 +9,7 @@ class NotificationPage extends StatefulWidget {
   _NotificationPageState createState() => _NotificationPageState();
 }
 
-bool hasBeenUpdated = false;
+bool hasBeenUpdated = true;
 bool eventOneHasOccurred = false;
 
 class _NotificationPageState extends State<NotificationPage> {
@@ -118,6 +118,24 @@ class _NotificationPageState extends State<NotificationPage> {
           if (welcomeViewed == true) ...[
             _welcomeNotification(),
           ],
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: filteredNotifications.length,
+            itemBuilder: (BuildContext context, int listIndex) {
+              if (filteredNotifications[listIndex].viewed) {
+                return NotificationCard(
+                  notification: filteredNotifications[listIndex],
+                  onTap: () {
+                    setState(() {
+                      filteredNotifications[listIndex].viewed = true;
+                    });
+                  },
+                );
+              } else {
+                return Container(); // To avoid rendering unviewed notifications under "Older"
+              }
+            },
+          ),
         ],
       ),
     );
