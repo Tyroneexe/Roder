@@ -9,12 +9,15 @@ class NotificationPage extends StatefulWidget {
   _NotificationPageState createState() => _NotificationPageState();
 }
 
-bool hasBeenUpdated = false;
-bool eventOneHasOccurred = false;
+// bool values for the notification items
+bool hasBeenUpdated = true;
+bool eventOneHasOccurred = true;
+bool eventTwoHasOccurred = true;
+
+bool welcomeViewed = false;
 
 class _NotificationPageState extends State<NotificationPage> {
-  bool welcomeViewed = false;
-  bool hasNotifications = false;
+  bool hasNotifications = true;
   List<NotificationItem> filteredNotifications = [];
 
   List<NotificationItem> notifications = [
@@ -32,6 +35,13 @@ class _NotificationPageState extends State<NotificationPage> {
       event: "eventOne",
       viewed: false,
     ),
+    NotificationItem(
+      title: "Notification Test 3",
+      time: "This is the 3rd Test",
+      icon: Icons.notifications,
+      event: "eventTwo",
+      viewed: false,
+    ),
   ];
 
   @override
@@ -44,14 +54,14 @@ class _NotificationPageState extends State<NotificationPage> {
     // Retrieve the welcome viewed status from shared preferences
     welcomeViewed = await _getWelcomeViewedBool();
 
-    hasNotifications = filteredNotifications.isNotEmpty;
-
     // Populate the filteredNotifications list based on conditions
     filteredNotifications = notifications
         .where((n) {
           if (n.event == "patchnotes" && hasBeenUpdated) {
             return true;
           } else if (n.event == "eventOne" && eventOneHasOccurred) {
+            return true;
+          } else if (n.event == "eventTwo" && eventTwoHasOccurred) {
             return true;
           } else {
             return false;
@@ -76,7 +86,7 @@ class _NotificationPageState extends State<NotificationPage> {
       appBar: _appBar(),
       body: Column(
         children: [
-          if (hasNotifications) ...[
+          if (filteredNotifications.isNotEmpty) ...[
             Row(
               children: [
                 SizedBox(width: 20),
@@ -91,7 +101,7 @@ class _NotificationPageState extends State<NotificationPage> {
               ],
             ),
             SizedBox(height: 10),
-            if (welcomeViewed == false) ...[
+            if (!welcomeViewed) ...[
               _welcomeNotification(),
               SizedBox(height: 10),
             ],
@@ -136,7 +146,7 @@ class _NotificationPageState extends State<NotificationPage> {
                 if (filteredNotifications[listIndex].viewed) {
                   return NotificationCard(
                     notification: filteredNotifications[listIndex],
-                    onTap: () async {},
+                    onTap: () {},
                   );
                 } else {
                   return Container();
@@ -148,7 +158,7 @@ class _NotificationPageState extends State<NotificationPage> {
               _welcomeNotification(),
             ],
           ],
-          if (!hasNotifications) ...[
+          if (filteredNotifications.isEmpty) ...[
             Container(
               height: MediaQuery.of(context).size.height - 250,
               child: Center(
@@ -214,113 +224,105 @@ class _NotificationPageState extends State<NotificationPage> {
   }
 
   _welcomeNotification() {
-    return FutureBuilder<bool>(
-      future: _getWelcomeViewedBool(),
-      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-        if (snapshot.hasData) {
-          welcomeViewed = snapshot.data!;
-        }
-        return GestureDetector(
-          onTap: () {
-            setState(() {
-              welcomeViewed = true;
-            });
-            _saveWelcomeViewedBool();
-          },
-          child: Stack(
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          welcomeViewed = true;
+        });
+        _saveWelcomeViewedBool();
+      },
+      child: Stack(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              welcomeViewed
+                  ? SizedBox()
+                  : Container(
+                      height: 90,
+                      width: 10,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(4),
+                          bottomLeft: Radius.circular(4),
+                        ),
+                        color: btnBlueClr,
+                      ),
+                    ),
+              Container(
+                height: 90,
+                width: MediaQuery.of(context).size.width - 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: newNotis,
+                ),
+              ),
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 18),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  welcomeViewed
-                      ? SizedBox()
-                      : Container(
-                          height: 90,
-                          width: 10,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(4),
-                              bottomLeft: Radius.circular(4),
-                            ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.waving_hand_rounded,
+                            color: btnBlueClr,
+                            size: 32,
+                          ),
+                          SizedBox(width: 20),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                    ],
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Welcome to ',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 20,
+                            color: textNotis,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Roder',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
                             color: btnBlueClr,
                           ),
                         ),
-                  Container(
-                    height: 90,
-                    width: MediaQuery.of(context).size.width - 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      color: newNotis,
+                        TextSpan(
+                          text: '\nFind your Ride, your Way.',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 20,
+                            color: textNotis,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(height: 18),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.waving_hand_rounded,
-                                color: btnBlueClr,
-                                size: 32,
-                              ),
-                              SizedBox(width: 20),
-                            ],
-                          ),
-                          SizedBox(height: 20),
-                        ],
-                      ),
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Welcome to ',
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.w700,
-                                fontSize: 20,
-                                color: textNotis,
-                              ),
-                            ),
-                            TextSpan(
-                              text: 'Roder',
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: btnBlueClr,
-                              ),
-                            ),
-                            TextSpan(
-                              text: '\nFind your Ride, your Way.',
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.w700,
-                                fontSize: 20,
-                                color: textNotis,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  //Text date
-                ],
-              ),
+              //Text date
             ],
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 
@@ -331,7 +333,7 @@ class _NotificationPageState extends State<NotificationPage> {
 
   Future<bool> _getWelcomeViewedBool() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('welcomeViewed') ?? false;
+    return prefs.getBool('welcomeViewed') ?? true;
   }
 }
 

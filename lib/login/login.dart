@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/navbar/navbar.dart';
 
+import '../ui/notification_page.dart';
 import 'google_sign_in.dart';
 
 class LogIn extends StatelessWidget {
@@ -99,6 +100,7 @@ class LogIn extends StatelessWidget {
   ElevatedButton logInBtn(BuildContext context) {
     return ElevatedButton(
       onPressed: () async {
+        welcomeViewed = false;
         final provider =
             Provider.of<GoogleSignInProvider>(context, listen: false);
         await provider.googleLogIn();
