@@ -76,22 +76,6 @@ class _NotificationPageState extends State<NotificationPage> {
       appBar: _appBar(),
       body: Column(
         children: [
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Text(
-                  'Notifications',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 25,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 20),
           if (hasNotifications) ...[
             Row(
               children: [
@@ -165,38 +149,44 @@ class _NotificationPageState extends State<NotificationPage> {
             ],
           ],
           if (!hasNotifications) ...[
-            Column(
-              children: [
-                Container(
-                  height: 220,
-                  width: 220,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/NotiRoderImage.png'),
+            Container(
+              height: MediaQuery.of(context).size.height - 250,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 220,
+                      width: 220,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/NotiRoderImage.png'),
+                        ),
+                      ),
                     ),
-                  ),
+                    SizedBox(height: 10),
+                    Text(
+                      'No New Notifications.',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'There are no new notifications to show right now',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w100,
+                        fontSize: 14,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 10),
-                Text(
-                  'No New Notifications.',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 20,
-                    color: Colors.black,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'There are no new notifications to show right now',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w100,
-                    fontSize: 14,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
+              ),
             ),
           ],
         ],
@@ -206,9 +196,20 @@ class _NotificationPageState extends State<NotificationPage> {
 
   _appBar() {
     return AppBar(
-      backgroundColor: context.theme.colorScheme.background,
+      iconTheme: IconThemeData(
+        color: Colors.black,
+      ),
       elevation: 0,
-      foregroundColor: Get.isDarkMode ? Colors.white : Colors.black,
+      title: Text(
+        'Notifications',
+        style: TextStyle(
+          fontFamily: 'Roboto',
+          fontWeight: FontWeight.w700,
+          fontSize: 25,
+          color: Colors.black,
+        ),
+      ),
+      backgroundColor: context.theme.colorScheme.background,
     );
   }
 
