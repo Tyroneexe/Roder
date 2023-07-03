@@ -419,6 +419,7 @@ class _SettingsState extends State<Settings> {
               ),
               onPressed: () {
                 _launchUrl();
+                Navigator.of(context).pop();
               },
             ),
           ],
@@ -481,6 +482,7 @@ class _SettingsState extends State<Settings> {
                 ),
               ),
               onPressed: () {
+                Navigator.of(context).pop();
                 setState(() {
                   AwesomeNotifications()
                       .isNotificationAllowed()
@@ -553,6 +555,7 @@ class _SettingsState extends State<Settings> {
                 ),
               ),
               onPressed: () {
+                Navigator.of(context).pop();
                 setState(() {
                   AppSettings.openNotificationSettings();
                 });
