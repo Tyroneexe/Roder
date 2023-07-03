@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +29,31 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
   //
   final Uri _urlInsta = Uri.parse(
       'https://www.instagram.com/roderbiker/?igshid=MzNlNGNkZWQ4Mg%3D%3D');
+
+  @override
+  void initState() {
+    super.initState();
+    checkLocationPermission();
+  }
+
+  Future<void> checkLocationPermission() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      // Permission has not been granted
+      await requestLocationPermission();
+    } else if (permission == LocationPermission.deniedForever) {
+      await requestLocationPermission();
+    }
+  }
+
+  Future<void> requestLocationPermission() async {
+    LocationPermission permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      await Geolocator.openAppSettings();
+      await Geolocator.openLocationSettings();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
