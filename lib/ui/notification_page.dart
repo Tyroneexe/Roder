@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roder/drawer/nav_drawer.dart';
 import 'package:roder/themes/theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationPage extends StatefulWidget {
   @override
@@ -113,117 +114,124 @@ class _NotificationPageState extends State<NotificationPage> {
   }
 
   _welcomeNotification() {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          welcomeViewed = true;
-        });
-      },
-      child: Stack(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+    return FutureBuilder<bool>(
+      future: _getWelcomeViewedBool(),
+      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+        if (snapshot.hasData) {
+          welcomeViewed = snapshot.data!;
+        }
+        return GestureDetector(
+          onTap: () {
+            setState(() {
+              welcomeViewed = true;
+            });
+            _saveWelcomeViewedBool();
+          },
+          child: Stack(
             children: [
-              welcomeViewed
-                  ? SizedBox()
-                  : Container(
-                      height: 90,
-                      width: 10,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(
-                            4,
-                          ),
-                          bottomLeft: Radius.circular(
-                            4,
-                          ),
-                        ),
-                        color: btnBlueClr,
-                      ),
-                    ),
-              Container(
-                height: 90,
-                width: MediaQuery.of(context).size.width - 40,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    4,
-                  ),
-                  color: newNotis,
-                ),
-              ),
-            ],
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 18,
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Icon(
-                            Icons.waving_hand_rounded,
-                            color: btnBlueClr,
-                            size: 36,
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                    ],
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'Welcome to ',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 22,
-                            color: textNotis,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'Roder',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22,
+                  welcomeViewed
+                      ? SizedBox()
+                      : Container(
+                          height: 90,
+                          width: 10,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(4),
+                              bottomLeft: Radius.circular(4),
+                            ),
                             color: btnBlueClr,
                           ),
                         ),
-                        TextSpan(
-                          text: '\nFind your Ride, your Way.',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 22,
-                            color: textNotis,
-                          ),
-                        ),
-                      ],
+                  Container(
+                    height: 90,
+                    width: MediaQuery.of(context).size.width - 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: newNotis,
                     ),
                   ),
                 ],
               ),
-              //Text date
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: 18),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(
+                                Icons.waving_hand_rounded,
+                                color: btnBlueClr,
+                                size: 32,
+                              ),
+                              SizedBox(width: 20),
+                            ],
+                          ),
+                          SizedBox(height: 20),
+                        ],
+                      ),
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'Welcome to ',
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20,
+                                color: textNotis,
+                              ),
+                            ),
+                            TextSpan(
+                              text: 'Roder',
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: btnBlueClr,
+                              ),
+                            ),
+                            TextSpan(
+                              text: '\nFind your Ride, your Way.',
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20,
+                                color: textNotis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  //Text date
+                ],
+              ),
             ],
-          )
-        ],
-      ),
+          ),
+        );
+      },
     );
+  }
+
+  _saveWelcomeViewedBool() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('welcomeViewed', welcomeViewed);
+  }
+
+  Future<bool> _getWelcomeViewedBool() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('welcomeViewed') ?? false;
   }
 }
 
