@@ -24,7 +24,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
   TextEditingController titleController = TextEditingController();
   TextEditingController locationController = TextEditingController();
 
-  String? selectedRadio;
+  String? selectedRide;
 
   //Date and Time
   String _selectedDate = DateFormat("d MMMM yyyy").format(DateTime.now());
@@ -42,7 +42,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
     return Scaffold(
       backgroundColor: context.theme.colorScheme.background,
-      appBar: _appbar(),
+      appBar: _appBar(),
       body: SingleChildScrollView(
         child: SizedBox(
           height: MediaQuery.of(context).size.height - 160,
@@ -150,10 +150,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   height: 40,
                   child: TextFormField(
                     controller: locationController,
-                    readOnly: true,
-                    onTap: () {
-                      //
-                    },
+                    // readOnly: true,
                     decoration: InputDecoration(
                       hintText: 'Choose Meetup Location',
                       hintStyle: TextStyle(
@@ -413,141 +410,89 @@ class _AddTaskPageState extends State<AddTaskPage> {
               SizedBox(
                 height: 10,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 20,
-                    ),
-                    child: Container(
-                      width: (MediaQuery.of(context).size.width / 3) - 17,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          6,
-                        ),
-                        border: Border.all(
-                          color: btnBlueClr,
-                          width: 1.5,
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Radio(
-                            value: 'Solo',
-                            groupValue: selectedRadio,
-                            onChanged: (value) {
-                              setState(() {
-                                selectedRadio = value!;
-                              });
-                            },
-                            activeColor: btnBlueClr,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 9,
-                            ),
-                            child: Text(
-                              'Solo',
-                              style: roRegular14,
-                            ),
-                          ),
-                        ],
-                      ),
+//////////////////////////////////////////////////////////
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 20,
+                ),
+                child: Container(
+                  width: MediaQuery.of(context).size.width - 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(
+                      color:
+                          btnBlueClr, // Replace Colors.blue with your desired border color
+                      width: 1.5,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 5,
-                    ),
-                    child: Container(
-                      width: (MediaQuery.of(context).size.width / 3) - 17,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          6,
-                        ),
-                        border: Border.all(
-                          color: btnBlueClr,
-                          width: 1.5,
-                        ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    child: DropdownButton<String>(
+                      underline: Container(),
+                      isExpanded: true,
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w100,
+                        fontSize: 16,
+                        color: Colors.black,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Radio(
-                            value: 'Invite',
-                            groupValue: selectedRadio,
-                            onChanged: (value) {
-                              setState(() {
-                                selectedRadio = value!;
-                              });
-                            },
-                            activeColor: btnBlueClr,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 9,
-                            ),
-                            child: Text(
-                              'Invite',
-                              style: roRegular14,
-                            ),
-                          ),
-                        ],
+                      icon: Icon(
+                        Icons.arrow_drop_down_rounded,
+                        color: btnBlueClr,
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      right: 20,
-                      left: 5,
-                    ),
-                    child: Container(
-                      width: (MediaQuery.of(context).size.width / 3) - 17,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          6,
-                        ),
-                        border: Border.all(
-                          color: btnBlueClr,
-                          width: 1.5,
+                      hint: Text(
+                        'Solo',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w100,
+                          fontSize: 16,
+                          color: Colors.black,
                         ),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Radio(
-                            value: 'Anyone',
-                            groupValue: selectedRadio,
-                            onChanged: (value) {
-                              setState(() {
-                                selectedRadio = value!;
-                              });
-                            },
-                            activeColor: btnBlueClr,
+                      value: selectedRide,
+                      onChanged: (String? value) {
+                        setState(() {
+                          selectedRide = value!;
+                        });
+                      },
+                      items: [
+                        DropdownMenuItem<String>(
+                          value: 'Solo',
+                          child: Row(
+                            children: [
+                              Icon(Icons.person),
+                              SizedBox(
+                                  width:
+                                      8), // Adjust the spacing between the icon and text as needed
+                              Text('Solo'),
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 9,
-                            ),
-                            child: Text(
-                              'Anyone',
-                              style: roRegular14,
-                            ),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Invite',
+                          child: Row(
+                            children: [
+                              Icon(Icons.mail),
+                              SizedBox(width: 8),
+                              Text('Invite'),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Anyone',
+                          child: Row(
+                            children: [
+                              Icon(Icons.public),
+                              SizedBox(width: 8),
+                              Text('Anyone'),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
+                ),
               ),
               Spacer(),
               //if inviter show users
@@ -567,13 +512,15 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           'GPhoto': user.photoURL!,
                           'Joined': 0,
                           'Meetup': locationController.text,
-                          'Riders': selectedRadio,
+                          'Riders': selectedRide,
+                          // 'Country' : ,
+                          // 'City' : ,
                         }).asStream();
                         titleController.clear();
-                        selectedRadio = '';
+                        selectedRide = '';
                         _addedRideBar();
+                        _scheduleNotification();
                       }
-                      _scheduleNotification();
                     },
                     style: ButtonStyle(
                       textStyle: MaterialStateProperty.all<TextStyle>(
@@ -755,7 +702,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
         icon: const Icon(Icons.add_location_outlined));
   }
 
-  _appbar() {
+  _appBar() {
     return AppBar(
       iconTheme: IconThemeData(
         color: btnBlueClr,

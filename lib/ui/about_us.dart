@@ -81,7 +81,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                               right: 20,
                             ),
                             child: Text(
-                              'Our app was created with a single goal in mind: to provide for riders to discover new routes and enjoy delicious breakfasts at the same time!  Our team of dedicated developers and motorcycle enthusiasts have created an app that is easy to use. With Roder, you can:',
+                              'Our app was created with a single goal in mind: to provide for riders to discover new routes and enjoy delicious breakfasts at the same time!\n\nOur team of dedicated developers and motorcycle enthusiasts have created an app that is easy to use. With Roder, you can:',
                               style: TextStyle(
                                 fontFamily: 'Roboto',
                                 fontWeight: FontWeight.w100,
