@@ -10,14 +10,13 @@ class NotificationPage extends StatefulWidget {
 }
 
 // bool values for the notification items
-bool hasBeenUpdated = true;
-bool eventOneHasOccurred = true;
-bool eventTwoHasOccurred = true;
+bool hasBeenUpdated = false;
+bool createdFirstRide = false;
+bool eventTwo = false;
 
 bool welcomeViewed = false;
 
 class _NotificationPageState extends State<NotificationPage> {
-  bool hasNotifications = true;
   List<NotificationItem> filteredNotifications = [];
 
   List<NotificationItem> notifications = [
@@ -29,10 +28,10 @@ class _NotificationPageState extends State<NotificationPage> {
       viewed: false,
     ),
     NotificationItem(
-      title: "Notification 2",
+      title: "You Created Your First Ride. Nice!",
       time: "This is a test",
-      icon: Icons.notifications,
-      event: "eventOne",
+      icon: Icons.add,
+      event: "createdFirstRide",
       viewed: false,
     ),
     NotificationItem(
@@ -59,9 +58,9 @@ class _NotificationPageState extends State<NotificationPage> {
         .where((n) {
           if (n.event == "patchnotes" && hasBeenUpdated) {
             return true;
-          } else if (n.event == "eventOne" && eventOneHasOccurred) {
+          } else if (n.event == "createdFirstRide" && createdFirstRide) {
             return true;
-          } else if (n.event == "eventTwo" && eventTwoHasOccurred) {
+          } else if (n.event == "eventTwo" && eventTwo) {
             return true;
           } else {
             return false;
@@ -81,12 +80,14 @@ class _NotificationPageState extends State<NotificationPage> {
 
   @override
   Widget build(BuildContext context) {
+    final hasUnviewedNotifications =
+        filteredNotifications.any((notification) => !notification.viewed);
     return Scaffold(
       endDrawer: NavitionDrawer(),
       appBar: _appBar(),
       body: Column(
         children: [
-          if (filteredNotifications.isNotEmpty) ...[
+          if (hasUnviewedNotifications || !welcomeViewed) ...[
             Row(
               children: [
                 SizedBox(width: 20),
@@ -146,7 +147,12 @@ class _NotificationPageState extends State<NotificationPage> {
                 if (filteredNotifications[listIndex].viewed) {
                   return NotificationCard(
                     notification: filteredNotifications[listIndex],
-                    onTap: () {},
+                    onTap: () async {
+                      setState(() {
+                        filteredNotifications[listIndex].viewed = false;
+                      });
+                      await filteredNotifications[listIndex].saveViewedStatus();
+                    },
                   );
                 } else {
                   return Container();
@@ -158,7 +164,7 @@ class _NotificationPageState extends State<NotificationPage> {
               _welcomeNotification(),
             ],
           ],
-          if (filteredNotifications.isEmpty) ...[
+          if (!hasUnviewedNotifications && welcomeViewed) ...[
             Container(
               height: MediaQuery.of(context).size.height - 250,
               child: Center(

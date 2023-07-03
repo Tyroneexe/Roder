@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:roder/themes/theme.dart';
 
+import 'notification_page.dart';
+
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({super.key});
 
@@ -521,6 +523,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         _addedRideBar();
                         _scheduleNotification();
                       }
+                      setState(() {
+                        createdFirstRide = true;
+                      });
                     },
                     style: ButtonStyle(
                       textStyle: MaterialStateProperty.all<TextStyle>(
