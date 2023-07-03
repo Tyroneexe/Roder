@@ -83,23 +83,41 @@ class _NotificationPageState extends State<NotificationPage> {
             ],
           ),
           SizedBox(height: 15),
-          _welcomeNotification(),
+          if (welcomeViewed == false) ...[
+            _welcomeNotification(),
+          ],
           SizedBox(height: 10),
-          Expanded(
-            child: ListView.builder(
-              itemCount: filteredNotifications.length,
-              itemBuilder: (BuildContext context, int index) {
-                return NotificationCard(
-                  notification: filteredNotifications[index],
-                  onTap: () {
-                    setState(() {
-                      filteredNotifications[index].viewed = true;
-                    });
-                  },
-                );
-              },
-            ),
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: filteredNotifications.length,
+            itemBuilder: (BuildContext context, int index) {
+              return NotificationCard(
+                notification: filteredNotifications[index],
+                onTap: () {
+                  setState(() {
+                    filteredNotifications[index].viewed = true;
+                  });
+                },
+              );
+            },
           ),
+          Row(
+            children: [
+              SizedBox(width: 20),
+              Text(
+                'Older',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 15),
+          if (welcomeViewed == true) ...[
+            _welcomeNotification(),
+          ],
         ],
       ),
     );
