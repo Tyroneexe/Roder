@@ -9,11 +9,13 @@ class NotificationPage extends StatefulWidget {
   _NotificationPageState createState() => _NotificationPageState();
 }
 
-bool hasBeenUpdated = true;
+bool hasBeenUpdated = false;
 bool eventOneHasOccurred = false;
 
 class _NotificationPageState extends State<NotificationPage> {
   bool welcomeViewed = false;
+  bool hasNotifications = false;
+  List<NotificationItem> filteredNotifications = [];
 
   List<NotificationItem> notifications = [
     NotificationItem(
@@ -33,8 +35,19 @@ class _NotificationPageState extends State<NotificationPage> {
   ];
 
   @override
-  Widget build(BuildContext context) {
-    List<NotificationItem> filteredNotifications = notifications
+  void initState() {
+    super.initState();
+    initializeNotifications();
+  }
+
+  void initializeNotifications() async {
+    // Retrieve the welcome viewed status from shared preferences
+    welcomeViewed = await _getWelcomeViewedBool();
+
+    hasNotifications = filteredNotifications.isNotEmpty;
+
+    // Populate the filteredNotifications list based on conditions
+    filteredNotifications = notifications
         .where((n) {
           if (n.event == "patchnotes" && hasBeenUpdated) {
             return true;
@@ -48,6 +61,16 @@ class _NotificationPageState extends State<NotificationPage> {
         .reversed
         .toList();
 
+    for (var notification in filteredNotifications) {
+      notification.viewed =
+          await NotificationItem.getViewedStatus(notification.event);
+    }
+
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       endDrawer: NavitionDrawer(),
       appBar: _appBar(),
@@ -69,73 +92,113 @@ class _NotificationPageState extends State<NotificationPage> {
             ],
           ),
           SizedBox(height: 20),
-          Row(
-            children: [
-              SizedBox(width: 20),
-              Text(
-                'Recently',
-                style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w700,
-                  fontSize: 16,
+          if (hasNotifications) ...[
+            Row(
+              children: [
+                SizedBox(width: 20),
+                Text(
+                  'Recently',
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  ),
                 ),
-              ),
+              ],
+            ),
+            SizedBox(height: 10),
+            if (welcomeViewed == false) ...[
+              _welcomeNotification(),
+              SizedBox(height: 10),
             ],
-          ),
-          SizedBox(height: 15),
-          if (welcomeViewed == false) ...[
-            _welcomeNotification(),
-          ],
-          SizedBox(height: 10),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: filteredNotifications.length,
-            itemBuilder: (BuildContext context, int index) {
-              return NotificationCard(
-                notification: filteredNotifications[index],
-                onTap: () {
-                  setState(() {
-                    filteredNotifications[index].viewed = true;
-                  });
-                },
-              );
-            },
-          ),
-          Row(
-            children: [
-              SizedBox(width: 20),
-              Text(
-                'Older',
-                style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w700,
-                  fontSize: 16,
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: filteredNotifications.length,
+              itemBuilder: (BuildContext context, int listIndex) {
+                if (filteredNotifications[listIndex].viewed == true) {
+                  return Container();
+                } else {
+                  return NotificationCard(
+                    notification: filteredNotifications[listIndex],
+                    onTap: () async {
+                      setState(() {
+                        filteredNotifications[listIndex].viewed = true;
+                      });
+                      await filteredNotifications[listIndex].saveViewedStatus();
+                    },
+                  );
+                }
+              },
+            ),
+            SizedBox(height: 15),
+            Row(
+              children: [
+                SizedBox(width: 20),
+                Text(
+                  'Older',
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  ),
                 ),
-              ),
+              ],
+            ),
+            SizedBox(height: 15),
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: filteredNotifications.length,
+              itemBuilder: (BuildContext context, int listIndex) {
+                if (filteredNotifications[listIndex].viewed) {
+                  return NotificationCard(
+                    notification: filteredNotifications[listIndex],
+                    onTap: () async {},
+                  );
+                } else {
+                  return Container();
+                }
+              },
+            ),
+            SizedBox(height: 10),
+            if (welcomeViewed == true) ...[
+              _welcomeNotification(),
             ],
-          ),
-          SizedBox(height: 15),
-          if (welcomeViewed == true) ...[
-            _welcomeNotification(),
           ],
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: filteredNotifications.length,
-            itemBuilder: (BuildContext context, int listIndex) {
-              if (filteredNotifications[listIndex].viewed) {
-                return NotificationCard(
-                  notification: filteredNotifications[listIndex],
-                  onTap: () {
-                    setState(() {
-                      filteredNotifications[listIndex].viewed = true;
-                    });
-                  },
-                );
-              } else {
-                return Container(); // To avoid rendering unviewed notifications under "Older"
-              }
-            },
-          ),
+          if (!hasNotifications) ...[
+            Column(
+              children: [
+                Container(
+                  height: 220,
+                  width: 220,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/NotiRoderImage.png'),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'No New Notifications.',
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'There are no new notifications to show right now',
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w100,
+                    fontSize: 14,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          ],
         ],
       ),
     );
@@ -366,7 +429,7 @@ class NotificationItem {
   final String time;
   final IconData? icon;
   final String event;
-  bool viewed;
+  bool viewed = false;
 
   NotificationItem({
     required this.title,
@@ -375,4 +438,14 @@ class NotificationItem {
     required this.event,
     required this.viewed,
   });
+
+  Future<void> saveViewedStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('notification_$event', viewed);
+  }
+
+  static Future<bool> getViewedStatus(String event) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('notification_$event') ?? false;
+  }
 }
