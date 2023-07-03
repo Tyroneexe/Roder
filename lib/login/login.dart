@@ -148,7 +148,7 @@ class LogIn extends StatelessWidget {
     final ref = referenceDatabase.ref();
 
     if (user != null) {
-      ref.child('Users').push().set({
+      ref.child('Users').child(user.uid).set({
         'name': user.displayName!,
         'email': user.email!,
         'contact': '',

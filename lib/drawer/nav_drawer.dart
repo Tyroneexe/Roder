@@ -427,6 +427,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                 ),
               ),
               onPressed: () async {
+                Navigator.pop(context);
                 final provider =
                     Provider.of<GoogleSignInProvider>(context, listen: false);
                 provider.logout();
