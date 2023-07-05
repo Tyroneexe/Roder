@@ -22,7 +22,11 @@ class AccountPage extends StatefulWidget {
   State<AccountPage> createState() => _AccountPageState();
 }
 
+String name = '';
+String nu = '';
+String email = '';
 String location = '';
+String bike = '';
 
 class _AccountPageState extends State<AccountPage> {
   File? image;
@@ -47,22 +51,25 @@ class _AccountPageState extends State<AccountPage> {
         child: Column(
           children: [
             Center(
-              child: Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  image != null
-                      ? GestureDetector(
-                          child: Image.file(
-                            image!,
-                            width: 120,
-                            height: 120,
-                          ),
-                          onTap: () {
-                            pickImage();
-                          },
-                        )
-                      : GestureDetector(
-                          child: FutureBuilder<DataSnapshot>(
+              child: GestureDetector(
+                onTap: () {
+                  pickImage();
+                },
+                child: Stack(
+                  alignment: Alignment.bottomRight,
+                  children: [
+                    image != null
+                        ? GestureDetector(
+                            child: Image.file(
+                              image!,
+                              width: 120,
+                              height: 120,
+                            ),
+                            onTap: () {
+                              pickImage();
+                            },
+                          )
+                        : FutureBuilder<DataSnapshot>(
                             future: usersRef
                                 .child(user.uid)
                                 .once()
@@ -90,39 +97,36 @@ class _AccountPageState extends State<AccountPage> {
                               }
                             },
                           ),
-                          onTap: () {
-                            pickImage();
-                          },
-                        ),
-                  Container(
-                    width: 36,
-                    height: 36,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: searchBarClr,
-                    ),
-                    child: Icon(
-                      Icons.edit,
-                      color: btnBlueClr,
-                      size: 24,
-                    ),
-                  ),
-                  Positioned(
-                    right: 0,
-                    bottom: 0,
-                    child: Container(
+                    Container(
                       width: 36,
                       height: 36,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 2,
+                        color: searchBarClr,
+                      ),
+                      child: Icon(
+                        Icons.edit,
+                        color: btnBlueClr,
+                        size: 24,
+                      ),
+                    ),
+                    Positioned(
+                      right: 0,
+                      bottom: 0,
+                      child: Container(
+                        width: 36,
+                        height: 36,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 2,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             SizedBox(
@@ -270,61 +274,115 @@ class _AccountPageState extends State<AccountPage> {
                         child: Text('Cancel'),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 10,
-                      ),
-                      child: TextButton(
-                        onPressed: () {
-                          String newName = titleController.text;
-                          String contactNumber = nuController.text;
-                          String email = emailController.text;
-                          String locationValue = location;
-                          String bike = bikeController.text;
-                          if (titleController.text.isEmpty ||
-                              nuController.text.isEmpty ||
-                              bikeController.text.isEmpty) {
-                            _allFieldsRequired();
-                          } else {
-                            updateUserInformation(
-                              newName,
-                              contactNumber,
-                              email,
-                              locationValue,
-                              bike,
-                            );
-                          }
-                        },
-                        style: ButtonStyle(
-                          textStyle: MaterialStateProperty.all<TextStyle>(
-                            TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14,
-                              color: Colors.white,
+                    FutureBuilder<DataSnapshot>(
+                      future:
+                          usersRef.child(user.uid).once().then((databaseEvent) {
+                        return databaseEvent.snapshot;
+                      }),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<DataSnapshot> snapshot) {
+                        if (snapshot.hasData) {
+                          final userData =
+                              snapshot.data!.value as Map<dynamic, dynamic>;
+                          final userFoto = userData['foto'] as String;
+
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: TextButton(
+                              onPressed: () {
+                                if (image == null) {
+                                  String newName = titleController.text;
+                                  String contactNumber = nuController.text;
+                                  String email = emailController.text;
+                                  String locationValue = location;
+                                  String bike = bikeController.text;
+                                  String foto = userFoto;
+
+                                  updateUserInformation(newName, contactNumber,
+                                      email, locationValue, bike, foto);
+                                } else {
+                                  String newName = titleController.text;
+                                  String contactNumber = nuController.text;
+                                  String email = emailController.text;
+                                  String locationValue = location;
+                                  String bike = bikeController.text;
+                                  String foto = image!.path;
+
+                                  updateUserInformation(newName, contactNumber,
+                                      email, locationValue, bike, foto);
+                                }
+                              },
+                              style: ButtonStyle(
+                                textStyle: MaterialStateProperty.all<TextStyle>(
+                                  TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.white),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        btnBlueClr),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                ),
+                                minimumSize: MaterialStateProperty.all<Size>(
+                                  Size(
+                                    (MediaQuery.of(context).size.width / 2) -
+                                        25,
+                                    38,
+                                  ),
+                                ),
+                              ),
+                              child: Text('Save'),
                             ),
-                          ),
-                          foregroundColor: MaterialStateProperty.all<Color>(
-                            Colors.white,
-                          ),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            btnBlueClr,
-                          ),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6),
+                          );
+                        } else {
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: TextButton(
+                              onPressed: () {},
+                              style: ButtonStyle(
+                                textStyle: MaterialStateProperty.all<TextStyle>(
+                                  TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.white),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        btnBlueClr),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                ),
+                                minimumSize: MaterialStateProperty.all<Size>(
+                                  Size(
+                                    (MediaQuery.of(context).size.width / 2) -
+                                        25,
+                                    38,
+                                  ),
+                                ),
+                              ),
+                              child: Text('Save'),
                             ),
-                          ),
-                          minimumSize: MaterialStateProperty.all<Size>(
-                            Size(
-                              (MediaQuery.of(context).size.width / 2) - 25,
-                              38,
-                            ),
-                          ),
-                        ),
-                        child: Text('Save'),
-                      ),
+                          );
+                        }
+                      },
                     ),
                   ],
                 ),
@@ -750,19 +808,6 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
-  _allFieldsRequired() {
-    Get.snackbar("Required", "All fields are required!",
-        snackPosition: SnackPosition.TOP,
-        borderWidth: 2,
-        borderColor: Colors.red[600],
-        backgroundColor: Colors.white,
-        colorText: Colors.red[600],
-        icon: Icon(
-          Icons.warning_amber_rounded,
-          color: Colors.red[600],
-        ));
-  }
-
   _errorMsg() {
     showDialog(
       context: context,
@@ -808,13 +853,14 @@ class _AccountPageState extends State<AccountPage> {
       FirebaseDatabase.instance.ref().child('Users');
 
   void updateUserInformation(String userName, String contactNumber,
-      String email, String location, String bike) {
+      String email, String location, String bike, String foto) {
     usersRef.child(user.uid).update({
       'name': userName,
       'contact': contactNumber,
       'email': email,
       'location': location,
       'bike': bike,
+      'foto': foto
     }).asStream();
   }
 
