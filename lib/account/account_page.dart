@@ -24,7 +24,6 @@ class AccountPage extends StatefulWidget {
 
 String name = '';
 String nu = '';
-String email = '';
 String location = '';
 String bike = '';
 
@@ -33,9 +32,10 @@ class _AccountPageState extends State<AccountPage> {
   //
   TextEditingController titleController = TextEditingController();
   TextEditingController nuController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController locationController = TextEditingController();
   TextEditingController bikeController = TextEditingController();
+  //
+  final DatabaseReference usersRef =
+      FirebaseDatabase.instance.ref().child('Users');
 
   @override
   void initState() {
@@ -149,7 +149,7 @@ class _AccountPageState extends State<AccountPage> {
                 SizedBox(
                   height: 10,
                 ),
-                userNameForm(context),
+                userNameForm(),
                 SizedBox(
                   height: 20,
                 ),
@@ -293,7 +293,7 @@ class _AccountPageState extends State<AccountPage> {
                                 if (image == null) {
                                   String newName = titleController.text;
                                   String contactNumber = nuController.text;
-                                  String email = emailController.text;
+                                  String email = user.email!;
                                   String locationValue = location;
                                   String bike = bikeController.text;
                                   String foto = userFoto;
@@ -303,7 +303,7 @@ class _AccountPageState extends State<AccountPage> {
                                 } else {
                                   String newName = titleController.text;
                                   String contactNumber = nuController.text;
-                                  String email = emailController.text;
+                                  String email = user.email!;
                                   String locationValue = location;
                                   String bike = bikeController.text;
                                   String foto = image!.path;
@@ -419,7 +419,7 @@ class _AccountPageState extends State<AccountPage> {
           border: OutlineInputBorder(
             borderSide: BorderSide(
               color: btnBlueClr,
-              width: 1.5,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(
               6,
@@ -428,7 +428,7 @@ class _AccountPageState extends State<AccountPage> {
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: btnBlueClr,
-              width: 1.5,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(
               6,
@@ -437,7 +437,7 @@ class _AccountPageState extends State<AccountPage> {
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: btnBlueClr,
-              width: 1.5,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(
               6,
@@ -460,7 +460,6 @@ class _AccountPageState extends State<AccountPage> {
             fontWeight: FontWeight.w100,
             fontSize: 14,
             color: Colors.black),
-        // controller: locationController,
         decoration: InputDecoration(
           hintText: location,
           hintStyle: TextStyle(
@@ -475,7 +474,7 @@ class _AccountPageState extends State<AccountPage> {
           border: OutlineInputBorder(
             borderSide: BorderSide(
               color: btnBlueClr,
-              width: 1.5,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(
               6,
@@ -484,7 +483,7 @@ class _AccountPageState extends State<AccountPage> {
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: btnBlueClr,
-              width: 1.5,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(
               6,
@@ -493,7 +492,7 @@ class _AccountPageState extends State<AccountPage> {
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: btnBlueClr,
-              width: 1.5,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(
               6,
@@ -537,7 +536,6 @@ class _AccountPageState extends State<AccountPage> {
             fontWeight: FontWeight.w100,
             fontSize: 14,
             color: Colors.black),
-        controller: emailController,
         decoration: InputDecoration(
           hintText: user.email,
           hintStyle: TextStyle(
@@ -552,7 +550,7 @@ class _AccountPageState extends State<AccountPage> {
           border: OutlineInputBorder(
             borderSide: BorderSide(
               color: btnBlueClr,
-              width: 1.5,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(
               6,
@@ -561,7 +559,7 @@ class _AccountPageState extends State<AccountPage> {
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: btnBlueClr,
-              width: 1.5,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(
               6,
@@ -570,7 +568,7 @@ class _AccountPageState extends State<AccountPage> {
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: btnBlueClr,
-              width: 1.5,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(
               6,
@@ -615,7 +613,7 @@ class _AccountPageState extends State<AccountPage> {
           border: OutlineInputBorder(
             borderSide: BorderSide(
               color: btnBlueClr,
-              width: 1.5,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(
               6,
@@ -624,7 +622,7 @@ class _AccountPageState extends State<AccountPage> {
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: btnBlueClr,
-              width: 1.5,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(
               6,
@@ -633,7 +631,7 @@ class _AccountPageState extends State<AccountPage> {
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: btnBlueClr,
-              width: 1.5,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(
               6,
@@ -646,57 +644,158 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
-  Container userNameForm(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width - 40,
-      height: 40,
-      child: TextFormField(
-        style: TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w100,
-            fontSize: 14,
-            color: Colors.black),
-        controller: titleController,
-        decoration: InputDecoration(
-          hintText: user.displayName,
-          hintStyle: TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w100,
-            fontSize: 14,
-            color: Colors.black,
-          ),
-          contentPadding: EdgeInsets.only(
-            left: 20,
-          ),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: btnBlueClr,
-              width: 1.5,
+  Widget userNameForm() {
+    return FutureBuilder<DataSnapshot>(
+      future: usersRef.child(user.uid).once().then((databaseEvent) {
+        return databaseEvent.snapshot;
+      }),
+      builder: (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Container(
+            width: MediaQuery.of(context).size.width - 40,
+            height: 40,
+            child: TextFormField(
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w100,
+                fontSize: 14,
+                color: Colors.black,
+              ),
+              controller: titleController,
+              decoration: InputDecoration(
+                hintText: user.displayName,
+                hintStyle: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w100,
+                  fontSize: 14,
+                  color: Colors.black,
+                ),
+                contentPadding: EdgeInsets.only(
+                  left: 20,
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: btnBlueClr,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: btnBlueClr,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: btnBlueClr,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+              ),
             ),
-            borderRadius: BorderRadius.circular(
-              6,
+          );
+        } else if (snapshot.hasData) {
+          final userData = snapshot.data!.value as Map<dynamic, dynamic>;
+          final userName = userData['name'] as String;
+
+          return Container(
+            width: MediaQuery.of(context).size.width - 40,
+            height: 40,
+            child: TextFormField(
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w100,
+                fontSize: 14,
+                color: Colors.black,
+              ),
+              controller: titleController,
+              decoration: InputDecoration(
+                hintText: userName,
+                hintStyle: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w100,
+                  fontSize: 14,
+                  color: Colors.black,
+                ),
+                contentPadding: EdgeInsets.only(
+                  left: 20,
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: btnBlueClr,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: btnBlueClr,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: btnBlueClr,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+              ),
             ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: btnBlueClr,
-              width: 1.5,
+          );
+        } else {
+          return Container(
+            width: MediaQuery.of(context).size.width - 40,
+            height: 40,
+            child: TextFormField(
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w100,
+                fontSize: 14,
+                color: Colors.black,
+              ),
+              controller: titleController,
+              decoration: InputDecoration(
+                hintText: user.displayName,
+                hintStyle: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w100,
+                  fontSize: 14,
+                  color: Colors.black,
+                ),
+                contentPadding: EdgeInsets.only(
+                  left: 20,
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: btnBlueClr,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: btnBlueClr,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: btnBlueClr,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+              ),
             ),
-            borderRadius: BorderRadius.circular(
-              6,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: btnBlueClr,
-              width: 1.5,
-            ),
-            borderRadius: BorderRadius.circular(
-              6,
-            ),
-          ),
-        ),
-      ),
+          );
+        }
+      },
     );
   }
 
@@ -848,9 +947,6 @@ class _AccountPageState extends State<AccountPage> {
       },
     );
   }
-
-  final DatabaseReference usersRef =
-      FirebaseDatabase.instance.ref().child('Users');
 
   void updateUserInformation(String userName, String contactNumber,
       String email, String location, String bike, String foto) {
