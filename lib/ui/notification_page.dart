@@ -12,7 +12,8 @@ class NotificationPage extends StatefulWidget {
 // bool values for the notification items
 bool hasBeenUpdated = false;
 bool createdFirstRide = false;
-bool eventTwo = false;
+bool eventTwo = true;
+bool notificationBadgeVisible = false;
 
 bool welcomeViewed = false;
 
@@ -83,86 +84,94 @@ class _NotificationPageState extends State<NotificationPage> {
   Widget build(BuildContext context) {
     final hasUnviewedNotifications =
         filteredNotifications.any((notification) => !notification.viewed);
+    setState(() {
+      notificationBadgeVisible =
+          filteredNotifications.any((notification) => !notification.viewed);
+    });
     return Scaffold(
       endDrawer: NavitionDrawer(),
       appBar: _appBar(),
       body: Column(
         children: [
           if (hasUnviewedNotifications || !welcomeViewed) ...[
-            Row(
-              children: [
-                SizedBox(width: 20),
-                Text(
-                  'Recently',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
+            if (!seeOlderNotifications) ...[
+              Row(
+                children: [
+                  SizedBox(width: 20),
+                  Text(
+                    'Recently',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            if (!welcomeViewed) ...[
-              _welcomeNotification(),
+                ],
+              ),
               SizedBox(height: 10),
-            ],
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: filteredNotifications.length,
-              itemBuilder: (BuildContext context, int listIndex) {
-                if (filteredNotifications[listIndex].viewed == true) {
-                  return Container();
-                } else {
-                  return NotificationCard(
-                    notification: filteredNotifications[listIndex],
-                    onTap: () async {
-                      setState(() {
-                        filteredNotifications[listIndex].viewed = true;
-                      });
-                      await filteredNotifications[listIndex].saveViewedStatus();
-                    },
-                  );
-                }
-              },
-            ),
-            SizedBox(height: 15),
-            Row(
-              children: [
-                SizedBox(width: 20),
-                Text(
-                  'Older',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                  ),
-                ),
+              if (!welcomeViewed) ...[
+                _welcomeNotification(),
+                SizedBox(height: 10),
               ],
-            ),
-            SizedBox(height: 15),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: filteredNotifications.length,
-              itemBuilder: (BuildContext context, int listIndex) {
-                if (filteredNotifications[listIndex].viewed) {
-                  return NotificationCard(
-                    notification: filteredNotifications[listIndex],
-                    onTap: () async {
-                      setState(() {
-                        filteredNotifications[listIndex].viewed = false;
-                      });
-                      await filteredNotifications[listIndex].saveViewedStatus();
-                    },
-                  );
-                } else {
-                  return Container();
-                }
-              },
-            ),
-            SizedBox(height: 10),
-            if (welcomeViewed == true) ...[
-              _welcomeNotification(),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: filteredNotifications.length,
+                itemBuilder: (BuildContext context, int listIndex) {
+                  if (filteredNotifications[listIndex].viewed == true) {
+                    return Container();
+                  } else {
+                    return NotificationCard(
+                      notification: filteredNotifications[listIndex],
+                      onTap: () async {
+                        setState(() {
+                          filteredNotifications[listIndex].viewed = true;
+                        });
+                        await filteredNotifications[listIndex]
+                            .saveViewedStatus();
+                      },
+                    );
+                  }
+                },
+              ),
+              SizedBox(height: 15),
+              Row(
+                children: [
+                  SizedBox(width: 20),
+                  Text(
+                    'Older',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 15),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: filteredNotifications.length,
+                itemBuilder: (BuildContext context, int listIndex) {
+                  if (filteredNotifications[listIndex].viewed) {
+                    return NotificationCard(
+                      notification: filteredNotifications[listIndex],
+                      onTap: () async {
+                        setState(() {
+                          filteredNotifications[listIndex].viewed = false;
+                        });
+                        await filteredNotifications[listIndex]
+                            .saveViewedStatus();
+                      },
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
+              SizedBox(height: 10),
+              if (welcomeViewed == true) ...[
+                _welcomeNotification(),
+              ],
             ],
           ],
           if (!hasUnviewedNotifications &&
