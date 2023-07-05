@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:roder/account/account_page.dart';
 import 'package:roder/login/google_sign_in.dart';
 import 'package:roder/settings_page/settings_page.dart';
+import 'package:roder/test.dart';
 import 'package:roder/themes/theme.dart';
 import 'package:roder/ui/about_us.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -348,6 +349,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
               ),
               onTap: () {
                 Get.to(() => AboutUsPage());
+                Get.to(() => Test());
               },
             ),
           ),

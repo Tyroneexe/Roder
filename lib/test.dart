@@ -32,11 +32,13 @@ class _TestState extends State<Test> {
   Query dbRef = FirebaseDatabase.instance.ref().child('Rides');
   DatabaseReference reference = FirebaseDatabase.instance.ref().child('Rides');
   final databaseReference = FirebaseDatabase.instance.ref();
+  //
+  final DatabaseReference usersRef =
+      FirebaseDatabase.instance.ref().child('Users');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: context.theme.colorScheme.background,
       endDrawer: NavitionDrawer(),
       appBar: AppBar(
         backgroundColor: context.theme.colorScheme.background,
@@ -51,16 +53,34 @@ class _TestState extends State<Test> {
             children: [
               Padding(
                 padding: EdgeInsets.only(left: 20),
-                child: Text(
-                  'Hey ${user.displayName},',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                    color: Colors.black,
-                  ),
+                child: FutureBuilder<DataSnapshot>(
+                  future: usersRef.child(user.uid).once().then((databaseEvent) {
+                    return databaseEvent.snapshot;
+                  }),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<DataSnapshot> snapshot) {
+                    if (snapshot.hasData) {
+                      final userData =
+                          snapshot.data!.value as Map<dynamic, dynamic>;
+                      final userName = userData['name'] as String;
+
+                      return Text(
+                        'Hey $userName,',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                          color: Colors.black,
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else {
+                      return Text('Loading...');
+                    }
+                  },
                 ),
-              ),
+              )
             ],
           ),
           SizedBox(

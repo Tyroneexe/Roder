@@ -1,6 +1,7 @@
 // ignore_for_file: unrelated_type_equality_checks, non_constant_identifier_names
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -16,6 +17,8 @@ class AccountPage extends StatefulWidget {
   @override
   State<AccountPage> createState() => _AccountPageState();
 }
+
+String location = '';
 
 class _AccountPageState extends State<AccountPage> {
   //
@@ -228,7 +231,24 @@ class _AccountPageState extends State<AccountPage> {
                       ),
                       child: TextButton(
                         onPressed: () {
-                          //
+                          String newName = titleController.text;
+                          String contactNumber = nuController.text;
+                          String email = emailController.text;
+                          String locationValue = location;
+                          String bike = bikeController.text;
+                          if (titleController.text.isEmpty ||
+                              nuController.text.isEmpty ||
+                              bikeController.text.isEmpty) {
+                            _allFieldsRequired();
+                          } else {
+                            updateUserInformation(
+                              newName,
+                              contactNumber,
+                              email,
+                              locationValue,
+                              bike,
+                            );
+                          }
                         },
                         style: ButtonStyle(
                           textStyle: MaterialStateProperty.all<TextStyle>(
@@ -326,6 +346,7 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   Container locationForm(BuildContext context) {
+    location = '$_currentCity, $_currentCountry';
     return Container(
       width: MediaQuery.of(context).size.width - 40,
       height: 40,
@@ -336,9 +357,9 @@ class _AccountPageState extends State<AccountPage> {
             fontWeight: FontWeight.w100,
             fontSize: 14,
             color: Colors.black),
-        controller: locationController,
+        // controller: locationController,
         decoration: InputDecoration(
-          hintText: '$_currentCity, $_currentCountry',
+          hintText: location,
           hintStyle: TextStyle(
             fontFamily: 'Roboto',
             fontWeight: FontWeight.w100,
@@ -684,6 +705,19 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
+  _allFieldsRequired() {
+    Get.snackbar("Required", "All fields are required!",
+        snackPosition: SnackPosition.TOP,
+        borderWidth: 2,
+        borderColor: Colors.red[600],
+        backgroundColor: Colors.white,
+        colorText: Colors.red[600],
+        icon: Icon(
+          Icons.warning_amber_rounded,
+          color: Colors.red[600],
+        ));
+  }
+
   _errorMsg() {
     showDialog(
       context: context,
@@ -725,4 +759,17 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
+  final DatabaseReference usersRef =
+      FirebaseDatabase.instance.ref().child('Users');
+
+  void updateUserInformation(String userName, String contactNumber,
+      String email, String location, String bike) {
+    usersRef.child(user.uid).update({
+      'name': userName,
+      'contact': contactNumber,
+      'email': email,
+      'location': location,
+      'bike': bike,
+    }).asStream();
+  }
 }
