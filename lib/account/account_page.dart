@@ -1,12 +1,16 @@
 // ignore_for_file: unrelated_type_equality_checks, non_constant_identifier_names
 
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:roder/themes/theme.dart';
 import '../homepage/home_page.dart';
@@ -21,6 +25,7 @@ class AccountPage extends StatefulWidget {
 String location = '';
 
 class _AccountPageState extends State<AccountPage> {
+  File? image;
   //
   TextEditingController titleController = TextEditingController();
   TextEditingController nuController = TextEditingController();
@@ -45,10 +50,50 @@ class _AccountPageState extends State<AccountPage> {
               child: Stack(
                 alignment: Alignment.bottomRight,
                 children: [
-                  CircleAvatar(
-                    radius: 60,
-                    backgroundImage: NetworkImage(user.photoURL!),
-                  ),
+                  image != null
+                      ? GestureDetector(
+                          child: Image.file(
+                            image!,
+                            width: 120,
+                            height: 120,
+                          ),
+                          onTap: () {
+                            pickImage();
+                          },
+                        )
+                      : GestureDetector(
+                          child: FutureBuilder<DataSnapshot>(
+                            future: usersRef
+                                .child(user.uid)
+                                .once()
+                                .then((databaseEvent) {
+                              return databaseEvent.snapshot;
+                            }),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<DataSnapshot> snapshot) {
+                              if (snapshot.hasData) {
+                                final userData = snapshot.data!.value
+                                    as Map<dynamic, dynamic>;
+                                final userFoto = userData['foto'] as String;
+
+                                return CircleAvatar(
+                                  radius: 60,
+                                  backgroundImage: NetworkImage(userFoto),
+                                );
+                              } else if (snapshot.hasError) {
+                                return Text('Error: ${snapshot.error}');
+                              } else {
+                                return CircleAvatar(
+                                  radius: 60,
+                                  backgroundImage: NetworkImage(user.photoURL!),
+                                );
+                              }
+                            },
+                          ),
+                          onTap: () {
+                            pickImage();
+                          },
+                        ),
                   Container(
                     width: 36,
                     height: 36,
@@ -186,7 +231,7 @@ class _AccountPageState extends State<AccountPage> {
                       ),
                       child: TextButton(
                         onPressed: () {
-                          // save to the database that is yet to be created
+                          //
                         },
                         style: ButtonStyle(
                           textStyle: MaterialStateProperty.all<TextStyle>(
@@ -771,5 +816,20 @@ class _AccountPageState extends State<AccountPage> {
       'location': location,
       'bike': bike,
     }).asStream();
+  }
+
+  Future<void> pickImage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+      if (image == null) return;
+
+      final imageTemp = File(image.path);
+      setState(() {
+        this.image = imageTemp;
+      });
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
   }
 }

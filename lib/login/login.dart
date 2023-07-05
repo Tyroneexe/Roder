@@ -151,11 +151,12 @@ class LogIn extends StatelessWidget {
 
     if (user != null) {
       ref.child('Users').child(user.uid).set({
-        'name': user.displayName!,
-        'email': user.email!,
+        'name': user.displayName,
+        'email': user.email,
         'contact': '',
         'location': '',
-        'bike': ''
+        'bike': '',
+        'foto': user.photoURL,
       }).asStream();
     } else {
       print('Error');
