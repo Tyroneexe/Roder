@@ -18,6 +18,7 @@ bool welcomeViewed = false;
 
 class _NotificationPageState extends State<NotificationPage> {
   List<NotificationItem> filteredNotifications = [];
+  bool seeOlderNotifications = false;
 
   List<NotificationItem> notifications = [
     NotificationItem(
@@ -164,7 +165,9 @@ class _NotificationPageState extends State<NotificationPage> {
               _welcomeNotification(),
             ],
           ],
-          if (!hasUnviewedNotifications && welcomeViewed) ...[
+          if (!hasUnviewedNotifications &&
+              welcomeViewed &&
+              !seeOlderNotifications) ...[
             Container(
               height: MediaQuery.of(context).size.height - 250,
               child: Center(
@@ -200,11 +203,91 @@ class _NotificationPageState extends State<NotificationPage> {
                         color: Colors.black,
                       ),
                     ),
+                    SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: TextButton(
+                        onPressed: () {
+                          setState(() {
+                            seeOlderNotifications = true;
+                          });
+                        },
+                        style: ButtonStyle(
+                          textStyle: MaterialStateProperty.all<TextStyle>(
+                            TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                          ),
+                          foregroundColor: MaterialStateProperty.all<Color>(
+                            Colors.white,
+                          ),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            btnBlueClr,
+                          ),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                          ),
+                          minimumSize: MaterialStateProperty.all<Size>(
+                            Size(
+                              MediaQuery.of(context).size.width / 1.5,
+                              38,
+                            ),
+                          ),
+                        ),
+                        child: Text('See Older Notifications'),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
           ],
+          if (seeOlderNotifications) ...[
+            SizedBox(height: 20),
+            Row(
+              children: [
+                SizedBox(width: 20),
+                Text(
+                  'Older',
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: filteredNotifications.length,
+              itemBuilder: (BuildContext context, int listIndex) {
+                if (filteredNotifications[listIndex].viewed) {
+                  return NotificationCard(
+                    notification: filteredNotifications[listIndex],
+                    onTap: () async {
+                      setState(() {
+                        filteredNotifications[listIndex].viewed = false;
+                      });
+                      await filteredNotifications[listIndex].saveViewedStatus();
+                    },
+                  );
+                } else {
+                  return Container();
+                }
+              },
+            ),
+            SizedBox(height: 10),
+            if (welcomeViewed == true) ...[
+              _welcomeNotification(),
+            ],
+          ]
         ],
       ),
     );
