@@ -30,7 +30,7 @@ String bike = '';
 class _AccountPageState extends State<AccountPage> {
   File? image;
   //
-  TextEditingController titleController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   TextEditingController nuController = TextEditingController();
   TextEditingController bikeController = TextEditingController();
   //
@@ -285,13 +285,17 @@ class _AccountPageState extends State<AccountPage> {
                           final userData =
                               snapshot.data!.value as Map<dynamic, dynamic>;
                           final userFoto = userData['foto'] as String;
+                          final userName = userData['name'] as String;
 
                           return Padding(
                             padding: const EdgeInsets.only(left: 10),
                             child: TextButton(
+                              // add the || || if statement below and also add the
+                              // else with null checking
                               onPressed: () {
-                                if (image == null) {
-                                  String newName = titleController.text;
+                                if (image == null ||
+                                    nameController.text.isEmpty) {
+                                  String newName = userName;
                                   String contactNumber = nuController.text;
                                   String email = user.email!;
                                   String locationValue = location;
@@ -301,12 +305,12 @@ class _AccountPageState extends State<AccountPage> {
                                   updateUserInformation(newName, contactNumber,
                                       email, locationValue, bike, foto);
                                 } else {
-                                  String newName = titleController.text;
+                                  String newName = nameController.text;
                                   String contactNumber = nuController.text;
                                   String email = user.email!;
                                   String locationValue = location;
                                   String bike = bikeController.text;
-                                  String foto = image!.path;
+                                  String foto = image?.path ?? userFoto;
 
                                   updateUserInformation(newName, contactNumber,
                                       email, locationValue, bike, foto);
@@ -661,7 +665,7 @@ class _AccountPageState extends State<AccountPage> {
                 fontSize: 14,
                 color: Colors.black,
               ),
-              controller: titleController,
+              controller: nameController,
               decoration: InputDecoration(
                 hintText: user.displayName,
                 hintStyle: TextStyle(
@@ -701,6 +705,8 @@ class _AccountPageState extends State<AccountPage> {
           final userData = snapshot.data!.value as Map<dynamic, dynamic>;
           final userName = userData['name'] as String;
 
+          name = userName;
+
           return Container(
             width: MediaQuery.of(context).size.width - 40,
             height: 40,
@@ -711,7 +717,7 @@ class _AccountPageState extends State<AccountPage> {
                 fontSize: 14,
                 color: Colors.black,
               ),
-              controller: titleController,
+              controller: nameController,
               decoration: InputDecoration(
                 hintText: userName,
                 hintStyle: TextStyle(
@@ -758,7 +764,7 @@ class _AccountPageState extends State<AccountPage> {
                 fontSize: 14,
                 color: Colors.black,
               ),
-              controller: titleController,
+              controller: nameController,
               decoration: InputDecoration(
                 hintText: user.displayName,
                 hintStyle: TextStyle(
