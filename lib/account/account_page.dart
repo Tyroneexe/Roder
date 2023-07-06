@@ -30,6 +30,7 @@ String bike = '';
 class _AccountPageState extends State<AccountPage> {
   File? image;
   //
+  String selectedCountry = '';
   TextEditingController nameController = TextEditingController();
   TextEditingController nuController = TextEditingController();
   TextEditingController bikeController = TextEditingController();
@@ -295,6 +296,7 @@ class _AccountPageState extends State<AccountPage> {
                               snapshot.data!.value as Map<dynamic, dynamic>;
                           final userFoto = userData['foto'] as String;
                           final userName = userData['name'] as String;
+                          final userNum = userData['contact'] as String;
 
                           return Padding(
                             padding: const EdgeInsets.only(left: 10),
@@ -303,9 +305,10 @@ class _AccountPageState extends State<AccountPage> {
                               // else with null checking
                               onPressed: () {
                                 if (image == null ||
-                                    nameController.text.isEmpty) {
+                                    nameController.text.isEmpty ||
+                                    nuController.text.isEmpty) {
                                   String newName = userName;
-                                  String contactNumber = nuController.text;
+                                  String contactNumber = userNum;
                                   String email = user.email!;
                                   String locationValue = location;
                                   String bike = bikeController.text;
@@ -592,69 +595,215 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
-  Container numberForm(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width - 40,
-      height: 60,
-      child: IntlPhoneField(
-        flagsButtonPadding: EdgeInsets.only(
-          left: 20,
-        ),
-        dropdownIcon: Icon(
-          Icons.arrow_drop_down,
-          color: btnBlueClr,
-        ),
-        disableLengthCheck: false,
-        dropdownIconPosition: IconPosition.trailing,
-        style: TextStyle(
-          fontFamily: 'Roboto',
-          fontWeight: FontWeight.w100,
-          fontSize: 14,
-          color: Colors.black,
-        ),
-        controller: nuController,
-        decoration: InputDecoration(
-          hintText: 'xxx - xxx - xxx',
-          hintStyle: TextStyle(
-              fontFamily: 'Roboto',
-              fontWeight: FontWeight.w100,
-              fontSize: 14,
-              color: Colors.grey),
-          contentPadding: EdgeInsets.only(
-            left: 20,
-          ),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: btnBlueClr,
-              width: 2,
-            ),
-            borderRadius: BorderRadius.circular(
-              6,
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: btnBlueClr,
-              width: 2,
-            ),
-            borderRadius: BorderRadius.circular(
-              6,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: btnBlueClr,
-              width: 2,
-            ),
-            borderRadius: BorderRadius.circular(
-              6,
-            ),
-          ),
-        ),
-        initialCountryCode: 'US',
-        // onChanged: (phone) {},
-      ),
-    );
+  numberForm(BuildContext context) {
+    return FutureBuilder<DataSnapshot>(
+        future: usersRef.child(user.uid).once().then((databaseEvent) {
+          return databaseEvent.snapshot;
+        }),
+        builder: (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Container(
+              width: MediaQuery.of(context).size.width - 40,
+              height: 60,
+              child: IntlPhoneField(
+                flagsButtonPadding: EdgeInsets.only(
+                  left: 20,
+                ),
+                dropdownIcon: Icon(
+                  Icons.arrow_drop_down,
+                  color: btnBlueClr,
+                ),
+                disableLengthCheck: false,
+                dropdownIconPosition: IconPosition.trailing,
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w100,
+                  fontSize: 14,
+                  color: Colors.black,
+                ),
+                controller: nuController,
+                decoration: InputDecoration(
+                  hintText: 'xxx - xxx - xxx',
+                  hintStyle: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.grey),
+                  contentPadding: EdgeInsets.only(
+                    left: 20,
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: btnBlueClr,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      6,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: btnBlueClr,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      6,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: btnBlueClr,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      6,
+                    ),
+                  ),
+                ),
+                initialCountryCode: 'US',
+                onChanged: (phone) {},
+                onCountryChanged: (phone) {},
+              ),
+            );
+          } else if (snapshot.hasData) {
+            final userData = snapshot.data!.value as Map<dynamic, dynamic>;
+            final userNum = userData['contact'] as String;
+
+            return Container(
+              width: MediaQuery.of(context).size.width - 40,
+              height: 60,
+              child: IntlPhoneField(
+                flagsButtonPadding: EdgeInsets.only(
+                  left: 20,
+                ),
+                dropdownIcon: Icon(
+                  Icons.arrow_drop_down,
+                  color: btnBlueClr,
+                ),
+                disableLengthCheck: false,
+                dropdownIconPosition: IconPosition.trailing,
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w100,
+                  fontSize: 14,
+                  color: Colors.black,
+                ),
+                controller: nuController,
+                decoration: InputDecoration(
+                  hintText: userNum == '' ? 'xxx-xxx-xxx' : userNum,
+                  hintStyle: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.grey),
+                  contentPadding: EdgeInsets.only(
+                    left: 20,
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: btnBlueClr,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      6,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: btnBlueClr,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      6,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: btnBlueClr,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      6,
+                    ),
+                  ),
+                ),
+                initialCountryCode: 'US',
+                onChanged: (phone) {},
+                onCountryChanged: (phone) {
+                  selectedCountry = phone.dialCode;
+                  print(selectedCountry);
+                },
+              ),
+            );
+          } else {
+            return Container(
+              width: MediaQuery.of(context).size.width - 40,
+              height: 60,
+              child: IntlPhoneField(
+                flagsButtonPadding: EdgeInsets.only(
+                  left: 20,
+                ),
+                dropdownIcon: Icon(
+                  Icons.arrow_drop_down,
+                  color: btnBlueClr,
+                ),
+                disableLengthCheck: false,
+                dropdownIconPosition: IconPosition.trailing,
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w100,
+                  fontSize: 14,
+                  color: Colors.black,
+                ),
+                controller: nuController,
+                decoration: InputDecoration(
+                  hintText: 'xxx - xxx - xxx',
+                  hintStyle: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.grey),
+                  contentPadding: EdgeInsets.only(
+                    left: 20,
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: btnBlueClr,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      6,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: btnBlueClr,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      6,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: btnBlueClr,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      6,
+                    ),
+                  ),
+                ),
+                initialCountryCode: 'US',
+                onChanged: (phone) {},
+                onCountryChanged: (phone) {
+                  selectedCountry = phone.dialCode;
+                  print(selectedCountry);
+                },
+              ),
+            );
+          }
+        });
   }
 
   Widget userNameForm() {
