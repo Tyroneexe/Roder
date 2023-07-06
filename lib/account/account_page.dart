@@ -412,57 +412,173 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
-  Container bikeForm(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width - 40,
-      height: 40,
-      child: TextFormField(
-        style: TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w100,
-            fontSize: 14,
-            color: Colors.black),
-        controller: bikeController,
-        decoration: InputDecoration(
-          hintText: 'Rather Not Say',
-          hintStyle: TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w100,
-            fontSize: 14,
-            color: Colors.black,
-          ),
-          contentPadding: EdgeInsets.only(
-            left: 20,
-          ),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: btnBlueClr,
-              width: 2,
+  bikeForm(BuildContext context) {
+    return FutureBuilder<DataSnapshot>(
+      future: usersRef.child(user.uid).once().then((databaseEvent) {
+        return databaseEvent.snapshot;
+      }),
+      builder: (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Container(
+            width: MediaQuery.of(context).size.width - 40,
+            height: 40,
+            child: TextFormField(
+              style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w100,
+                  fontSize: 14,
+                  color: Colors.black),
+              controller: bikeController,
+              decoration: InputDecoration(
+                hintText: 'Rather Not Say',
+                hintStyle: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w100,
+                  fontSize: 14,
+                  color: Colors.black,
+                ),
+                contentPadding: EdgeInsets.only(
+                  left: 20,
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: btnBlueClr,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    6,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: btnBlueClr,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    6,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: btnBlueClr,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    6,
+                  ),
+                ),
+              ),
             ),
-            borderRadius: BorderRadius.circular(
-              6,
+          );
+        } else if (snapshot.hasData) {
+          final userData = snapshot.data!.value as Map<dynamic, dynamic>;
+          final userBike = userData['bike'] as String;
+
+          return Container(
+            width: MediaQuery.of(context).size.width - 40,
+            height: 40,
+            child: TextFormField(
+              style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w100,
+                  fontSize: 14,
+                  color: Colors.black),
+              controller: bikeController,
+              decoration: InputDecoration(
+                hintText: userBike,
+                hintStyle: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w100,
+                  fontSize: 14,
+                  color: Colors.black,
+                ),
+                contentPadding: EdgeInsets.only(
+                  left: 20,
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: btnBlueClr,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    6,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: btnBlueClr,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    6,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: btnBlueClr,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    6,
+                  ),
+                ),
+              ),
             ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: btnBlueClr,
-              width: 2,
+          );
+        } else {
+          return Container(
+            width: MediaQuery.of(context).size.width - 40,
+            height: 40,
+            child: TextFormField(
+              style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w100,
+                  fontSize: 14,
+                  color: Colors.black),
+              controller: bikeController,
+              decoration: InputDecoration(
+                hintText: 'Rather Not Say',
+                hintStyle: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w100,
+                  fontSize: 14,
+                  color: Colors.black,
+                ),
+                contentPadding: EdgeInsets.only(
+                  left: 20,
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: btnBlueClr,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    6,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: btnBlueClr,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    6,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: btnBlueClr,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    6,
+                  ),
+                ),
+              ),
             ),
-            borderRadius: BorderRadius.circular(
-              6,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: btnBlueClr,
-              width: 2,
-            ),
-            borderRadius: BorderRadius.circular(
-              6,
-            ),
-          ),
-        ),
-      ),
+          );
+        }
+      },
     );
   }
 
@@ -699,7 +815,7 @@ class _AccountPageState extends State<AccountPage> {
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.w100,
                       fontSize: 14,
-                      color: Colors.grey),
+                      color: Colors.black),
                   contentPadding: EdgeInsets.only(
                     left: 20,
                   ),
