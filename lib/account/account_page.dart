@@ -83,10 +83,19 @@ class _AccountPageState extends State<AccountPage> {
                                     as Map<dynamic, dynamic>;
                                 final userFoto = userData['foto'] as String;
 
-                                return CircleAvatar(
-                                  radius: 60,
-                                  backgroundImage: NetworkImage(userFoto),
-                                );
+                                if (userFoto.startsWith('/')) {
+                                  // Local file path
+                                  return CircleAvatar(
+                                    radius: 60,
+                                    backgroundImage: FileImage(File(userFoto)),
+                                  );
+                                } else {
+                                  // Network image URL
+                                  return CircleAvatar(
+                                    radius: 60,
+                                    backgroundImage: NetworkImage(userFoto),
+                                  );
+                                }
                               } else if (snapshot.hasError) {
                                 return Text('Error: ${snapshot.error}');
                               } else {
