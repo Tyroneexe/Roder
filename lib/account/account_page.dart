@@ -13,7 +13,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:roder/themes/theme.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../homepage/home_page.dart';
 
 class AccountPage extends StatefulWidget {
@@ -44,15 +43,8 @@ class _AccountPageState extends State<AccountPage> {
   @override
   void initState() {
     super.initState();
-    _getCountryChosen();
     _getCurrentLocation();
   }
-
-  // @override
-  // void dispose() {
-  //   countryCodeController.dispose();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -1278,16 +1270,5 @@ class _AccountPageState extends State<AccountPage> {
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
-  }
-
-  _saveCountryChosen(String selectedCountryFlag) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('selectedCountryFlag', selectedCountryFlag);
-  }
-
-  _getCountryChosen() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    selectedCountryFlag = prefs.getString('selectedCountryFlag') ?? '';
-    print(selectedCountryFlag);
   }
 }
