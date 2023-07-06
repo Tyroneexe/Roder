@@ -27,6 +27,9 @@ String nu = '';
 String location = '';
 String bike = '';
 
+  final DatabaseReference usersRef =
+      FirebaseDatabase.instance.ref().child('Users');
+
 class _AccountPageState extends State<AccountPage> {
   File? image;
   //
@@ -37,8 +40,6 @@ class _AccountPageState extends State<AccountPage> {
   TextEditingController nuController = TextEditingController();
   TextEditingController bikeController = TextEditingController();
   //
-  final DatabaseReference usersRef =
-      FirebaseDatabase.instance.ref().child('Users');
 
   @override
   void initState() {

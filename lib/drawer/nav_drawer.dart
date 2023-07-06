@@ -1,4 +1,7 @@
 // ignore_for_file: must_be_immutable, unused_field, non_constant_identifier_names
+import 'dart:io';
+
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,7 +13,6 @@ import 'package:provider/provider.dart';
 import 'package:roder/account/account_page.dart';
 import 'package:roder/login/google_sign_in.dart';
 import 'package:roder/settings_page/settings_page.dart';
-import 'package:roder/test.dart';
 import 'package:roder/themes/theme.dart';
 import 'package:roder/ui/about_us.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -116,25 +118,91 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                 SizedBox(
                   width: 25,
                 ),
-                CircleAvatar(
-                  radius: 32,
-                  backgroundImage: NetworkImage(
-                    user.photoURL!,
-                  ),
+                FutureBuilder<DataSnapshot>(
+                  future: usersRef.child(user.uid).once().then((databaseEvent) {
+                    return databaseEvent.snapshot;
+                  }),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<DataSnapshot> snapshot) {
+                    if (snapshot.hasData) {
+                      final userData =
+                          snapshot.data!.value as Map<dynamic, dynamic>;
+                      final userFoto = userData['foto'] as String;
+
+                      if (userFoto.startsWith('/')) {
+                        // Local file path
+                        return CircleAvatar(
+                          radius: 32,
+                          backgroundImage: FileImage(File(userFoto)),
+                        );
+                      } else {
+                        // Network image URL
+                        return CircleAvatar(
+                          radius: 32,
+                          backgroundImage: NetworkImage(userFoto),
+                        );
+                      }
+                    } else {
+                      return CircleAvatar(
+                        radius: 32,
+                        backgroundImage: NetworkImage(user.photoURL!),
+                      );
+                    }
+                  },
                 ),
                 SizedBox(width: 10),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      user.displayName!,
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16,
-                        color: Colors.black,
-                      ),
+                    FutureBuilder<DataSnapshot>(
+                      future:
+                          usersRef.child(user.uid).once().then((databaseEvent) {
+                        return databaseEvent.snapshot;
+                      }),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<DataSnapshot> snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Text(
+                            user.displayName!,
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
+                          );
+                        } else if (snapshot.hasData) {
+                          final userData =
+                              snapshot.data!.value as Map<dynamic, dynamic>;
+                          final userName = userData['name'] as String;
+
+                          return Text(
+                            userName,
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
+                          );
+                        } else {
+                          final userData =
+                              snapshot.data!.value as Map<dynamic, dynamic>;
+                          final userName = userData['name'] as String;
+
+                          return Text(
+                            userName,
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
+                          );
+                        }
+                      },
                     ),
                     FutureBuilder<PackageInfo>(
                       future: PackageInfo.fromPlatform(),
@@ -349,7 +417,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
               ),
               onTap: () {
                 Get.to(() => AboutUsPage());
-                Get.to(() => Test());
+                // Get.to(() => Test());
               },
             ),
           ),

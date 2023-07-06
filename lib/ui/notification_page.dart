@@ -12,7 +12,7 @@ class NotificationPage extends StatefulWidget {
 // bool values for the notification items
 bool hasBeenUpdated = false;
 bool createdFirstRide = false;
-bool eventTwo = true;
+bool eventTwo = false;
 bool notificationBadgeVisible = false;
 
 bool welcomeViewed = false;

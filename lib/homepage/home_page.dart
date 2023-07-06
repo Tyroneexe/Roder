@@ -1,25 +1,19 @@
 // ignore_for_file: non_constant_identifier_names,, unnecessary_statements
 
-import 'dart:async';
-
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:new_version_plus/new_version_plus.dart';
-import 'package:provider/provider.dart';
 import 'package:roder/favourites/favourites.dart';
-import 'package:roder/themes/theme.dart';
-import 'package:roder/widgets/frosted_glass.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../account/account_page.dart';
 import '../drawer/nav_drawer.dart';
-import '../provider/clrProvider.dart';
-import '../ui/add_ride.dart';
 import '../ui/notification_page.dart';
+import '../widgets/filter_button.dart';
+import '../widgets/unfilter_button.dart';
 
 /*To Do's —>
 
@@ -99,22 +93,13 @@ final user = FirebaseAuth.instance.currentUser!;
 bool isNotificationsEnabled = true;
 
 class _HomePageState extends State<HomePage> {
+  bool isFilter1 = true;
+  bool isFilter2 = false;
+  bool isFilter3 = false;
+  bool isFilter4 = false;
   //
   int noImg = 0;
   //Loading animation
-  bool _isLoading = false;
-
-  void _startLoading() {
-    setState(() {
-      _isLoading = true;
-    });
-
-    Timer(Duration(milliseconds: 400), () {
-      setState(() {
-        _isLoading = false;
-      });
-    });
-  }
 
   //Filter for the rides
   bool rideFilter = true;
@@ -140,7 +125,6 @@ class _HomePageState extends State<HomePage> {
         AwesomeNotifications().requestPermissionToSendNotifications();
       }
     });
-
 
     final newVersion = NewVersionPlus(
         iOSId: 'com.tb.roder',
@@ -203,306 +187,266 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavitionDrawer(),
-      backgroundColor: context.theme.colorScheme.background,
-      body: CustomScrollView(
-        slivers: [
-          _appBar(context),
-          SliverFillRemaining(
-            child: Column(
-              children: [
-                _titleBar(),
-                if (_isLoading)
-                  CircularProgressIndicator(
-                    color: _getMainClr(
-                        Provider.of<ColorProvider>(context).selectedColor),
-                  ),
-                if (!_isLoading) _getDBRides(),
-                // _getDBRides(),
-              ],
-            ),
-          ),
-        ],
+      endDrawer: NavitionDrawer(),
+      appBar: AppBar(
+        backgroundColor: context.theme.colorScheme.background,
+        elevation: 0,
+        foregroundColor: Get.isDarkMode ? Colors.white : Colors.black,
       ),
-    );
-  }
-
-  SliverAppBar _appBar(BuildContext context) {
-    return SliverAppBar(
-      bottom: PreferredSize(
-        preferredSize: Size.fromHeight(24),
-        child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(30),
-            ),
-            color: context.theme.colorScheme.background,
-          ),
-          child: Column(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: _getMainClr(
-                        Provider.of<ColorProvider>(context).selectedColor),
-                    borderRadius: BorderRadius.circular(2),
+                padding: EdgeInsets.only(left: 20),
+                child: FutureBuilder<DataSnapshot>(
+                  future: usersRef.child(user.uid).once().then((databaseEvent) {
+                    return databaseEvent.snapshot;
+                  }),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<DataSnapshot> snapshot) {
+                    if (snapshot.hasData) {
+                      final userData =
+                          snapshot.data!.value as Map<dynamic, dynamic>;
+                      final userName = userData['name'] as String;
+
+                      return Text(
+                        'Hey $userName,',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                          color: Colors.black,
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else {
+                      return Text('Loading...');
+                    }
+                  },
+                ),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 7,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Text(
+                  "Let's Ride",
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w100,
+                    fontSize: 16,
+                    color: Colors.black,
                   ),
                 ),
               ),
             ],
           ),
-        ),
-      ),
-      flexibleSpace: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: _themeImage(noImg),
-            fit: BoxFit.cover,
-          ),
-        ),
-        alignment: Alignment.center,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 20,
-                  ),
-                  GestureDetector(
-                    child: FrostedGlassBox(
-                      theGradientColor: [
-                        rideFilter
-                            ? Colors.white.withOpacity(0.15)
-                            : _getMainClr(Provider.of<ColorProvider>(context)
-                                    .selectedColor)
-                                .withOpacity(0.4),
-                        rideFilter
-                            ? Colors.white.withOpacity(0.05)
-                            : _getMainClr(Provider.of<ColorProvider>(context)
-                                    .selectedColor)
-                                .withOpacity(0.3),
-                      ],
-                      theBorderColor: rideFilter
-                          ? Colors.white.withOpacity(0.13)
-                          : _getMainClr(Provider.of<ColorProvider>(context)
-                              .selectedColor),
-                      theWidth: 150.0,
-                      theHeight: 80.0,
-                      theChild: Text(
-                        'All Rides',
-                        style: TextStyle(
-                            fontFamily: 'AudioWide',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25,
-                            color: Colors.black),
-                      ),
-                    ),
-                    onTap: () {
-                      setState(() {
-                        if (!_isLoading) _startLoading();
-                        rideFilter = !rideFilter;
-                        rideFilter2 = true;
-                        rideFilter3 = true;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  GestureDetector(
-                    child: FrostedGlassBox(
-                      theGradientColor: [
-                        rideFilter2
-                            ? Colors.white.withOpacity(0.15)
-                            : _getMainClr(Provider.of<ColorProvider>(context)
-                                    .selectedColor)
-                                .withOpacity(0.4),
-                        rideFilter2
-                            ? Colors.white.withOpacity(0.05)
-                            : _getMainClr(Provider.of<ColorProvider>(context)
-                                    .selectedColor)
-                                .withOpacity(0.3),
-                      ],
-                      theBorderColor: rideFilter2
-                          ? Colors.white.withOpacity(0.13)
-                          : _getMainClr(Provider.of<ColorProvider>(context)
-                              .selectedColor),
-                      theWidth: 150.0,
-                      theHeight: 80.0,
-                      theChild: Text(
-                        'Near Me',
-                        style: TextStyle(
-                            fontFamily: 'AudioWide',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25,
-                            color: Colors.black),
-                      ),
-                    ),
-                    onTap: () {
-                      setState(() {
-                        if (!_isLoading) _startLoading();
-                        rideFilter2 = !rideFilter2;
-                        rideFilter = true;
-                        rideFilter3 = true;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  GestureDetector(
-                    child: FrostedGlassBox(
-                      theGradientColor: [
-                        rideFilter3
-                            ? Colors.white.withOpacity(0.15)
-                            : _getMainClr(Provider.of<ColorProvider>(context)
-                                    .selectedColor)
-                                .withOpacity(0.4),
-                        rideFilter3
-                            ? Colors.white.withOpacity(0.05)
-                            : _getMainClr(Provider.of<ColorProvider>(context)
-                                    .selectedColor)
-                                .withOpacity(0.3),
-                      ],
-                      theBorderColor: rideFilter3
-                          ? Colors.white.withOpacity(0.13)
-                          : _getMainClr(Provider.of<ColorProvider>(context)
-                              .selectedColor),
-                      theWidth: 150.0,
-                      theHeight: 80.0,
-                      theChild: Text(
-                        'Joined',
-                        style: TextStyle(
-                            fontFamily: 'AudioWide',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25,
-                            color: Colors.black),
-                      ),
-                    ),
-                    onTap: () {
-                      setState(() {
-                        if (!_isLoading) _startLoading();
-                        rideFilter3 = !rideFilter3;
-                        rideFilter = true;
-                        rideFilter2 = true;
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 35,
-            ),
-          ],
-        ),
-      ),
-      expandedHeight: 160.0,
-      pinned: false,
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(
-            Icons.add_circle,
-          ),
-          onPressed: () {
-            Get.to(() => AddTaskPage());
-          },
-        ),
-      ],
-    );
-  }
-
-  _themeImage(int no) {
-    if (Provider.of<ColorProvider>(context).selectedColor == 0) {
-      no = 0;
-    } else if (Provider.of<ColorProvider>(context).selectedColor == 1) {
-      no = 1;
-    } else if (Provider.of<ColorProvider>(context).selectedColor == 2) {
-      no = 2;
-    } else {
-      no = 0;
-    }
-
-    switch (no) {
-      case 0:
-        return AssetImage('assets/splash_screen.png');
-      case 1:
-        return AssetImage('assets/YellowHomePage.jpg');
-      case 2:
-        return AssetImage('assets/RedHomePage.jpg');
-      default:
-        return AssetImage('assets/splash_screen.png');
-    }
-  }
-
-  _getBGClr(int no) {
-    if (Provider.of<ColorProvider>(context).selectedColor == 0) {
-      switch (no) {
-        case 0:
-          return blueClr;
-        case 1:
-          return lightBlueClr;
-        case 2:
-          return vBlue;
-        default:
-          return blueClr;
-      }
-    } else if (Provider.of<ColorProvider>(context).selectedColor == 1) {
-      switch (no) {
-        case 0:
-          return oRange;
-        case 1:
-          return lightOrange;
-        case 2:
-          return skinOrange;
-        default:
-          return oRange;
-      }
-    } else {
-      switch (no) {
-        case 0:
-          return themeRed;
-        case 1:
-          return rred;
-        case 2:
-          return darkRed;
-        default:
-          return themeRed;
-      }
-    }
-  }
-
-  _titleBar() {
-    return Container(
-      margin: const EdgeInsets.only(right: 20, top: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
           SizedBox(
-            width: 10,
+            height: 20,
           ),
-          Text(
-            !rideFilter
-                ? chooseTitleText(0)
-                : !rideFilter2
-                    ? chooseTitleText(1)
-                    : !rideFilter3
-                        ? chooseTitleText(2)
-                        : chooseTitleText(0),
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontWeight: FontWeight.bold,
-              fontSize: 35,
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 10.0,
+                  ),
+                  child: isFilter1
+                      ? FilterButton(
+                          onPressed: () {
+                            setState(() {
+                              if (isFilter2 == false &&
+                                  isFilter3 == false &&
+                                  isFilter4 == false) {
+                                isFilter1 = true;
+                              } else {
+                                isFilter1 = !isFilter1;
+                                isFilter4 = false;
+                                isFilter2 = false;
+                                isFilter3 = false;
+                              }
+                            });
+                          },
+                          child: Text(
+                            'All Rides',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                          ),
+                        )
+                      : UnFilterButton(
+                          onPressed: () {
+                            setState(() {
+                              isFilter1 = !isFilter1;
+                              isFilter4 = false;
+                              isFilter2 = false;
+                              isFilter3 = false;
+                            });
+                          },
+                          child: Text(
+                            'All Rides',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                ),
+                isFilter2
+                    ? FilterButton(
+                        onPressed: () {
+                          setState(() {
+                            if (isFilter1 == false &&
+                                isFilter3 == false &&
+                                isFilter4 == false) {
+                              isFilter2 = true;
+                            } else {
+                              isFilter2 = !isFilter2;
+                              isFilter4 = false;
+                              isFilter1 = false;
+                              isFilter3 = false;
+                            }
+                          });
+                        },
+                        child: Text(
+                          'Near Me',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
+                    : UnFilterButton(
+                        onPressed: () {
+                          setState(() {
+                            isFilter2 = !isFilter2;
+                            isFilter1 = false;
+                            isFilter4 = false;
+                            isFilter3 = false;
+                          });
+                        },
+                        child: Text(
+                          'Near Me',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                isFilter3
+                    ? FilterButton(
+                        onPressed: () {
+                          setState(() {
+                            if (isFilter2 == false &&
+                                isFilter1 == false &&
+                                isFilter4 == false) {
+                              isFilter3 = true;
+                            } else {
+                              isFilter3 = !isFilter3;
+                              isFilter4 = false;
+                              isFilter2 = false;
+                              isFilter1 = false;
+                            }
+                          });
+                        },
+                        child: Text(
+                          'Joined',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
+                    : UnFilterButton(
+                        onPressed: () {
+                          setState(() {
+                            isFilter3 = !isFilter3;
+                            isFilter1 = false;
+                            isFilter2 = false;
+                            isFilter4 = false;
+                          });
+                        },
+                        child: Text(
+                          'Joined',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                isFilter4
+                    ? FilterButton(
+                        onPressed: () {
+                          setState(() {
+                            if (isFilter2 == false &&
+                                isFilter3 == false &&
+                                isFilter1 == false) {
+                              isFilter4 = true;
+                            } else {
+                              isFilter4 = !isFilter4;
+                              isFilter1 = false;
+                              isFilter2 = false;
+                              isFilter3 = false;
+                            }
+                          });
+                        },
+                        child: Text(
+                          'Events',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
+                    : UnFilterButton(
+                        onPressed: () {
+                          setState(() {
+                            isFilter4 = !isFilter4;
+                            isFilter1 = false;
+                            isFilter2 = false;
+                            isFilter3 = false;
+                          });
+                        },
+                        child: Text(
+                          'Events',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+              ],
             ),
           ),
+          SizedBox(
+            height: 20,
+          ),
+          _getDBRides(),
         ],
       ),
     );
@@ -528,23 +472,6 @@ class _HomePageState extends State<HomePage> {
     return titleText;
   }
 
-  _getMainClr(int no) {
-    switch (no) {
-      case 0:
-        setState(() {});
-        return lightBlueClr;
-      case 1:
-        setState(() {});
-        return oRange;
-      case 2:
-        setState(() {});
-        return themeRed;
-      default:
-        setState(() {});
-        return lightBlueClr;
-    }
-  }
-
   _getDBRides() {
     return Expanded(
       child: FirebaseAnimatedList(
@@ -556,7 +483,7 @@ class _HomePageState extends State<HomePage> {
           Rides['key'] = snapshot.key;
           if (rideFilter3 == false) {
             if (joinedRides.contains(Rides['key'])) {
-              return listItemFav(Rides: Rides)
+              return listItem(Rides: Rides)
                   .animate()
                   .slideX(duration: 300.ms)
                   .fade(duration: 400.ms);
@@ -574,274 +501,40 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget listItem({
+   Widget listItem({
     required Map Rides,
   }) {
-    saveprefs() async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setStringList("joined_rides", joinedRides);
-    }
-
-    return Slidable(
-      startActionPane: ActionPane(
-        motion: const BehindMotion(),
-        extentRatio: 1 / 5,
-        children: [
-          SlidableAction(
-            backgroundColor: _getBGClr(Rides['Color']),
-            icon: Icons.add,
-            label: 'JOIN',
-            onPressed: (context) async {
-              print(Rides['key']);
-              if (!joinedRides.contains(Rides['key'])) {
-                joinedRides.add(Rides['key']);
-                saveprefs();
-                databaseReference
-                    .child('Rides/${Rides['key']}')
-                    .update({'Joined': Rides['Joined'] + 1});
-                _addedToFav();
-                setState(() {});
-              } else {
-                _alreadyJoined();
-              }
-            },
+    return Padding(
+      //padding for spacing between rides
+      padding:
+          const EdgeInsets.only(left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
+      //this container is for the image
+      child: Container(
+        height: 170,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          image: DecorationImage(
+            image: AssetImage(
+              'assets/image 14.png',
+            ),
+            fit: BoxFit.cover,
           ),
-        ],
-      ),
-      child: Stack(
-        clipBehavior: Clip.none,
-        alignment: Alignment.topRight,
-        children: [
-          Container(
-            margin: const EdgeInsets.all(10),
-            padding: const EdgeInsets.all(20),
-            height: 200,
-            decoration: BoxDecoration(
-              color: joinedRides.contains(Rides['key'])
-                  ? successClr
-                  : _getBGClr(Rides['Color']),
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            child: Stack(
-              children: [
-                Container(
-                  // color: Colors.red.withOpacity(0.2),
-                  padding: EdgeInsets.only(left: 205, top: 100),
-                  child: Text(
-                    "Joined: ${Rides['Joined'].toString()}",
-                    style: tyStyle,
-                  ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(
-                        bottom: 20,
-                      ),
-                      child: Center(
-                        child: Text(
-                          Rides['Name'],
-                          style: const TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Center(
-                      child: FittedBox(
-                        fit: BoxFit.contain,
-                        child: Text(
-                          Rides['Origin'] + '  to  ' + Rides['Destination'],
-                          style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w400,
-                              fontSize: 15,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Text(Rides['Date'], style: tyStyle),
-                    Text(
-                      Rides['Start Time'] + '  to  ' + Rides['End Time'],
-                      style: tyStyle,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            right: 0,
-            child: CircleAvatar(
-              radius: 25,
-              backgroundImage: NetworkImage(Rides['GPhoto']),
-            ),
-          ),
-        ],
-      ),
-      closeOnScroll: true,
-    );
-  }
-
-  Widget listItemFav({
-    required Map Rides,
-  }) {
-    return Slidable(
-      startActionPane: ActionPane(
-        motion: const BehindMotion(),
-        extentRatio: 1 / 5,
-        children: [
-          SlidableAction(
-            backgroundColor: rred,
-            label: 'LEAVE',
-            icon: Icons.logout,
-            onPressed: (context) async {
-              databaseReference
-                  .child('Rides/${Rides['key']}')
-                  .update({'Joined': Rides['Joined'] - 1});
-              _delFromFav();
-              if (joinedRides.contains(Rides['key'])) {
-                joinedRides.remove(Rides['key']);
-                //update shared preferences
-                final prefs = await SharedPreferences.getInstance();
-                await prefs.setStringList('joined_rides', joinedRides);
-                setState(() {});
-              }
-            },
-          )
-          // SlidableAction(
-          //   backgroundColor: _getBGClr(Rides['Color']),
-          //   icon: Icons.more_horiz,
-          //   label: 'DETAIL',
-          //   onPressed: (BuildContext context) async {
-          //     //
-          //   },
-          // ),
-        ],
-      ),
-      child: Stack(
-        clipBehavior: Clip.none,
-        alignment: Alignment.topRight,
-        children: [
-          Container(
-            margin: const EdgeInsets.all(10),
-            padding: const EdgeInsets.all(20),
-            height: 200,
-            decoration: BoxDecoration(
-              color: joinedRides.contains(Rides['key'])
-                  ? successClr
-                  : _getBGClr(Rides['Color']),
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            child: Stack(children: [
-              Container(
-                // color: Colors.red.withOpacity(0.2),
-                padding: EdgeInsets.only(left: 205, top: 100),
-                child: Text(
-                  "Joined: ${Rides['Joined'].toString()}",
-                  style: tyStyle,
+        ),
+        child: Stack(
+          children: [
+            //this container is for the black hue
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.black.withOpacity(
+                  0.6,
                 ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(
-                      bottom: 20,
-                    ),
-                    child: Center(
-                      child: Text(
-                        Rides['Name'],
-                        style: const TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                            color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Center(
-                    child: FittedBox(
-                      fit: BoxFit.contain,
-                      child: Text(
-                        Rides['Origin'] + '  to  ' + Rides['Destination'],
-                        style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15,
-                            color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Text(Rides['Date'], style: tyStyle),
-                  Text(
-                    Rides['Start Time'] + '  to  ' + Rides['End Time'],
-                    style: tyStyle,
-                  ),
-                ],
-              ),
-            ]),
-          ),
-          Positioned(
-            right: 0,
-            child: CircleAvatar(
-              radius: 25,
-              backgroundImage: NetworkImage(Rides['GPhoto']),
-            ),
-          ),
-        ],
+            )
+          ],
+        ),
       ),
-      closeOnScroll: true,
     );
   }
-
-  _delFromFav() {
-    Get.snackbar("RIDE REMOVED", "Ride removed from Favorites",
-        snackPosition: SnackPosition.TOP,
-        // duration: 2,
-        borderWidth: 5,
-        borderColor: rred,
-        backgroundColor: Colors.white,
-        colorText: rred,
-        icon: const Icon(Icons.logout));
-  }
-
-  _alreadyJoined() {
-    Get.snackbar("RIDE ALREADY JOINED", "You have already joined this ride",
-        snackPosition: SnackPosition.TOP,
-        borderWidth: 5,
-        borderColor: sandyClr,
-        backgroundColor: Colors.white,
-        colorText: sandyClr,
-        icon: const Icon(Icons.access_time_filled_rounded));
-  }
-
-  _addedToFav() {
-    Get.snackbar("RIDE ADDED", "Ride added to Favorites",
-        snackPosition: SnackPosition.TOP,
-        borderWidth: 5,
-        borderColor: Colors.green[600],
-        backgroundColor: Colors.white,
-        colorText: Colors.green[600],
-        icon: const Icon(Icons.add));
-  }
-
 
 }
