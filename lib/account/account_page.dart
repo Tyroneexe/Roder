@@ -48,6 +48,12 @@ class _AccountPageState extends State<AccountPage> {
     _getCurrentLocation();
   }
 
+  // @override
+  // void dispose() {
+  //   countryCodeController.dispose();
+  //   super.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
     String userPhoneNumber = selectedCountry + nuController.text;
@@ -709,6 +715,8 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
+  String sel = '';
+
   numberForm(BuildContext context) {
     return FutureBuilder<DataSnapshot>(
         future: usersRef.child(user.uid).once().then((databaseEvent) {
@@ -774,9 +782,17 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                   ),
                 ),
-                initialCountryCode: selectedCountryFlag,
-                onChanged: (phone) {},
-                onCountryChanged: (phone) {},
+                onChanged: (phone) {
+                  setState(() {
+                    userPhoneNumber = selectedCountry + nuController.text;
+                  });
+                },
+                onCountryChanged: (phone) {
+                  setState(() {
+                    selectedCountry = phone.dialCode;
+                    // selectedCountryFlag = phone.code;
+                  });
+                },
               ),
             );
           } else if (snapshot.hasData) {
@@ -841,7 +857,6 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                   ),
                 ),
-                initialCountryCode: selectedCountryFlag,
                 onChanged: (phone) {
                   setState(() {
                     userPhoneNumber = selectedCountry + nuController.text;
@@ -850,9 +865,7 @@ class _AccountPageState extends State<AccountPage> {
                 onCountryChanged: (phone) {
                   setState(() {
                     selectedCountry = phone.dialCode;
-                    selectedCountryFlag = phone.flag;
-                    print(selectedCountryFlag);
-                    _saveCountryChosen();
+                    // selectedCountryFlag = phone.code;
                   });
                 },
               ),
@@ -916,9 +929,18 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                   ),
                 ),
-                initialCountryCode: selectedCountryFlag,
-                onChanged: (phone) {},
-                onCountryChanged: (phone) {},
+                // initialCountryCode: selectedCountryFlag,
+                onChanged: (phone) {
+                  setState(() {
+                    userPhoneNumber = selectedCountry + nuController.text;
+                  });
+                },
+                onCountryChanged: (phone) {
+                  setState(() {
+                    selectedCountry = phone.dialCode;
+                    // selectedCountryFlag = phone.code;
+                  });
+                },
               ),
             );
           }
@@ -1258,13 +1280,14 @@ class _AccountPageState extends State<AccountPage> {
     }
   }
 
-  _saveCountryChosen() async {
+  _saveCountryChosen(String selectedCountryFlag) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('selectedCountryFlag', selectedCountryFlag);
+    await prefs.setString('selectedCountryFlag', selectedCountryFlag);
   }
 
   _getCountryChosen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.getString('selectedCountryFlag');
+    selectedCountryFlag = prefs.getString('selectedCountryFlag') ?? '';
+    print(selectedCountryFlag);
   }
 }
