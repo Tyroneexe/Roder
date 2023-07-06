@@ -13,6 +13,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:roder/themes/theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../homepage/home_page.dart';
 
 class AccountPage extends StatefulWidget {
@@ -30,6 +31,7 @@ String bike = '';
 class _AccountPageState extends State<AccountPage> {
   File? image;
   //
+  String selectedCountryFlag = '';
   String selectedCountry = '';
   String userPhoneNumber = '';
   TextEditingController nameController = TextEditingController();
@@ -42,6 +44,7 @@ class _AccountPageState extends State<AccountPage> {
   @override
   void initState() {
     super.initState();
+    _getCountryChosen();
     _getCurrentLocation();
   }
 
@@ -299,6 +302,7 @@ class _AccountPageState extends State<AccountPage> {
                           final userFoto = userData['foto'] as String;
                           final userName = userData['name'] as String;
                           final userNum = userData['contact'] as String;
+                          final userBike = userData['bike'] as String;
 
                           return Padding(
                             padding: const EdgeInsets.only(left: 10),
@@ -306,29 +310,21 @@ class _AccountPageState extends State<AccountPage> {
                               // add the || || if statement below and also add the
                               // else with null checking
                               onPressed: () {
-                                //image == null ||
-                                if (nameController.text.isEmpty ||
-                                    nuController.text.isEmpty) {
-                                  String newName = userName;
-                                  String contactNumber = userNum;
-                                  String email = user.email!;
-                                  String locationValue = location;
-                                  String bike = bikeController.text;
-                                  String foto = userFoto;
+                                String newName = nameController.text == ''
+                                    ? userName
+                                    : nameController.text;
+                                String contactNumber = nuController.text == ''
+                                    ? userNum
+                                    : '+' + userPhoneNumber;
+                                String email = user.email!;
+                                String locationValue = location;
+                                String bike = bikeController.text == ''
+                                    ? userBike
+                                    : bikeController.text;
+                                String foto = image?.path ?? userFoto;
 
-                                  updateUserInformation(newName, contactNumber,
-                                      email, locationValue, bike, foto);
-                                } else {
-                                  String newName = nameController.text;
-                                  String contactNumber = '+' + userPhoneNumber;
-                                  String email = user.email!;
-                                  String locationValue = location;
-                                  String bike = bikeController.text;
-                                  String foto = image?.path ?? userFoto;
-
-                                  updateUserInformation(newName, contactNumber,
-                                      email, locationValue, bike, foto);
-                                }
+                                updateUserInformation(newName, contactNumber,
+                                    email, locationValue, bike, foto);
                               },
                               style: ButtonStyle(
                                 textStyle: MaterialStateProperty.all<TextStyle>(
@@ -713,8 +709,6 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
-  String selected = '';
-
   numberForm(BuildContext context) {
     return FutureBuilder<DataSnapshot>(
         future: usersRef.child(user.uid).once().then((databaseEvent) {
@@ -780,7 +774,7 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                   ),
                 ),
-                initialCountryCode: 'US',
+                initialCountryCode: selectedCountryFlag,
                 onChanged: (phone) {},
                 onCountryChanged: (phone) {},
               ),
@@ -847,11 +841,19 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                   ),
                 ),
-                initialCountryCode: 'US',
-                onChanged: (phone) {},
+                initialCountryCode: selectedCountryFlag,
+                onChanged: (phone) {
+                  setState(() {
+                    userPhoneNumber = selectedCountry + nuController.text;
+                  });
+                },
                 onCountryChanged: (phone) {
-                  selectedCountry = phone.dialCode;
-                  print(selectedCountry);
+                  setState(() {
+                    selectedCountry = phone.dialCode;
+                    selectedCountryFlag = phone.flag;
+                    print(selectedCountryFlag);
+                    _saveCountryChosen();
+                  });
                 },
               ),
             );
@@ -914,20 +916,9 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                   ),
                 ),
-                initialCountryCode: 'US',
-                onChanged: (phone) {
-                  setState(() {
-                    userPhoneNumber = selectedCountry + nuController.text;
-                  });
-                  print(userPhoneNumber);
-                },
-                onCountryChanged: (phone) {
-                  setState(() {
-                    selectedCountry = phone.dialCode;
-                  });
-                  print(selected);
-                  // print(selectedCountry);
-                },
+                initialCountryCode: selectedCountryFlag,
+                onChanged: (phone) {},
+                onCountryChanged: (phone) {},
               ),
             );
           }
@@ -1265,5 +1256,15 @@ class _AccountPageState extends State<AccountPage> {
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
+  }
+
+  _saveCountryChosen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('selectedCountryFlag', selectedCountryFlag);
+  }
+
+  _getCountryChosen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.getString('selectedCountryFlag');
   }
 }
