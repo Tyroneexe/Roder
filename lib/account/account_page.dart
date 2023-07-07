@@ -41,7 +41,7 @@ class _AccountPageState extends State<AccountPage> {
   TextEditingController bikeController = TextEditingController();
   //
 
-  @override
+@override
   void initState() {
     super.initState();
     _getCurrentLocation();

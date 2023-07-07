@@ -194,7 +194,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      'No New Notifications.',
+                      'No New Notifications',
                       style: TextStyle(
                         fontFamily: 'Roboto',
                         fontWeight: FontWeight.w700,

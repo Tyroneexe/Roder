@@ -61,61 +61,93 @@ class _SearchState extends State<Search> {
           SizedBox(
             height: 10,
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: recentHistory.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 5, bottom: 5),
-                  child: GestureDetector(
-                    onTap: () {
-                      searchFilter.text = recentHistory[index];
-                    },
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Icon(
-                          Icons.history,
-                          color: recentTxtClr,
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          recentHistory[index],
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14,
-                            color: recentTxtClr,
-                          ),
-                        ),
-                        Spacer(),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              recentHistory.removeAt(index);
-                            });
-                            saveRecentHistory();
-                          },
-                          child: Icon(
-                            Icons.close_rounded,
-                            color: recentTxtClr,
-                            size: 22,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
+          if (recentHistory.length == 0) ...[
+            Container(
+              height: 220,
+              width: 220,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/NotiRoderImage.png'),
+                ),
+              ),
             ),
-          ),
+            SizedBox(height: 10),
+            Text(
+              'No Searches Yet',
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w700,
+                fontSize: 20,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Go ahead and explore some rides!',
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w100,
+                fontSize: 14,
+                color: Colors.black,
+              ),
+            ),
+          ] else ...[
+            Expanded(
+              child: ListView.builder(
+                itemCount: recentHistory.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 5, bottom: 5),
+                    child: GestureDetector(
+                      onTap: () {
+                        searchFilter.text = recentHistory[index];
+                      },
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Icon(
+                            Icons.history,
+                            color: recentTxtClr,
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            recentHistory[index],
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
+                              color: recentTxtClr,
+                            ),
+                          ),
+                          Spacer(),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                recentHistory.removeAt(index);
+                              });
+                              saveRecentHistory();
+                            },
+                            child: Icon(
+                              Icons.close_rounded,
+                              color: recentTxtClr,
+                              size: 22,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ]
         ],
       ),
     );

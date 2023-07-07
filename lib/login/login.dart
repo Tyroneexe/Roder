@@ -7,9 +7,14 @@ import 'package:roder/navbar/navbar.dart';
 import '../ui/notification_page.dart';
 import 'google_sign_in.dart';
 
-class LogIn extends StatelessWidget {
+class LogIn extends StatefulWidget {
   LogIn({super.key});
 
+  @override
+  State<LogIn> createState() => _LogInState();
+}
+
+class _LogInState extends State<LogIn> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: StreamBuilder(
@@ -97,10 +102,13 @@ class LogIn extends StatelessWidget {
     );
   }
 
-  ElevatedButton logInBtn(BuildContext context) {
+  logInBtn(BuildContext context) {
     return ElevatedButton(
       onPressed: () async {
-        welcomeViewed = false;
+        setState(() {
+          welcomeViewed = false;
+        });
+
         final provider =
             Provider.of<GoogleSignInProvider>(context, listen: false);
         await provider.googleLogIn();
