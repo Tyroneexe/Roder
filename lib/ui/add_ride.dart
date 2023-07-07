@@ -629,6 +629,12 @@ class _AddTaskPageState extends State<AddTaskPage> {
       initialDate: DateTime.now(),
       firstDate: DateTime(2015),
       lastDate: DateTime(2121),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: _getPickerTheme(),
+          child: child!,
+        );
+      },
     );
 
     if (pickerDate != null) {
@@ -665,7 +671,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
     }
   }
 
-  _showTimePicker() {
+  Future<TimeOfDay?> _showTimePicker() {
     return showTimePicker(
       initialEntryMode: TimePickerEntryMode.input,
       context: context,
@@ -674,6 +680,12 @@ class _AddTaskPageState extends State<AddTaskPage> {
         minute: int.parse(_startTime.split(":")[1].split(" ")[0]),
       ),
       useRootNavigator: false,
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: _getPickerTheme(),
+          child: child!,
+        );
+      },
     );
   }
 
@@ -724,5 +736,30 @@ class _AddTaskPageState extends State<AddTaskPage> {
       ),
       backgroundColor: context.theme.colorScheme.background,
     );
+  }
+
+  ThemeData _getPickerTheme() {
+    // Retrieve the current theme
+
+    // Create a copy of the current theme
+    ThemeData pickerTheme = Theme.of(context).copyWith(
+      colorScheme: Theme.of(context).colorScheme.copyWith(
+            primary: btnBlueClr, // Customize the primary color
+          ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.pressed)) {
+                return btnBlueClr; // Customize the button text color when pressed
+              }
+              return btnBlueClr; // Customize the default button text color
+            },
+          ),
+        ),
+      ),
+    );
+
+    return pickerTheme;
   }
 }

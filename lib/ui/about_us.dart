@@ -29,7 +29,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: AssetImage(
-                      'assets/AboutUsImage.png',
+                      'assets/AboutUsImg.jpg',
                     ),
                   ),
                 ),
