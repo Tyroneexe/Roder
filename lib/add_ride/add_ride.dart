@@ -26,7 +26,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
   TextEditingController titleController = TextEditingController();
   TextEditingController locationController = TextEditingController();
 
-  String selectedRide = '1';
+  String selectedRide = 'Solo';
 
   //Date and Time
   String _selectedDate = DateFormat("d MMMM yyyy").format(DateTime.now());
@@ -466,7 +466,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       },
                       items: [
                         DropdownMenuItem<String>(
-                          value: '1',
+                          value: 'Solo',
                           child: Row(
                             children: [
                               Icon(Icons.person),
@@ -478,7 +478,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           ),
                         ),
                         DropdownMenuItem<String>(
-                          value: '2',
+                          value: 'Invite',
                           child: Row(
                             children: [
                               Icon(Icons.mail),
@@ -488,7 +488,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           ),
                         ),
                         DropdownMenuItem<String>(
-                          value: '3',
+                          value: 'Anyone',
                           child: Row(
                             children: [
                               Icon(Icons.public),
@@ -502,7 +502,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   ),
                 ),
               ),
-              if (selectedRide == '2') ...[
+              if (selectedRide == 'Invite') ...[
                 SizedBox(
                   height: 20,
                 ),
