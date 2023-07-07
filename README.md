@@ -19,8 +19,6 @@
 <img align="left" alt="GitHub" width="35px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" style="padding-right:10px;" />
 <br />
 
-#
-
 ## ✨ Features ✨ 
 - Create and organize your own bike runs.
 - Find and join existing bike runs in your area.
