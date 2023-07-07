@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:roder/drawer/nav_drawer.dart';
 import 'package:roder/themes/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,6 +17,7 @@ bool eventTwo = false;
 bool notificationBadgeVisible = false;
 
 bool welcomeViewed = false;
+DateTime? notificationTime;
 
 class _NotificationPageState extends State<NotificationPage> {
   List<NotificationItem> filteredNotifications = [];
@@ -78,6 +80,32 @@ class _NotificationPageState extends State<NotificationPage> {
     }
 
     setState(() {});
+  }
+
+  _formatNotificationTime() {
+    final currentTime = DateTime.now();
+    final difference = currentTime.difference(notificationTime!);
+
+    if (difference.inSeconds < 60) {
+      // Less than a minute ago
+      return 'Just now';
+    } else if (difference.inMinutes < 60) {
+      // Minutes ago
+      final minutes = difference.inMinutes;
+      return '$minutes min ago';
+    } else if (difference.inHours < 24) {
+      // Hours ago
+      final hours = difference.inHours;
+      return '$hours hour${hours > 1 ? 's' : ''} ago';
+    } else if (difference.inDays < 7) {
+      // Days ago
+      final days = difference.inDays;
+      return '$days day${days > 1 ? 's' : ''} ago';
+    } else {
+      // More than a week ago, display the date
+      final formatter = DateFormat('MMM dd, yyyy');
+      return formatter.format(notificationTime!);
+    }
   }
 
   @override
@@ -337,8 +365,8 @@ class _NotificationPageState extends State<NotificationPage> {
               welcomeViewed
                   ? SizedBox()
                   : Container(
-                      height: 90,
-                      width: 10,
+                      height: 100,
+                      width: 8,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(4),
@@ -348,7 +376,7 @@ class _NotificationPageState extends State<NotificationPage> {
                       ),
                     ),
               Container(
-                height: 90,
+                height: 100,
                 width: MediaQuery.of(context).size.width - 40,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
@@ -416,7 +444,18 @@ class _NotificationPageState extends State<NotificationPage> {
                   ),
                 ],
               ),
-              //Text date
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                _formatNotificationTime(),
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w100,
+                  fontSize: 12,
+                  color: textNotis,
+                ),
+              ),
             ],
           ),
         ],
@@ -431,7 +470,7 @@ class _NotificationPageState extends State<NotificationPage> {
 
   Future<bool> _getWelcomeViewedBool() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('welcomeViewed') ?? true;
+    return prefs.getBool('welcomeViewed') ?? false;
   }
 }
 

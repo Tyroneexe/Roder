@@ -751,9 +751,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
           foregroundColor: MaterialStateProperty.resolveWith<Color?>(
             (Set<MaterialState> states) {
               if (states.contains(MaterialState.pressed)) {
-                return btnBlueClr; // Customize the button text color when pressed
+                return btnBlueClr; 
               }
-              return btnBlueClr; // Customize the default button text color
+              return btnBlueClr; 
             },
           ),
         ),

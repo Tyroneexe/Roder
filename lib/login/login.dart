@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/navbar/navbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../ui/notification_page.dart';
 import 'google_sign_in.dart';
@@ -106,6 +107,7 @@ class _LogInState extends State<LogIn> {
     return ElevatedButton(
       onPressed: () async {
         setState(() {
+          notificationTime = DateTime.now();
           welcomeViewed = false;
         });
 
@@ -113,6 +115,8 @@ class _LogInState extends State<LogIn> {
             Provider.of<GoogleSignInProvider>(context, listen: false);
         await provider.googleLogIn();
         assignUserID();
+
+        _saveWelcomeViewedBool();
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -150,6 +154,11 @@ class _LogInState extends State<LogIn> {
         fixedSize: MaterialStateProperty.all<Size>(Size(330, 50)),
       ),
     );
+  }
+
+  _saveWelcomeViewedBool() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('welcomeViewed', welcomeViewed);
   }
 
   void assignUserID() async {
