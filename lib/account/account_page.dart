@@ -318,7 +318,9 @@ class _AccountPageState extends State<AccountPage> {
                                 String email = user.email!;
                                 String locationValue = location;
                                 String bike = bikeController.text == ''
-                                    ? userBike
+                                    ? userBike == ''
+                                        ? 'Rather Not Say'
+                                        : userBike
                                     : bikeController.text;
                                 String foto = image?.path ?? userFoto;
 
@@ -480,7 +482,7 @@ class _AccountPageState extends State<AccountPage> {
                   color: Colors.black),
               controller: bikeController,
               decoration: InputDecoration(
-                hintText: userBike,
+                hintText: userBike == '' ? 'Rather Not Say' : userBike,
                 hintStyle: TextStyle(
                   fontFamily: 'Roboto',
                   fontWeight: FontWeight.w100,
