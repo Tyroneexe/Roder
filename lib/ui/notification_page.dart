@@ -101,8 +101,15 @@ class _NotificationPageState extends State<NotificationPage> {
       // Days ago
       final days = difference.inDays;
       return '$days day${days > 1 ? 's' : ''} ago';
+    } else if (difference.inDays < 30) {
+      // Weeks ago
+      final weeks = difference.inDays ~/ 7;
+      return '$weeks week${weeks > 1 ? 's' : ''} ago';
+    } else if (difference.inDays < 60) {
+      // One month ago
+      return 'One month ago';
     } else {
-      // More than a week ago, display the date
+      // More than two months ago, display only the date
       final formatter = DateFormat('MMM dd, yyyy');
       return formatter.format(notificationTime!);
     }
