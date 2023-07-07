@@ -8,79 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:new_version_plus/new_version_plus.dart';
-import 'package:roder/favourites/favourites.dart';
 import '../account/account_page.dart';
 import '../drawer/nav_drawer.dart';
 import '../ui/notification_page.dart';
 import '../widgets/filter_button.dart';
 import '../widgets/unfilter_button.dart';
-
-/*To Do's —>
-
-Updates —>
-
-
-/
-| Customization dropdown in add page
-| update message popup
-| make dbrides load after button click
-| Notifications
-| fix splash screen
-| Border of text fields
-| Red color of delete account
-| Fix image in home page
-| modify notifictations
-| Fixed time picker in add page
-| Update Nav drawer
-| .slide for nav drawer
-| contact page in nav bar instead of feedback
-=================================================
-| make rides expandable
-\
-
-/
-| Give each user a place in the database
-===============================================
-| Wrtie to Database 
-| Make host join ride when press on 'create ride'
-| Make Host Delete Ride
-| Make a Ride change-able when clicked
-| Give people user names
-| Give people custom pfp
-| show who has joined the ride
-| Show who has made the ride when pressed on circle avatar of the rides
-| make more notifications (if someone has joined your ride, left etc)
-| be able to share links of rides
-======Show app to BMW
-| Rides Near Me
-| Block users
-| Friends only can join (Accounts to follow(friend) someone)
-| recommend a ride route based on previous ride routes (show friends(follows) rides)
-| Notification page for when people add you as fried, join, leave, create, etc.
-\
-
-/ Animation update
-| Settings page change /Like Contanct page\ (change color then change image and change theme then chagne image maybe something like that )
-| Use Rive to add animations to the app
-| Cool animation for opening nav drawer
-| MAYBE beter animations for rides appearing
-| Floating /maybe transparent\ nav bar
-| Splash screen and loading screen for bike animation 
-| Change color of picture based on theme
-\
-
-/
-| iOs compatible
-| log in with facebook and instagram
-| Let everyone see the polyline of the ride
-| save polylines in database
-| addvertisement to promote
-\
-
-/
-| Roder Marketplace
-\
-*/
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -254,199 +186,203 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: 20,
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 10.0,
-                  ),
-                  child: isFilter1
-                      ? FilterButton(
-                          onPressed: () {
-                            setState(() {
-                              if (isFilter2 == false &&
-                                  isFilter3 == false &&
-                                  isFilter4 == false) {
-                                isFilter1 = true;
-                              } else {
-                                isFilter1 = !isFilter1;
-                                isFilter4 = false;
-                                isFilter2 = false;
-                                isFilter3 = false;
-                              }
-                            });
-                          },
-                          child: Text(
-                            'All Rides',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14,
-                              color: Colors.white,
-                            ),
-                          ),
-                        )
-                      : UnFilterButton(
-                          onPressed: () {
-                            setState(() {
-                              isFilter1 = !isFilter1;
-                              isFilter4 = false;
-                              isFilter2 = false;
-                              isFilter3 = false;
-                            });
-                          },
-                          child: Text(
-                            'All Rides',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ),
-                ),
-                isFilter2
-                    ? FilterButton(
-                        onPressed: () {
-                          setState(() {
-                            if (isFilter1 == false &&
-                                isFilter3 == false &&
-                                isFilter4 == false) {
-                              isFilter2 = true;
-                            } else {
-                              isFilter2 = !isFilter2;
-                              isFilter4 = false;
-                              isFilter1 = false;
-                              isFilter3 = false;
-                            }
-                          });
-                        },
-                        child: Text(
-                          'Near Me',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                            color: Colors.white,
-                          ),
-                        ),
-                      )
-                    : UnFilterButton(
-                        onPressed: () {
-                          setState(() {
-                            isFilter2 = !isFilter2;
-                            isFilter1 = false;
-                            isFilter4 = false;
-                            isFilter3 = false;
-                          });
-                        },
-                        child: Text(
-                          'Near Me',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                isFilter3
-                    ? FilterButton(
-                        onPressed: () {
-                          setState(() {
-                            if (isFilter2 == false &&
-                                isFilter1 == false &&
-                                isFilter4 == false) {
-                              isFilter3 = true;
-                            } else {
-                              isFilter3 = !isFilter3;
-                              isFilter4 = false;
-                              isFilter2 = false;
-                              isFilter1 = false;
-                            }
-                          });
-                        },
-                        child: Text(
-                          'Joined',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                            color: Colors.white,
-                          ),
-                        ),
-                      )
-                    : UnFilterButton(
-                        onPressed: () {
-                          setState(() {
-                            isFilter3 = !isFilter3;
-                            isFilter1 = false;
-                            isFilter2 = false;
-                            isFilter4 = false;
-                          });
-                        },
-                        child: Text(
-                          'Joined',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                isFilter4
-                    ? FilterButton(
-                        onPressed: () {
-                          setState(() {
-                            if (isFilter2 == false &&
-                                isFilter3 == false &&
-                                isFilter1 == false) {
-                              isFilter4 = true;
-                            } else {
-                              isFilter4 = !isFilter4;
-                              isFilter1 = false;
-                              isFilter2 = false;
-                              isFilter3 = false;
-                            }
-                          });
-                        },
-                        child: Text(
-                          'Events',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                            color: Colors.white,
-                          ),
-                        ),
-                      )
-                    : UnFilterButton(
-                        onPressed: () {
-                          setState(() {
-                            isFilter4 = !isFilter4;
-                            isFilter1 = false;
-                            isFilter2 = false;
-                            isFilter3 = false;
-                          });
-                        },
-                        child: Text(
-                          'Events',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-              ],
-            ),
-          ),
+          _filterRidesButtons(),
           SizedBox(
             height: 20,
           ),
           _getDBRides(),
+        ],
+      ),
+    );
+  }
+
+  _filterRidesButtons() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 10.0,
+            ),
+            child: isFilter1
+                ? FilterButton(
+                    onPressed: () {
+                      setState(() {
+                        if (isFilter2 == false &&
+                            isFilter3 == false &&
+                            isFilter4 == false) {
+                          isFilter1 = true;
+                        } else {
+                          isFilter1 = !isFilter1;
+                          isFilter4 = false;
+                          isFilter2 = false;
+                          isFilter3 = false;
+                        }
+                      });
+                    },
+                    child: Text(
+                      'All Rides',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
+                    ),
+                  )
+                : UnFilterButton(
+                    onPressed: () {
+                      setState(() {
+                        isFilter1 = !isFilter1;
+                        isFilter4 = false;
+                        isFilter2 = false;
+                        isFilter3 = false;
+                      });
+                    },
+                    child: Text(
+                      'All Rides',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+          ),
+          isFilter2
+              ? FilterButton(
+                  onPressed: () {
+                    setState(() {
+                      if (isFilter1 == false &&
+                          isFilter3 == false &&
+                          isFilter4 == false) {
+                        isFilter2 = true;
+                      } else {
+                        isFilter2 = !isFilter2;
+                        isFilter4 = false;
+                        isFilter1 = false;
+                        isFilter3 = false;
+                      }
+                    });
+                  },
+                  child: Text(
+                    'Near Me',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              : UnFilterButton(
+                  onPressed: () {
+                    setState(() {
+                      isFilter2 = !isFilter2;
+                      isFilter1 = false;
+                      isFilter4 = false;
+                      isFilter3 = false;
+                    });
+                  },
+                  child: Text(
+                    'Near Me',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+          isFilter3
+              ? FilterButton(
+                  onPressed: () {
+                    setState(() {
+                      if (isFilter2 == false &&
+                          isFilter1 == false &&
+                          isFilter4 == false) {
+                        isFilter3 = true;
+                      } else {
+                        isFilter3 = !isFilter3;
+                        isFilter4 = false;
+                        isFilter2 = false;
+                        isFilter1 = false;
+                      }
+                    });
+                  },
+                  child: Text(
+                    'Joined',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              : UnFilterButton(
+                  onPressed: () {
+                    setState(() {
+                      isFilter3 = !isFilter3;
+                      isFilter1 = false;
+                      isFilter2 = false;
+                      isFilter4 = false;
+                    });
+                  },
+                  child: Text(
+                    'Joined',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+          isFilter4
+              ? FilterButton(
+                  onPressed: () {
+                    setState(() {
+                      if (isFilter2 == false &&
+                          isFilter3 == false &&
+                          isFilter1 == false) {
+                        isFilter4 = true;
+                      } else {
+                        isFilter4 = !isFilter4;
+                        isFilter1 = false;
+                        isFilter2 = false;
+                        isFilter3 = false;
+                      }
+                    });
+                  },
+                  child: Text(
+                    'Events',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              : UnFilterButton(
+                  onPressed: () {
+                    setState(() {
+                      isFilter4 = !isFilter4;
+                      isFilter1 = false;
+                      isFilter2 = false;
+                      isFilter3 = false;
+                    });
+                  },
+                  child: Text(
+                    'Events',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
         ],
       ),
     );
@@ -481,27 +417,16 @@ class _HomePageState extends State<HomePage> {
             Animation<double> animation, int index) {
           Map Rides = snapshot.value as Map;
           Rides['key'] = snapshot.key;
-          if (rideFilter3 == false) {
-            if (joinedRides.contains(Rides['key'])) {
-              return listItem(Rides: Rides)
-                  .animate()
-                  .slideX(duration: 300.ms)
-                  .fade(duration: 400.ms);
-            } else {
-              return Container();
-            }
-          } else {
-            return listItem(Rides: Rides)
-                .animate()
-                .slideX(duration: 300.ms)
-                .fade(duration: 400.ms);
-          }
+          return listItem(Rides: Rides)
+              .animate()
+              .slideX(duration: 300.ms)
+              .fade(duration: 400.ms);
         },
       ),
     );
   }
 
-   Widget listItem({
+  Widget listItem({
     required Map Rides,
   }) {
     return Padding(
@@ -536,5 +461,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
 }

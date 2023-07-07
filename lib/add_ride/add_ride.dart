@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:roder/account/account_page.dart';
 import 'package:roder/themes/theme.dart';
 
-import 'notification_page.dart';
+import '../ui/notification_page.dart';
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({super.key});
