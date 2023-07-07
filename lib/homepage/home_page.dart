@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:new_version_plus/new_version_plus.dart';
 import '../account/account_page.dart';
 import '../drawer/nav_drawer.dart';
+import '../themes/theme.dart';
 import '../ui/notification_page.dart';
 import '../widgets/filter_button.dart';
 import '../widgets/unfilter_button.dart';
@@ -388,26 +389,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  chooseTitleText(int nu) {
-    String titleText;
-
-    switch (nu) {
-      case 0:
-        titleText = 'All Rides';
-        break;
-      case 1:
-        titleText = 'Near Me';
-        break;
-      case 2:
-        titleText = 'Joined Rides';
-        break;
-      default:
-        titleText = 'All Rides';
-        break;
-    }
-    return titleText;
-  }
-
   _getDBRides() {
     return Expanded(
       child: FirebaseAnimatedList(
@@ -415,9 +396,9 @@ class _HomePageState extends State<HomePage> {
         query: dbRef,
         itemBuilder: (BuildContext context, DataSnapshot snapshot,
             Animation<double> animation, int index) {
-          Map Rides = snapshot.value as Map;
-          Rides['key'] = snapshot.key;
-          return listItem(Rides: Rides)
+          Map rideData = snapshot.value as Map;
+          rideData['key'] = snapshot.key;
+          return listItem(rideData: rideData)
               .animate()
               .slideX(duration: 300.ms)
               .fade(duration: 400.ms);
@@ -427,35 +408,140 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget listItem({
-    required Map Rides,
+    required Map rideData,
   }) {
     return Padding(
-      //padding for spacing between rides
       padding:
           const EdgeInsets.only(left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
-      //this container is for the image
       child: Container(
-        height: 170,
+        height: 180,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           image: DecorationImage(
-            image: AssetImage(
-              'assets/image 14.png',
-            ),
+            image: AssetImage('assets/image 14.png'),
             fit: BoxFit.cover,
           ),
         ),
         child: Stack(
           children: [
-            //this container is for the black hue
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
-                color: Colors.black.withOpacity(
-                  0.6,
+                color: Colors.black.withOpacity(0.6),
+              ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 20),
+                  child: Text(
+                    rideData['Country'],
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: countryRideListClr,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    rideData['City'],
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    rideData['Name'],
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    '${rideData['Riders']} Ride',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    rideData['Date'],
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 20, bottom: 10),
+                child: TextButton(
+                  onPressed: () {
+                    // Button onPressed logic
+                  },
+                  style: ButtonStyle(
+                    textStyle: MaterialStateProperty.all<TextStyle>(
+                      TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 12,
+                        color: Colors.white,
+                      ),
+                    ),
+                    foregroundColor: MaterialStateProperty.all<Color>(
+                      Colors.white,
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      btnBlueClr,
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    // minimumSize: MaterialStateProperty.all<Size>(
+                    //   Size(
+                    //     30,
+                    //     30,
+                    //   ),
+                    // ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 5, right: 5),
+                    child: Text('Join Ride'),
+                  ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

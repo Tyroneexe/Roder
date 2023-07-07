@@ -25,10 +25,11 @@ const Color skinOrange = Color(0xFFFFBA84);
 const Color themeRed = Color(0xFFef6448);
 //const Color rred = Color(0xFFFF2400);
 const Color darkRed = Color(0xFF660000);
-// Filter Button for Home Page
+// Home Page
 const Color btnBlueClr = Color(0xFF315099);
 const Color outlineBtnClr = Color(0xFF6A92F0);
 const Color unselectedBtnClr = Color(0xFFD8E0F2);
+const Color countryRideListClr = Color(0xFFA5BDF8);
 // Notifications
 const Color oldNotis = Color(0xFFF5F8FF);
 const Color newNotis = Color(0xFFE9EEFB);
