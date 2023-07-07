@@ -117,6 +117,7 @@ class _LogInState extends State<LogIn> {
         assignUserID();
 
         _saveWelcomeViewedBool();
+        _saveNotificationTime();
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -159,6 +160,11 @@ class _LogInState extends State<LogIn> {
   _saveWelcomeViewedBool() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('welcomeViewed', welcomeViewed);
+  }
+
+  _saveNotificationTime() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('notificationTime', notificationTime.toString());
   }
 
   void assignUserID() async {

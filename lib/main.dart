@@ -15,12 +15,33 @@ import 'package:roder/login/google_sign_in.dart';
 import 'package:roder/provider/clrProvider.dart';
 import 'package:roder/themes/theme_services.dart';
 import 'package:roder/themes/theme.dart';
+import 'package:roder/ui/notification_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'login/login.dart';
 import 'navbar/navbar.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? storedNotificationTime = prefs.getString('notificationTime');
+
+  if (storedNotificationTime != null) {
+    notificationTime = DateTime.parse(storedNotificationTime);
+  } else {
+    // Set a default value for notificationTime if it is null
+    notificationTime = DateTime.now();
+    prefs.setString('notificationTime', notificationTime.toString());
+  }
+
+  // Calculate the time difference
+  if (notificationTime != null) {
+    final currentTime = DateTime.now();
+    final difference = currentTime.difference(notificationTime!);
+
+    // Use the difference to display the appropriate message or perform any other necessary actions
+    print('Time difference: $difference');
+  }
   //
   await loadFont();
   //
