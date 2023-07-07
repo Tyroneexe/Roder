@@ -17,6 +17,7 @@ import 'package:roder/themes/theme_services.dart';
 import 'package:roder/themes/theme.dart';
 import 'package:roder/ui/notification_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'add_ride/location_provider.dart';
 import 'login/login.dart';
 import 'navbar/navbar.dart';
 
@@ -64,6 +65,9 @@ Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider<LocationProvider>(
+          create: (context) => LocationProvider(),
+        ),
         ChangeNotifierProvider<ColorProvider>(
           create: (context) => ColorProvider(),
         ),

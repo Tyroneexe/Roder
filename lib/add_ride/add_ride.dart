@@ -1,16 +1,17 @@
 // ignore_for_file: unused_field
 
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:roder/account/account_page.dart';
 import 'package:roder/themes/theme.dart';
-
+import '../homepage/home_page.dart';
 import '../ui/notification_page.dart';
+import 'location_provider.dart';
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({super.key});
@@ -21,28 +22,21 @@ class AddTaskPage extends StatefulWidget {
 
 class _AddTaskPageState extends State<AddTaskPage> {
   //Database
-  final referenceDatabase = FirebaseDatabase.instance;
-  final user = FirebaseAuth.instance.currentUser!;
-
   //Texts
   TextEditingController titleController = TextEditingController();
   TextEditingController locationController = TextEditingController();
 
-  String? selectedRide;
+  String selectedRide = '1';
 
   //Date and Time
   String _selectedDate = DateFormat("d MMMM yyyy").format(DateTime.now());
   String _endTime = "9:00 PM";
   String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
 
-  //Color
-  int _selectedColor = 0;
-  Color _mainColor = lightBlueClr;
-  bool isColorVisible = false;
-
   @override
   Widget build(BuildContext context) {
-    final ref = referenceDatabase.ref();
+    final ref = FirebaseDatabase.instance.ref();
+    final locationProvider = Provider.of<LocationProvider>(context, listen: false);
 
     return Scaffold(
       backgroundColor: context.theme.colorScheme.background,
@@ -153,16 +147,27 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   width: MediaQuery.of(context).size.width - 40,
                   height: 40,
                   child: TextFormField(
-                    controller: locationController,
-                    // readOnly: true,
+                    onTap: () {
+                      _locationPopup();
+                    },
+                    readOnly: true,
                     decoration: InputDecoration(
-                      hintText: 'Choose Meetup Location',
-                      hintStyle: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w100,
-                        fontSize: 14,
-                        color: Colors.grey,
-                      ),
+                      hintText: locationController.text == ''
+                          ? 'Choose Meetup Location'
+                          : locationController.text,
+                      hintStyle: locationController.text == ''
+                          ? TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w100,
+                              fontSize: 14,
+                              color: Colors.grey,
+                            )
+                          : TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w100,
+                              fontSize: 14,
+                              color: Colors.black,
+                            ),
                       contentPadding: EdgeInsets.only(
                         left: 20,
                       ),
@@ -461,7 +466,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       },
                       items: [
                         DropdownMenuItem<String>(
-                          value: 'Solo',
+                          value: '1',
                           child: Row(
                             children: [
                               Icon(Icons.person),
@@ -473,7 +478,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           ),
                         ),
                         DropdownMenuItem<String>(
-                          value: 'Invite',
+                          value: '2',
                           child: Row(
                             children: [
                               Icon(Icons.mail),
@@ -483,7 +488,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           ),
                         ),
                         DropdownMenuItem<String>(
-                          value: 'Anyone',
+                          value: '3',
                           child: Row(
                             children: [
                               Icon(Icons.public),
@@ -497,7 +502,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   ),
                 ),
               ),
-              if (selectedRide == 'Invite') ...[
+              if (selectedRide == '2') ...[
                 SizedBox(
                   height: 20,
                 ),
@@ -536,17 +541,15 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           'Date': _selectedDate,
                           'Start Time': _startTime,
                           'End Time': _endTime,
-                          'Color': _selectedColor,
                           'Person': user.displayName!,
                           'GPhoto': user.photoURL!,
                           'Joined': 0,
-                          'Meetup': locationController.text,
                           'Riders': selectedRide,
-                          // 'Country' : ,
-                          // 'City' : ,
+                          'Country': locationProvider.countryController.text,
+                          'City': locationProvider.cityController.text,
+                          'Address': locationProvider.addressController.text,
                         }).asStream();
                         titleController.clear();
-                        selectedRide = '';
                         _addedRideBar();
                         _scheduleNotification();
                       }
@@ -611,7 +614,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
       await AwesomeNotifications().createNotification(
         content: NotificationContent(
           id: -1,
-          channelKey: 'channelName',
+          channelKey: 'channelKey',
           title: 'There is a Ride Today!',
           body: "Fill up your bike and be ready",
         ),
@@ -847,6 +850,239 @@ class _AddTaskPageState extends State<AddTaskPage> {
           ],
         ),
       ],
+    );
+  }
+
+  void _locationPopup() {
+    final locationProvider = Provider.of<LocationProvider>(context, listen: false);
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Meetup Location',
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w700,
+              fontSize: 25,
+              color: Colors.black,
+            ),
+          ),
+          content: IntrinsicHeight(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Country',
+                  style: actPageTxt,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width - 40,
+                  height: 40,
+                  child: TextFormField(
+                    style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w100,
+                        fontSize: 14,
+                        color: Colors.black),
+                    controller: locationProvider.countryController,
+                    decoration: InputDecoration(
+                      hintText: 'Country',
+                      hintStyle: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w100,
+                        fontSize: 14,
+                        color: Colors.grey,
+                      ),
+                      contentPadding: EdgeInsets.only(
+                        left: 20,
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'City',
+                  style: actPageTxt,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width - 40,
+                  height: 40,
+                  child: TextFormField(
+                    style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w100,
+                        fontSize: 14,
+                        color: Colors.black),
+                    controller: locationProvider.cityController,
+                    decoration: InputDecoration(
+                      hintText: 'City',
+                      hintStyle: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w100,
+                        fontSize: 14,
+                        color: Colors.grey,
+                      ),
+                      contentPadding: EdgeInsets.only(
+                        left: 20,
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'Address',
+                  style: actPageTxt,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width - 40,
+                  height: 40,
+                  child: TextFormField(
+                    style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w100,
+                        fontSize: 14,
+                        color: Colors.black),
+                    controller: locationProvider.addressController,
+                    decoration: InputDecoration(
+                      hintText: 'Street',
+                      hintStyle: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w100,
+                        fontSize: 14,
+                        color: Colors.grey,
+                      ),
+                      contentPadding: EdgeInsets.only(
+                        left: 20,
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: btnBlueClr,
+                          width: 1.5,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: Text(
+                'OK',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: btnBlueClr,
+                ),
+              ),
+              onPressed: () {
+                setState(() {
+                  locationController.text =
+                      locationProvider.countryController.text +
+                          ', ' +
+                          locationProvider.cityController.text +
+                          ', ' +
+                          locationProvider.addressController.text;
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
