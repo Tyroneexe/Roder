@@ -41,7 +41,7 @@ class _AccountPageState extends State<AccountPage> {
   TextEditingController bikeController = TextEditingController();
   //
 
-@override
+  @override
   void initState() {
     super.initState();
     _getCurrentLocation();
@@ -56,91 +56,42 @@ class _AccountPageState extends State<AccountPage> {
         child: Column(
           children: [
             Center(
-              child: GestureDetector(
-                onTap: () {
-                  pickImage();
-                },
-                child: Stack(
-                  alignment: Alignment.bottomRight,
-                  children: [
-                    image != null
-                        ? GestureDetector(
-                            child: Image.file(
-                              image!,
-                              width: 120,
-                              height: 120,
-                            ),
-                            onTap: () {
-                              pickImage();
-                            },
-                          )
-                        : FutureBuilder<DataSnapshot>(
-                            future: usersRef
-                                .child(user.uid)
-                                .once()
-                                .then((databaseEvent) {
-                              return databaseEvent.snapshot;
-                            }),
-                            builder: (BuildContext context,
-                                AsyncSnapshot<DataSnapshot> snapshot) {
-                              if (snapshot.hasData) {
-                                final userData = snapshot.data!.value
-                                    as Map<dynamic, dynamic>;
-                                final userFoto = userData['foto'] as String;
-
-                                if (userFoto.startsWith('/')) {
-                                  // Local file path
-                                  return CircleAvatar(
-                                    radius: 60,
-                                    backgroundImage: FileImage(File(userFoto)),
-                                  );
-                                } else {
-                                  // Network image URL
-                                  return CircleAvatar(
-                                    radius: 60,
-                                    backgroundImage: NetworkImage(userFoto),
-                                  );
-                                }
-                              } else if (snapshot.hasError) {
-                                return Text('Error: ${snapshot.error}');
-                              } else {
-                                return CircleAvatar(
-                                  radius: 60,
-                                  backgroundImage: NetworkImage(user.photoURL!),
-                                );
-                              }
-                            },
-                          ),
-                    Container(
+              child: Stack(
+                alignment: Alignment.bottomRight,
+                children: [
+                  CircleAvatar(
+                    radius: 60,
+                    backgroundImage: NetworkImage(user.photoURL!),
+                  ),
+                  Container(
+                    width: 36,
+                    height: 36,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: searchBarClr,
+                    ),
+                    child: Icon(
+                      Icons.edit,
+                      color: btnBlueClr,
+                      size: 24,
+                    ),
+                  ),
+                  Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: Container(
                       width: 36,
                       height: 36,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: searchBarClr,
-                      ),
-                      child: Icon(
-                        Icons.edit,
-                        color: btnBlueClr,
-                        size: 24,
-                      ),
-                    ),
-                    Positioned(
-                      right: 0,
-                      bottom: 0,
-                      child: Container(
-                        width: 36,
-                        height: 36,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.white,
-                            width: 2,
-                          ),
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 2,
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             SizedBox(
