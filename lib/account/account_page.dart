@@ -27,8 +27,8 @@ String nu = '';
 String location = '';
 String bike = '';
 
-  final DatabaseReference usersRef =
-      FirebaseDatabase.instance.ref().child('Users');
+final DatabaseReference usersRef =
+    FirebaseDatabase.instance.ref().child('Users');
 
 class _AccountPageState extends State<AccountPage> {
   File? image;

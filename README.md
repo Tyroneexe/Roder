@@ -10,7 +10,7 @@
 
 ---
 
-### 🔧 Languages 🔧
+### 🔧 Roder Languages 🔧
 
 <img align="left" alt="Visual Studio Code" width="35px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" style="padding-right:10px;" />
 <img align="left" alt="GitHub" width="35px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" style="padding-right:10px;" />
@@ -42,13 +42,13 @@ If you want to schedule a meetup with other riders, you can use the app's chat f
 
 ## 🎈 Credits 🎈
 This app was developed by [**Tiaan Bothma**](https://github.com/Tyroneexe/Tiaan-Bothma). You can find more of my work on my Fiverr gig [App Building](https://www.fiverr.com/totallyt484/build-a-mobile-app-using-flutter-with-a-database) or at [Game Development](https://www.fiverr.com/totallyt484/code-your-c-sharp-and-python-projects).
-The product management and financial work is all done by by **Cobus Bothma**, you can see his work at [Instagram Management](https://www.instagram.com/roderbiker/?igshid=MzNlNGNkZWQ4Mg%3D%3D) and also at [GTA Backstory Creation](https://www.fiverr.com/heisenbergbra?source=gig_cards&referrer_gig_slug=do-your-gta-rp-application-and-backstory&ref_ctx_id=922f1a5aa671ee6d1b16c98d8d39719a&imp_id=62887fe1-18e0-4136-8f06-0865f46ada60).
+The product management and financial work is all done by **Cobus Bothma**, you can see his work at [Instagram Management](https://www.instagram.com/roderbiker/?igshid=MzNlNGNkZWQ4Mg%3D%3D) and also at [GTA Backstory Creation](https://www.fiverr.com/heisenbergbra?source=gig_cards&referrer_gig_slug=do-your-gta-rp-application-and-backstory&ref_ctx_id=922f1a5aa671ee6d1b16c98d8d39719a&imp_id=62887fe1-18e0-4136-8f06-0865f46ada60).
 
 ## 🥳 Contributing 🥳
 If you want to contribute to **Roder**, you can fork the repository and submit a pull request with your changes. We welcome contributions from anyone who wants to help make Roder a better app for bike riders.
 
 ## 🪪 License 🪪
-**Roder** is licensed under the NONE license. Which means that the author or owner of the project has not explicitly granted any permissions or rights to others to use or distribute their code.
+**Roder** is licensed under the NONE license. Which means that the author or owner of the project has not explicitly granted any permissions or rights to others to use or distribute their code. But we still welcome users to contribute to Roder and the source code.
 
 ## 📞 Contact 📞
-For any inquiries or support regarding this project, please contact me through my email at [Roder Email](roderteam@gmail.com).
+For any inquiries or support regarding this project, please contact me through email at [Roder Email](roderteam@gmail.com).

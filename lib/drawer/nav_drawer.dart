@@ -84,154 +84,162 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
 
   //
   Widget buildHeader(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned(
-          top: 28,
-          left: 16,
-          child: IconButton(
-            icon: Text(
-              String.fromCharCode(Icons.close_rounded.codePoint),
-              style: TextStyle(
-                inherit: false,
-                color: btnBlueClr,
-                fontSize: 28,
-                fontWeight: FontWeight.w700,
-                fontFamily: Icons.close_rounded.fontFamily,
-                package: Icons.close_rounded.fontPackage,
-              ),
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 100,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 25,
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => AccountPage());
+      },
+      child: Stack(
+        children: [
+          Positioned(
+            top: 28,
+            left: 16,
+            child: IconButton(
+              icon: Text(
+                String.fromCharCode(Icons.close_rounded.codePoint),
+                style: TextStyle(
+                  inherit: false,
+                  color: btnBlueClr,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w700,
+                  fontFamily: Icons.close_rounded.fontFamily,
+                  package: Icons.close_rounded.fontPackage,
                 ),
-                FutureBuilder<DataSnapshot>(
-                  future: usersRef.child(user.uid).once().then((databaseEvent) {
-                    return databaseEvent.snapshot;
-                  }),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<DataSnapshot> snapshot) {
-                    if (snapshot.hasData) {
-                      final userData =
-                          snapshot.data!.value as Map<dynamic, dynamic>;
-                      final userFoto = userData['foto'] as String;
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 100,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 25,
+                  ),
+                  FutureBuilder<DataSnapshot>(
+                    future:
+                        usersRef.child(user.uid).once().then((databaseEvent) {
+                      return databaseEvent.snapshot;
+                    }),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<DataSnapshot> snapshot) {
+                      if (snapshot.hasData) {
+                        final userData =
+                            snapshot.data!.value as Map<dynamic, dynamic>;
+                        final userFoto = userData['foto'] as String;
 
-                      if (userFoto.startsWith('/')) {
-                        // Local file path
-                        return CircleAvatar(
-                          radius: 32,
-                          backgroundImage: FileImage(File(userFoto)),
-                        );
+                        if (userFoto.startsWith('/')) {
+                          // Local file path
+                          return CircleAvatar(
+                            radius: 32,
+                            backgroundImage: FileImage(File(userFoto)),
+                          );
+                        } else {
+                          // Network image URL
+                          return CircleAvatar(
+                            radius: 32,
+                            backgroundImage: NetworkImage(userFoto),
+                          );
+                        }
                       } else {
-                        // Network image URL
                         return CircleAvatar(
                           radius: 32,
-                          backgroundImage: NetworkImage(userFoto),
+                          backgroundImage: NetworkImage(user.photoURL!),
                         );
                       }
-                    } else {
-                      return CircleAvatar(
-                        radius: 32,
-                        backgroundImage: NetworkImage(user.photoURL!),
-                      );
-                    }
-                  },
-                ),
-                SizedBox(width: 10),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FutureBuilder<DataSnapshot>(
-                      future:
-                          usersRef.child(user.uid).once().then((databaseEvent) {
-                        return databaseEvent.snapshot;
-                      }),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<DataSnapshot> snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Text(
-                            user.displayName!,
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                              color: Colors.black,
-                            ),
-                          );
-                        } else if (snapshot.hasData) {
-                          final userData =
-                              snapshot.data!.value as Map<dynamic, dynamic>;
-                          final userName = userData['name'] as String;
+                    },
+                  ),
+                  SizedBox(width: 10),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      FutureBuilder<DataSnapshot>(
+                        future: usersRef
+                            .child(user.uid)
+                            .once()
+                            .then((databaseEvent) {
+                          return databaseEvent.snapshot;
+                        }),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<DataSnapshot> snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Text(
+                              user.displayName!,
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            );
+                          } else if (snapshot.hasData) {
+                            final userData =
+                                snapshot.data!.value as Map<dynamic, dynamic>;
+                            final userName = userData['name'] as String;
 
-                          return Text(
-                            userName,
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                              color: Colors.black,
-                            ),
-                          );
-                        } else {
-                          final userData =
-                              snapshot.data!.value as Map<dynamic, dynamic>;
-                          final userName = userData['name'] as String;
+                            return Text(
+                              userName,
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            );
+                          } else {
+                            final userData =
+                                snapshot.data!.value as Map<dynamic, dynamic>;
+                            final userName = userData['name'] as String;
 
-                          return Text(
-                            userName,
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                              color: Colors.black,
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                    FutureBuilder<PackageInfo>(
-                      future: PackageInfo.fromPlatform(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<PackageInfo> snapshot) {
-                        if (snapshot.hasData) {
-                          return Text(
-                            'Software Patch ${snapshot.data?.version}',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: 12,
-                              color: Colors.black,
-                            ),
-                          );
-                        } else {
-                          return CircularProgressIndicator();
-                        }
-                      },
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-          ],
-        ),
-      ],
+                            return Text(
+                              userName,
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                      FutureBuilder<PackageInfo>(
+                        future: PackageInfo.fromPlatform(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<PackageInfo> snapshot) {
+                          if (snapshot.hasData) {
+                            return Text(
+                              'Software Patch ${snapshot.data?.version}',
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: 12,
+                                color: Colors.black,
+                              ),
+                            );
+                          } else {
+                            return CircularProgressIndicator();
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
