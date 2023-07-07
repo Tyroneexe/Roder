@@ -15,6 +15,29 @@ import '../ui/notification_page.dart';
 import '../widgets/filter_button.dart';
 import '../widgets/unfilter_button.dart';
 
+/*
+To Do
+
+loading indicator for notification page
+Time between the selected time and the end time
+fix the route page system not working
+Clean the Theme Page
+save the first ride created bool with shared preferences
+log in with facebook and instagram
+do the message part of the app
+fix the custom profile pic
+(link to ride) when i press on the users in the add ride page, it hsould invite them them to the ride, learn how to open the ride that the user has been invited to
+if ride is solo then instead of joining, then ask to join
+notifications if someone has joined the ride
+create a notification saying that the user has been invited
+Follow and block users after messaging part is done
+make Host delete Ride
+make host join ride when press on 'create ride'
+post app to playstore
+iOS compatible
+show app to BMW
+*/
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
