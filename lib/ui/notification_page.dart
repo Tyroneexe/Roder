@@ -126,49 +126,178 @@ class _NotificationPageState extends State<NotificationPage> {
     return Scaffold(
       endDrawer: NavitionDrawer(),
       appBar: _appBar(),
-      body: Column(
-        children: [
-          if (hasUnviewedNotifications || !welcomeViewed) ...[
-            if (!seeOlderNotifications) ...[
-              Row(
-                children: [
-                  SizedBox(width: 20),
-                  Text(
-                    'Recently',
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16,
+      body: RefreshIndicator(
+        color: btnBlueClr,
+        strokeWidth: 3,
+        onRefresh: _refresh,
+        child: Column(
+          children: [
+            if (hasUnviewedNotifications || !welcomeViewed) ...[
+              if (!seeOlderNotifications) ...[
+                Row(
+                  children: [
+                    SizedBox(width: 20),
+                    Text(
+                      'Recently',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 10),
-              if (!welcomeViewed) ...[
-                _welcomeNotification(),
+                  ],
+                ),
                 SizedBox(height: 10),
+                if (!welcomeViewed) ...[
+                  _welcomeNotification(),
+                  SizedBox(height: 10),
+                ],
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: filteredNotifications.length,
+                  itemBuilder: (BuildContext context, int listIndex) {
+                    if (filteredNotifications[listIndex].viewed == true) {
+                      return Container();
+                    } else {
+                      return NotificationCard(
+                        notification: filteredNotifications[listIndex],
+                        onTap: () async {
+                          setState(() {
+                            filteredNotifications[listIndex].viewed = true;
+                          });
+                          await filteredNotifications[listIndex]
+                              .saveViewedStatus();
+                        },
+                      );
+                    }
+                  },
+                ),
+                SizedBox(height: 15),
+                Row(
+                  children: [
+                    SizedBox(width: 20),
+                    Text(
+                      'Older',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 15),
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: filteredNotifications.length,
+                  itemBuilder: (BuildContext context, int listIndex) {
+                    if (filteredNotifications[listIndex].viewed) {
+                      return NotificationCard(
+                        notification: filteredNotifications[listIndex],
+                        onTap: () async {
+                          setState(() {
+                            filteredNotifications[listIndex].viewed = false;
+                          });
+                          await filteredNotifications[listIndex]
+                              .saveViewedStatus();
+                        },
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
+                ),
+                SizedBox(height: 10),
+                if (welcomeViewed == true) ...[
+                  _welcomeNotification(),
+                ],
               ],
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: filteredNotifications.length,
-                itemBuilder: (BuildContext context, int listIndex) {
-                  if (filteredNotifications[listIndex].viewed == true) {
-                    return Container();
-                  } else {
-                    return NotificationCard(
-                      notification: filteredNotifications[listIndex],
-                      onTap: () async {
-                        setState(() {
-                          filteredNotifications[listIndex].viewed = true;
-                        });
-                        await filteredNotifications[listIndex]
-                            .saveViewedStatus();
-                      },
-                    );
-                  }
-                },
+            ],
+            if (!hasUnviewedNotifications &&
+                welcomeViewed &&
+                !seeOlderNotifications) ...[
+              Container(
+                height: MediaQuery.of(context).size.height - 250,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 220,
+                        width: 220,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/NotiRoderImage.png'),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'No New Notifications',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20,
+                          color: Colors.black,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'There are no new notifications to show right now',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w100,
+                          fontSize: 14,
+                          color: Colors.black,
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        child: TextButton(
+                          onPressed: () {
+                            setState(() {
+                              seeOlderNotifications = true;
+                            });
+                          },
+                          style: ButtonStyle(
+                            textStyle: MaterialStateProperty.all<TextStyle>(
+                              TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w700,
+                                fontSize: 14,
+                                color: Colors.white,
+                              ),
+                            ),
+                            foregroundColor: MaterialStateProperty.all<Color>(
+                              Colors.white,
+                            ),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                              btnBlueClr,
+                            ),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                            ),
+                            minimumSize: MaterialStateProperty.all<Size>(
+                              Size(
+                                MediaQuery.of(context).size.width / 1.5,
+                                38,
+                              ),
+                            ),
+                          ),
+                          child: Text('See Older Notifications'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              SizedBox(height: 15),
+            ],
+            if (seeOlderNotifications) ...[
+              SizedBox(height: 20),
               Row(
                 children: [
                   SizedBox(width: 20),
@@ -182,7 +311,7 @@ class _NotificationPageState extends State<NotificationPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 10),
               ListView.builder(
                 shrinkWrap: true,
                 itemCount: filteredNotifications.length,
@@ -207,132 +336,9 @@ class _NotificationPageState extends State<NotificationPage> {
               if (welcomeViewed == true) ...[
                 _welcomeNotification(),
               ],
-            ],
+            ]
           ],
-          if (!hasUnviewedNotifications &&
-              welcomeViewed &&
-              !seeOlderNotifications) ...[
-            Container(
-              height: MediaQuery.of(context).size.height - 250,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 220,
-                      width: 220,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/NotiRoderImage.png'),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      'No New Notifications',
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20,
-                        color: Colors.black,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      'There are no new notifications to show right now',
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w100,
-                        fontSize: 14,
-                        color: Colors.black,
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                      child: TextButton(
-                        onPressed: () {
-                          setState(() {
-                            seeOlderNotifications = true;
-                          });
-                        },
-                        style: ButtonStyle(
-                          textStyle: MaterialStateProperty.all<TextStyle>(
-                            TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14,
-                              color: Colors.white,
-                            ),
-                          ),
-                          foregroundColor: MaterialStateProperty.all<Color>(
-                            Colors.white,
-                          ),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            btnBlueClr,
-                          ),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                          ),
-                          minimumSize: MaterialStateProperty.all<Size>(
-                            Size(
-                              MediaQuery.of(context).size.width / 1.5,
-                              38,
-                            ),
-                          ),
-                        ),
-                        child: Text('See Older Notifications'),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-          if (seeOlderNotifications) ...[
-            SizedBox(height: 20),
-            Row(
-              children: [
-                SizedBox(width: 20),
-                Text(
-                  'Older',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: filteredNotifications.length,
-              itemBuilder: (BuildContext context, int listIndex) {
-                if (filteredNotifications[listIndex].viewed) {
-                  return NotificationCard(
-                    notification: filteredNotifications[listIndex],
-                    onTap: () async {
-                      setState(() {
-                        filteredNotifications[listIndex].viewed = false;
-                      });
-                      await filteredNotifications[listIndex].saveViewedStatus();
-                    },
-                  );
-                } else {
-                  return Container();
-                }
-              },
-            ),
-            SizedBox(height: 10),
-            if (welcomeViewed == true) ...[
-              _welcomeNotification(),
-            ],
-          ]
-        ],
+        ),
       ),
     );
   }
@@ -468,6 +474,10 @@ class _NotificationPageState extends State<NotificationPage> {
         ],
       ),
     );
+  }
+
+  Future _refresh() async {
+    setState(() {});
   }
 
   _saveWelcomeViewedBool() async {

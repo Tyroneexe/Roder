@@ -19,9 +19,10 @@ import '../widgets/unfilter_button.dart';
 To Do
 
 loading indicator for notification page
-Time between the selected time and the end time
-fix the route page system not working
+
 Clean the Theme Page
+fix the route page system not working
+Time between the selected time and the end time
 save the first ride created bool with shared preferences
 log in with facebook and instagram
 do the message part of the app
