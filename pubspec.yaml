@@ -84,10 +84,11 @@ dependencies:
 
   #firebase database
   firebase_database: ^10.0.14
-  flutter_slidable: ^2.0.0
-  search_page: ^2.3.0
-  firebase_core: ^2.6.1
+
+  #firestore database
+  cloud_firestore: ^4.8.2
   firebase_auth: ^4.6.1
+  firebase_core: ^2.6.1
 
 
   #flutter native splash

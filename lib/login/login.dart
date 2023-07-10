@@ -1,10 +1,13 @@
+// ignore_for_file: unnecessary_null_comparison
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/navbar/navbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../homepage/home_page.dart';
 import '../ui/notification_page.dart';
 import 'google_sign_in.dart';
 
@@ -114,7 +117,8 @@ class _LogInState extends State<LogIn> {
         final provider =
             Provider.of<GoogleSignInProvider>(context, listen: false);
         await provider.googleLogIn();
-        assignUserID();
+        //
+        saveUserInTheDatabase();
 
         _saveWelcomeViewedBool();
         _saveNotificationTime();
@@ -167,22 +171,35 @@ class _LogInState extends State<LogIn> {
     prefs.setString('notificationTime', notificationTime.toString());
   }
 
-  void assignUserID() async {
-    final user = FirebaseAuth.instance.currentUser;
-    final referenceDatabase = FirebaseDatabase.instance;
-    final ref = referenceDatabase.ref();
-
+  //create a users in the firestore database
+  Future saveUserInTheDatabase() async {
     if (user != null) {
-      ref.child('Users').child(user.uid).set({
-        'name': user.displayName,
-        'email': user.email,
-        'contact': '',
-        'location': '',
-        'bike': '',
-        'foto': user.photoURL,
-      }).asStream();
+      // Assuming you have the necessary user information
+      String userID = user.uid;
+      String username = user.displayName!;
+      String email = user.email!;
+
+      await createUser(userID, username, email);
     } else {
       print('Error');
+    }
+  }
+
+  Future<void> createUser(String userID, String username, String email) async {
+    try {
+      // Get a reference to the Firestore collection
+      CollectionReference users =
+          FirebaseFirestore.instance.collection('users');
+
+      // Create a new user document with the provided user ID
+      await users.doc(userID).set({
+        'username': username,
+        'email': email,
+      });
+
+      print('User created successfully!');
+    } catch (e) {
+      print('Error creating user: $e');
     }
   }
 }

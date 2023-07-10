@@ -5,11 +5,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../provider/clrProvider.dart';
 import '../themes/theme.dart';
 
 class Favourites extends StatefulWidget {
@@ -43,157 +40,144 @@ class _FavouritesState extends State<Favourites> {
   }
 
   Widget listItem({
-    required Map Rides,
+    required Map rideData,
   }) {
-    return Slidable(
-      startActionPane: ActionPane(
-        motion: const BehindMotion(),
-        extentRatio: 1 / 5,
-        children: [
-          SlidableAction(
-            backgroundColor: rred,
-            label: 'LEAVE',
-            icon: Icons.logout,
-            onPressed: (context) async {
-              databaseReference
-                  .child('Rides/${Rides['key']}')
-                  .update({'Joined': Rides['Joined'] - 1});
-              _delFromFav();
-              if (joinedRides.contains(Rides['key'])) {
-                joinedRides.remove(Rides['key']);
-                //update shared preferences
-                final prefs = await SharedPreferences.getInstance();
-                await prefs.setStringList('joined_rides', joinedRides);
-                setState(() {});
-              }
-            },
-          )
-          // SlidableAction(
-          //   backgroundColor: _getBGClr(Rides['Color']),
-          //   icon: Icons.more_horiz,
-          //   label: 'DETAIL',
-          //   onPressed: (BuildContext context) async {
-          //     //
-          //   },
-          // ),
-        ],
-      ),
-      child: Stack(
-        clipBehavior: Clip.none,
-        alignment: Alignment.topRight,
-        children: [
-          Container(
-            margin: const EdgeInsets.all(10),
-            padding: const EdgeInsets.all(20),
-            height: 200,
-            decoration: BoxDecoration(
-              color: _getBGClr(Rides['Color']),
-              borderRadius: BorderRadius.circular(20.0),
+    return Padding(
+      padding:
+          const EdgeInsets.only(left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
+      child: Container(
+        height: 180,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          image: DecorationImage(
+            image: AssetImage('assets/image 14.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.black.withOpacity(0.6),
+              ),
             ),
-            child: Stack(children: [
-              Container(
-                // color: Colors.red.withOpacity(0.2),
-                padding: EdgeInsets.only(left: 205, top: 100),
-                child: Text(
-                  "Joined: ${Rides['Joined'].toString()}",
-                  style: tyStyle,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 20),
+                  child: Text(
+                    rideData['Country'],
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: countryRideListClr,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    rideData['City'],
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    rideData['Name'],
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    '${rideData['Riders']} Ride',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    rideData['Date'],
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 20, bottom: 10),
+                child: TextButton(
+                  onPressed: () {
+                    // Button onPressed logic
+                  },
+                  style: ButtonStyle(
+                    textStyle: MaterialStateProperty.all<TextStyle>(
+                      TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 12,
+                        color: Colors.white,
+                      ),
+                    ),
+                    foregroundColor: MaterialStateProperty.all<Color>(
+                      Colors.white,
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      btnBlueClr,
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    // minimumSize: MaterialStateProperty.all<Size>(
+                    //   Size(
+                    //     30,
+                    //     30,
+                    //   ),
+                    // ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 5, right: 5),
+                    child: Text('Join Ride'),
+                  ),
                 ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(
-                      bottom: 20,
-                    ),
-                    child: Center(
-                      child: Text(
-                        Rides['Name'],
-                        style: const TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                            color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Center(
-                    child: FittedBox(
-                      fit: BoxFit.contain,
-                      child: Text(
-                        Rides['Origin'] + '  to  ' + Rides['Destination'],
-                        style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15,
-                            color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Text(Rides['Date'], style: tyStyle),
-                  Text(
-                    Rides['Start Time'] + '  to  ' + Rides['End Time'],
-                    style: tyStyle,
-                  ),
-                ],
-              ),
-            ]),
-          ),
-          Positioned(
-            right: 0,
-            child: CircleAvatar(
-              radius: 25,
-              backgroundImage: NetworkImage(Rides['GPhoto']),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-      closeOnScroll: true,
     );
-  }
-
-  _getBGClr(int no) {
-    if (Provider.of<ColorProvider>(context).selectedColor == 0) {
-      switch (no) {
-        case 0:
-          return blueClr;
-        case 1:
-          return lightBlueClr;
-        case 2:
-          return vBlue;
-        default:
-          return blueClr;
-      }
-    } else if (Provider.of<ColorProvider>(context).selectedColor == 1) {
-      switch (no) {
-        case 0:
-          return oRange;
-        case 1:
-          return lightOrange;
-        case 2:
-          return skinOrange;
-        default:
-          return oRange;
-      }
-    } else {
-      switch (no) {
-        case 0:
-          return themeRed;
-        case 1:
-          return rred;
-        case 2:
-          return darkRed;
-        default:
-          return themeRed;
-      }
-    }
   }
 
   @override
@@ -225,12 +209,12 @@ class _FavouritesState extends State<Favourites> {
                     query: dbRef,
                     itemBuilder: (BuildContext context, DataSnapshot snapshot,
                         Animation<double> animation, int index) {
-                      Map Rides = snapshot.value as Map;
-                      Rides['key'] = snapshot.key;
+                      Map rideData = snapshot.value as Map;
+                      rideData['key'] = snapshot.key;
                       //
                       //
-                      if (joinedRides.contains(Rides['key'])) {
-                        return listItem(Rides: Rides)
+                      if (joinedRides.contains(rideData['key'])) {
+                        return listItem(rideData: rideData)
                             .animate()
                             .slideX(duration: 300.ms)
                             .fade(duration: 400.ms);
@@ -244,16 +228,16 @@ class _FavouritesState extends State<Favourites> {
             ]));
   }
 
-  _delFromFav() {
-    Get.snackbar("RIDE REMOVED", "Ride removed from Favorites",
-        snackPosition: SnackPosition.TOP,
-        // duration: 2,
-        borderWidth: 5,
-        borderColor: rred,
-        backgroundColor: Colors.white,
-        colorText: rred,
-        icon: const Icon(Icons.logout));
-  }
+  // _delFromFav() {
+  //   Get.snackbar("RIDE REMOVED", "Ride removed from Favorites",
+  //       snackPosition: SnackPosition.TOP,
+  //       // duration: 2,
+  //       borderWidth: 5,
+  //       borderColor: rred,
+  //       backgroundColor: Colors.white,
+  //       colorText: rred,
+  //       icon: const Icon(Icons.logout));
+  // }
 
   _appbar(BuildContext context) {
     return AppBar(
