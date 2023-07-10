@@ -175,24 +175,23 @@ class _LogInState extends State<LogIn> {
   Future saveUserInTheDatabase() async {
     if (user != null) {
       // Assuming you have the necessary user information
-      String userID = user.uid;
       String username = user.displayName!;
       String email = user.email!;
 
-      await createUser(userID, username, email);
+      await createUser(username, email);
     } else {
       print('Error');
     }
   }
 
-  Future<void> createUser(String userID, String username, String email) async {
+  Future<void> createUser(String username, String email) async {
     try {
       // Get a reference to the Firestore collection
       CollectionReference users =
           FirebaseFirestore.instance.collection('users');
 
       // Create a new user document with the provided user ID
-      await users.doc(userID).set({
+      await users.doc(user.uid).set({
         'username': username,
         'email': email,
       });

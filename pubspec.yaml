@@ -58,7 +58,7 @@ dependencies:
   shared_preferences: ^2.0.17
   get_storage:
   get: ^4.6.5
-  sqflite:
+  # sqflite:
 
   #google maps
   permission_handler: ^10.2.0
@@ -66,9 +66,9 @@ dependencies:
   google_api_headers: ^1.0.0
   tuple: ^2.0.1
   http: ^0.13.0
-  uuid: ^3.0.7
-  google_maps_flutter: ^2.2.5
-  flutter_polyline_points: ^1.0.0
+  # uuid: ^3.0.7
+  # google_maps_flutter: ^2.2.5
+  # flutter_polyline_points: ^1.0.0
   geolocator: ^9.0.2
   geocoding: ^2.1.0
 
