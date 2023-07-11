@@ -18,6 +18,9 @@ import '../widgets/unfilter_button.dart';
 /*
 To Do
 
+StreamBuilder for rides (real time)
+FutureBuilder for user data (returns a future(await))
+
 loading indicator for notification page
 
 Clean the Theme Page
