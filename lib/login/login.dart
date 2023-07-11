@@ -194,6 +194,12 @@ class _LogInState extends State<LogIn> {
       await users.doc(user.uid).set({
         'username': username,
         'email': email,
+        'foto': user.photoURL,
+        'bike': '',
+        'contact': '',
+        'location': '',
+        'rides': [],
+        //groups (array)
       });
 
       print('User created successfully!');

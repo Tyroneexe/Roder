@@ -1,6 +1,7 @@
 // ignore_for_file: unused_field
 
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
@@ -35,9 +36,21 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
   @override
   Widget build(BuildContext context) {
-    final ref = FirebaseDatabase.instance.ref();
-    final locationProvider = Provider.of<LocationProvider>(context, listen: false);
+    // final locationProvider =
+    //     Provider.of<LocationProvider>(context, listen: false);
 
+    // Map<String, dynamic> rideData = {
+    //   'Name': titleController.text,
+    //   'Date': _selectedDate,
+    //   'Start Time': _startTime,
+    //   'End Time': _endTime,
+    //   'Person': user.displayName!,
+    //   'Joined': 0,
+    //   'Riders': selectedRide,
+    //   'Country': locationProvider.countryController.text,
+    //   'City': locationProvider.cityController.text,
+    //   'Address': locationProvider.addressController.text,
+    // };
     return Scaffold(
       backgroundColor: context.theme.colorScheme.background,
       appBar: _appBar(),
@@ -534,21 +547,10 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_validateDate() == true) {
-                        ref.child('Rides').push().set({
-                          'Name': titleController.text,
-                          'Date': _selectedDate,
-                          'Start Time': _startTime,
-                          'End Time': _endTime,
-                          'Person': user.displayName!,
-                          'GPhoto': user.photoURL!,
-                          'Joined': 0,
-                          'Riders': selectedRide,
-                          'Country': locationProvider.countryController.text,
-                          'City': locationProvider.cityController.text,
-                          'Address': locationProvider.addressController.text,
-                        }).asStream();
+                        createRide();
+                        /////////
                         titleController.clear();
                         _addedRideBar();
                         _scheduleNotification();
@@ -596,6 +598,37 @@ class _AddTaskPageState extends State<AddTaskPage> {
         ),
       ),
     );
+  }
+
+  final ridesCollection = FirebaseFirestore.instance.collection('rides');
+  final usersCollection = FirebaseFirestore.instance.collection('users');
+
+  void createRide() async {
+    final locationProvider =
+        Provider.of<LocationProvider>(context, listen: false);
+    // Add a ride document to the "rides" collection with an auto-generated ID
+    final rideDoc = await ridesCollection.add({
+      'Name': titleController.text,
+      'Date': _selectedDate,
+      'Start Time': _startTime,
+      'End Time': _endTime,
+      'Person': user.displayName!,
+      'Joined': 0,
+      'Riders': selectedRide,
+      'Country': locationProvider.countryController.text,
+      'City': locationProvider.cityController.text,
+      'Address': locationProvider.addressController.text,
+    });
+
+    // Reference the user document
+    final userDoc = usersCollection.doc(user.uid);
+
+    // Add the ride ID to the "rides" subcollection within the user document
+    userDoc.update({
+      'rides': FieldValue.arrayUnion([rideDoc.id]),
+    });
+
+    print('Ride added with ID: ${rideDoc.id}');
   }
 
   // _selectedDate is for when the ride is happening (completly seperate from the notificaitons)
@@ -854,7 +887,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
   }
 
   void _locationPopup() {
-    final locationProvider = Provider.of<LocationProvider>(context, listen: false);
+    final locationProvider =
+        Provider.of<LocationProvider>(context, listen: false);
 
     showDialog(
       context: context,
