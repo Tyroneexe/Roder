@@ -2,13 +2,10 @@
 
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:roder/account/account_page.dart';
 import 'package:roder/themes/theme.dart';
 import '../homepage/home_page.dart';
 import '../ui/notification_page.dart';
@@ -520,7 +517,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   height: 10,
                 ),
                 //search bar for searching users
-                _getUsers(),
+                // _getUsers(),
                 SizedBox(
                   height: 10,
                 ),
@@ -810,65 +807,65 @@ class _AddTaskPageState extends State<AddTaskPage> {
     return pickerTheme;
   }
 
-  _getUsers() {
-    return Expanded(
-      child: FirebaseAnimatedList(
-        physics: BouncingScrollPhysics(),
-        query: usersRef,
-        itemBuilder: (BuildContext context, DataSnapshot snapshot,
-            Animation<double> animation, int index) {
-          final userData = snapshot.value as Map<dynamic, dynamic>;
-          return listItem(userData: userData);
-        },
-      ),
-    );
-  }
+  // _getUsers() {
+  //   return Expanded(
+  //     child: FirebaseAnimatedList(
+  //       physics: BouncingScrollPhysics(),
+  //       query: usersRef,
+  //       itemBuilder: (BuildContext context, DataSnapshot snapshot,
+  //           Animation<double> animation, int index) {
+  //         final userData = snapshot.value as Map<dynamic, dynamic>;
+  //         return listItem(userData: userData);
+  //       },
+  //     ),
+  //   );
+  // }
 
-  Widget listItem({
-    required Map userData,
-  }) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          //padding for spacing between rides
-          padding: const EdgeInsets.only(
-              left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
-          //this container is for the image
-          child: CircleAvatar(
-            radius: 24,
-            backgroundImage: NetworkImage(
-              userData['foto'],
-            ),
-          ),
-        ),
-        //padding to make the text in line with the circle avatar
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 12),
-              child: Text(
-                userData['name'],
-                style: roRegular14,
-              ),
-            ),
-            Text(
-              userData['bike'],
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w100,
-                fontSize: 12,
-                color: Colors.black,
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
+  // Widget listItem({
+  //   required Map userData,
+  // }) {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.start,
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       Padding(
+  //         //padding for spacing between rides
+  //         padding: const EdgeInsets.only(
+  //             left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
+  //         //this container is for the image
+  //         child: CircleAvatar(
+  //           radius: 24,
+  //           backgroundImage: NetworkImage(
+  //             userData['foto'],
+  //           ),
+  //         ),
+  //       ),
+  //       //padding to make the text in line with the circle avatar
+  //       Column(
+  //         mainAxisAlignment: MainAxisAlignment.start,
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           Padding(
+  //             padding: const EdgeInsets.only(top: 12),
+  //             child: Text(
+  //               userData['name'],
+  //               style: roRegular14,
+  //             ),
+  //           ),
+  //           Text(
+  //             userData['bike'],
+  //             style: TextStyle(
+  //               fontFamily: 'Roboto',
+  //               fontWeight: FontWeight.w100,
+  //               fontSize: 12,
+  //               color: Colors.black,
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ],
+  //   );
+  // }
 
   void _locationPopup() {
     final locationProvider =

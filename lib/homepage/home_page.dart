@@ -3,11 +3,9 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_version_plus/new_version_plus.dart';
-import '../account/account_page.dart';
 import '../drawer/nav_drawer.dart';
 import '../themes/theme.dart';
 import '../ui/notification_page.dart';
@@ -17,7 +15,8 @@ import '../widgets/unfilter_button.dart';
 /*
 To Do
 
-FutureBuilder for user data (returns a future(await))
+add the memebers list in add ride page with firestore
+
 
 Save joined rides locally
 
@@ -145,16 +144,17 @@ class _HomePageState extends State<HomePage> {
             children: [
               Padding(
                 padding: EdgeInsets.only(left: 20),
-                child: FutureBuilder<DataSnapshot>(
-                  future: usersRef.child(user.uid).once().then((databaseEvent) {
-                    return databaseEvent.snapshot;
-                  }),
+                child: FutureBuilder<DocumentSnapshot>(
+                  future: FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(user.uid)
+                      .get(),
                   builder: (BuildContext context,
-                      AsyncSnapshot<DataSnapshot> snapshot) {
+                      AsyncSnapshot<DocumentSnapshot> snapshot) {
                     if (snapshot.hasData) {
                       final userData =
-                          snapshot.data!.value as Map<dynamic, dynamic>;
-                      final userName = userData['name'] as String;
+                          snapshot.data!.data() as Map<String, dynamic>;
+                      final userName = userData['username'] as String;
 
                       return Text(
                         'Hey $userName,',

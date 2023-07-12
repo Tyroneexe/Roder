@@ -78,9 +78,6 @@ dependencies:
   google_sign_in: ^6.1.2
   in_app_review: ^2.0.6
 
-  #firebase database
-  firebase_database: ^10.0.14
-
   #firestore database
   cloud_firestore: ^4.8.2
   firebase_auth: ^4.6.1

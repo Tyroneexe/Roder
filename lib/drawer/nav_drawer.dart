@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable, unused_field, non_constant_identifier_names
 import 'dart:io';
 
-import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +12,6 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/account/account_page.dart';
 import 'package:roder/login/google_sign_in.dart';
-import 'package:roder/settings_page/settings_page.dart';
 import 'package:roder/themes/theme.dart';
 import 'package:roder/ui/about_us.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -121,16 +120,16 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                   SizedBox(
                     width: 25,
                   ),
-                  FutureBuilder<DataSnapshot>(
-                    future:
-                        usersRef.child(user.uid).once().then((databaseEvent) {
-                      return databaseEvent.snapshot;
-                    }),
+                  FutureBuilder<DocumentSnapshot>(
+                    future: FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(user.uid)
+                        .get(),
                     builder: (BuildContext context,
-                        AsyncSnapshot<DataSnapshot> snapshot) {
+                        AsyncSnapshot<DocumentSnapshot> snapshot) {
                       if (snapshot.hasData) {
                         final userData =
-                            snapshot.data!.value as Map<dynamic, dynamic>;
+                            snapshot.data!.data() as Map<String, dynamic>;
                         final userFoto = userData['foto'] as String;
 
                         if (userFoto.startsWith('/')) {
@@ -159,15 +158,13 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      FutureBuilder<DataSnapshot>(
-                        future: usersRef
-                            .child(user.uid)
-                            .once()
-                            .then((databaseEvent) {
-                          return databaseEvent.snapshot;
-                        }),
+                      FutureBuilder<DocumentSnapshot>(
+                        future: FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(user.uid)
+                            .get(),
                         builder: (BuildContext context,
-                            AsyncSnapshot<DataSnapshot> snapshot) {
+                            AsyncSnapshot<DocumentSnapshot> snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
                             return Text(
@@ -181,8 +178,8 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                             );
                           } else if (snapshot.hasData) {
                             final userData =
-                                snapshot.data!.value as Map<dynamic, dynamic>;
-                            final userName = userData['name'] as String;
+                                snapshot.data!.data() as Map<String, dynamic>;
+                            final userName = userData['username'] as String;
 
                             return Text(
                               userName,
@@ -195,7 +192,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                             );
                           } else {
                             final userData =
-                                snapshot.data!.value as Map<dynamic, dynamic>;
+                                snapshot.data!.data() as Map<String, dynamic>;
                             final userName = userData['name'] as String;
 
                             return Text(

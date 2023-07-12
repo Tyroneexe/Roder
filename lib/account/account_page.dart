@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
@@ -28,8 +27,6 @@ String nu = '';
 String location = '';
 String bike = '';
 
-final DatabaseReference usersRef =
-    FirebaseDatabase.instance.ref().child('Users');
 
 class _AccountPageState extends State<AccountPage> {
   File? image;
