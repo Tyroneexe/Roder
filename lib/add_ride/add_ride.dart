@@ -36,21 +36,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final locationProvider =
-    //     Provider.of<LocationProvider>(context, listen: false);
-
-    // Map<String, dynamic> rideData = {
-    //   'Name': titleController.text,
-    //   'Date': _selectedDate,
-    //   'Start Time': _startTime,
-    //   'End Time': _endTime,
-    //   'Person': user.displayName!,
-    //   'Joined': 0,
-    //   'Riders': selectedRide,
-    //   'Country': locationProvider.countryController.text,
-    //   'City': locationProvider.cityController.text,
-    //   'Address': locationProvider.addressController.text,
-    // };
     return Scaffold(
       backgroundColor: context.theme.colorScheme.background,
       appBar: _appBar(),
@@ -613,7 +598,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
       'Start Time': _startTime,
       'End Time': _endTime,
       'Person': user.displayName!,
-      'Joined': 0,
+      'Joined': 1,
       'Riders': selectedRide,
       'Country': locationProvider.countryController.text,
       'City': locationProvider.cityController.text,

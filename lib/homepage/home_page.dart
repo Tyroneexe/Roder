@@ -247,13 +247,21 @@ class _HomePageState extends State<HomePage> {
       for (var ride in rides) {
         imageNumber = (imageNumber % 4) + 1;
         if (isFilter3 && await isRideJoinedByCurrentUser(ride.id)) {
-          final rideWidget = JoinedRideListItem(
+          final rideWidget = RideListItem(
+            //this should return joined ride list item
+            ride: ride,
+            imageNumber: imageNumber,
+          );
+          rideWidgets.add(rideWidget);
+        } else if (isFilter4 && await isRideCreatedByCurrentUser(ride.id)) {
+          final rideWidget = CreatedRideListItem(
             ride: ride,
             imageNumber: imageNumber,
           );
           rideWidgets.add(rideWidget);
         } else if (isFilter1) {
           final rideWidget = RideListItem(
+            //this should return joined ride list item
             ride: ride,
             imageNumber: imageNumber,
           );
@@ -266,6 +274,22 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<bool> isRideJoinedByCurrentUser(String rideId) async {
+    // this function should also check if the user
+    final userDoc =
+        FirebaseFirestore.instance.collection('users').doc(user.uid);
+
+    final snapshot = await userDoc.get();
+    final ridesArray = snapshot.data()?['joined_rides'] as List<dynamic>?;
+
+    if (ridesArray != null && ridesArray.contains(rideId)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  Future<bool> isRideCreatedByCurrentUser(String rideId) async {
+    // this function should also check if the user
     final userDoc =
         FirebaseFirestore.instance.collection('users').doc(user.uid);
 
@@ -439,7 +463,7 @@ class _HomePageState extends State<HomePage> {
                     });
                   },
                   child: Text(
-                    'Events',
+                    'My Rides',
                     style: TextStyle(
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.w700,
@@ -458,7 +482,7 @@ class _HomePageState extends State<HomePage> {
                     });
                   },
                   child: Text(
-                    'Events',
+                    'My Rides',
                     style: TextStyle(
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.w700,
@@ -617,8 +641,8 @@ class RideListItem extends StatelessWidget {
   }
 }
 
-class JoinedRideListItem extends StatelessWidget {
-  JoinedRideListItem({
+class CreatedRideListItem extends StatelessWidget {
+  CreatedRideListItem({
     super.key,
     required this.ride,
     required this.imageNumber,
