@@ -53,20 +53,11 @@ final user = FirebaseAuth.instance.currentUser!;
 bool isNotificationsEnabled = true;
 
 class _HomePageState extends State<HomePage> {
+  //ride filters for rides
   bool isFilter1 = true;
   bool isFilter2 = false;
   bool isFilter3 = false;
   bool isFilter4 = false;
-  //
-  int noImg = 0;
-  //Loading animation
-
-  //Filter for the rides
-  bool rideFilter = true;
-  bool rideFilter2 = true;
-  bool rideFilter3 = true;
-
-  //Expandable
 
   //Update popup for updates
   String release = "";
