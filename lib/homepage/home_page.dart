@@ -60,8 +60,6 @@ class _HomePageState extends State<HomePage> {
   bool isFilter3 = false;
   bool isFilter4 = false;
 
-  int imageNumber = 0;
-
   //Update popup for updates
   String release = "";
 
@@ -211,28 +209,74 @@ class _HomePageState extends State<HomePage> {
           StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance.collection('rides').snapshots(),
             builder: (context, snapshot) {
-              List<Widget> rideWidgets = [];
               if (snapshot.hasData) {
                 final rides = snapshot.data?.docs.reversed.toList();
-                for (var ride in rides!) {
-                  imageNumber = (imageNumber % 4) + 1;
-                  final rideWidget = RideListItem(
-                    ride: ride,
-                    imageNumber: imageNumber,
-                  );
-                  rideWidgets.add(rideWidget);
-                }
+                return FutureBuilder<List<Widget>>(
+                  future: buildRideWidgets(rides),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    } else if (snapshot.hasData) {
+                      final riderWidgets = snapshot.data!;
+                      return Expanded(
+                        child: ListView(
+                          children: riderWidgets,
+                        ),
+                      );
+                    } else {
+                      return Text('Error loading rides.');
+                    }
+                  },
+                );
+              } else {
+                return CircularProgressIndicator();
               }
-              return Expanded(
-                child: ListView(
-                  children: rideWidgets,
-                ),
-              );
             },
-          ),
+          )
         ],
       ),
     );
+  }
+
+  Future<List<Widget>> buildRideWidgets(
+      List<QueryDocumentSnapshot>? rides) async {
+    List<Widget> rideWidgets = [];
+    int imageNumber = 0;
+
+    if (rides != null) {
+      for (var ride in rides) {
+        imageNumber = (imageNumber % 4) + 1;
+        if (isFilter3 && await isRideJoinedByCurrentUser(ride.id)) {
+          final rideWidget = JoinedRideListItem(
+            ride: ride,
+            imageNumber: imageNumber,
+          );
+          rideWidgets.add(rideWidget);
+        } else if (isFilter1) {
+          final rideWidget = RideListItem(
+            ride: ride,
+            imageNumber: imageNumber,
+          );
+          rideWidgets.add(rideWidget);
+        }
+      }
+    }
+
+    return rideWidgets;
+  }
+
+  Future<bool> isRideJoinedByCurrentUser(String rideId) async {
+    final userDoc =
+        FirebaseFirestore.instance.collection('users').doc(user.uid);
+
+    final snapshot = await userDoc.get();
+    final ridesArray = snapshot.data()?['rides'] as List<dynamic>?;
+
+    if (ridesArray != null && ridesArray.contains(rideId)) {
+      return true;
+    }
+
+    return false;
   }
 
   _filterRidesButtons() {
