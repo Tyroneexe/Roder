@@ -1,11 +1,10 @@
 // ignore_for_file: non_constant_identifier_names,, unnecessary_statements
 
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:new_version_plus/new_version_plus.dart';
 import '../account/account_page.dart';
@@ -63,9 +62,7 @@ class _HomePageState extends State<HomePage> {
   String release = "";
 
   //Database
-  Query dbRef = FirebaseDatabase.instance.ref().child('Rides');
-  DatabaseReference reference = FirebaseDatabase.instance.ref().child('Rides');
-  final databaseReference = FirebaseDatabase.instance.ref();
+
   //
   @override
   void initState() {
@@ -209,7 +206,160 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: 20,
           ),
-          _getDBRides(),
+          StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance.collection('rides').snapshots(),
+            builder: (context, snapshot) {
+              List<Widget> rideWidgets = [];
+              if (snapshot.hasData) {
+                final rides = snapshot.data?.docs.reversed.toList();
+                for (var ride in rides!) {
+                  final rideWidget = Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
+                    child: Container(
+                      height: 180,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        image: DecorationImage(
+                          image: AssetImage('assets/image 14.png'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.black.withOpacity(0.6),
+                            ),
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 20, left: 20),
+                                child: Text(
+                                  ride['Country'],
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w100,
+                                    fontSize: 14,
+                                    color: countryRideListClr,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Text(
+                                  ride['City'],
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w100,
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 30),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Text(
+                                  ride['Name'],
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w100,
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Text(
+                                  '${ride['Riders']} Ride',
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w100,
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Text(
+                                  ride['Date'],
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w100,
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 20, bottom: 10),
+                              child: TextButton(
+                                onPressed: () {
+                                  // Button onPressed logic
+                                },
+                                style: ButtonStyle(
+                                  textStyle:
+                                      MaterialStateProperty.all<TextStyle>(
+                                    TextStyle(
+                                      fontFamily: 'Roboto',
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 12,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    Colors.white,
+                                  ),
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    btnBlueClr,
+                                  ),
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 5, right: 5),
+                                  child: Text('Join Ride'),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                  rideWidgets.add(rideWidget);
+                }
+              }
+              return Expanded(
+                child: ListView(
+                  children: rideWidgets,
+                ),
+              );
+            },
+          )
         ],
       ),
     );
@@ -403,165 +553,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
         ],
-      ),
-    );
-  }
-
-  _getDBRides() {
-    return Expanded(
-      child: FirebaseAnimatedList(
-        physics: BouncingScrollPhysics(),
-        query: dbRef,
-        itemBuilder: (BuildContext context, DataSnapshot snapshot,
-            Animation<double> animation, int index) {
-          Map rideData = snapshot.value as Map;
-          rideData['key'] = snapshot.key;
-          return listItem(rideData: rideData)
-              .animate()
-              .slideX(duration: 300.ms)
-              .fade(duration: 400.ms);
-        },
-      ),
-    );
-  }
-
-  Widget listItem({
-    required Map rideData,
-  }) {
-    return Padding(
-      padding:
-          const EdgeInsets.only(left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
-      child: Container(
-        height: 180,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          image: DecorationImage(
-            image: AssetImage('assets/image 14.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: Colors.black.withOpacity(0.6),
-              ),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 20),
-                  child: Text(
-                    rideData['Country'],
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: countryRideListClr,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text(
-                    rideData['City'],
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 30),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text(
-                    rideData['Name'],
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 5),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text(
-                    '${rideData['Riders']} Ride',
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 5),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text(
-                    rideData['Date'],
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 20, bottom: 10),
-                child: TextButton(
-                  onPressed: () {
-                    // Button onPressed logic
-                  },
-                  style: ButtonStyle(
-                    textStyle: MaterialStateProperty.all<TextStyle>(
-                      TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 12,
-                        color: Colors.white,
-                      ),
-                    ),
-                    foregroundColor: MaterialStateProperty.all<Color>(
-                      Colors.white,
-                    ),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      btnBlueClr,
-                    ),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    // minimumSize: MaterialStateProperty.all<Size>(
-                    //   Size(
-                    //     30,
-                    //     30,
-                    //   ),
-                    // ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 5, right: 5),
-                    child: Text('Join Ride'),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
