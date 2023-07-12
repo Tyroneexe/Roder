@@ -213,7 +213,7 @@ class _SearchState extends State<Search> {
                       String.fromCharCode(Icons.close_rounded.codePoint),
                       style: TextStyle(
                         inherit: false,
-                        color: btnBlueClr,
+                        color: blueClr,
                         fontSize: 28,
                         fontWeight: FontWeight.w700,
                         fontFamily: Icons.close_rounded.fontFamily,

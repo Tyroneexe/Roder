@@ -127,7 +127,7 @@ class _NotificationPageState extends State<NotificationPage> {
       endDrawer: NavitionDrawer(),
       appBar: _appBar(),
       body: RefreshIndicator(
-        color: btnBlueClr,
+        color: blueClr,
         strokeWidth: 3,
         onRefresh: _refresh,
         child: Column(
@@ -273,7 +273,7 @@ class _NotificationPageState extends State<NotificationPage> {
                               Colors.white,
                             ),
                             backgroundColor: MaterialStateProperty.all<Color>(
-                              btnBlueClr,
+                              blueClr,
                             ),
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(
@@ -385,7 +385,7 @@ class _NotificationPageState extends State<NotificationPage> {
                           topLeft: Radius.circular(4),
                           bottomLeft: Radius.circular(4),
                         ),
-                        color: btnBlueClr,
+                        color: blueClr,
                       ),
                     ),
               Container(
@@ -413,7 +413,7 @@ class _NotificationPageState extends State<NotificationPage> {
                         children: [
                           Icon(
                             Icons.waving_hand_rounded,
-                            color: btnBlueClr,
+                            color: blueClr,
                             size: 32,
                           ),
                           SizedBox(width: 20),
@@ -440,7 +440,7 @@ class _NotificationPageState extends State<NotificationPage> {
                             fontFamily: 'Roboto',
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
-                            color: btnBlueClr,
+                            color: blueClr,
                           ),
                         ),
                         TextSpan(
@@ -532,7 +532,7 @@ class NotificationCard extends StatelessWidget {
                           4,
                         ),
                       ),
-                      color: btnBlueClr,
+                      color: blueClr,
                     ),
                   ),
             SizedBox(
@@ -541,7 +541,7 @@ class NotificationCard extends StatelessWidget {
             if (notification.icon != null)
               Icon(
                 notification.icon,
-                color: btnBlueClr,
+                color: blueClr,
                 size: 36,
               ),
             if (notification.icon != null) SizedBox(width: 20),

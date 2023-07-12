@@ -210,7 +210,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
         ),
       ),
       backgroundColor: context.theme.colorScheme.background,
-      foregroundColor: btnBlueClr,
+      foregroundColor: blueClr,
     );
   }
 }

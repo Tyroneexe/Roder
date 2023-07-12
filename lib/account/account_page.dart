@@ -72,7 +72,7 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                     child: Icon(
                       Icons.edit,
-                      color: btnBlueClr,
+                      color: blueClr,
                       size: 24,
                     ),
                   ),
@@ -212,7 +212,7 @@ class _AccountPageState extends State<AccountPage> {
                             ),
                           ),
                           foregroundColor: MaterialStateProperty.all<Color>(
-                            btnBlueClr,
+                            blueClr,
                           ),
                           backgroundColor: MaterialStateProperty.all<Color>(
                             Colors.white,
@@ -224,7 +224,7 @@ class _AccountPageState extends State<AccountPage> {
                                 6,
                               ),
                               side: BorderSide(
-                                color: btnBlueClr,
+                                color: blueClr,
                                 width: 2,
                               ),
                             ),
@@ -291,8 +291,7 @@ class _AccountPageState extends State<AccountPage> {
                                     MaterialStateProperty.all<Color>(
                                         Colors.white),
                                 backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        btnBlueClr),
+                                    MaterialStateProperty.all<Color>(blueClr),
                                 shape: MaterialStateProperty.all<
                                     RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
@@ -328,8 +327,7 @@ class _AccountPageState extends State<AccountPage> {
                                     MaterialStateProperty.all<Color>(
                                         Colors.white),
                                 backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        btnBlueClr),
+                                    MaterialStateProperty.all<Color>(blueClr),
                                 shape: MaterialStateProperty.all<
                                     RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
@@ -390,7 +388,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: btnBlueClr,
+                    color: blueClr,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(
@@ -399,7 +397,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: btnBlueClr,
+                    color: blueClr,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(
@@ -408,7 +406,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: btnBlueClr,
+                    color: blueClr,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(
@@ -445,7 +443,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: btnBlueClr,
+                    color: blueClr,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(
@@ -454,7 +452,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: btnBlueClr,
+                    color: blueClr,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(
@@ -463,7 +461,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: btnBlueClr,
+                    color: blueClr,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(
@@ -497,7 +495,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: btnBlueClr,
+                    color: blueClr,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(
@@ -506,7 +504,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: btnBlueClr,
+                    color: blueClr,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(
@@ -515,7 +513,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: btnBlueClr,
+                    color: blueClr,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(
@@ -555,7 +553,7 @@ class _AccountPageState extends State<AccountPage> {
           ),
           border: OutlineInputBorder(
             borderSide: BorderSide(
-              color: btnBlueClr,
+              color: blueClr,
               width: 2,
             ),
             borderRadius: BorderRadius.circular(
@@ -564,7 +562,7 @@ class _AccountPageState extends State<AccountPage> {
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: btnBlueClr,
+              color: blueClr,
               width: 2,
             ),
             borderRadius: BorderRadius.circular(
@@ -573,7 +571,7 @@ class _AccountPageState extends State<AccountPage> {
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: btnBlueClr,
+              color: blueClr,
               width: 2,
             ),
             borderRadius: BorderRadius.circular(
@@ -631,7 +629,7 @@ class _AccountPageState extends State<AccountPage> {
           ),
           border: OutlineInputBorder(
             borderSide: BorderSide(
-              color: btnBlueClr,
+              color: blueClr,
               width: 2,
             ),
             borderRadius: BorderRadius.circular(
@@ -640,7 +638,7 @@ class _AccountPageState extends State<AccountPage> {
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: btnBlueClr,
+              color: blueClr,
               width: 2,
             ),
             borderRadius: BorderRadius.circular(
@@ -649,7 +647,7 @@ class _AccountPageState extends State<AccountPage> {
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: btnBlueClr,
+              color: blueClr,
               width: 2,
             ),
             borderRadius: BorderRadius.circular(
@@ -679,7 +677,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 dropdownIcon: Icon(
                   Icons.arrow_drop_down,
-                  color: btnBlueClr,
+                  color: blueClr,
                 ),
                 disableLengthCheck: false,
                 dropdownIconPosition: IconPosition.trailing,
@@ -702,7 +700,7 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                   border: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: btnBlueClr,
+                      color: blueClr,
                       width: 2,
                     ),
                     borderRadius: BorderRadius.circular(
@@ -711,7 +709,7 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: btnBlueClr,
+                      color: blueClr,
                       width: 2,
                     ),
                     borderRadius: BorderRadius.circular(
@@ -720,7 +718,7 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: btnBlueClr,
+                      color: blueClr,
                       width: 2,
                     ),
                     borderRadius: BorderRadius.circular(
@@ -754,7 +752,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 dropdownIcon: Icon(
                   Icons.arrow_drop_down,
-                  color: btnBlueClr,
+                  color: blueClr,
                 ),
                 disableLengthCheck: false,
                 dropdownIconPosition: IconPosition.trailing,
@@ -777,7 +775,7 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                   border: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: btnBlueClr,
+                      color: blueClr,
                       width: 2,
                     ),
                     borderRadius: BorderRadius.circular(
@@ -786,7 +784,7 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: btnBlueClr,
+                      color: blueClr,
                       width: 2,
                     ),
                     borderRadius: BorderRadius.circular(
@@ -795,7 +793,7 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: btnBlueClr,
+                      color: blueClr,
                       width: 2,
                     ),
                     borderRadius: BorderRadius.circular(
@@ -826,7 +824,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 dropdownIcon: Icon(
                   Icons.arrow_drop_down,
-                  color: btnBlueClr,
+                  color: blueClr,
                 ),
                 disableLengthCheck: false,
                 dropdownIconPosition: IconPosition.trailing,
@@ -849,7 +847,7 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                   border: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: btnBlueClr,
+                      color: blueClr,
                       width: 2,
                     ),
                     borderRadius: BorderRadius.circular(
@@ -858,7 +856,7 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: btnBlueClr,
+                      color: blueClr,
                       width: 2,
                     ),
                     borderRadius: BorderRadius.circular(
@@ -867,7 +865,7 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: btnBlueClr,
+                      color: blueClr,
                       width: 2,
                     ),
                     borderRadius: BorderRadius.circular(
@@ -924,21 +922,21 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: btnBlueClr,
+                    color: blueClr,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: btnBlueClr,
+                    color: blueClr,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: btnBlueClr,
+                    color: blueClr,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(6),
@@ -976,21 +974,21 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: btnBlueClr,
+                    color: blueClr,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: btnBlueClr,
+                    color: blueClr,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: btnBlueClr,
+                    color: blueClr,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(6),
@@ -1023,21 +1021,21 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: btnBlueClr,
+                    color: blueClr,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: btnBlueClr,
+                    color: blueClr,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: btnBlueClr,
+                    color: blueClr,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(6),
@@ -1054,7 +1052,7 @@ class _AccountPageState extends State<AccountPage> {
     return AppBar(
       elevation: 0,
       backgroundColor: context.theme.colorScheme.background,
-      foregroundColor: btnBlueClr,
+      foregroundColor: blueClr,
       actions: [
         IconButton(
           icon: Icon(

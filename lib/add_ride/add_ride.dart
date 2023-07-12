@@ -90,8 +90,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: btnBlueClr,
-                          width: 1.5,
+                          color: blueClr,
+                          width: 2,
                         ),
                         borderRadius: BorderRadius.circular(
                           6,
@@ -99,8 +99,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: btnBlueClr,
-                          width: 1.5,
+                          color: blueClr,
+                          width: 2,
                         ),
                         borderRadius: BorderRadius.circular(
                           6,
@@ -108,8 +108,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: btnBlueClr,
-                          width: 1.5,
+                          color: blueClr,
+                          width: 2,
                         ),
                         borderRadius: BorderRadius.circular(
                           6,
@@ -171,8 +171,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: btnBlueClr,
-                          width: 1.5,
+                          color: blueClr,
+                          width: 2,
                         ),
                         borderRadius: BorderRadius.circular(
                           6,
@@ -180,8 +180,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: btnBlueClr,
-                          width: 1.5,
+                          color: blueClr,
+                          width: 2,
                         ),
                         borderRadius: BorderRadius.circular(
                           6,
@@ -189,8 +189,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: btnBlueClr,
-                          width: 1.5,
+                          color: blueClr,
+                          width: 2,
                         ),
                         borderRadius: BorderRadius.circular(
                           6,
@@ -243,8 +243,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: btnBlueClr,
-                          width: 1.5,
+                          color: blueClr,
+                          width: 2,
                         ),
                         borderRadius: BorderRadius.circular(
                           6,
@@ -252,8 +252,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: btnBlueClr,
-                          width: 1.5,
+                          color: blueClr,
+                          width: 2,
                         ),
                         borderRadius: BorderRadius.circular(
                           6,
@@ -261,8 +261,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: btnBlueClr,
-                          width: 1.5,
+                          color: blueClr,
+                          width: 2,
                         ),
                         borderRadius: BorderRadius.circular(
                           6,
@@ -304,8 +304,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           ),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: btnBlueClr,
-                              width: 1.5,
+                              color: blueClr,
+                              width: 2,
                             ),
                             borderRadius: BorderRadius.circular(
                               6,
@@ -313,8 +313,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: btnBlueClr,
-                              width: 1.5,
+                              color: blueClr,
+                              width: 2,
                             ),
                             borderRadius: BorderRadius.circular(
                               6,
@@ -322,8 +322,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: btnBlueClr,
-                              width: 1.5,
+                              color: blueClr,
+                              width: 2,
                             ),
                             borderRadius: BorderRadius.circular(
                               6,
@@ -368,8 +368,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           ),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: btnBlueClr,
-                              width: 1.5,
+                              color: blueClr,
+                              width: 2,
                             ),
                             borderRadius: BorderRadius.circular(
                               6,
@@ -377,8 +377,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: btnBlueClr,
-                              width: 1.5,
+                              color: blueClr,
+                              width: 2,
                             ),
                             borderRadius: BorderRadius.circular(
                               6,
@@ -386,8 +386,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: btnBlueClr,
-                              width: 1.5,
+                              color: blueClr,
+                              width: 2,
                             ),
                             borderRadius: BorderRadius.circular(
                               6,
@@ -428,8 +428,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     borderRadius: BorderRadius.circular(6),
                     border: Border.all(
                       color:
-                          btnBlueClr, // Replace Colors.blue with your desired border color
-                      width: 1.5,
+                          blueClr, // Replace Colors.blue with your desired border color
+                      width: 2,
                     ),
                   ),
                   child: Padding(
@@ -445,7 +445,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       icon: Icon(
                         Icons.arrow_drop_down_rounded,
-                        color: btnBlueClr,
+                        color: blueClr,
                       ),
                       hint: Text(
                         'Solo',
@@ -535,7 +535,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     onPressed: () async {
                       if (_validateDate() == true) {
                         createRide();
-                        /////////
                         titleController.clear();
                         _addedRideBar();
                         _scheduleNotification();
@@ -557,7 +556,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         Colors.white,
                       ),
                       backgroundColor: MaterialStateProperty.all<Color>(
-                        btnBlueClr,
+                        blueClr,
                       ),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
@@ -761,16 +760,16 @@ class _AddTaskPageState extends State<AddTaskPage> {
     Get.snackbar("CREATED RIDE", "Ride has been created",
         snackPosition: SnackPosition.TOP,
         borderWidth: 2,
-        borderColor: btnBlueClr,
+        borderColor: blueClr,
         backgroundColor: Colors.white,
-        colorText: btnBlueClr,
+        colorText: blueClr,
         icon: const Icon(Icons.add_location_outlined));
   }
 
   _appBar() {
     return AppBar(
       iconTheme: IconThemeData(
-        color: btnBlueClr,
+        color: blueClr,
       ),
       elevation: 0,
       title: Text(
@@ -792,16 +791,16 @@ class _AddTaskPageState extends State<AddTaskPage> {
     // Create a copy of the current theme
     ThemeData pickerTheme = Theme.of(context).copyWith(
       colorScheme: Theme.of(context).colorScheme.copyWith(
-            primary: btnBlueClr, // Customize the primary color
+            primary: blueClr, // Customize the primary color
           ),
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
           foregroundColor: MaterialStateProperty.resolveWith<Color?>(
             (Set<MaterialState> states) {
               if (states.contains(MaterialState.pressed)) {
-                return btnBlueClr;
+                return blueClr;
               }
-              return btnBlueClr;
+              return blueClr;
             },
           ),
         ),
@@ -923,8 +922,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: btnBlueClr,
-                          width: 1.5,
+                          color: blueClr,
+                          width: 2,
                         ),
                         borderRadius: BorderRadius.circular(
                           6,
@@ -932,8 +931,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: btnBlueClr,
-                          width: 1.5,
+                          color: blueClr,
+                          width: 2,
                         ),
                         borderRadius: BorderRadius.circular(
                           6,
@@ -941,8 +940,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: btnBlueClr,
-                          width: 1.5,
+                          color: blueClr,
+                          width: 2,
                         ),
                         borderRadius: BorderRadius.circular(
                           6,
@@ -984,8 +983,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: btnBlueClr,
-                          width: 1.5,
+                          color: blueClr,
+                          width: 2,
                         ),
                         borderRadius: BorderRadius.circular(
                           6,
@@ -993,8 +992,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: btnBlueClr,
-                          width: 1.5,
+                          color: blueClr,
+                          width: 2,
                         ),
                         borderRadius: BorderRadius.circular(
                           6,
@@ -1002,8 +1001,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: btnBlueClr,
-                          width: 1.5,
+                          color: blueClr,
+                          width: 2,
                         ),
                         borderRadius: BorderRadius.circular(
                           6,
@@ -1045,8 +1044,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: btnBlueClr,
-                          width: 1.5,
+                          color: blueClr,
+                          width: 2,
                         ),
                         borderRadius: BorderRadius.circular(
                           6,
@@ -1054,8 +1053,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: btnBlueClr,
-                          width: 1.5,
+                          color: blueClr,
+                          width: 2,
                         ),
                         borderRadius: BorderRadius.circular(
                           6,
@@ -1063,8 +1062,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: btnBlueClr,
-                          width: 1.5,
+                          color: blueClr,
+                          width: 2,
                         ),
                         borderRadius: BorderRadius.circular(
                           6,
@@ -1084,7 +1083,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold,
                   fontSize: 14,
-                  color: btnBlueClr,
+                  color: blueClr,
                 ),
               ),
               onPressed: () {

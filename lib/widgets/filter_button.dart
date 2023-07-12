@@ -29,7 +29,7 @@ class FilterButton extends StatelessWidget {
               onPressed: onPressed,
               child: child,
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(btnBlueClr),
+                backgroundColor: MaterialStateProperty.all<Color>(blueClr),
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(

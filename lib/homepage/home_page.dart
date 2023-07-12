@@ -22,8 +22,6 @@ FutureBuilder for user data (returns a future(await))
 
 Save joined rides locally
 
-loading indicator for notification page
-
 Clean the Theme Page
 fix the route page system not working
 Time between the selected time and the end time
@@ -619,7 +617,7 @@ class RideListItem extends StatelessWidget {
                       Colors.white,
                     ),
                     backgroundColor: MaterialStateProperty.all<Color>(
-                      btnBlueClr,
+                      blueClr,
                     ),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(

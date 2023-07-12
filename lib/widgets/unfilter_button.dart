@@ -20,7 +20,7 @@ class UnFilterButton extends StatelessWidget {
           child: child,
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(unselectedBtnClr),
-            foregroundColor: MaterialStateProperty.all<Color>(btnBlueClr),
+            foregroundColor: MaterialStateProperty.all<Color>(blueClr),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),

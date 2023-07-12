@@ -97,7 +97,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                 String.fromCharCode(Icons.close_rounded.codePoint),
                 style: TextStyle(
                   inherit: false,
-                  color: btnBlueClr,
+                  color: blueClr,
                   fontSize: 28,
                   fontWeight: FontWeight.w700,
                   fontFamily: Icons.close_rounded.fontFamily,
@@ -258,7 +258,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             padding: EdgeInsets.only(left: 5),
             child: ListTile(
               contentPadding: EdgeInsets.symmetric(horizontal: 20),
-              leading: Icon(Icons.home, size: 30, color: btnBlueClr),
+              leading: Icon(Icons.home, size: 30, color: blueClr),
               title: const Text(
                 'Home',
                 style: TextStyle(
@@ -277,7 +277,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             padding: EdgeInsets.only(left: 5),
             child: ListTile(
                 contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                leading: const Icon(Icons.person, size: 30, color: btnBlueClr),
+                leading: const Icon(Icons.person, size: 30, color: blueClr),
                 title: const Text(
                   'Account',
                   style: TextStyle(
@@ -295,7 +295,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             padding: EdgeInsets.only(left: 5),
             child: ListTile(
               contentPadding: EdgeInsets.symmetric(horizontal: 20),
-              leading: Icon(Icons.settings, size: 30, color: btnBlueClr),
+              leading: Icon(Icons.settings, size: 30, color: blueClr),
               title: const Text(
                 'App Settings',
                 style: TextStyle(
@@ -314,7 +314,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             padding: EdgeInsets.only(left: 5),
             child: ListTile(
               contentPadding: EdgeInsets.symmetric(horizontal: 20),
-              leading: Icon(Icons.phone, size: 30, color: btnBlueClr),
+              leading: Icon(Icons.phone, size: 30, color: blueClr),
               title: const Text(
                 'Contact Us',
                 style: TextStyle(
@@ -362,7 +362,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                                   ),
                                   style: ElevatedButton.styleFrom(
                                     foregroundColor: Colors.white,
-                                    backgroundColor: btnBlueClr,
+                                    backgroundColor: blueClr,
                                     elevation: 8.0,
                                     padding:
                                         EdgeInsets.symmetric(vertical: 16.0),
@@ -386,7 +386,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                                   ),
                                   style: ElevatedButton.styleFrom(
                                     foregroundColor: Colors.white,
-                                    backgroundColor: btnBlueClr,
+                                    backgroundColor: blueClr,
                                     elevation: 8.0,
                                     padding:
                                         EdgeInsets.symmetric(vertical: 16.0),
@@ -411,8 +411,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             ),
             child: ListTile(
               contentPadding: EdgeInsets.symmetric(horizontal: 20),
-              leading:
-                  const Icon(Icons.info_rounded, size: 30, color: btnBlueClr),
+              leading: const Icon(Icons.info_rounded, size: 30, color: blueClr),
               title: const Text(
                 'About Us',
                 style: TextStyle(
@@ -455,7 +454,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                   Colors.white,
                 ),
                 backgroundColor: MaterialStateProperty.all<Color>(
-                  btnBlueClr,
+                  blueClr,
                 ),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
@@ -526,7 +525,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                   fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
-                  color: btnBlueClr,
+                  color: blueClr,
                 ),
               ),
               onPressed: () async {
@@ -589,7 +588,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                   text: 'roderteam@gmail.com',
                   style: TextStyle(
                     fontSize: 18,
-                    color: btnBlueClr,
+                    color: blueClr,
                     decoration: TextDecoration.underline,
                   ),
                   recognizer: TapGestureRecognizer()
@@ -621,7 +620,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
               child: Text(
                 'OK',
                 style: TextStyle(
-                  color: btnBlueClr,
+                  color: blueClr,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -685,7 +684,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
               child: Text(
                 'Go to Instagram',
                 style: TextStyle(
-                  color: btnBlueClr,
+                  color: blueClr,
                   fontWeight: FontWeight.bold,
                 ),
               ),

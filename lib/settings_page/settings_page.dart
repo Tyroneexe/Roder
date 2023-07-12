@@ -63,7 +63,7 @@ class _SettingsState extends State<Settings> {
                 child: Icon(
                   Icons.person,
                   size: 38,
-                  color: btnBlueClr,
+                  color: blueClr,
                 ),
               ),
               Padding(
@@ -114,7 +114,7 @@ class _SettingsState extends State<Settings> {
                   child: Icon(
                     Icons.arrow_forward_ios_rounded,
                     size: 18,
-                    color: btnBlueClr,
+                    color: blueClr,
                   ),
                 ),
               ],
@@ -147,7 +147,7 @@ class _SettingsState extends State<Settings> {
                   child: Icon(
                     Icons.arrow_forward_ios_rounded,
                     size: 18,
-                    color: btnBlueClr,
+                    color: blueClr,
                   ),
                 ),
               ],
@@ -180,7 +180,7 @@ class _SettingsState extends State<Settings> {
                   child: Icon(
                     Icons.arrow_forward_ios_rounded,
                     size: 18,
-                    color: btnBlueClr,
+                    color: blueClr,
                   ),
                 ),
               ],
@@ -202,7 +202,7 @@ class _SettingsState extends State<Settings> {
                 child: Icon(
                   Icons.volume_up_rounded,
                   size: 38,
-                  color: btnBlueClr,
+                  color: blueClr,
                 ),
               ),
               Padding(
@@ -254,7 +254,7 @@ class _SettingsState extends State<Settings> {
                   activeTrackColor: switchClr,
                   inactiveTrackColor: Colors.grey,
                   inactiveThumbColor: Colors.white,
-                  activeColor: btnBlueClr,
+                  activeColor: blueClr,
                   onChanged: (bool value) {
                     setState(() {
                       isNotificationsEnabled = !isNotificationsEnabled;
@@ -297,7 +297,7 @@ class _SettingsState extends State<Settings> {
                   activeTrackColor: switchClr,
                   inactiveTrackColor: Colors.grey,
                   inactiveThumbColor: Colors.white,
-                  activeColor: btnBlueClr,
+                  activeColor: blueClr,
                   onChanged: (bool value) {
                     //
                   },
@@ -326,7 +326,7 @@ class _SettingsState extends State<Settings> {
                   activeTrackColor: switchClr,
                   inactiveTrackColor: Colors.grey,
                   inactiveThumbColor: Colors.white,
-                  activeColor: btnBlueClr,
+                  activeColor: blueClr,
                   onChanged: (bool value) {
                     //
                   },
@@ -355,7 +355,7 @@ class _SettingsState extends State<Settings> {
                   activeTrackColor: switchClr,
                   inactiveTrackColor: Colors.grey,
                   inactiveThumbColor: Colors.white,
-                  activeColor: btnBlueClr,
+                  activeColor: blueClr,
                   onChanged: (bool value) {
                     //
                   },
@@ -414,7 +414,7 @@ class _SettingsState extends State<Settings> {
                   fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
-                  color: btnBlueClr,
+                  color: blueClr,
                 ),
               ),
               onPressed: () {
@@ -478,7 +478,7 @@ class _SettingsState extends State<Settings> {
                   fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
-                  color: btnBlueClr,
+                  color: blueClr,
                 ),
               ),
               onPressed: () {
@@ -551,7 +551,7 @@ class _SettingsState extends State<Settings> {
                   fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
-                  color: btnBlueClr,
+                  color: blueClr,
                 ),
               ),
               onPressed: () {
@@ -579,7 +579,7 @@ class _SettingsState extends State<Settings> {
   _appbar() {
     return AppBar(
       iconTheme: IconThemeData(
-        color: btnBlueClr,
+        color: blueClr,
       ),
       elevation: 0,
       title: Text(
