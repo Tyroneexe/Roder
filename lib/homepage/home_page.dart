@@ -16,12 +16,8 @@ import '../widgets/unfilter_button.dart';
 To Do
 
 add the memebers list in add ride page with firestore
-
-
-Save joined rides in the database, so that i can show who has joined the ride
-
-Time between the selected time and the end time
 save the first ride created bool with shared preferences
+Save joined rides in the database, so that i can show who has joined the ride
 log in with facebook and instagram
 do the message part of the app
 fix the custom profile pic
@@ -243,7 +239,7 @@ class _HomePageState extends State<HomePage> {
                 return CircularProgressIndicator();
               }
             },
-          )
+          ),
         ],
       ),
     );
@@ -670,25 +666,17 @@ class CreatedRideListItem extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 20, left: 20),
-                  child: Text(
-                    ride['Country'],
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: countryRideListClr,
-                    ),
-                  ),
+                  child: Text(ride['Country'],
+                      style: rideListItemTxt.copyWith(
+                        color: countryRideListClr,
+                      )),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
                     ride['City'],
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
+                    style: rideListItemTxt.copyWith(
                       fontSize: 20,
-                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -696,26 +684,8 @@ class CreatedRideListItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
-                    ride['Name'],
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 5),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text(
                     '${ride['Riders']} Ride',
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
+                    style: rideListItemTxt,
                   ),
                 ),
                 SizedBox(height: 5),
@@ -723,12 +693,15 @@ class CreatedRideListItem extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
                     ride['Date'],
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
+                    style: rideListItemTxt,
+                  ),
+                ),
+                SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    ride['Start Time'] + '  to  ' + ride['End Time'],
+                    style: rideListItemTxt,
                   ),
                 ),
               ],

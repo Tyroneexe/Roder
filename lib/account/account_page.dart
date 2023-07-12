@@ -27,7 +27,6 @@ String nu = '';
 String location = '';
 String bike = '';
 
-
 class _AccountPageState extends State<AccountPage> {
   File? image;
   //

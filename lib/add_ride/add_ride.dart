@@ -518,6 +518,28 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 ),
                 //search bar for searching users
                 // _getUsers(),
+                StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('users')
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    List<Widget> userWidgets = [];
+                    if (snapshot.hasData) {
+                      final users = snapshot.data?.docs.reversed.toList();
+                      for (var user in users!) {
+                        final userWidget = userListItem(user);
+                        userWidgets.add(userWidget);
+                      }
+                    } else {
+                      return CircularProgressIndicator(
+                        color: blueClr,
+                      );
+                    }
+                    return Expanded(
+                      child: ListView(children: userWidgets),
+                    );
+                  },
+                ),
                 SizedBox(
                   height: 10,
                 ),
@@ -578,6 +600,50 @@ class _AddTaskPageState extends State<AddTaskPage> {
           ),
         ),
       ),
+    );
+  }
+
+  userListItem(QueryDocumentSnapshot<Object?> user) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          //padding for spacing between rides
+          padding: const EdgeInsets.only(
+              left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
+          //this container is for the image
+          child: CircleAvatar(
+            radius: 24,
+            backgroundImage: NetworkImage(
+              user['foto'],
+            ),
+          ),
+        ),
+        //padding to make the text in line with the circle avatar
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 12),
+              child: Text(
+                user['username'],
+                style: roRegular14,
+              ),
+            ),
+            Text(
+              user['bike'],
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w100,
+                fontSize: 12,
+                color: Colors.black,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
@@ -806,66 +872,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
     return pickerTheme;
   }
-
-  // _getUsers() {
-  //   return Expanded(
-  //     child: FirebaseAnimatedList(
-  //       physics: BouncingScrollPhysics(),
-  //       query: usersRef,
-  //       itemBuilder: (BuildContext context, DataSnapshot snapshot,
-  //           Animation<double> animation, int index) {
-  //         final userData = snapshot.value as Map<dynamic, dynamic>;
-  //         return listItem(userData: userData);
-  //       },
-  //     ),
-  //   );
-  // }
-
-  // Widget listItem({
-  //   required Map userData,
-  // }) {
-  //   return Row(
-  //     mainAxisAlignment: MainAxisAlignment.start,
-  //     crossAxisAlignment: CrossAxisAlignment.start,
-  //     children: [
-  //       Padding(
-  //         //padding for spacing between rides
-  //         padding: const EdgeInsets.only(
-  //             left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
-  //         //this container is for the image
-  //         child: CircleAvatar(
-  //           radius: 24,
-  //           backgroundImage: NetworkImage(
-  //             userData['foto'],
-  //           ),
-  //         ),
-  //       ),
-  //       //padding to make the text in line with the circle avatar
-  //       Column(
-  //         mainAxisAlignment: MainAxisAlignment.start,
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Padding(
-  //             padding: const EdgeInsets.only(top: 12),
-  //             child: Text(
-  //               userData['name'],
-  //               style: roRegular14,
-  //             ),
-  //           ),
-  //           Text(
-  //             userData['bike'],
-  //             style: TextStyle(
-  //               fontFamily: 'Roboto',
-  //               fontWeight: FontWeight.w100,
-  //               fontSize: 12,
-  //               color: Colors.black,
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     ],
-  //   );
-  // }
 
   void _locationPopup() {
     final locationProvider =
