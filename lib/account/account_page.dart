@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -239,44 +240,48 @@ class _AccountPageState extends State<AccountPage> {
                         child: Text('Cancel'),
                       ),
                     ),
-                    FutureBuilder<DataSnapshot>(
-                      future:
-                          usersRef.child(user.uid).once().then((databaseEvent) {
-                        return databaseEvent.snapshot;
-                      }),
+                    FutureBuilder<DocumentSnapshot>(
+                      future: FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(user.uid)
+                          .get(),
                       builder: (BuildContext context,
-                          AsyncSnapshot<DataSnapshot> snapshot) {
+                          AsyncSnapshot<DocumentSnapshot> snapshot) {
                         if (snapshot.hasData) {
                           final userData =
-                              snapshot.data!.value as Map<dynamic, dynamic>;
+                              snapshot.data!.data() as Map<String, dynamic>;
                           final userFoto = userData['foto'] as String;
-                          final userName = userData['name'] as String;
+                          final userName = userData['username'] as String;
                           final userNum = userData['contact'] as String;
                           final userBike = userData['bike'] as String;
 
                           return Padding(
                             padding: const EdgeInsets.only(left: 10),
                             child: TextButton(
-                              // add the || || if statement below and also add the
-                              // else with null checking
                               onPressed: () {
-                                String newName = nameController.text == ''
+                                String newName = nameController.text.isEmpty
                                     ? userName
                                     : nameController.text;
-                                String contactNumber = nuController.text == ''
+                                String contactNumber = nuController.text.isEmpty
                                     ? userNum
                                     : '+' + userPhoneNumber;
                                 String email = user.email!;
                                 String locationValue = location;
-                                String bike = bikeController.text == ''
-                                    ? userBike == ''
+                                String bike = bikeController.text.isEmpty
+                                    ? (userBike.isEmpty
                                         ? 'Rather Not Say'
-                                        : userBike
+                                        : userBike)
                                     : bikeController.text;
                                 String foto = image?.path ?? userFoto;
 
-                                updateUserInformation(newName, contactNumber,
-                                    email, locationValue, bike, foto);
+                                updateUserInformation(
+                                  newName,
+                                  contactNumber,
+                                  email,
+                                  locationValue,
+                                  bike,
+                                  foto,
+                                );
                               },
                               style: ButtonStyle(
                                 textStyle: MaterialStateProperty.all<TextStyle>(
@@ -347,7 +352,7 @@ class _AccountPageState extends State<AccountPage> {
                           );
                         }
                       },
-                    ),
+                    )
                   ],
                 ),
               ],
@@ -359,11 +364,11 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   bikeForm(BuildContext context) {
-    return FutureBuilder<DataSnapshot>(
-      future: usersRef.child(user.uid).once().then((databaseEvent) {
-        return databaseEvent.snapshot;
-      }),
-      builder: (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
+    return FutureBuilder<DocumentSnapshot>(
+      future:
+          FirebaseFirestore.instance.collection('users').doc(user.uid).get(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Container(
             width: MediaQuery.of(context).size.width - 40,
@@ -417,7 +422,7 @@ class _AccountPageState extends State<AccountPage> {
             ),
           );
         } else if (snapshot.hasData) {
-          final userData = snapshot.data!.value as Map<dynamic, dynamic>;
+          final userData = snapshot.data!.data() as Map<String, dynamic>;
           final userBike = userData['bike'] as String;
 
           return Container(
@@ -528,7 +533,7 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
-  Container locationForm(BuildContext context) {
+  locationForm(BuildContext context) {
     location = '$_currentCity, $_currentCountry';
     return Container(
       width: MediaQuery.of(context).size.width - 40,
@@ -662,11 +667,11 @@ class _AccountPageState extends State<AccountPage> {
   String sel = '';
 
   numberForm(BuildContext context) {
-    return FutureBuilder<DataSnapshot>(
-        future: usersRef.child(user.uid).once().then((databaseEvent) {
-          return databaseEvent.snapshot;
-        }),
-        builder: (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
+    return FutureBuilder<DocumentSnapshot>(
+        future:
+            FirebaseFirestore.instance.collection('users').doc(user.uid).get(),
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Container(
               width: MediaQuery.of(context).size.width - 40,
@@ -740,7 +745,7 @@ class _AccountPageState extends State<AccountPage> {
               ),
             );
           } else if (snapshot.hasData) {
-            final userData = snapshot.data!.value as Map<dynamic, dynamic>;
+            final userData = snapshot.data!.data() as Map<String, dynamic>;
             final userNum = userData['contact'] as String;
 
             return Container(
@@ -892,11 +897,11 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   Widget userNameForm() {
-    return FutureBuilder<DataSnapshot>(
-      future: usersRef.child(user.uid).once().then((databaseEvent) {
-        return databaseEvent.snapshot;
-      }),
-      builder: (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
+    return FutureBuilder<DocumentSnapshot>(
+      future:
+          FirebaseFirestore.instance.collection('users').doc(user.uid).get(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Container(
             width: MediaQuery.of(context).size.width - 40,
@@ -945,10 +950,8 @@ class _AccountPageState extends State<AccountPage> {
             ),
           );
         } else if (snapshot.hasData) {
-          final userData = snapshot.data!.value as Map<dynamic, dynamic>;
-          final userName = userData['name'] as String;
-
-          name = userName;
+          final userData = snapshot.data!.data() as Map<String, dynamic>;
+          final userName = userData['username'] as String;
 
           return Container(
             width: MediaQuery.of(context).size.width - 40,
@@ -1199,14 +1202,21 @@ class _AccountPageState extends State<AccountPage> {
 
   void updateUserInformation(String userName, String contactNumber,
       String email, String location, String bike, String foto) {
-    usersRef.child(user.uid).update({
-      'name': userName,
+    CollectionReference usersCollection =
+        FirebaseFirestore.instance.collection('users');
+
+    usersCollection.doc(user.uid).update({
+      'username': userName,
       'contact': contactNumber,
       'email': email,
       'location': location,
       'bike': bike,
-      'foto': foto
-    }).asStream();
+      'foto': foto,
+    }).then((_) {
+      print('User information updated successfully!');
+    }).catchError((error) {
+      print('Failed to update user information: $error');
+    });
   }
 
   Future<void> pickImage() async {

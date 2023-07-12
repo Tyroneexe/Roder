@@ -17,12 +17,10 @@ import '../widgets/unfilter_button.dart';
 /*
 To Do
 
-StreamBuilder for rides (real time)
 FutureBuilder for user data (returns a future(await))
 
 Save joined rides locally
 
-Clean the Theme Page
 fix the route page system not working
 Time between the selected time and the end time
 save the first ride created bool with shared preferences
