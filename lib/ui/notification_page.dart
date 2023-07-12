@@ -33,7 +33,7 @@ class _NotificationPageState extends State<NotificationPage> {
     ),
     NotificationItem(
       title: "You Created Your First Ride. Nice!",
-      time: "This is a test",
+      time: "",
       icon: Icons.add,
       event: "createdFirstRide",
       viewed: false,
@@ -78,6 +78,9 @@ class _NotificationPageState extends State<NotificationPage> {
       notification.viewed =
           await NotificationItem.getViewedStatus(notification.event);
     }
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.getBool('createdFirstRide');
 
     setState(() {});
   }

@@ -4,6 +4,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:new_version_plus/new_version_plus.dart';
 import '../drawer/nav_drawer.dart';
@@ -26,6 +27,8 @@ if ride is solo then instead of joining, then ask to join
 notifications if someone has joined the ride
 create a notification saying that the user has been invited
 Follow and block users after messaging part is done
+
+make notification system using firestore, it would be easier instead of using prefs
 
 /
 | Wrtie to Database 
@@ -253,25 +256,25 @@ class _HomePageState extends State<HomePage> {
     if (rides != null) {
       for (var ride in rides) {
         imageNumber = (imageNumber % 4) + 1;
-        if (isFilter3 && await isRideJoinedByCurrentUser(ride.id)) {
+        if (isFilter3) {
           final rideWidget = RideListItem(
             //this should return joined ride list item
             ride: ride,
             imageNumber: imageNumber,
-          );
+          ).animate().slideY(duration: 400.ms, begin: 1).fade(duration: 400.ms);
           rideWidgets.add(rideWidget);
         } else if (isFilter4 && await isRideCreatedByCurrentUser(ride.id)) {
           final rideWidget = CreatedRideListItem(
             ride: ride,
             imageNumber: imageNumber,
-          );
+          ).animate().slideY(duration: 400.ms, begin: 1).fade(duration: 400.ms);
           rideWidgets.add(rideWidget);
         } else if (isFilter1) {
           final rideWidget = RideListItem(
             //this should return joined ride list item
             ride: ride,
             imageNumber: imageNumber,
-          );
+          ).animate().slideY(duration: 400.ms, begin: 1).fade(duration: 400.ms);
           rideWidgets.add(rideWidget);
         }
       }

@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/themes/theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../homepage/home_page.dart';
 import '../ui/notification_page.dart';
 import 'location_provider.dart';
@@ -561,6 +562,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       setState(() {
                         createdFirstRide = true;
                       });
+                      _saveCreatedFirstRide();
                     },
                     style: ButtonStyle(
                       textStyle: MaterialStateProperty.all<TextStyle>(
@@ -603,16 +605,20 @@ class _AddTaskPageState extends State<AddTaskPage> {
     );
   }
 
+  // save the ride created bool
+  _saveCreatedFirstRide() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('createdFirstRide', createdFirstRide);
+  }
+
   userListItem(QueryDocumentSnapshot<Object?> user) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          //padding for spacing between rides
           padding: const EdgeInsets.only(
               left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
-          //this container is for the image
           child: CircleAvatar(
             radius: 24,
             backgroundImage: NetworkImage(
@@ -620,7 +626,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
             ),
           ),
         ),
-        //padding to make the text in line with the circle avatar
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
