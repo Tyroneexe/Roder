@@ -201,7 +201,7 @@ class _FavouritesState extends State<Favourites> {
               ),
               Expanded(
                 child: RefreshIndicator(
-                  color: primaryClr,
+                  color: btnBlueClr,
                   strokeWidth: 3,
                   onRefresh: _refresh,
                   child: FirebaseAnimatedList(

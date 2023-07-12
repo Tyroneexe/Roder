@@ -68,9 +68,6 @@ Future<void> main() async {
         ChangeNotifierProvider<LocationProvider>(
           create: (context) => LocationProvider(),
         ),
-        ChangeNotifierProvider<ColorProvider>(
-          create: (context) => ColorProvider(),
-        ),
         ChangeNotifierProvider<GoogleSignInProvider>(
           create: (context) => GoogleSignInProvider(),
         ),

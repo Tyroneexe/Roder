@@ -3,20 +3,13 @@ import 'package:get/get.dart';
 
 // App Colors
 
-// Blue Color Tints
-const Color darkbl50 = Color(0xFF092068);
-const Color darkbl40 = Color(0xFF0b267d);
-const Color blueClr = Color(0xFF123fd0);
-const Color lightBlueClr = Color(0xFF03D3F2);
 // Colors
 const Color catalinaBlue = Color(0xFF042A73);
 const Color iceCold = Color(0xFFA4EAF4);
 const Color vBlue = Color(0xFF055777);
 // Construction Colors
 const Color rred = Color(0xFFFE0000);
-const Color successClr = Color(0xFF52C833);
 const Color sandyClr = Color(0xFFD0B59A);
-const Color purple = Color(0xFF7c14ff);
 // Yellow Theme Colors
 const Color oRange = Color(0xFFf9be0d);
 const Color lightOrange = Color(0xFFFFB952);
@@ -46,7 +39,6 @@ const Color navBarBkgClr = Color(0xFFe7eeff);
 const Color infoPopUpClr = Color(0xFFF6F9FF);
 
 //
-const primaryClr = blueClr;
 
 const bkgClr = Color.fromARGB(250, 250, 250, 255);
 
@@ -55,7 +47,7 @@ class Themes {
     brightness: Brightness.light,
     colorScheme: const ColorScheme.light()
         .copyWith(
-          primary: primaryClr,
+          primary: btnBlueClr,
         )
         .copyWith(
           background: bkgClr,

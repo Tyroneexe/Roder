@@ -1,16 +1,13 @@
 // ignore_for_file: unused_field, must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:roder/themes/theme.dart';
 
-import '../provider/clrProvider.dart';
 
 class MyButton extends StatelessWidget {
   final Function()? onTap;
   MyButton({Key? key, required this.onTap}) : super(key: key);
   
-  Color _mainColor = lightBlueClr;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +19,7 @@ class MyButton extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color:
-                _getMainClr(Provider.of<ColorProvider>(context).selectedColor)),
+                btnBlueClr,),
         child: Center(
           child: Icon(
             Icons.add,
@@ -34,20 +31,4 @@ class MyButton extends StatelessWidget {
     );
   }
 
-  _getMainClr(int no) {
-    switch (no) {
-      case 0:
-        _mainColor = lightBlueClr;
-        return lightBlueClr;
-      case 1:
-        _mainColor = oRange;
-        return oRange;
-      case 2:
-        _mainColor = themeRed;
-        return themeRed;
-      default:
-        _mainColor = lightBlueClr;
-        return lightBlueClr;
-    }
-  }
 }

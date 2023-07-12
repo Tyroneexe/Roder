@@ -29,7 +29,6 @@ class NavitionDrawer extends StatefulWidget {
 class _NavitionDrawerState extends State<NavitionDrawer> {
   //
   int noImg = 0;
-  Color _mainColor = lightBlueClr;
   //
   final Uri _urlInsta = Uri.parse(
       'https://www.instagram.com/roderbiker/?igshid=MzNlNGNkZWQ4Mg%3D%3D');

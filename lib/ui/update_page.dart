@@ -136,8 +136,8 @@ class _UpdatePageState extends State<UpdatePage> {
           : MediaQuery.of(context).size.width - 40,
       height: isExpanded ? 450 : 160,
       child: FlutterFancyContainer(
-        colorOne: lightBlueClr,
-        colorTwo: darkbl50,
+        colorOne: btnBlueClr,
+        colorTwo: searchBarClr,
         onTap: () {
           setState(() {
             isExpanded = !isExpanded;
@@ -210,7 +210,7 @@ class _UpdatePageState extends State<UpdatePage> {
           : MediaQuery.of(context).size.width - 40,
       height: isExpanded ? 620 : 160,
       child: FlutterFancyContainer(
-        colorOne: blueClr,
+        colorOne: btnBlueClr,
         colorTwo: themeRed,
         onTap: () {
           setState(() {
@@ -288,7 +288,7 @@ class _UpdatePageState extends State<UpdatePage> {
           : MediaQuery.of(context).size.width - 40,
       height: isExpanded ? 550 : 160,
       child: FlutterFancyContainer(
-        colorOne: darkbl50,
+        colorOne: btnBlueClr,
         colorTwo: iceCold,
         onTap: () {
           setState(() {
