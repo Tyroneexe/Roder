@@ -20,6 +20,8 @@ To Do
 StreamBuilder for rides (real time)
 FutureBuilder for user data (returns a future(await))
 
+Save joined rides locally
+
 loading indicator for notification page
 
 Clean the Theme Page
@@ -58,10 +60,10 @@ class _HomePageState extends State<HomePage> {
   bool isFilter3 = false;
   bool isFilter4 = false;
 
+  int imageNumber = 0;
+
   //Update popup for updates
   String release = "";
-
-  //Database
 
   //
   @override
@@ -213,142 +215,10 @@ class _HomePageState extends State<HomePage> {
               if (snapshot.hasData) {
                 final rides = snapshot.data?.docs.reversed.toList();
                 for (var ride in rides!) {
-                  final rideWidget = Padding(
-                    padding: const EdgeInsets.only(
-                        left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
-                    child: Container(
-                      height: 180,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        image: DecorationImage(
-                          image: AssetImage('assets/image 14.png'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Stack(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.black.withOpacity(0.6),
-                            ),
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 20, left: 20),
-                                child: Text(
-                                  ride['Country'],
-                                  style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w100,
-                                    fontSize: 14,
-                                    color: countryRideListClr,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Text(
-                                  ride['City'],
-                                  style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w100,
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 30),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Text(
-                                  ride['Name'],
-                                  style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w100,
-                                    fontSize: 14,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 5),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Text(
-                                  '${ride['Riders']} Ride',
-                                  style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w100,
-                                    fontSize: 14,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 5),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Text(
-                                  ride['Date'],
-                                  style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w100,
-                                    fontSize: 14,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 20, bottom: 10),
-                              child: TextButton(
-                                onPressed: () {
-                                  // Button onPressed logic
-                                },
-                                style: ButtonStyle(
-                                  textStyle:
-                                      MaterialStateProperty.all<TextStyle>(
-                                    TextStyle(
-                                      fontFamily: 'Roboto',
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 12,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  foregroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                    Colors.white,
-                                  ),
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                    btnBlueClr,
-                                  ),
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 5, right: 5),
-                                  child: Text('Join Ride'),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  imageNumber = (imageNumber % 4) + 1;
+                  final rideWidget = RideListItem(
+                    ride: ride,
+                    imageNumber: imageNumber,
                   );
                   rideWidgets.add(rideWidget);
                 }
@@ -359,7 +229,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             },
-          )
+          ),
         ],
       ),
     );
@@ -553,6 +423,296 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
         ],
+      ),
+    );
+  }
+}
+
+class RideListItem extends StatelessWidget {
+  RideListItem({
+    super.key,
+    required this.ride,
+    required this.imageNumber,
+  });
+
+  final QueryDocumentSnapshot<Object?> ride;
+  final int imageNumber;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding:
+          const EdgeInsets.only(left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
+      child: Container(
+        height: 180,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          image: DecorationImage(
+            image: AssetImage('assets/image $imageNumber.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.black.withOpacity(0.6),
+              ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 20),
+                  child: Text(
+                    ride['Country'],
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: countryRideListClr,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    ride['City'],
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    ride['Name'],
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    '${ride['Riders']} Ride',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    ride['Date'],
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 20, bottom: 10),
+                child: TextButton(
+                  onPressed: () {
+                    // join the ride (add to joined rides (locally))
+                  },
+                  style: ButtonStyle(
+                    textStyle: MaterialStateProperty.all<TextStyle>(
+                      TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 12,
+                        color: Colors.white,
+                      ),
+                    ),
+                    foregroundColor: MaterialStateProperty.all<Color>(
+                      Colors.white,
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      btnBlueClr,
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 5, right: 5),
+                    child: Text('Join Ride'),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class JoinedRideListItem extends StatelessWidget {
+  JoinedRideListItem({
+    super.key,
+    required this.ride,
+    required this.imageNumber,
+  });
+
+  final QueryDocumentSnapshot<Object?> ride;
+  final int imageNumber;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding:
+          const EdgeInsets.only(left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
+      child: Container(
+        height: 180,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          image: DecorationImage(
+            image: AssetImage('assets/image $imageNumber.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.black.withOpacity(0.6),
+              ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 20),
+                  child: Text(
+                    ride['Country'],
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: countryRideListClr,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    ride['City'],
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    ride['Name'],
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    '${ride['Riders']} Ride',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    ride['Date'],
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 20, bottom: 10),
+                child: TextButton(
+                  onPressed: () {
+                    // end the ride (add to joined rides (locally))
+                  },
+                  style: ButtonStyle(
+                    textStyle: MaterialStateProperty.all<TextStyle>(
+                      TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 12,
+                        color: Colors.white,
+                      ),
+                    ),
+                    foregroundColor: MaterialStateProperty.all<Color>(
+                      Colors.white,
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      rred,
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 5, right: 5),
+                    child: Text('End Ride'),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
