@@ -13,6 +13,7 @@ class AppPage {
     GetPage(name: search, page: () => const Search()),
     GetPage(name: task, page: () => const AddTaskPage()),
   ];
+
   //
   static getnavbar() => navbar;
   static gethome() => home;

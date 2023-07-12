@@ -18,6 +18,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'add_ride/location_provider.dart';
 import 'login/login.dart';
 import 'navbar/navbar.dart';
+import 'navbar/routes.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,6 +61,7 @@ Future<void> main() async {
   //
   await Firebase.initializeApp();
   //
+
   runApp(
     MultiProvider(
       providers: [
@@ -103,6 +105,7 @@ class MyApp extends StatelessWidget {
       darkTheme: Themes.dark,
       themeMode: ThemeService().theme,
       home: LogIn(),
+      getPages: AppPage.routes,
     );
   }
 }

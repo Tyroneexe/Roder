@@ -18,9 +18,8 @@ To Do
 add the memebers list in add ride page with firestore
 
 
-Save joined rides locally
+Save joined rides in the database, so that i can show who has joined the ride
 
-fix the route page system not working
 Time between the selected time and the end time
 save the first ride created bool with shared preferences
 log in with facebook and instagram
@@ -31,11 +30,27 @@ if ride is solo then instead of joining, then ask to join
 notifications if someone has joined the ride
 create a notification saying that the user has been invited
 Follow and block users after messaging part is done
-make Host delete Ride
-make host join ride when press on 'create ride'
-post app to playstore
+
+/
+| Wrtie to Database 
+| Make host join ride when press on 'create ride'
+| Give people user names
+===============================================
+| Make Host Delete Ride // write the onpress function
+| Make a Ride change-able when clicked //only host can do this //maybe do this after messages
+| Fix the custom pfp
+| show who has joined the ride
+| Show who has made the ride
+| make more notifications (if someone has joined your ride, left etc)
+| be able to share links of rides
+======Show app to BMW
 iOS compatible
-show app to BMW
+| Rides Near Me
+| Block users // do after creating the messages part
+| Friends only can join (Accounts to follow(friend) someone) //only send ride id to the invited user
+| recommend a ride route based on previous ride routes (show friends(follows) rides)
+| Notification page for when people add you as fried, join, leave, create, etc.
+\
 */
 
 class HomePage extends StatefulWidget {
@@ -544,38 +559,15 @@ class RideListItem extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
                     ride['City'],
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
+                    style: rideListItemTxt.copyWith(fontSize: 20),
                   ),
                 ),
                 SizedBox(height: 30),
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
-                    ride['Name'],
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 5),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text(
                     '${ride['Riders']} Ride',
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
+                    style: rideListItemTxt,
                   ),
                 ),
                 SizedBox(height: 5),
@@ -583,12 +575,15 @@ class RideListItem extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
                     ride['Date'],
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
+                    style: rideListItemTxt,
+                  ),
+                ),
+                SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    ride['Start Time'] + '  to  ' + ride['End Time'],
+                    style: rideListItemTxt,
                   ),
                 ),
               ],

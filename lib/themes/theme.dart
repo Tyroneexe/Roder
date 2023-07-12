@@ -60,6 +60,15 @@ TextStyle get actPageTxt {
       color: Colors.black);
 }
 
+TextStyle get rideListItemTxt {
+  return TextStyle(
+    fontFamily: 'Roboto',
+    fontWeight: FontWeight.w100,
+    fontSize: 14,
+    color: Colors.white,
+  );
+}
+
 TextStyle get roRegular14 {
   return TextStyle(
       fontFamily: 'Roboto',
