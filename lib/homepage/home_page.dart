@@ -17,31 +17,20 @@ import '../widgets/unfilter_button.dart';
 To Do
 
 fix the custom profile pic
+popup when ride is clicked
+| show who has joined the ride
+| Show who has made the ride
 
-do the message part of the app after the update
-
-(https link to ride) when i press on the users in the add ride page, it hsould invite them them to the ride, learn how to open the ride that the user has been invited to
 if ride is solo then instead of joining, then ask to join
-notifications if someone has joined the ride
-create a notification saying that the user has been invited
-Follow and block users after messaging part is done
 
-make notification system using firestore, it would be easier instead of using prefs
-add edit rides after creating the notification system
 /
 | Wrtie to Database 
 | Make host join ride when press on 'create ride'
 | Give people user names
 add the memebers list in add ride page with firestore
 save the first ride created bool with shared preferences
-===============================================
 | Make Host Delete Ride // write the onpress function
-| Make a Ride change-able when clicked //only host can do this //maybe do this after messages
-| Fix the custom pfp
-| show who has joined the ride
-| Show who has made the ride
-| make more notifications (if someone has joined your ride, left etc)
-| be able to share links of rides
+===============================================
 ======Show app to BMW
 log in with facebook and instagram
 iOS compatible
@@ -50,6 +39,15 @@ iOS compatible
 | Friends only can join (Accounts to follow(friend) someone) //only send ride id to the invited user
 | recommend a ride route based on previous ride routes (show friends(follows) rides)
 | Notification page for when people add you as fried, join, leave, create, etc.
+////////////////////////////////////////////////////////////////
+do the message part of the app after the update
+make notification system using firestore, it would be easier instead of using prefs
+add edit rides after creating the notification system
+(https link to ride) when i press on the users in the add ride page, it hsould invite them them to the ride, learn how to open the ride that the user has been invited to
+notifications if someone has joined the ride
+create a notification saying that the user has been invited
+Follow and block users after messaging part is done
+| Make a Ride change-able when clicked //only host can do this //maybe do this after messages
 \
 */
 

@@ -548,7 +548,7 @@ class _AccountPageState extends State<AccountPage> {
             fontSize: 14,
             color: Colors.black),
         decoration: InputDecoration(
-          hintText: currentCountryDB + ', ' + currentCityDB,
+          hintText: _currentCountry + ', ' + _currentCity,
           hintStyle: TextStyle(
             fontFamily: 'Roboto',
             fontWeight: FontWeight.w100,
@@ -1212,7 +1212,7 @@ class _AccountPageState extends State<AccountPage> {
         FirebaseFirestore.instance.collection('users');
 
     usersCollection.doc(currentUser.uid).update({
-      'username': userName,
+      'name': userName,
       'contact': contactNumber,
       'email': email,
       'country': country,
