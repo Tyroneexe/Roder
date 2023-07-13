@@ -123,7 +123,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                   FutureBuilder<DocumentSnapshot>(
                     future: FirebaseFirestore.instance
                         .collection('users')
-                        .doc(user.uid)
+                        .doc(currentUser.uid)
                         .get(),
                     builder: (BuildContext context,
                         AsyncSnapshot<DocumentSnapshot> snapshot) {
@@ -148,7 +148,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                       } else {
                         return CircleAvatar(
                           radius: 32,
-                          backgroundImage: NetworkImage(user.photoURL!),
+                          backgroundImage: NetworkImage(currentUser.photoURL!),
                         );
                       }
                     },
@@ -161,14 +161,14 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                       FutureBuilder<DocumentSnapshot>(
                         future: FirebaseFirestore.instance
                             .collection('users')
-                            .doc(user.uid)
+                            .doc(currentUser.uid)
                             .get(),
                         builder: (BuildContext context,
                             AsyncSnapshot<DocumentSnapshot> snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
                             return Text(
-                              user.displayName!,
+                              currentUser.displayName!,
                               style: TextStyle(
                                 fontFamily: 'Roboto',
                                 fontWeight: FontWeight.w700,
@@ -179,7 +179,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                           } else if (snapshot.hasData) {
                             final userData =
                                 snapshot.data!.data() as Map<String, dynamic>;
-                            final userName = userData['username'] as String;
+                            final userName = userData['name'] as String;
 
                             return Text(
                               userName,

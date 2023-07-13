@@ -173,10 +173,10 @@ class _LogInState extends State<LogIn> {
 
   //create a users in the firestore database
   Future saveUserInTheDatabase() async {
-    if (user != null) {
+    if (currentUser != null) {
       // Assuming you have the necessary user information
-      String username = user.displayName!;
-      String email = user.email!;
+      String username = currentUser.displayName!;
+      String email = currentUser.email!;
 
       await createUser(username, email);
     } else {
@@ -191,10 +191,10 @@ class _LogInState extends State<LogIn> {
           FirebaseFirestore.instance.collection('users');
 
       // Create a new user document with the provided user ID
-      await users.doc(user.uid).set({
-        'username': username,
+      await users.doc(currentUser.uid).set({
+        'name': username,
         'email': email,
-        'foto': user.photoURL,
+        'foto': currentUser.photoURL,
         'bike': '',
         'contact': '',
         'location': '',

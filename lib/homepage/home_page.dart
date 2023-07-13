@@ -16,12 +16,14 @@ import '../widgets/unfilter_button.dart';
 /*
 To Do
 
-add the memebers list in add ride page with firestore
-save the first ride created bool with shared preferences
+
 Save joined rides in the database, so that i can show who has joined the ride
-log in with facebook and instagram
-do the message part of the app
+add joined rides to the users, then add the ride id, then cross refernece
+
 fix the custom profile pic
+
+do the message part of the app
+
 (link to ride) when i press on the users in the add ride page, it hsould invite them them to the ride, learn how to open the ride that the user has been invited to
 if ride is solo then instead of joining, then ask to join
 notifications if someone has joined the ride
@@ -29,11 +31,13 @@ create a notification saying that the user has been invited
 Follow and block users after messaging part is done
 
 make notification system using firestore, it would be easier instead of using prefs
-
+add edit rides after creating the notification system
 /
 | Wrtie to Database 
 | Make host join ride when press on 'create ride'
 | Give people user names
+add the memebers list in add ride page with firestore
+save the first ride created bool with shared preferences
 ===============================================
 | Make Host Delete Ride // write the onpress function
 | Make a Ride change-able when clicked //only host can do this //maybe do this after messages
@@ -43,6 +47,7 @@ make notification system using firestore, it would be easier instead of using pr
 | make more notifications (if someone has joined your ride, left etc)
 | be able to share links of rides
 ======Show app to BMW
+log in with facebook and instagram
 iOS compatible
 | Rides Near Me
 | Block users // do after creating the messages part
@@ -59,7 +64,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-final user = FirebaseAuth.instance.currentUser!;
+final currentUser = FirebaseAuth.instance.currentUser!;
 bool isNotificationsEnabled = true;
 
 class _HomePageState extends State<HomePage> {
@@ -161,14 +166,14 @@ class _HomePageState extends State<HomePage> {
                 child: FutureBuilder<DocumentSnapshot>(
                   future: FirebaseFirestore.instance
                       .collection('users')
-                      .doc(user.uid)
+                      .doc(currentUser.uid)
                       .get(),
                   builder: (BuildContext context,
                       AsyncSnapshot<DocumentSnapshot> snapshot) {
                     if (snapshot.hasData) {
                       final userData =
                           snapshot.data!.data() as Map<String, dynamic>;
-                      final userName = userData['username'] as String;
+                      final userName = userData['name'] as String;
 
                       return Text(
                         'Hey $userName,',
@@ -286,7 +291,7 @@ class _HomePageState extends State<HomePage> {
   Future<bool> isRideJoinedByCurrentUser(String rideId) async {
     // this function should also check if the user
     final userDoc =
-        FirebaseFirestore.instance.collection('users').doc(user.uid);
+        FirebaseFirestore.instance.collection('users').doc(currentUser.uid);
 
     final snapshot = await userDoc.get();
     final ridesArray = snapshot.data()?['joined_rides'] as List<dynamic>?;
@@ -301,7 +306,7 @@ class _HomePageState extends State<HomePage> {
   Future<bool> isRideCreatedByCurrentUser(String rideId) async {
     // this function should also check if the user
     final userDoc =
-        FirebaseFirestore.instance.collection('users').doc(user.uid);
+        FirebaseFirestore.instance.collection('users').doc(currentUser.uid);
 
     final snapshot = await userDoc.get();
     final ridesArray = snapshot.data()?['rides'] as List<dynamic>?;
@@ -587,47 +592,75 @@ class RideListItem extends StatelessWidget {
                 ),
               ],
             ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 20, bottom: 10),
-                child: TextButton(
-                  onPressed: () {
-                    // join the ride (add to joined rides (locally))
-                  },
-                  style: ButtonStyle(
-                    textStyle: MaterialStateProperty.all<TextStyle>(
-                      TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 12,
-                        color: Colors.white,
+            StreamBuilder<QuerySnapshot>(
+                stream:
+                    FirebaseFirestore.instance.collection('users').snapshots(),
+                builder: (context, snapshot) {
+                  final users = snapshot.data?.docs.reversed.toList();
+                  final currentUserDB =
+                      users?.firstWhere((user) => user.id == currentUser.uid);
+                  return Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 20, bottom: 10),
+                      child: TextButton(
+                        onPressed: () {
+                          if (currentUserDB!['joinedRides'].contains(ride.id)) {
+                            print('already joined');
+                          } else {
+                            _addJoinedRideToDB();
+                          }
+                        },
+                        style: ButtonStyle(
+                          textStyle: MaterialStateProperty.all<TextStyle>(
+                            TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 12,
+                              color: Colors.white,
+                            ),
+                          ),
+                          foregroundColor: MaterialStateProperty.all<Color>(
+                            Colors.white,
+                          ),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            blueClr,
+                          ),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 5, right: 5),
+                          child: Text('Join Ride'),
+                        ),
                       ),
                     ),
-                    foregroundColor: MaterialStateProperty.all<Color>(
-                      Colors.white,
-                    ),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      blueClr,
-                    ),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 5, right: 5),
-                    child: Text('Join Ride'),
-                  ),
-                ),
-              ),
-            ),
+                  );
+                }),
           ],
         ),
       ),
     );
+  }
+
+  _addJoinedRideToDB() {
+    final usersCollection = FirebaseFirestore.instance.collection('users');
+
+    // Reference the user document
+    final userDoc = usersCollection.doc(currentUser.uid);
+
+    // Get the ride document ID
+    final rideDocId = ride.id; // Assuming 'ride' is the ride document
+
+    // Add the ride ID to the "joinedRides" subcollection within the user document
+    userDoc.update({
+      'joinedRides': FieldValue.arrayUnion([rideDocId]),
+    });
   }
 }
 

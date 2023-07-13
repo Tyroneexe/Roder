@@ -633,7 +633,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
             Padding(
               padding: const EdgeInsets.only(top: 12),
               child: Text(
-                user['username'],
+                user['name'],
                 style: roRegular14,
               ),
             ),
@@ -664,7 +664,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
       'Date': _selectedDate,
       'Start Time': _startTime,
       'End Time': _endTime,
-      'Person': user.displayName!,
+      'Person': currentUser.displayName!,
       'Joined': 1,
       'Riders': selectedRide,
       'Country': locationProvider.countryController.text,
@@ -673,7 +673,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
     });
 
     // Reference the user document
-    final userDoc = usersCollection.doc(user.uid);
+    final userDoc = usersCollection.doc(currentUser.uid);
 
     // Add the ride ID to the "rides" subcollection within the user document
     userDoc.update({

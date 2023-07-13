@@ -58,7 +58,7 @@ class _AccountPageState extends State<AccountPage> {
                 children: [
                   CircleAvatar(
                     radius: 60,
-                    backgroundImage: NetworkImage(user.photoURL!),
+                    backgroundImage: NetworkImage(currentUser.photoURL!),
                   ),
                   Container(
                     width: 36,
@@ -239,7 +239,7 @@ class _AccountPageState extends State<AccountPage> {
                     FutureBuilder<DocumentSnapshot>(
                       future: FirebaseFirestore.instance
                           .collection('users')
-                          .doc(user.uid)
+                          .doc(currentUser.uid)
                           .get(),
                       builder: (BuildContext context,
                           AsyncSnapshot<DocumentSnapshot> snapshot) {
@@ -247,7 +247,7 @@ class _AccountPageState extends State<AccountPage> {
                           final userData =
                               snapshot.data!.data() as Map<String, dynamic>;
                           final userFoto = userData['foto'] as String;
-                          final userName = userData['username'] as String;
+                          final userName = userData['name'] as String;
                           final userNum = userData['contact'] as String;
                           final userBike = userData['bike'] as String;
 
@@ -261,7 +261,7 @@ class _AccountPageState extends State<AccountPage> {
                                 String contactNumber = nuController.text.isEmpty
                                     ? userNum
                                     : '+' + userPhoneNumber;
-                                String email = user.email!;
+                                String email = currentUser.email!;
                                 String locationValue = location;
                                 String bike = bikeController.text.isEmpty
                                     ? (userBike.isEmpty
@@ -362,7 +362,7 @@ class _AccountPageState extends State<AccountPage> {
   bikeForm(BuildContext context) {
     return FutureBuilder<DocumentSnapshot>(
       future:
-          FirebaseFirestore.instance.collection('users').doc(user.uid).get(),
+          FirebaseFirestore.instance.collection('users').doc(currentUser.uid).get(),
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -618,7 +618,7 @@ class _AccountPageState extends State<AccountPage> {
             fontSize: 14,
             color: Colors.black),
         decoration: InputDecoration(
-          hintText: user.email,
+          hintText: currentUser.email,
           hintStyle: TextStyle(
             fontFamily: 'Roboto',
             fontWeight: FontWeight.w100,
@@ -665,7 +665,7 @@ class _AccountPageState extends State<AccountPage> {
   numberForm(BuildContext context) {
     return FutureBuilder<DocumentSnapshot>(
         future:
-            FirebaseFirestore.instance.collection('users').doc(user.uid).get(),
+            FirebaseFirestore.instance.collection('users').doc(currentUser.uid).get(),
         builder:
             (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -895,7 +895,7 @@ class _AccountPageState extends State<AccountPage> {
   Widget userNameForm() {
     return FutureBuilder<DocumentSnapshot>(
       future:
-          FirebaseFirestore.instance.collection('users').doc(user.uid).get(),
+          FirebaseFirestore.instance.collection('users').doc(currentUser.uid).get(),
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -911,7 +911,7 @@ class _AccountPageState extends State<AccountPage> {
               ),
               controller: nameController,
               decoration: InputDecoration(
-                hintText: user.displayName,
+                hintText: currentUser.displayName,
                 hintStyle: TextStyle(
                   fontFamily: 'Roboto',
                   fontWeight: FontWeight.w100,
@@ -947,7 +947,7 @@ class _AccountPageState extends State<AccountPage> {
           );
         } else if (snapshot.hasData) {
           final userData = snapshot.data!.data() as Map<String, dynamic>;
-          final userName = userData['username'] as String;
+          final userName = userData['name'] as String;
 
           return Container(
             width: MediaQuery.of(context).size.width - 40,
@@ -1008,7 +1008,7 @@ class _AccountPageState extends State<AccountPage> {
               ),
               controller: nameController,
               decoration: InputDecoration(
-                hintText: user.displayName,
+                hintText: currentUser.displayName,
                 hintStyle: TextStyle(
                   fontFamily: 'Roboto',
                   fontWeight: FontWeight.w100,
@@ -1201,7 +1201,7 @@ class _AccountPageState extends State<AccountPage> {
     CollectionReference usersCollection =
         FirebaseFirestore.instance.collection('users');
 
-    usersCollection.doc(user.uid).update({
+    usersCollection.doc(currentUser.uid).update({
       'username': userName,
       'contact': contactNumber,
       'email': email,
