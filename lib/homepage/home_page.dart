@@ -796,7 +796,7 @@ class CreatedRideListItem extends StatelessWidget {
                       child: TextButton(
                         onPressed: () {
                           if (currentUserDB!['rides'].contains(ride.id)) {
-                            deleteRideFromDB(ride.id);
+                            _deleteRideAlert(context);
                           } else {
                             Text('Cannot Delete Ride');
                           }
@@ -841,18 +841,78 @@ class CreatedRideListItem extends StatelessWidget {
     );
   }
 
-  // Assuming you have the ID of the document you want to delete
+  _deleteRideAlert(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: navBarBkgClr,
+          title: Text(
+            'End Ride',
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Colors.black,
+            ),
+          ),
+          content: Text(
+            'Are you sure you want to end this ride',
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w100,
+              fontSize: 16,
+              color: Colors.black,
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w200,
+                  fontSize: 16,
+                  color: recentTxtClr,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text(
+                'Yes',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: blueClr,
+                ),
+              ),
+              onPressed: () {
+                deleteRideFromDB(ride.id);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          elevation: 20,
+        );
+      },
+    );
+  }
+
   deleteRideFromDB(String documentId) {
     FirebaseFirestore.instance
-        .collection(
-            'rides') // Replace 'rides' with the name of your Firestore collection
-        .doc(documentId) // Specify the ID of the document you want to delete
+        .collection('rides')
+        .doc(documentId)
         .delete()
         .then((value) {
-      // Document successfully deleted
       print('Document deleted successfully');
     }).catchError((error) {
-      // An error occurred while deleting the document
       print('Failed to delete document: $error');
     });
   }
