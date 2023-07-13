@@ -16,15 +16,11 @@ import '../widgets/unfilter_button.dart';
 /*
 To Do
 
-
-Save joined rides in the database, so that i can show who has joined the ride
-add joined rides to the users, then add the ride id, then cross refernece
-
 fix the custom profile pic
 
-do the message part of the app
+do the message part of the app after the update
 
-(link to ride) when i press on the users in the add ride page, it hsould invite them them to the ride, learn how to open the ride that the user has been invited to
+(https link to ride) when i press on the users in the add ride page, it hsould invite them them to the ride, learn how to open the ride that the user has been invited to
 if ride is solo then instead of joining, then ask to join
 notifications if someone has joined the ride
 create a notification saying that the user has been invited
@@ -784,46 +780,80 @@ class CreatedRideListItem extends StatelessWidget {
                 ),
               ],
             ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 20, bottom: 10),
-                child: TextButton(
-                  onPressed: () {
-                    // end the ride (add to joined rides (locally))
-                  },
-                  style: ButtonStyle(
-                    textStyle: MaterialStateProperty.all<TextStyle>(
-                      TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 12,
-                        color: Colors.white,
+            StreamBuilder<QuerySnapshot>(
+              stream:
+                  FirebaseFirestore.instance.collection('users').snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final users = snapshot.data?.docs.reversed.toList();
+                  final currentUserDB =
+                      users?.firstWhere((user) => user.id == currentUser.uid);
+                  return Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 20, bottom: 10),
+                      child: TextButton(
+                        onPressed: () {
+                          if (currentUserDB!['rides'].contains(ride.id)) {
+                            deleteRideFromDB(ride.id);
+                          } else {
+                            Text('Cannot Delete Ride');
+                          }
+                        },
+                        style: ButtonStyle(
+                          textStyle: MaterialStateProperty.all<TextStyle>(
+                            TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 12,
+                              color: Colors.white,
+                            ),
+                          ),
+                          foregroundColor: MaterialStateProperty.all<Color>(
+                            Colors.white,
+                          ),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            rred,
+                          ),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 5, right: 5),
+                          child: Text('End Ride'),
+                        ),
                       ),
                     ),
-                    foregroundColor: MaterialStateProperty.all<Color>(
-                      Colors.white,
-                    ),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      rred,
-                    ),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 5, right: 5),
-                    child: Text('End Ride'),
-                  ),
-                ),
-              ),
+                  );
+                } else {
+                  return Text('Loading...');
+                }
+              },
             ),
           ],
         ),
       ),
     );
+  }
+
+  // Assuming you have the ID of the document you want to delete
+  deleteRideFromDB(String documentId) {
+    FirebaseFirestore.instance
+        .collection(
+            'rides') // Replace 'rides' with the name of your Firestore collection
+        .doc(documentId) // Specify the ID of the document you want to delete
+        .delete()
+        .then((value) {
+      // Document successfully deleted
+      print('Document deleted successfully');
+    }).catchError((error) {
+      // An error occurred while deleting the document
+      print('Failed to delete document: $error');
+    });
   }
 }
