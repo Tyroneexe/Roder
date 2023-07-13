@@ -625,7 +625,7 @@ class RideListItem extends StatelessWidget {
                       child: TextButton(
                         onPressed: () {
                           if (currentUserDB['joinedRides'].contains(ride.id)) {
-                            _addedRideBar();
+                            _leaveRide();
                           } else {
                             _addJoinedRideToDB();
                           }
@@ -674,14 +674,19 @@ class RideListItem extends StatelessWidget {
     );
   }
 
-  _addedRideBar() {
-    Get.snackbar("Already Joined", "You have already joined this ride",
-        snackPosition: SnackPosition.TOP,
-        borderWidth: 2,
-        borderColor: blueClr,
-        backgroundColor: Colors.white,
-        colorText: blueClr,
-        icon: const Icon(Icons.add_location_outlined));
+  _leaveRide() {
+    final usersCollection = FirebaseFirestore.instance.collection('users');
+
+    // Reference the user document
+    final userDoc = usersCollection.doc(currentUser.uid);
+
+    // Get the ride document ID
+    final rideDocId = ride.id; // Assuming 'ride' is the ride document
+
+    // Add the ride ID to the "joinedRides" subcollection within the user document
+    userDoc.update({
+      'joinedRides': FieldValue.arrayRemove([rideDocId]),
+    });
   }
 
   _addJoinedRideToDB() {
