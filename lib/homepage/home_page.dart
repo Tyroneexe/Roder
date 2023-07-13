@@ -697,16 +697,33 @@ class RideListItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(6),
-                    topRight: Radius.circular(6),
-                  ),
-                  child: Image.asset(
-                    'assets/image $imageNumber.png',
-                    height: 200,
-                    fit: BoxFit.cover,
-                  ),
+                Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(6),
+                        topRight: Radius.circular(6),
+                      ),
+                      child: Image.asset(
+                        'assets/image $imageNumber.png',
+                        height: 200,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Positioned(
+                      right: 0,
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        icon: Icon(
+                          Icons.close,
+                          color: Colors.white,
+                          size: 32,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 20,
@@ -741,7 +758,33 @@ class RideListItem extends StatelessWidget {
                       width: 20,
                     ),
                     Text(
-                      "${ride['Date']} | ${ride['Start Time']} to ${ride['End Time']}",
+                      "${ride['Date'].substring(0, ride['Date'].length - 5)}  |  ${ride['Start Time']} to ${ride['End Time']}",
+                      style: roRegular14.copyWith(
+                        fontWeight: FontWeight.w100,
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Icon(
+                      Icons.location_pin,
+                      size: 28,
+                      color: blueClr,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      "${ride['City']}, ${ride['Country']}",
                       style: roRegular14.copyWith(
                         fontWeight: FontWeight.w100,
                       ),
