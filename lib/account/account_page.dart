@@ -1,11 +1,8 @@
 // ignore_for_file: unrelated_type_equality_checks, non_constant_identifier_names
 
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -29,7 +26,6 @@ String currentCityDB = '';
 String bike = '';
 
 class _AccountPageState extends State<AccountPage> {
-  File? image;
   //
   String selectedCountryFlag = '';
   String selectedCountry = '';
@@ -54,42 +50,47 @@ class _AccountPageState extends State<AccountPage> {
         child: Column(
           children: [
             Center(
-              child: Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  CircleAvatar(
-                    radius: 60,
-                    backgroundImage: NetworkImage(currentUser.photoURL!),
-                  ),
-                  Container(
-                    width: 36,
-                    height: 36,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: searchBarClr,
+              child: GestureDetector(
+                onTap: () {
+                  pickImage();
+                },
+                child: Stack(
+                  alignment: Alignment.bottomRight,
+                  children: [
+                    CircleAvatar(
+                      radius: 60,
+                      backgroundImage: NetworkImage(currentUser.photoURL!),
                     ),
-                    child: Icon(
-                      Icons.edit,
-                      color: blueClr,
-                      size: 24,
-                    ),
-                  ),
-                  Positioned(
-                    right: 0,
-                    bottom: 0,
-                    child: Container(
+                    Container(
                       width: 36,
                       height: 36,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 2,
+                        color: searchBarClr,
+                      ),
+                      child: Icon(
+                        Icons.edit,
+                        color: blueClr,
+                        size: 24,
+                      ),
+                    ),
+                    Positioned(
+                      right: 0,
+                      bottom: 0,
+                      child: Container(
+                        width: 36,
+                        height: 36,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 2,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             SizedBox(
@@ -270,7 +271,7 @@ class _AccountPageState extends State<AccountPage> {
                                         ? 'Rather Not Say'
                                         : userBike)
                                     : bikeController.text;
-                                String foto = image?.path ?? userFoto;
+                                String foto = userFoto;
 
                                 updateUserInformation(
                                   newName,
@@ -1227,17 +1228,11 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   Future<void> pickImage() async {
-    try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-
-      if (image == null) return;
-
-      final imageTemp = File(image.path);
-      setState(() {
-        this.image = imageTemp;
-      });
-    } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
+    //Use firebase storage to save the foto
+    final ImagePicker _imagePicker = ImagePicker();
+    XFile? file = await _imagePicker.pickImage(source: ImageSource.gallery);
+    if (file != null) {
+      //Firebase storage here
     }
   }
 }

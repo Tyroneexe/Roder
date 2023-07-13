@@ -16,12 +16,7 @@ import '../widgets/unfilter_button.dart';
 /*
 To Do
 
-popup when ride is clicked
-| show who has joined the ride
-| Show who has made the ride
 fix the custom profile pic
-
-if ride is solo then instead of joining, then ask to join
 
 /
 | Wrtie to Database 
@@ -30,6 +25,9 @@ if ride is solo then instead of joining, then ask to join
 add the memebers list in add ride page with firestore
 save the first ride created bool with shared preferences
 | Make Host Delete Ride // write the onpress function
+popup when ride is clicked
+| show who has joined the ride
+| Show who has made the ride
 ===============================================
 ======Show app to BMW
 log in with facebook and instagram
@@ -48,6 +46,7 @@ notifications if someone has joined the ride
 create a notification saying that the user has been invited
 Follow and block users after messaging part is done
 | Make a Ride change-able when clicked //only host can do this //maybe do this after messages
+if ride is solo then instead of joining, then ask to join
 \
 */
 
