@@ -294,6 +294,15 @@ class _HomePageState extends State<HomePage> {
                 .slideY(duration: 400.ms, begin: 1)
                 .fade(duration: 400.ms);
             rideWidgets.add(rideWidget);
+          } else if (isFilter2 && ride['Country'] == currentUserDB['country']) {
+            final rideWidget = RideListItem(
+              ride: ride,
+              imageNumber: imageNumber,
+            )
+                .animate()
+                .slideY(duration: 400.ms, begin: 1)
+                .fade(duration: 400.ms);
+            rideWidgets.add(rideWidget);
           }
         }
       }

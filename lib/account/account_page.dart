@@ -24,7 +24,8 @@ class AccountPage extends StatefulWidget {
 
 String name = '';
 String nu = '';
-String location = '';
+String currentCountryDB = '';
+String currentCityDB = '';
 String bike = '';
 
 class _AccountPageState extends State<AccountPage> {
@@ -262,7 +263,8 @@ class _AccountPageState extends State<AccountPage> {
                                     ? userNum
                                     : '+' + userPhoneNumber;
                                 String email = currentUser.email!;
-                                String locationValue = location;
+                                String country = currentCountryDB;
+                                String city = currentCityDB;
                                 String bike = bikeController.text.isEmpty
                                     ? (userBike.isEmpty
                                         ? 'Rather Not Say'
@@ -274,7 +276,8 @@ class _AccountPageState extends State<AccountPage> {
                                   newName,
                                   contactNumber,
                                   email,
-                                  locationValue,
+                                  country,
+                                  city,
                                   bike,
                                   foto,
                                 );
@@ -361,8 +364,10 @@ class _AccountPageState extends State<AccountPage> {
 
   bikeForm(BuildContext context) {
     return FutureBuilder<DocumentSnapshot>(
-      future:
-          FirebaseFirestore.instance.collection('users').doc(currentUser.uid).get(),
+      future: FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser.uid)
+          .get(),
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -530,7 +535,8 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   locationForm(BuildContext context) {
-    location = '$_currentCity, $_currentCountry';
+    currentCountryDB = _currentCountry;
+    currentCityDB = _currentCity;
     return Container(
       width: MediaQuery.of(context).size.width - 40,
       height: 40,
@@ -542,7 +548,7 @@ class _AccountPageState extends State<AccountPage> {
             fontSize: 14,
             color: Colors.black),
         decoration: InputDecoration(
-          hintText: location,
+          hintText: currentCountryDB + ', ' + currentCityDB,
           hintStyle: TextStyle(
             fontFamily: 'Roboto',
             fontWeight: FontWeight.w100,
@@ -664,8 +670,10 @@ class _AccountPageState extends State<AccountPage> {
 
   numberForm(BuildContext context) {
     return FutureBuilder<DocumentSnapshot>(
-        future:
-            FirebaseFirestore.instance.collection('users').doc(currentUser.uid).get(),
+        future: FirebaseFirestore.instance
+            .collection('users')
+            .doc(currentUser.uid)
+            .get(),
         builder:
             (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -894,8 +902,10 @@ class _AccountPageState extends State<AccountPage> {
 
   Widget userNameForm() {
     return FutureBuilder<DocumentSnapshot>(
-      future:
-          FirebaseFirestore.instance.collection('users').doc(currentUser.uid).get(),
+      future: FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser.uid)
+          .get(),
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -1197,7 +1207,7 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   void updateUserInformation(String userName, String contactNumber,
-      String email, String location, String bike, String foto) {
+      String email, String country, String city, String bike, String foto) {
     CollectionReference usersCollection =
         FirebaseFirestore.instance.collection('users');
 
@@ -1205,7 +1215,8 @@ class _AccountPageState extends State<AccountPage> {
       'username': userName,
       'contact': contactNumber,
       'email': email,
-      'location': location,
+      'country': country,
+      'city': city,
       'bike': bike,
       'foto': foto,
     }).then((_) {

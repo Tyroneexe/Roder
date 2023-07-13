@@ -197,7 +197,8 @@ class _LogInState extends State<LogIn> {
         'foto': currentUser.photoURL,
         'bike': '',
         'contact': '',
-        'location': '',
+        'country': '',
+        'city': '',
         'rides': [],
         //groups (array)
       });

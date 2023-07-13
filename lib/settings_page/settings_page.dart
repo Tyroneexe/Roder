@@ -33,12 +33,12 @@ class _SettingsPageState extends State<SettingsPage> {
     });
   }
 
-  final Uri _PrivacyUrl = Uri.parse(
+  final Uri _privacyUrl = Uri.parse(
       'https://github.com/Tyroneexe/Roder-privacy/blob/main/privacy-policy.md');
 
   Future<void> _launchPrivacyPolicy() async {
-    if (!await launchUrl(_PrivacyUrl)) {
-      throw Exception('Could not launch $_PrivacyUrl');
+    if (!await launchUrl(_privacyUrl)) {
+      throw Exception('Could not launch $_privacyUrl');
     }
   }
 
