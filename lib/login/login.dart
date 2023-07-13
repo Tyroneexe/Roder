@@ -200,6 +200,7 @@ class _LogInState extends State<LogIn> {
         'country': '',
         'city': '',
         'rides': [],
+        'joinedRides': [],
         //groups (array)
       });
 

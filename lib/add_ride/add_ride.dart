@@ -670,6 +670,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
       'Country': locationProvider.countryController.text,
       'City': locationProvider.cityController.text,
       'Address': locationProvider.addressController.text,
+      'User': currentUser.photoURL,
     });
 
     // Reference the user document

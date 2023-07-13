@@ -684,6 +684,7 @@ class RideListItem extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return Dialog(
+          insetPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(
@@ -791,6 +792,80 @@ class RideListItem extends StatelessWidget {
                     )
                   ],
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'View on Google Maps',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16,
+                        color: blueClr,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                  ),
+                  child: Text(
+                    'Creator',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(6),
+                    child: Image.network(
+                      ride['User'],
+                      height: 40,
+                      width: 40,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                  ),
+                  child: Text(
+                    'Participants',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                JoinedUsersWidget(rideId: ride.id),
+                SizedBox(
+                  height: 20,
+                ),
               ],
             ),
           ),
@@ -827,6 +902,68 @@ class RideListItem extends StatelessWidget {
     userDoc.update({
       'joinedRides': FieldValue.arrayUnion([rideDocId]),
     });
+  }
+}
+
+class JoinedUsersWidget extends StatelessWidget {
+  final String rideId;
+
+  JoinedUsersWidget({required this.rideId});
+
+  Future<List<Widget>> fetchJoinedUsers() async {
+    final CollectionReference usersCollection =
+        FirebaseFirestore.instance.collection('users');
+
+    QuerySnapshot rideUsersSnapshot =
+        await usersCollection.where('joinedRides', arrayContains: rideId).get();
+
+    List<DocumentSnapshot> rideUsersDocuments = rideUsersSnapshot.docs;
+
+    List<Widget> rideUsers =
+        rideUsersDocuments.map((DocumentSnapshot document) {
+      return Padding(
+        padding: const EdgeInsets.only(left: 20),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(6),
+          child: Image.network(
+            document.get('foto'),
+            height: 40,
+            width: 40,
+            fit: BoxFit.cover,
+          ),
+        ),
+      );
+    }).toList();
+
+    return rideUsers;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<Widget>>(
+      future: fetchJoinedUsers(),
+      builder: (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          // Display a loading indicator while fetching the data
+          return CircularProgressIndicator();
+        }
+
+        if (snapshot.hasError) {
+          // Handle any error that occurred during data fetching
+          return Text('Error: ${snapshot.error}');
+        }
+
+        if (snapshot.hasData) {
+          // Display the fetched user widgets
+          return Row(
+            children: snapshot.data!,
+          );
+        }
+
+        // Default fallback if no data is available
+        return Text('No joined users found');
+      },
+    );
   }
 }
 
