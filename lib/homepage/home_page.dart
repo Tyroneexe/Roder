@@ -16,10 +16,10 @@ import '../widgets/unfilter_button.dart';
 /*
 To Do
 
-fix the custom profile pic
 popup when ride is clicked
 | show who has joined the ride
 | Show who has made the ride
+fix the custom profile pic
 
 if ride is solo then instead of joining, then ask to join
 
@@ -554,10 +554,15 @@ class RideListItem extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: Colors.black.withOpacity(0.6),
+            GestureDetector(
+              onTap: () {
+                _ridePopup(context);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.black.withOpacity(0.6),
+                ),
               ),
             ),
             Column(
@@ -671,6 +676,83 @@ class RideListItem extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  _ridePopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(
+                6,
+              ),
+            ),
+          ),
+          elevation: 10,
+          child: IntrinsicHeight(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(6),
+                    topRight: Radius.circular(6),
+                  ),
+                  child: Image.asset(
+                    'assets/image $imageNumber.png',
+                    height: 200,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    ride['Address'],
+                    style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20,
+                        color: blueClr),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Icon(
+                      Icons.access_time_filled_outlined,
+                      size: 26,
+                      color: blueClr,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      "${ride['Date']} | ${ride['Start Time']} to ${ride['End Time']}",
+                      style: roRegular14.copyWith(
+                        fontWeight: FontWeight.w100,
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
