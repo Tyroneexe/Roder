@@ -12,14 +12,14 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../homepage/home_page.dart';
 
-class Settings extends StatefulWidget {
-  const Settings({super.key});
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
 
   @override
-  State<Settings> createState() => _SettingsState();
+  State<SettingsPage> createState() => _SettingsPageState();
 }
 
-class _SettingsState extends State<Settings> {
+class _SettingsPageState extends State<SettingsPage> {
   @override
   void initState() {
     super.initState();
@@ -33,12 +33,20 @@ class _SettingsState extends State<Settings> {
     });
   }
 
-  final Uri _url = Uri.parse(
+  final Uri _PrivacyUrl = Uri.parse(
       'https://github.com/Tyroneexe/Roder-privacy/blob/main/privacy-policy.md');
 
-  Future<void> _launchUrl() async {
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
+  Future<void> _launchPrivacyPolicy() async {
+    if (!await launchUrl(_PrivacyUrl)) {
+      throw Exception('Could not launch $_PrivacyUrl');
+    }
+  }
+
+  final Uri _githubUrl = Uri.parse('https://github.com/Tyroneexe/Roder');
+
+  Future<void> _launchGitHub() async {
+    if (!await launchUrl(_githubUrl)) {
+      throw Exception('Could not launch $_githubUrl');
     }
   }
 
@@ -187,6 +195,39 @@ class _SettingsState extends State<Settings> {
             ),
             onTap: () {
               Get.to(() => UpdatePage());
+            },
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          GestureDetector(
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                  ),
+                  child: Text(
+                    'Roder GitHub',
+                    style: roRegular14,
+                  ),
+                ),
+                Spacer(),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    right: 20,
+                    top: 10,
+                  ),
+                  child: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 18,
+                    color: blueClr,
+                  ),
+                ),
+              ],
+            ),
+            onTap: () {
+              _goToGitHub();
             },
           ),
           SizedBox(
@@ -368,6 +409,70 @@ class _SettingsState extends State<Settings> {
     );
   }
 
+  _goToGitHub() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: navBarBkgClr,
+          title: Text(
+            'Roder GitHub',
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Colors.black,
+            ),
+          ),
+          content: Text(
+            "Do you want to view Roder's Github",
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w100,
+              fontSize: 16,
+              color: Colors.black,
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w200,
+                  fontSize: 16,
+                  color: recentTxtClr,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text(
+                'Yes',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: blueClr,
+                ),
+              ),
+              onPressed: () {
+                _launchGitHub();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          elevation: 20,
+        );
+      },
+    );
+  }
+
   _privacyPolicyAlert() {
     showDialog(
       context: context,
@@ -418,7 +523,7 @@ class _SettingsState extends State<Settings> {
                 ),
               ),
               onPressed: () {
-                _launchUrl();
+                _launchPrivacyPolicy();
                 Navigator.of(context).pop();
               },
             ),

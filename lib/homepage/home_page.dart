@@ -261,26 +261,40 @@ class _HomePageState extends State<HomePage> {
     if (rides != null) {
       for (var ride in rides) {
         imageNumber = (imageNumber % 4) + 1;
-        if (isFilter3) {
-          final rideWidget = RideListItem(
-            //this should return joined ride list item
-            ride: ride,
-            imageNumber: imageNumber,
-          ).animate().slideY(duration: 400.ms, begin: 1).fade(duration: 400.ms);
-          rideWidgets.add(rideWidget);
-        } else if (isFilter4 && await isRideCreatedByCurrentUser(ride.id)) {
-          final rideWidget = CreatedRideListItem(
-            ride: ride,
-            imageNumber: imageNumber,
-          ).animate().slideY(duration: 400.ms, begin: 1).fade(duration: 400.ms);
-          rideWidgets.add(rideWidget);
-        } else if (isFilter1) {
-          final rideWidget = RideListItem(
-            //this should return joined ride list item
-            ride: ride,
-            imageNumber: imageNumber,
-          ).animate().slideY(duration: 400.ms, begin: 1).fade(duration: 400.ms);
-          rideWidgets.add(rideWidget);
+        final snapshot =
+            await FirebaseFirestore.instance.collection('users').get();
+        if (snapshot.docs.isNotEmpty) {
+          final users = snapshot.docs.reversed.toList();
+          final currentUserDB =
+              users.firstWhere((user) => user.id == currentUser.uid);
+          if (isFilter3 && currentUserDB['joinedRides'].contains(ride.id)) {
+            final rideWidget = RideListItem(
+              ride: ride,
+              imageNumber: imageNumber,
+            )
+                .animate()
+                .slideY(duration: 400.ms, begin: 1)
+                .fade(duration: 400.ms);
+            rideWidgets.add(rideWidget);
+          } else if (isFilter4 && await isRideCreatedByCurrentUser(ride.id)) {
+            final rideWidget = CreatedRideListItem(
+              ride: ride,
+              imageNumber: imageNumber,
+            )
+                .animate()
+                .slideY(duration: 400.ms, begin: 1)
+                .fade(duration: 400.ms);
+            rideWidgets.add(rideWidget);
+          } else if (isFilter1) {
+            final rideWidget = RideListItem(
+              ride: ride,
+              imageNumber: imageNumber,
+            )
+                .animate()
+                .slideY(duration: 400.ms, begin: 1)
+                .fade(duration: 400.ms);
+            rideWidgets.add(rideWidget);
+          }
         }
       }
     }
@@ -593,9 +607,10 @@ class RideListItem extends StatelessWidget {
               ],
             ),
             StreamBuilder<QuerySnapshot>(
-                stream:
-                    FirebaseFirestore.instance.collection('users').snapshots(),
-                builder: (context, snapshot) {
+              stream:
+                  FirebaseFirestore.instance.collection('users').snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
                   final users = snapshot.data?.docs.reversed.toList();
                   final currentUserDB =
                       users?.firstWhere((user) => user.id == currentUser.uid);
@@ -606,8 +621,8 @@ class RideListItem extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 20, bottom: 10),
                       child: TextButton(
                         onPressed: () {
-                          if (currentUserDB!['joinedRides'].contains(ride.id)) {
-                            print('already joined');
+                          if (currentUserDB['joinedRides'].contains(ride.id)) {
+                            _addedRideBar();
                           } else {
                             _addJoinedRideToDB();
                           }
@@ -625,7 +640,9 @@ class RideListItem extends StatelessWidget {
                             Colors.white,
                           ),
                           backgroundColor: MaterialStateProperty.all<Color>(
-                            blueClr,
+                            currentUserDB!['joinedRides'].contains(ride.id)
+                                ? outlineBtnClr
+                                : blueClr,
                           ),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -636,16 +653,32 @@ class RideListItem extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 5, right: 5),
-                          child: Text('Join Ride'),
+                          child: currentUserDB['joinedRides'].contains(ride.id)
+                              ? Text('Leave Ride')
+                              : Text('Join Ride'),
                         ),
                       ),
                     ),
                   );
-                }),
+                } else {
+                  return Text('Loading...');
+                }
+              },
+            ),
           ],
         ),
       ),
     );
+  }
+
+  _addedRideBar() {
+    Get.snackbar("Already Joined", "You have already joined this ride",
+        snackPosition: SnackPosition.TOP,
+        borderWidth: 2,
+        borderColor: blueClr,
+        backgroundColor: Colors.white,
+        colorText: blueClr,
+        icon: const Icon(Icons.add_location_outlined));
   }
 
   _addJoinedRideToDB() {

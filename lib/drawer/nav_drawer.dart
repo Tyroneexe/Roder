@@ -16,6 +16,7 @@ import 'package:roder/themes/theme.dart';
 import 'package:roder/ui/about_us.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../homepage/home_page.dart';
+import '../settings_page/settings_page.dart';
 
 class NavitionDrawer extends StatefulWidget {
   NavitionDrawer({super.key});
@@ -303,7 +304,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                 ),
               ),
               onTap: () {
-                Get.to(() => Settings());
+                Get.to(() => SettingsPage());
               },
             ),
           ),
