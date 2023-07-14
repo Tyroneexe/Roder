@@ -1,6 +1,4 @@
 // ignore_for_file: must_be_immutable, unused_field, non_constant_identifier_names
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -128,28 +126,25 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                         .get(),
                     builder: (BuildContext context,
                         AsyncSnapshot<DocumentSnapshot> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircleAvatar(
+                          backgroundImage: NetworkImage(currentUser.photoURL!),
+                          radius: 32,
+                        );
+                      }
                       if (snapshot.hasData) {
-                        final userData =
+                        final user =
                             snapshot.data!.data() as Map<String, dynamic>;
-                        final userFoto = userData['foto'] as String;
-
-                        if (userFoto.startsWith('/')) {
-                          // Local file path
-                          return CircleAvatar(
-                            radius: 32,
-                            backgroundImage: FileImage(File(userFoto)),
-                          );
-                        } else {
-                          // Network image URL
-                          return CircleAvatar(
-                            radius: 32,
-                            backgroundImage: NetworkImage(userFoto),
-                          );
-                        }
+                        return CircleAvatar(
+                          backgroundImage: NetworkImage(user['foto']),
+                          radius: 32,
+                        );
                       } else {
                         return CircleAvatar(
+                          backgroundImage: NetworkImage(
+                            currentUser.photoURL!,
+                          ),
                           radius: 32,
-                          backgroundImage: NetworkImage(currentUser.photoURL!),
                         );
                       }
                     },

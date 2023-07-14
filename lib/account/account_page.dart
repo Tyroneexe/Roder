@@ -1,7 +1,10 @@
 // ignore_for_file: unrelated_type_equality_checks, non_constant_identifier_names
 
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -27,6 +30,7 @@ String bike = '';
 
 class _AccountPageState extends State<AccountPage> {
   //
+  String imageURL = "";
   String selectedCountryFlag = '';
   String selectedCountry = '';
   String userPhoneNumber = '';
@@ -57,10 +61,39 @@ class _AccountPageState extends State<AccountPage> {
                 child: Stack(
                   alignment: Alignment.bottomRight,
                   children: [
-                    CircleAvatar(
-                      radius: 60,
-                      backgroundImage: NetworkImage(currentUser.photoURL!),
-                    ),
+                    imageURL == ''
+                        ? FutureBuilder<DocumentSnapshot>(
+                            future: FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(currentUser.uid)
+                                .get(),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<DocumentSnapshot> snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircleAvatar(
+                                  backgroundImage:
+                                      NetworkImage(currentUser.photoURL!),
+                                  radius: 60,
+                                );
+                              }
+                              if (snapshot.hasData) {
+                                final user = snapshot.data!.data()
+                                    as Map<String, dynamic>;
+                                return CircleAvatar(
+                                  backgroundImage: NetworkImage(user['foto']),
+                                  radius: 60,
+                                );
+                              } else {
+                                return CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                    currentUser.photoURL!,
+                                  ),
+                                  radius: 60,
+                                );
+                              }
+                            })
+                        : Image.network(imageURL),
                     Container(
                       width: 36,
                       height: 36,
@@ -271,7 +304,8 @@ class _AccountPageState extends State<AccountPage> {
                                         ? 'Rather Not Say'
                                         : userBike)
                                     : bikeController.text;
-                                String foto = userFoto;
+                                String foto =
+                                    imageURL == '' ? userFoto : imageURL;
 
                                 updateUserInformation(
                                   newName,
@@ -1227,12 +1261,22 @@ class _AccountPageState extends State<AccountPage> {
     });
   }
 
-  Future<void> pickImage() async {
-    //Use firebase storage to save the foto
-    final ImagePicker _imagePicker = ImagePicker();
-    XFile? file = await _imagePicker.pickImage(source: ImageSource.gallery);
-    if (file != null) {
-      //Firebase storage here
+  pickImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    Reference storageRef =
+        FirebaseStorage.instance.ref().child('profilepic.jpg');
+
+    if (image != null) {
+      await storageRef.putFile(File(image.path));
+      storageRef.getDownloadURL().then((value) {
+        print(value);
+        setState(() {
+          imageURL = value;
+        });
+      });
+    } else {
+      return;
     }
   }
 }

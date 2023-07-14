@@ -20,9 +20,6 @@ To Do
 
 fix the custom profile pic (wih firebase storage)
 
-fix updates page
-review system when ride is done
-
 /
 | Wrtie to Database 
 | Make host join ride when press on 'create ride'
@@ -39,8 +36,10 @@ enhance the image 1, 2, 3, 4
 add view on google maps
 random image each time in about us page
 Button in home page to go to add page
+fix updates page
 ===============================================
 ======Show app to BMW
+review system when ride is done
 log in with facebook and instagram
 iOS compatible
 | Rides Near Me
