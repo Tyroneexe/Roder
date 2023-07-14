@@ -19,7 +19,6 @@ To Do
 fix the custom profile pic (wih firebase storage)
 
 add view on google maps
-enhance the image 1, 2, 3, 4
 
 random image each time in about us page
 
@@ -37,6 +36,7 @@ popup when ride is clicked
 | Show who has made the ride
 Add participants row in singechildschrollview
 about us page icon in the appbar
+enhance the image 1, 2, 3, 4
 ===============================================
 ======Show app to BMW
 log in with facebook and instagram
@@ -556,7 +556,7 @@ class RideListItem extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           image: DecorationImage(
-            image: AssetImage('assets/image $imageNumber.jpg'),
+            image: AssetImage('assets/image$imageNumber.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -714,7 +714,7 @@ class RideListItem extends StatelessWidget {
                         topRight: Radius.circular(6),
                       ),
                       child: Image.asset(
-                        'assets/image $imageNumber.jpg',
+                        'assets/image$imageNumber.jpg',
                         height: 200,
                         fit: BoxFit.cover,
                       ),
@@ -998,7 +998,7 @@ class CreatedRideListItem extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           image: DecorationImage(
-            image: AssetImage('assets/image $imageNumber.jpg'),
+            image: AssetImage('assets/image$imageNumber.jpg'),
             fit: BoxFit.cover,
           ),
         ),

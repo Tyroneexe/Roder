@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -12,6 +14,22 @@ class AboutUsPage extends StatefulWidget {
 }
 
 class _AboutUsPageState extends State<AboutUsPage> {
+  int? randomImgNumber;
+  final Random random = Random();
+
+  @override
+  void initState() {
+    super.initState();
+    generateRandomNumber();
+  }
+
+  void generateRandomNumber() {
+    setState(() {
+      // Generates a random number between 1 and 5 (inclusive)
+      randomImgNumber = random.nextInt(5) + 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +48,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: AssetImage(
-                      'assets/Image 5.jpg',
+                      'assets/image$randomImgNumber.jpg',
                     ),
                   ),
                 ),
