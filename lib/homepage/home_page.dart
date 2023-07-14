@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:new_version_plus/new_version_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../drawer/nav_drawer.dart';
 import '../themes/theme.dart';
 import '../ui/notification_page.dart';
@@ -806,7 +807,9 @@ class RideListItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      openGoogleMaps();
+                    },
                     child: Text(
                       'View on Google Maps',
                       style: TextStyle(
@@ -880,6 +883,16 @@ class RideListItem extends StatelessWidget {
         );
       },
     );
+  }
+
+  void openGoogleMaps() async {
+    Uri url = Uri.parse(
+        'https://www.google.com/maps/search/?api=1&query=${ride['City']} ${ride['Address']}');
+    if (await launchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   _leaveRide() {
