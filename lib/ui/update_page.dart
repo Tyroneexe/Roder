@@ -29,6 +29,10 @@ class _UpdatePageState extends State<UpdatePage> {
             SizedBox(
               height: 20,
             ),
+            _ver200(),
+            SizedBox(
+              height: 20,
+            ),
             _ver105(),
             SizedBox(
               height: 20,
@@ -48,13 +52,98 @@ class _UpdatePageState extends State<UpdatePage> {
     );
   }
 
+  _ver200() {
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 200),
+      width: isExpanded
+          ? MediaQuery.of(context).size.width
+          : MediaQuery.of(context).size.width - 40,
+      height: isExpanded ? 660 : 160,
+      child: FlutterFancyContainer(
+        colorOne: blueClr,
+        colorTwo: blueClr,
+        onTap: () {
+          setState(() {
+            isExpanded = !isExpanded;
+          });
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 45,
+            ),
+            AnimatedDefaultTextStyle(
+              duration: Duration(milliseconds: 200),
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.bold,
+                fontSize: isExpanded ? 24 : 30,
+                color: Get.isDarkMode ? Colors.white : Colors.black,
+              ),
+              child: Text('Version 2.0.0'),
+            ),
+            AnimatedDefaultTextStyle(
+              duration: Duration(milliseconds: 200),
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.bold,
+                fontSize: isExpanded ? 14 : 20,
+                color: Get.isDarkMode ? Colors.white : Colors.black,
+              ),
+              child: Text('July 2023'),
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            AnimatedDefaultTextStyle(
+              duration: Duration(milliseconds: 200),
+              style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w400,
+                  fontSize: isExpanded ? 20 : 0,
+                  color: Get.isDarkMode ? Colors.white : Colors.black),
+              child: Container(
+                padding: EdgeInsets.only(left: 20, right: 20),
+                child: Text(
+                  // "Bug Fixes:\n"
+                  // "● Fixed the Notification System\n"
+                  // "● Fixed the Time Picker in Add Page\n"
+                  // "● Fixed the Splash Screen\n\n"
+                  "New Features:\n"
+                  "● New and Improved UI and UX\n"
+                  "● Roder's code is now available\n"
+                  "● User Profiles\n"
+                  "● Custom Profile Pic for Users\n"
+                  "● Tap on Rides gives more information\n"
+                  "● See who created the ride\n"
+                  "● See who joined a Ride\n"
+                  "● Nearby Rides functionality"
+                  "● Automatically join ride when created\n"
+                  "● Creator of the ride can now delete the ride\n"
+                  "● Location of Ride can be viewed on Google Maps",
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w100,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   _ver105() {
     return AnimatedContainer(
       duration: Duration(milliseconds: 200),
       width: isExpanded
           ? MediaQuery.of(context).size.width
           : MediaQuery.of(context).size.width - 40,
-      height: isExpanded ? 580 : 160,
+      height: isExpanded ? 560 : 160,
       child: FlutterFancyContainer(
         colorOne: blueClr,
         colorTwo: blueClr,

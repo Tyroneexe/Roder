@@ -18,8 +18,6 @@ import '../widgets/unfilter_button.dart';
 /*
 To Do
 
-fix the custom profile pic (wih firebase storage)
-
 /
 | Wrtie to Database 
 | Make host join ride when press on 'create ride'
@@ -37,6 +35,7 @@ add view on google maps
 random image each time in about us page
 Button in home page to go to add page
 fix updates page
+fix the custom profile pic (wih firebase storage)
 ===============================================
 ======Show app to BMW
 review system when ride is done
