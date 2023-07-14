@@ -16,7 +16,6 @@ class _UpdatePageState extends State<UpdatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.theme.colorScheme.background,
       appBar: _appbar(),
       body: SingleChildScrollView(
         child: Column(

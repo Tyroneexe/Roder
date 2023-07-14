@@ -119,10 +119,15 @@ class _SettingsPageState extends State<SettingsPage> {
                     right: 20,
                     top: 10,
                   ),
-                  child: Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    size: 18,
-                    color: blueClr,
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.to(() => AccountPage());
+                    },
+                    child: Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 18,
+                      color: blueClr,
+                    ),
                   ),
                 ),
               ],
@@ -132,7 +137,7 @@ class _SettingsPageState extends State<SettingsPage> {
             },
           ),
           SizedBox(
-            height: 5,
+            height: 10,
           ),
           GestureDetector(
             child: Row(
@@ -152,10 +157,15 @@ class _SettingsPageState extends State<SettingsPage> {
                     right: 20,
                     top: 10,
                   ),
-                  child: Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    size: 18,
-                    color: blueClr,
+                  child: GestureDetector(
+                    onTap: () {
+                      _privacyPolicyAlert();
+                    },
+                    child: Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 18,
+                      color: blueClr,
+                    ),
                   ),
                 ),
               ],
@@ -165,7 +175,7 @@ class _SettingsPageState extends State<SettingsPage> {
             },
           ),
           SizedBox(
-            height: 5,
+            height: 10,
           ),
           GestureDetector(
             child: Row(
@@ -185,10 +195,15 @@ class _SettingsPageState extends State<SettingsPage> {
                     right: 20,
                     top: 10,
                   ),
-                  child: Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    size: 18,
-                    color: blueClr,
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.to(() => UpdatePage());
+                    },
+                    child: Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 18,
+                      color: blueClr,
+                    ),
                   ),
                 ),
               ],
@@ -198,7 +213,7 @@ class _SettingsPageState extends State<SettingsPage> {
             },
           ),
           SizedBox(
-            height: 5,
+            height: 10,
           ),
           GestureDetector(
             child: Row(
@@ -218,10 +233,15 @@ class _SettingsPageState extends State<SettingsPage> {
                     right: 20,
                     top: 10,
                   ),
-                  child: Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    size: 18,
-                    color: blueClr,
+                  child: GestureDetector(
+                    onTap: () {
+                      _goToGitHub();
+                    },
+                    child: Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 18,
+                      color: blueClr,
+                    ),
                   ),
                 ),
               ],
