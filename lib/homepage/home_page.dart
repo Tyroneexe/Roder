@@ -16,7 +16,14 @@ import '../widgets/unfilter_button.dart';
 /*
 To Do
 
-fix the custom profile pic
+fix the custom profile pic (wih firebase storage)
+
+add view on google maps
+enhance the image 1, 2, 3, 4
+
+random image each time in about us page
+
+fix updates page
 
 /
 | Wrtie to Database 
@@ -28,6 +35,8 @@ save the first ride created bool with shared preferences
 popup when ride is clicked
 | show who has joined the ride
 | Show who has made the ride
+Add participants row in singechildschrollview
+about us page icon in the appbar
 ===============================================
 ======Show app to BMW
 log in with facebook and instagram
@@ -253,7 +262,7 @@ class _HomePageState extends State<HomePage> {
 
     if (rides != null) {
       for (var ride in rides) {
-        imageNumber = (imageNumber % 4) + 1;
+        imageNumber = (imageNumber % 5) + 1;
         final snapshot =
             await FirebaseFirestore.instance.collection('users').get();
         if (snapshot.docs.isNotEmpty) {
@@ -547,7 +556,7 @@ class RideListItem extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           image: DecorationImage(
-            image: AssetImage('assets/image $imageNumber.png'),
+            image: AssetImage('assets/image $imageNumber.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -705,7 +714,7 @@ class RideListItem extends StatelessWidget {
                         topRight: Radius.circular(6),
                       ),
                       child: Image.asset(
-                        'assets/image $imageNumber.png',
+                        'assets/image $imageNumber.jpg',
                         height: 200,
                         fit: BoxFit.cover,
                       ),
@@ -954,8 +963,11 @@ class JoinedUsersWidget extends StatelessWidget {
 
         if (snapshot.hasData) {
           // Display the fetched user widgets
-          return Row(
-            children: snapshot.data!,
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: snapshot.data!,
+            ),
           );
         }
 
@@ -986,7 +998,7 @@ class CreatedRideListItem extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           image: DecorationImage(
-            image: AssetImage('assets/image $imageNumber.png'),
+            image: AssetImage('assets/image $imageNumber.jpg'),
             fit: BoxFit.cover,
           ),
         ),

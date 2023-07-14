@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../themes/theme.dart';
 
@@ -29,7 +30,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: AssetImage(
-                      'assets/AboutUsImg.jpg',
+                      'assets/Image 5.jpg',
                     ),
                   ),
                 ),
@@ -211,6 +212,92 @@ class _AboutUsPageState extends State<AboutUsPage> {
       ),
       backgroundColor: context.theme.colorScheme.background,
       foregroundColor: blueClr,
+      actions: [
+        GestureDetector(
+          onTap: () {
+            _goToGitHub();
+          },
+          child: Icon(
+            Icons.code,
+            size: 28,
+          ),
+        ),
+        SizedBox(
+          width: 20,
+        ),
+      ],
+    );
+  }
+
+  final Uri _githubUrl = Uri.parse('https://github.com/Tyroneexe/Roder');
+
+  Future<void> _launchGitHub() async {
+    if (!await launchUrl(_githubUrl)) {
+      throw Exception('Could not launch $_githubUrl');
+    }
+  }
+
+  _goToGitHub() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: navBarBkgClr,
+          title: Text(
+            "Roder's Code",
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Colors.black,
+            ),
+          ),
+          content: Text(
+            "Do you want to view Roder's Code. You can also conribute to the source code!",
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w100,
+              fontSize: 16,
+              color: Colors.black,
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w200,
+                  fontSize: 16,
+                  color: recentTxtClr,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text(
+                'Yes',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: blueClr,
+                ),
+              ),
+              onPressed: () {
+                _launchGitHub();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          elevation: 20,
+        );
+      },
     );
   }
 }
