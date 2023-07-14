@@ -35,11 +35,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.theme.colorScheme.background,
+      // backgroundColor: context.theme.colorScheme.background,
       appBar: _appBar(),
       body: SingleChildScrollView(
         child: SizedBox(
-          height: MediaQuery.of(context).size.height - 160,
+          height: MediaQuery.of(context).size.height - 140,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -595,9 +595,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 10,
-              ),
+              // SizedBox(
+              //   height: 10,
+              // ),
             ],
           ),
         ),

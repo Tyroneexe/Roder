@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:new_version_plus/new_version_plus.dart';
+import 'package:roder/add_ride/add_ride.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../drawer/nav_drawer.dart';
 import '../themes/theme.dart';
@@ -19,11 +20,9 @@ To Do
 
 fix the custom profile pic (wih firebase storage)
 
-add view on google maps
-
-random image each time in about us page
-
 fix updates page
+review system when ride is done
+Button in home page to go to add page
 
 /
 | Wrtie to Database 
@@ -38,6 +37,8 @@ popup when ride is clicked
 Add participants row in singechildschrollview
 about us page icon in the appbar
 enhance the image 1, 2, 3, 4
+add view on google maps
+random image each time in about us page
 ===============================================
 ======Show app to BMW
 log in with facebook and instagram
@@ -158,98 +159,121 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         foregroundColor: Get.isDarkMode ? Colors.white : Colors.black,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+      body: Stack(
         children: [
-          Row(
+          Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsets.only(left: 20),
-                child: FutureBuilder<DocumentSnapshot>(
-                  future: FirebaseFirestore.instance
-                      .collection('users')
-                      .doc(currentUser.uid)
-                      .get(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<DocumentSnapshot> snapshot) {
-                    if (snapshot.hasData) {
-                      final userData =
-                          snapshot.data!.data() as Map<String, dynamic>;
-                      final userName = userData['name'] as String;
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 20),
+                    child: FutureBuilder<DocumentSnapshot>(
+                      future: FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(currentUser.uid)
+                          .get(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<DocumentSnapshot> snapshot) {
+                        if (snapshot.hasData) {
+                          final userData =
+                              snapshot.data!.data() as Map<String, dynamic>;
+                          final userName = userData['name'] as String;
 
-                      return Text(
-                        'Hey $userName,',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25,
-                          color: Colors.black,
-                        ),
-                      );
-                    } else if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
-                    } else {
-                      return Text('Loading...');
-                    }
-                  },
-                ),
-              )
-            ],
-          ),
-          SizedBox(
-            height: 7,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 20),
-                child: Text(
-                  "Let's Ride",
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w100,
-                    fontSize: 16,
-                    color: Colors.black,
+                          return Text(
+                            'Hey $userName,',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                              color: Colors.black,
+                            ),
+                          );
+                        } else if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        } else {
+                          return Text('Loading...');
+                        }
+                      },
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 7,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 20),
+                    child: Text(
+                      "Let's Ride",
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w100,
+                        fontSize: 16,
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
-                ),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              _filterRidesButtons(),
+              SizedBox(
+                height: 20,
+              ),
+              StreamBuilder<QuerySnapshot>(
+                stream:
+                    FirebaseFirestore.instance.collection('rides').snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final rides = snapshot.data?.docs.reversed.toList();
+                    return FutureBuilder<List<Widget>>(
+                      future: buildRideWidgets(rides),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return CircularProgressIndicator();
+                        } else if (snapshot.hasData) {
+                          final riderWidgets = snapshot.data!;
+                          return Expanded(
+                            child: ListView(
+                              children: riderWidgets,
+                            ),
+                          );
+                        } else {
+                          return Text('Error loading rides.');
+                        }
+                      },
+                    );
+                  } else {
+                    return CircularProgressIndicator();
+                  }
+                },
               ),
             ],
           ),
-          SizedBox(
-            height: 20,
-          ),
-          _filterRidesButtons(),
-          SizedBox(
-            height: 20,
-          ),
-          StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance.collection('rides').snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final rides = snapshot.data?.docs.reversed.toList();
-                return FutureBuilder<List<Widget>>(
-                  future: buildRideWidgets(rides),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
-                    } else if (snapshot.hasData) {
-                      final riderWidgets = snapshot.data!;
-                      return Expanded(
-                        child: ListView(
-                          children: riderWidgets,
-                        ),
-                      );
-                    } else {
-                      return Text('Error loading rides.');
-                    }
-                  },
-                );
-              } else {
-                return CircularProgressIndicator();
-              }
-            },
+          Padding(
+            padding: const EdgeInsets.only(right: 20, bottom: 20),
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: FloatingActionButton(
+                foregroundColor: Colors.white,
+                backgroundColor: blueClr,
+                onPressed: () {
+                  Get.to(() => AddTaskPage());
+                },
+                child: Icon(
+                  Icons.add,
+                  size: 32,
+                ),
+              ),
+            ),
           ),
         ],
       ),

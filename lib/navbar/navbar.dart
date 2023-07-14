@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:roder/messages/messages_page.dart';
 import 'package:roder/navbar/barcontroller.dart';
 import 'package:roder/search/search_page.dart';
 import 'package:roder/themes/theme.dart';
-import 'package:roder/add_ride/add_ride.dart';
 import 'package:roder/ui/notification_page.dart';
 import '../homepage/home_page.dart';
 
@@ -26,7 +26,7 @@ class _NavBarState extends State<NavBar> {
         return Scaffold(
           body: IndexedStack(
             index: controller.tabIndex,
-            children: [HomePage(), NotificationPage(), Search(), AddTaskPage()],
+            children: [HomePage(), NotificationPage(), Search(), MessagePage()],
           ),
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
@@ -56,7 +56,7 @@ class _NavBarState extends State<NavBar> {
               ),
               _bottombarItem(Icons.search_rounded, ""),
               _bottombarItem(
-                Icons.add_circle_outline,
+                Icons.message,
                 "",
               ),
             ],

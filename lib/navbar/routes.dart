@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
+import 'package:roder/messages/messages_page.dart';
 import 'package:roder/navbar/navbar.dart';
 import 'package:roder/search/search_page.dart';
-import 'package:roder/add_ride/add_ride.dart';
 import 'package:roder/homepage/home_page.dart';
 import 'package:roder/ui/notification_page.dart';
 
@@ -11,7 +11,7 @@ class AppPage {
     GetPage(name: home, page: () => const HomePage()),
     GetPage(name: noti, page: () => NotificationPage()),
     GetPage(name: search, page: () => const Search()),
-    GetPage(name: task, page: () => const AddTaskPage()),
+    GetPage(name: message, page: () => const MessagePage()),
   ];
 
   //
@@ -19,11 +19,11 @@ class AppPage {
   static gethome() => home;
   static getnoti() => noti;
   static getsearch() => search;
-  static gettask() => task;
+  static getmessage() => message;
   //
   static String navbar = '/';
   static String home = '/home';
   static String noti = '/noti';
   static String search = '/search';
-  static String task = '/task';
+  static String message = '/message';
 }
