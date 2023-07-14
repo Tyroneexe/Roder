@@ -558,11 +558,12 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         titleController.clear();
                         _addedRideBar();
                         _scheduleNotification();
+                        setState(() {
+                          createdFirstRide = true;
+                        });
+                        _saveCreatedFirstRide();
+                        Navigator.of(context).pop();
                       }
-                      setState(() {
-                        createdFirstRide = true;
-                      });
-                      _saveCreatedFirstRide();
                     },
                     style: ButtonStyle(
                       textStyle: MaterialStateProperty.all<TextStyle>(

@@ -33,7 +33,7 @@ class _NotificationPageState extends State<NotificationPage> {
     ),
     NotificationItem(
       title: "You Created Your First Ride. Nice!",
-      time: "",
+      time: "Go and explore!",
       icon: Icons.add,
       event: "createdFirstRide",
       viewed: false,

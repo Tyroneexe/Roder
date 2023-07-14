@@ -18,6 +18,8 @@ import '../widgets/unfilter_button.dart';
 /*
 To Do
 
+Catched network image
+Search page funcionality
 /
 | Wrtie to Database 
 | Make host join ride when press on 'create ride'
@@ -909,7 +911,7 @@ class RideListItem extends StatelessWidget {
 
   void openGoogleMaps() async {
     Uri url = Uri.parse(
-        'https://www.google.com/maps/search/?api=1&query=${ride['City']} ${ride['Address']}');
+        'https://www.google.com/maps/search/?api=1&query=${ride['Country']} ${ride['City']} ${ride['Address']}');
     if (await launchUrl(url)) {
       await launchUrl(url);
     } else {
@@ -923,12 +925,9 @@ class RideListItem extends StatelessWidget {
     // Reference the user document
     final userDoc = usersCollection.doc(currentUser.uid);
 
-    // Get the ride document ID
-    final rideDocId = ride.id; // Assuming 'ride' is the ride document
-
     // Add the ride ID to the "joinedRides" subcollection within the user document
     userDoc.update({
-      'joinedRides': FieldValue.arrayRemove([rideDocId]),
+      'joinedRides': FieldValue.arrayRemove([ride.id]),
     });
   }
 
