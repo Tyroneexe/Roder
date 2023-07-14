@@ -22,7 +22,6 @@ fix the custom profile pic (wih firebase storage)
 
 fix updates page
 review system when ride is done
-Button in home page to go to add page
 
 /
 | Wrtie to Database 
@@ -39,6 +38,7 @@ about us page icon in the appbar
 enhance the image 1, 2, 3, 4
 add view on google maps
 random image each time in about us page
+Button in home page to go to add page
 ===============================================
 ======Show app to BMW
 log in with facebook and instagram

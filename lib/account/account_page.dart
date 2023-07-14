@@ -199,7 +199,7 @@ class _AccountPageState extends State<AccountPage> {
                       ),
                       child: TextButton(
                         onPressed: () {
-                          //
+                          Get.back();
                         },
                         style: ButtonStyle(
                           textStyle: MaterialStateProperty.all<TextStyle>(
