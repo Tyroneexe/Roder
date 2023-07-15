@@ -8,6 +8,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:new_version_plus/new_version_plus.dart';
 import 'package:roder/add_ride/add_ride.dart';
+import 'package:roder/widgets/custom_snackbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../drawer/nav_drawer.dart';
 import '../themes/theme.dart';
@@ -18,8 +19,9 @@ import '../widgets/unfilter_button.dart';
 /*
 To Do
 
-Catched network image
-Search page funcionality
+home page snackbars so that the user knows he created a ride,
+joined, left, ended and so on
+
 /
 | Wrtie to Database 
 | Make host join ride when press on 'create ride'
@@ -38,6 +40,7 @@ random image each time in about us page
 Button in home page to go to add page
 fix updates page
 fix the custom profile pic (wih firebase storage)
+Search page funcionality
 ===============================================
 ======Show app to BMW
 review system when ride is done
@@ -665,6 +668,18 @@ class RideListItem extends StatelessWidget {
                           if (currentUserDB['joinedRides'].contains(ride.id)) {
                             _leaveRide();
                           } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: CustomSnackbar(
+                                  title: 'Joined Ride',
+                                  subTitle: 'You have joined ${ride['Name']}',
+                                ),
+                                behavior: SnackBarBehavior.floating,
+                                backgroundColor: Colors.transparent,
+                                
+                                elevation: 0,
+                              ),
+                            );
                             _addJoinedRideToDB();
                           }
                         },
@@ -711,6 +726,61 @@ class RideListItem extends StatelessWidget {
       ),
     );
   }
+
+  // roderSnackBar() {
+  //   return Stack(
+  //     children: [
+  //       Container(
+  //         padding: EdgeInsets.all(
+  //           16,
+  //         ),
+  //         height: 90,
+  //         decoration: BoxDecoration(
+  //           color: blueClr,
+  //           borderRadius: BorderRadius.circular(
+  //             20,
+  //           ),
+  //         ),
+  //         child: Row(
+  //           children: [
+  //             SizedBox(
+  //               width: 130,
+  //             ),
+  //             Expanded(
+  //               child: Column(
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   Text(
+  //                     'Joined Ride',
+  //                     style: TextStyle(
+  //                       fontSize: 18,
+  //                       color: Colors.white,
+  //                     ),
+  //                   ),
+  //                   Text(
+  //                     "You have joined ${ride['Name']}",
+  //                     style: TextStyle(color: Colors.white, fontSize: 12),
+  //                     maxLines: 2,
+  //                     overflow: TextOverflow.ellipsis,
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //       Positioned(
+  //         top: -15,
+  //         child: Image.asset(
+  //           'assets/NotiRoderImage.png',
+  //           fit: BoxFit.contain,
+  //           height: 110,
+  //           width: 150,
+  //         ),
+  //       )
+  //     ],
+  //   );
+  // }
 
   _ridePopup(BuildContext context) {
     showDialog(

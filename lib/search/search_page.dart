@@ -1,7 +1,9 @@
 // ignore_for_file: unnecessary_null_comparison, unused_local_variable
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:roder/homepage/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../themes/theme.dart';
@@ -61,93 +63,129 @@ class _SearchState extends State<Search> {
           SizedBox(
             height: 10,
           ),
-          if (recentHistory.length == 0) ...[
-            Container(
-              height: 220,
-              width: 220,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/NotiRoderImage.png'),
+          if (searchFilter.text == '') ...[
+            if (recentHistory.length == 0) ...[
+              Container(
+                height: 220,
+                width: 220,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/NotiRoderImage.png'),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'No Searches Yet',
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
-                color: Colors.black,
+              SizedBox(height: 10),
+              Text(
+                'No Searches Yet',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20,
+                  color: Colors.black,
+                ),
               ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Go ahead and explore some rides!',
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w100,
-                fontSize: 14,
-                color: Colors.black,
+              SizedBox(height: 10),
+              Text(
+                'Go ahead and explore some rides!',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w100,
+                  fontSize: 14,
+                  color: Colors.black,
+                ),
               ),
-            ),
-          ] else ...[
-            Expanded(
-              child: ListView.builder(
-                itemCount: recentHistory.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 5, bottom: 5),
-                    child: GestureDetector(
-                      onTap: () {
-                        searchFilter.text = recentHistory[index];
-                      },
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Icon(
-                            Icons.history,
-                            color: recentTxtClr,
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            recentHistory[index],
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
+            ] else ...[
+              Expanded(
+                child: ListView.builder(
+                  itemCount: recentHistory.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 5, bottom: 5),
+                      child: GestureDetector(
+                        onTap: () {
+                          searchFilter.text = recentHistory[index];
+                          setState(() {});
+                        },
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Icon(
+                              Icons.history,
                               color: recentTxtClr,
                             ),
-                          ),
-                          Spacer(),
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                recentHistory.removeAt(index);
-                              });
-                              saveRecentHistory();
-                            },
-                            child: Icon(
-                              Icons.close_rounded,
-                              color: recentTxtClr,
-                              size: 22,
+                            SizedBox(
+                              width: 20,
                             ),
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                        ],
+                            Text(
+                              recentHistory[index],
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
+                                color: recentTxtClr,
+                              ),
+                            ),
+                            Spacer(),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  recentHistory.removeAt(index);
+                                });
+                                saveRecentHistory();
+                              },
+                              child: Icon(
+                                Icons.close_rounded,
+                                color: recentTxtClr,
+                                size: 22,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                          ],
+                        ),
                       ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ] else ...[
+            StreamBuilder<QuerySnapshot>(
+              stream:
+                  FirebaseFirestore.instance.collection('rides').snapshots(),
+              builder: (context, snapshot) {
+                List<Widget> rideWidgets = [];
+                int imageNumber = 0;
+                imageNumber = (imageNumber % 5) + 1;
+
+                if (snapshot.hasData) {
+                  final rides = snapshot.data?.docs.reversed.toList();
+
+                  for (var ride in rides!) {
+                    final rideData = ride.data() as Map<String, dynamic>;
+                    final ridePlace = rideData['City'] + rideData['Address'];
+
+                    if (ridePlace.contains(searchFilter.text)) {
+                      final rideWidget =
+                          RideListItem(ride: ride, imageNumber: imageNumber);
+                      rideWidgets.add(rideWidget);
+                    }
+                  }
+
+                  return Expanded(
+                    child: ListView(
+                      children: rideWidgets,
                     ),
                   );
-                },
-              ),
+                }
+
+                return CircularProgressIndicator();
+              },
             ),
-          ]
+          ],
         ],
       ),
     );
