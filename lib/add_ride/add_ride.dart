@@ -10,6 +10,7 @@ import 'package:roder/themes/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../homepage/home_page.dart';
 import '../ui/notification_page.dart';
+import '../widgets/custom_snackbar.dart';
 import 'location_provider.dart';
 
 class AddTaskPage extends StatefulWidget {
@@ -554,9 +555,21 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   TextButton(
                     onPressed: () async {
                       if (_validateDate() == true) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: CustomSnackbar(
+                              title: 'Created Ride',
+                              subTitle:
+                                  'You have created ${titleController.text}',
+                              color: rred,
+                            ),
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                          ),
+                        );
                         createRide();
                         titleController.clear();
-                        _addedRideBar();
                         _scheduleNotification();
                         setState(() {
                           createdFirstRide = true;
@@ -824,16 +837,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
       return false;
     }
     return false;
-  }
-
-  _addedRideBar() {
-    Get.snackbar("CREATED RIDE", "Ride has been created",
-        snackPosition: SnackPosition.TOP,
-        borderWidth: 2,
-        borderColor: blueClr,
-        backgroundColor: Colors.white,
-        colorText: blueClr,
-        icon: const Icon(Icons.add_location_outlined));
   }
 
   _appBar() {
