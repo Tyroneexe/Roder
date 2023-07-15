@@ -667,16 +667,28 @@ class RideListItem extends StatelessWidget {
                         onPressed: () {
                           if (currentUserDB['joinedRides'].contains(ride.id)) {
                             _leaveRide();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: CustomSnackbar(
+                                  title: 'Left Ride',
+                                  subTitle: 'You have left ${ride['Name']}',
+                                  color: outlineBtnClr,
+                                ),
+                                behavior: SnackBarBehavior.floating,
+                                backgroundColor: Colors.transparent,
+                                elevation: 0,
+                              ),
+                            );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: CustomSnackbar(
                                   title: 'Joined Ride',
                                   subTitle: 'You have joined ${ride['Name']}',
+                                  color: blueClr,
                                 ),
                                 behavior: SnackBarBehavior.floating,
                                 backgroundColor: Colors.transparent,
-                                
                                 elevation: 0,
                               ),
                             );
@@ -1177,8 +1189,6 @@ class CreatedRideListItem extends StatelessWidget {
                         onPressed: () {
                           if (currentUserDB!['rides'].contains(ride.id)) {
                             _deleteRideAlert(context);
-                          } else {
-                            Text('Cannot Delete Ride');
                           }
                         },
                         style: ButtonStyle(
@@ -1271,6 +1281,18 @@ class CreatedRideListItem extends StatelessWidget {
                 ),
               ),
               onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: CustomSnackbar(
+                      title: 'Ended Ride',
+                      subTitle: 'You have ended ${ride['Name']}',
+                      color: rred,
+                    ),
+                    behavior: SnackBarBehavior.floating,
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                  ),
+                );
                 deleteRideFromDB(ride.id);
                 Navigator.of(context).pop();
               },

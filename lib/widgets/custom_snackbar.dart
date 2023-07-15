@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../themes/theme.dart';
-
 class CustomSnackbar extends StatelessWidget {
   const CustomSnackbar({
     super.key,
     required this.title,
     required this.subTitle,
+    required this.color,
   });
 
   final String title;
   final String subTitle;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class CustomSnackbar extends StatelessWidget {
           ),
           height: 90,
           decoration: BoxDecoration(
-            color: blueClr,
+            color: color,
             borderRadius: BorderRadius.circular(
               20,
             ),
