@@ -19,8 +19,6 @@ import '../widgets/unfilter_button.dart';
 /*
 To Do
 
-home page snackbars so that the user knows he created a ride,
-joined, left, ended and so on
 
 /
 | Wrtie to Database 
@@ -41,6 +39,8 @@ Button in home page to go to add page
 fix updates page
 fix the custom profile pic (wih firebase storage)
 Search page funcionality
+home page snackbars so that the user knows he created a ride,
+joined, left, ended and so on
 ===============================================
 ======Show app to BMW
 review system when ride is done
