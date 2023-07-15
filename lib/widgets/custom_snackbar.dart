@@ -44,6 +44,9 @@ class CustomSnackbar extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
+                    SizedBox(
+                      height: 3,
+                    ),
                     Text(
                       subTitle,
                       style: TextStyle(color: Colors.white, fontSize: 12),

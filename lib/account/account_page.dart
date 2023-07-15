@@ -14,6 +14,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:roder/themes/theme.dart';
 import '../homepage/home_page.dart';
+import '../widgets/custom_snackbar.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -290,6 +291,18 @@ class _AccountPageState extends State<AccountPage> {
                             padding: const EdgeInsets.only(left: 10),
                             child: TextButton(
                               onPressed: () {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: CustomSnackbar(
+                                      title: 'Updated User',
+                                      subTitle: 'Updated $userName',
+                                      color: blueClr,
+                                    ),
+                                    behavior: SnackBarBehavior.floating,
+                                    backgroundColor: Colors.transparent,
+                                    elevation: 0,
+                                  ),
+                                );
                                 String newName = nameController.text.isEmpty
                                     ? userName
                                     : nameController.text;
