@@ -19,7 +19,6 @@ import '../widgets/unfilter_button.dart';
 /*
 To Do
 
-Fix message icon size
 also on the account edit page. the "rather not say". inside the your bike text block.
 
 /

@@ -430,7 +430,7 @@ class _AccountPageState extends State<AccountPage> {
                   color: Colors.black),
               controller: bikeController,
               decoration: InputDecoration(
-                hintText: 'Rather Not Say',
+                hintText: "Rather Not Say",
                 hintStyle: TextStyle(
                   fontFamily: 'Roboto',
                   fontWeight: FontWeight.w100,
@@ -486,12 +486,19 @@ class _AccountPageState extends State<AccountPage> {
               controller: bikeController,
               decoration: InputDecoration(
                 hintText: userBike == '' ? 'Rather Not Say' : userBike,
-                hintStyle: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w100,
-                  fontSize: 14,
-                  color: Colors.black,
-                ),
+                hintStyle: userBike == ''
+                    ? TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w100,
+                        fontSize: 14,
+                        color: Colors.grey,
+                      )
+                    : TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w100,
+                        fontSize: 14,
+                        color: Colors.black,
+                      ),
                 contentPadding: EdgeInsets.only(
                   left: 20,
                 ),
@@ -822,11 +829,17 @@ class _AccountPageState extends State<AccountPage> {
                 controller: nuController,
                 decoration: InputDecoration(
                   hintText: userNum == '' ? 'xxx-xxx-xxx' : userNum,
-                  hintStyle: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: Colors.black),
+                  hintStyle: userNum == ''
+                      ? TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w100,
+                          fontSize: 14,
+                          color: Colors.grey)
+                      : TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w100,
+                          fontSize: 14,
+                          color: Colors.black),
                   contentPadding: EdgeInsets.only(
                     left: 20,
                   ),
