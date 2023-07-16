@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:roder/drawer/nav_drawer.dart';
-import 'package:roder/themes/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../themes/colors.dart';
 
 class NotificationPage extends StatefulWidget {
   @override

@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:roder/themes/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../homepage/home_page.dart';
+import '../themes/colors.dart';
 import '../ui/notification_page.dart';
 import '../widgets/custom_snackbar.dart';
 import 'location_provider.dart';

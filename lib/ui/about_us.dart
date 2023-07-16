@@ -1,10 +1,8 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../themes/theme.dart';
+import '../themes/colors.dart';
 
 class AboutUsPage extends StatefulWidget {
   const AboutUsPage({super.key});

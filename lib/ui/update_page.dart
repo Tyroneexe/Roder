@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fancy_container/flutter_fancy_container.dart';
 import 'package:get/get.dart';
-import 'package:roder/themes/theme.dart';
+import '../themes/colors.dart';
 
 class UpdatePage extends StatefulWidget {
   const UpdatePage({super.key});

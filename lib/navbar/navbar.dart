@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:roder/messages/messages_page.dart';
 import 'package:roder/navbar/barcontroller.dart';
 import 'package:roder/search/search_page.dart';
-import 'package:roder/themes/theme.dart';
 import 'package:roder/ui/notification_page.dart';
 import '../homepage/home_page.dart';
+import '../themes/colors.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key, final String? payload});

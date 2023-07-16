@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roder/homepage/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../themes/theme.dart';
+import '../themes/colors.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);

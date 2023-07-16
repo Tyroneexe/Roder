@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../themes/theme.dart';
+import '../themes/colors.dart';
 
 class FilterButton extends StatelessWidget {
   final Function()? onPressed;

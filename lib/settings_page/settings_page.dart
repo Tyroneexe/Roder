@@ -10,6 +10,7 @@ import 'package:roder/ui/update_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../homepage/home_page.dart';
+import '../themes/colors.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
