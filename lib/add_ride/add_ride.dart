@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:roder/themes/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../homepage/home_page.dart';
 import '../themes/colors.dart';
@@ -56,7 +55,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   ),
                   Text(
                     'Ride Name',
-                    style: actPageTxt,
+                    style: TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: Colors.black),
                   ),
                 ],
               ),
@@ -130,7 +133,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   ),
                   Text(
                     'Meetup Location',
-                    style: actPageTxt,
+                    style: TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: Colors.black),
                   ),
                 ],
               ),
@@ -211,7 +218,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   ),
                   Text(
                     'Date',
-                    style: actPageTxt,
+                    style: TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: Colors.black),
                   ),
                 ],
               ),
@@ -340,7 +351,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     ),
                     child: Text(
                       'to',
-                      style: roRegular14,
+                      style: TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: Colors.black),
                     ),
                   ),
                   Padding(
@@ -410,7 +425,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   ),
                   Text(
                     'Riders',
-                    style: actPageTxt,
+                    style: TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: Colors.black),
                   ),
                 ],
               ),
@@ -512,7 +531,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     ),
                     Text(
                       'Memebers',
-                      style: actPageTxt,
+                      style: TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: Colors.black),
                     ),
                   ],
                 ),
@@ -649,7 +672,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
               padding: const EdgeInsets.only(top: 12),
               child: Text(
                 user['name'],
-                style: roRegular14,
+                style: TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: Colors.black),
               ),
             ),
             Text(
@@ -908,7 +935,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
               children: [
                 Text(
                   'Country',
-                  style: actPageTxt,
+                  style: TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: Colors.black),
                 ),
                 SizedBox(
                   height: 10,
@@ -969,7 +1000,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 ),
                 Text(
                   'City',
-                  style: actPageTxt,
+                  style: TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: Colors.black),
                 ),
                 SizedBox(
                   height: 10,
@@ -1030,7 +1065,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 ),
                 Text(
                   'Address',
-                  style: actPageTxt,
+                  style: TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: Colors.black),
                 ),
                 SizedBox(
                   height: 10,

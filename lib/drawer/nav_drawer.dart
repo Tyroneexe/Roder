@@ -10,7 +10,6 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/account/account_page.dart';
 import 'package:roder/login/google_sign_in.dart';
-import 'package:roder/themes/theme.dart';
 import 'package:roder/themes/theme_services.dart';
 import 'package:roder/ui/about_us.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -436,8 +435,11 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
               ),
               Text(
                 'Light',
-                style: actPageTxt.copyWith(
-                    color: Get.isDarkMode ? Colors.grey : Colors.black),
+                style: TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: Colors.black)
               ),
               Padding(
                 padding: const EdgeInsets.only(
@@ -460,8 +462,11 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
               ),
               Text(
                 'Dark',
-                style: actPageTxt.copyWith(
-                    color: Get.isDarkMode ? Colors.black : Colors.grey),
+                style: TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: Colors.black)
               ),
             ],
           ),

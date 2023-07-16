@@ -12,7 +12,6 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:roder/themes/theme.dart';
 import '../homepage/home_page.dart';
 import '../themes/colors.dart';
 import '../widgets/custom_snackbar.dart';
@@ -141,7 +140,11 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                     Text(
                       'User Name',
-                      style: actPageTxt,
+                      style: TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: Colors.black),
                     ),
                   ],
                 ),
@@ -160,7 +163,11 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                     Text(
                       'Contact Number',
-                      style: actPageTxt,
+                      style: TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: Colors.black),
                     ),
                   ],
                 ),
@@ -176,7 +183,11 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                     Text(
                       'Email',
-                      style: actPageTxt,
+                      style: TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: Colors.black),
                     ),
                   ],
                 ),
@@ -195,7 +206,11 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                     Text(
                       'Location',
-                      style: actPageTxt,
+                      style: TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: Colors.black),
                     ),
                   ],
                 ),
@@ -214,7 +229,11 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                     Text(
                       'Your Bike',
-                      style: actPageTxt,
+                      style: TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: Colors.black),
                     ),
                   ],
                 ),

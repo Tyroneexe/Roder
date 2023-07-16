@@ -12,7 +12,6 @@ import 'package:roder/widgets/custom_snackbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../drawer/nav_drawer.dart';
 import '../themes/colors.dart';
-import '../themes/theme.dart';
 import '../ui/notification_page.dart';
 import '../widgets/filter_button.dart';
 import '../widgets/unfilter_button.dart';
@@ -625,7 +624,12 @@ class RideListItem extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
                     ride['City'],
-                    style: rideListItemTxt.copyWith(fontSize: 20),
+                    style: TextStyle(
+    fontFamily: 'Roboto',
+    fontWeight: FontWeight.w100,
+    fontSize: 20,
+    color: Colors.white,
+  )
                   ),
                 ),
                 SizedBox(height: 30),
@@ -633,7 +637,12 @@ class RideListItem extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
                     '${ride['Riders']} Ride',
-                    style: rideListItemTxt,
+                    style: TextStyle(
+    fontFamily: 'Roboto',
+    fontWeight: FontWeight.w100,
+    fontSize: 14,
+    color: Colors.white,
+  ),
                   ),
                 ),
                 SizedBox(height: 5),
@@ -641,7 +650,12 @@ class RideListItem extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
                     ride['Date'],
-                    style: rideListItemTxt,
+                    style: TextStyle(
+    fontFamily: 'Roboto',
+    fontWeight: FontWeight.w100,
+    fontSize: 14,
+    color: Colors.white,
+  ),
                   ),
                 ),
                 SizedBox(height: 5),
@@ -649,7 +663,12 @@ class RideListItem extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
                     ride['Start Time'] + '  to  ' + ride['End Time'],
-                    style: rideListItemTxt,
+                    style: TextStyle(
+    fontFamily: 'Roboto',
+    fontWeight: FontWeight.w100,
+    fontSize: 14,
+    color: Colors.white,
+  ),
                   ),
                 ),
               ],
@@ -879,9 +898,11 @@ class RideListItem extends StatelessWidget {
                     ),
                     Text(
                       "${ride['Date'].substring(0, ride['Date'].length - 5)}  |  ${ride['Start Time']} to ${ride['End Time']}",
-                      style: roRegular14.copyWith(
-                        fontWeight: FontWeight.w100,
-                      ),
+                      style: TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w100,
+      fontSize: 14,
+      color: Colors.black)
                     )
                   ],
                 ),
@@ -905,9 +926,11 @@ class RideListItem extends StatelessWidget {
                     ),
                     Text(
                       "${ride['City']}, ${ride['Country']}",
-                      style: roRegular14.copyWith(
-                        fontWeight: FontWeight.w100,
-                      ),
+                      style: TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w100,
+      fontSize: 14,
+      color: Colors.black)
                     )
                   ],
                 ),
@@ -1137,17 +1160,23 @@ class CreatedRideListItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 20, left: 20),
                   child: Text(ride['Country'],
-                      style: rideListItemTxt.copyWith(
-                        color: countryRideListClr,
-                      )),
+                      style: TextStyle(
+    fontFamily: 'Roboto',
+    fontWeight: FontWeight.w100,
+    fontSize: 14,
+    color: countryRideListClr,
+  )),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
                     ride['City'],
-                    style: rideListItemTxt.copyWith(
-                      fontSize: 20,
-                    ),
+                    style: TextStyle(
+    fontFamily: 'Roboto',
+    fontWeight: FontWeight.w100,
+    fontSize: 20,
+    color: Colors.white,
+  )
                   ),
                 ),
                 SizedBox(height: 30),
@@ -1155,7 +1184,12 @@ class CreatedRideListItem extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
                     '${ride['Riders']} Ride',
-                    style: rideListItemTxt,
+                    style: TextStyle(
+    fontFamily: 'Roboto',
+    fontWeight: FontWeight.w100,
+    fontSize: 14,
+    color: Colors.white,
+  ),
                   ),
                 ),
                 SizedBox(height: 5),
@@ -1163,7 +1197,12 @@ class CreatedRideListItem extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
                     ride['Date'],
-                    style: rideListItemTxt,
+                    style: TextStyle(
+    fontFamily: 'Roboto',
+    fontWeight: FontWeight.w100,
+    fontSize: 14,
+    color: Colors.white,
+  ),
                   ),
                 ),
                 SizedBox(height: 5),
@@ -1171,7 +1210,12 @@ class CreatedRideListItem extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
                     ride['Start Time'] + '  to  ' + ride['End Time'],
-                    style: rideListItemTxt,
+                    style: TextStyle(
+    fontFamily: 'Roboto',
+    fontWeight: FontWeight.w100,
+    fontSize: 14,
+    color: Colors.white,
+  ),
                   ),
                 ),
               ],

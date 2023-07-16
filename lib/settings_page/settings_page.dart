@@ -5,7 +5,6 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roder/account/account_page.dart';
-import 'package:roder/themes/theme.dart';
 import 'package:roder/ui/update_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -110,7 +109,11 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   child: Text(
                     'Content Settings',
-                    style: roRegular14,
+                    style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14,
+                        color: Colors.black),
                   ),
                 ),
                 Spacer(),
@@ -148,7 +151,11 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   child: Text(
                     'Privacy Policy',
-                    style: roRegular14,
+                    style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14,
+                        color: Colors.black),
                   ),
                 ),
                 Spacer(),
@@ -186,7 +193,11 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   child: Text(
                     'Updates',
-                    style: roRegular14,
+                    style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14,
+                        color: Colors.black),
                   ),
                 ),
                 Spacer(),
@@ -224,7 +235,11 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   child: Text(
                     'Roder GitHub',
-                    style: roRegular14,
+                    style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14,
+                        color: Colors.black),
                   ),
                 ),
                 Spacer(),
@@ -301,7 +316,11 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 child: Text(
                   'Push Notifications',
-                  style: roRegular14,
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: Colors.black),
                 ),
               ),
               Spacer(),
@@ -345,7 +364,11 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 child: Text(
                   'News For You',
-                  style: roRegular14,
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: Colors.black),
                 ),
               ),
               Spacer(),
@@ -374,7 +397,11 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 child: Text(
                   'Group Activity',
-                  style: roRegular14,
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: Colors.black),
                 ),
               ),
               Spacer(),
@@ -403,7 +430,11 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 child: Text(
                   'Account Activity',
-                  style: roRegular14,
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: Colors.black),
                 ),
               ),
               Spacer(),
