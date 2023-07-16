@@ -19,6 +19,8 @@ import '../widgets/unfilter_button.dart';
 /*
 To Do
 
+Fix message icon size
+also on the account edit page. the "rather not say". inside the your bike text block.
 
 /
 | Wrtie to Database 
@@ -76,10 +78,10 @@ bool isNotificationsEnabled = true;
 
 class _HomePageState extends State<HomePage> {
   //ride filters for rides
-  bool isFilter1 = true;
-  bool isFilter2 = false;
-  bool isFilter3 = false;
-  bool isFilter4 = false;
+  bool rideFilter1 = true;
+  bool rideFilter2 = false;
+  bool rideFilter3 = false;
+  bool rideFilter4 = false;
 
   //Update popup for updates
   String release = "";
@@ -297,7 +299,7 @@ class _HomePageState extends State<HomePage> {
           final users = snapshot.docs.reversed.toList();
           final currentUserDB =
               users.firstWhere((user) => user.id == currentUser.uid);
-          if (isFilter3 && currentUserDB['joinedRides'].contains(ride.id)) {
+          if (rideFilter3 && currentUserDB['joinedRides'].contains(ride.id)) {
             final rideWidget = RideListItem(
               ride: ride,
               imageNumber: imageNumber,
@@ -306,7 +308,7 @@ class _HomePageState extends State<HomePage> {
                 .slideY(duration: 400.ms, begin: 1)
                 .fade(duration: 400.ms);
             rideWidgets.add(rideWidget);
-          } else if (isFilter4 && await isRideCreatedByCurrentUser(ride.id)) {
+          } else if (rideFilter4 && await isRideCreatedByCurrentUser(ride.id)) {
             final rideWidget = CreatedRideListItem(
               ride: ride,
               imageNumber: imageNumber,
@@ -315,7 +317,7 @@ class _HomePageState extends State<HomePage> {
                 .slideY(duration: 400.ms, begin: 1)
                 .fade(duration: 400.ms);
             rideWidgets.add(rideWidget);
-          } else if (isFilter1) {
+          } else if (rideFilter1) {
             final rideWidget = RideListItem(
               ride: ride,
               imageNumber: imageNumber,
@@ -324,7 +326,7 @@ class _HomePageState extends State<HomePage> {
                 .slideY(duration: 400.ms, begin: 1)
                 .fade(duration: 400.ms);
             rideWidgets.add(rideWidget);
-          } else if (isFilter2 && ride['Country'] == currentUserDB['country']) {
+          } else if (rideFilter2 && ride['Country'] == currentUserDB['country']) {
             final rideWidget = RideListItem(
               ride: ride,
               imageNumber: imageNumber,
@@ -381,19 +383,19 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.only(
               left: 10.0,
             ),
-            child: isFilter1
+            child: rideFilter1
                 ? FilterButton(
                     onPressed: () {
                       setState(() {
-                        if (isFilter2 == false &&
-                            isFilter3 == false &&
-                            isFilter4 == false) {
-                          isFilter1 = true;
+                        if (rideFilter2 == false &&
+                            rideFilter3 == false &&
+                            rideFilter4 == false) {
+                          rideFilter1 = true;
                         } else {
-                          isFilter1 = !isFilter1;
-                          isFilter4 = false;
-                          isFilter2 = false;
-                          isFilter3 = false;
+                          rideFilter1 = !rideFilter1;
+                          rideFilter4 = false;
+                          rideFilter2 = false;
+                          rideFilter3 = false;
                         }
                       });
                     },
@@ -410,10 +412,10 @@ class _HomePageState extends State<HomePage> {
                 : UnFilterButton(
                     onPressed: () {
                       setState(() {
-                        isFilter1 = !isFilter1;
-                        isFilter4 = false;
-                        isFilter2 = false;
-                        isFilter3 = false;
+                        rideFilter1 = !rideFilter1;
+                        rideFilter4 = false;
+                        rideFilter2 = false;
+                        rideFilter3 = false;
                       });
                     },
                     child: Text(
@@ -426,19 +428,19 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
           ),
-          isFilter2
+          rideFilter2
               ? FilterButton(
                   onPressed: () {
                     setState(() {
-                      if (isFilter1 == false &&
-                          isFilter3 == false &&
-                          isFilter4 == false) {
-                        isFilter2 = true;
+                      if (rideFilter1 == false &&
+                          rideFilter3 == false &&
+                          rideFilter4 == false) {
+                        rideFilter2 = true;
                       } else {
-                        isFilter2 = !isFilter2;
-                        isFilter4 = false;
-                        isFilter1 = false;
-                        isFilter3 = false;
+                        rideFilter2 = !rideFilter2;
+                        rideFilter4 = false;
+                        rideFilter1 = false;
+                        rideFilter3 = false;
                       }
                     });
                   },
@@ -455,10 +457,10 @@ class _HomePageState extends State<HomePage> {
               : UnFilterButton(
                   onPressed: () {
                     setState(() {
-                      isFilter2 = !isFilter2;
-                      isFilter1 = false;
-                      isFilter4 = false;
-                      isFilter3 = false;
+                      rideFilter2 = !rideFilter2;
+                      rideFilter1 = false;
+                      rideFilter4 = false;
+                      rideFilter3 = false;
                     });
                   },
                   child: Text(
@@ -470,19 +472,19 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-          isFilter3
+          rideFilter3
               ? FilterButton(
                   onPressed: () {
                     setState(() {
-                      if (isFilter2 == false &&
-                          isFilter1 == false &&
-                          isFilter4 == false) {
-                        isFilter3 = true;
+                      if (rideFilter2 == false &&
+                          rideFilter1 == false &&
+                          rideFilter4 == false) {
+                        rideFilter3 = true;
                       } else {
-                        isFilter3 = !isFilter3;
-                        isFilter4 = false;
-                        isFilter2 = false;
-                        isFilter1 = false;
+                        rideFilter3 = !rideFilter3;
+                        rideFilter4 = false;
+                        rideFilter2 = false;
+                        rideFilter1 = false;
                       }
                     });
                   },
@@ -499,10 +501,10 @@ class _HomePageState extends State<HomePage> {
               : UnFilterButton(
                   onPressed: () {
                     setState(() {
-                      isFilter3 = !isFilter3;
-                      isFilter1 = false;
-                      isFilter2 = false;
-                      isFilter4 = false;
+                      rideFilter3 = !rideFilter3;
+                      rideFilter1 = false;
+                      rideFilter2 = false;
+                      rideFilter4 = false;
                     });
                   },
                   child: Text(
@@ -514,19 +516,19 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-          isFilter4
+          rideFilter4
               ? FilterButton(
                   onPressed: () {
                     setState(() {
-                      if (isFilter2 == false &&
-                          isFilter3 == false &&
-                          isFilter1 == false) {
-                        isFilter4 = true;
+                      if (rideFilter2 == false &&
+                          rideFilter3 == false &&
+                          rideFilter1 == false) {
+                        rideFilter4 = true;
                       } else {
-                        isFilter4 = !isFilter4;
-                        isFilter1 = false;
-                        isFilter2 = false;
-                        isFilter3 = false;
+                        rideFilter4 = !rideFilter4;
+                        rideFilter1 = false;
+                        rideFilter2 = false;
+                        rideFilter3 = false;
                       }
                     });
                   },
@@ -543,10 +545,10 @@ class _HomePageState extends State<HomePage> {
               : UnFilterButton(
                   onPressed: () {
                     setState(() {
-                      isFilter4 = !isFilter4;
-                      isFilter1 = false;
-                      isFilter2 = false;
-                      isFilter3 = false;
+                      rideFilter4 = !rideFilter4;
+                      rideFilter1 = false;
+                      rideFilter2 = false;
+                      rideFilter3 = false;
                     });
                   },
                   child: Text(

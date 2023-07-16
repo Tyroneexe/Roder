@@ -119,7 +119,7 @@ class _UpdatePageState extends State<UpdatePage> {
                   "● Tap on Rides gives more information\n"
                   "● See who created the ride\n"
                   "● See who joined a Ride\n"
-                  "● Nearby Rides functionality"
+                  "● Nearby Rides functionality\n"
                   "● Automatically join ride when created\n"
                   "● Creator of the ride can now delete the ride\n"
                   "● Location of Ride can be viewed on Google Maps",
