@@ -42,7 +42,7 @@ class _NavBarState extends State<NavBar> {
             selectedIconTheme: IconThemeData(size: 0),
             unselectedIconTheme: IconThemeData(size: 0),
             items: [
-              _bottombarItem(Icons.home, ""),
+              _bottombarItem(Icons.home, "", 26),
               BottomNavigationBarItem(
                 icon: Badge(
                   backgroundColor: Colors.red,
@@ -54,11 +54,12 @@ class _NavBarState extends State<NavBar> {
                 ),
                 label: "",
               ),
-              _bottombarItem(Icons.search_rounded, ""),
               _bottombarItem(
-                Icons.message,
+                Icons.search_rounded,
                 "",
+                26,
               ),
+              _bottombarItem(Icons.message, "", 24),
             ],
           ),
         );
@@ -67,11 +68,11 @@ class _NavBarState extends State<NavBar> {
   }
 }
 
-_bottombarItem(IconData icon, String label) {
+_bottombarItem(IconData icon, String label, double size) {
   return BottomNavigationBarItem(
     icon: Icon(
       icon,
-      size: 26,
+      size: size,
     ),
     label: label,
   );
