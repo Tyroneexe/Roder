@@ -23,7 +23,11 @@ class _UpdatePageState extends State<UpdatePage> {
             Center(
               child: Text(
                 'Patch Notes',
-                style: headingStyle,
+                style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 35,
+                    color: Get.isDarkMode ? Colors.white : Colors.black),
               ),
             ),
             SizedBox(

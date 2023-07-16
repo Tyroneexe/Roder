@@ -26,6 +26,12 @@ const Color unselectedBtnClr = Color(0xFFD8E0F2);
 const Color countryRideListClr = Color(0xFFA5BDF8);
 const Color oldNotis = Color(0xFFF5F8FF);
 
+//  Dark mode Colors
+//Navbar Colors
+const Color navBarSelectedIcon = Color(0xFF7098F6);
+const Color navBarBackgroundClr = Color(0xFF282828);
+const Color rideFilterDark = Color(0xFF282828);
+
 const bkgClr = Color.fromARGB(250, 250, 250, 255);
 
 class Themes {
@@ -77,42 +83,3 @@ TextStyle get roRegular14 {
       color: Colors.black);
 }
 
-TextStyle get headingStyle {
-  return TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.bold,
-      fontSize: 35,
-      color: Get.isDarkMode ? Colors.white : Colors.black);
-}
-
-TextStyle get subHeadingStyle {
-  return TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.bold,
-      fontSize: 24,
-      color: Get.isDarkMode ? Colors.grey[400] : Colors.grey);
-}
-
-TextStyle get titleStyle {
-  return TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w400,
-      fontSize: 20,
-      color: Get.isDarkMode ? Colors.white : Colors.black);
-}
-
-TextStyle get tyStyle {
-  return const TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w400,
-      fontSize: 17,
-      color: Colors.white);
-}
-
-TextStyle get subTitleStyle {
-  return TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w400,
-      fontSize: 14,
-      color: Get.isDarkMode ? Colors.grey[100] : Colors.grey[600]);
-}

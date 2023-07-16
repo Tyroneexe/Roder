@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../themes/theme.dart';
 
@@ -19,8 +20,10 @@ class UnFilterButton extends StatelessWidget {
           onPressed: onPressed,
           child: child,
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(unselectedBtnClr),
-            foregroundColor: MaterialStateProperty.all<Color>(blueClr),
+            backgroundColor: MaterialStateProperty.all<Color>(
+                Get.isDarkMode ? rideFilterDark : unselectedBtnClr),
+            foregroundColor: MaterialStateProperty.all<Color>(
+                Get.isDarkMode ? Colors.white : blueClr),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),

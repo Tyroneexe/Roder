@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:roder/account/account_page.dart';
 import 'package:roder/login/google_sign_in.dart';
 import 'package:roder/themes/theme.dart';
+import 'package:roder/themes/theme_services.dart';
 import 'package:roder/ui/about_us.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../homepage/home_page.dart';
@@ -426,6 +427,42 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             height: 20,
             indent: 25,
             endIndent: 25,
+          ),
+          Row(
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 6,
+              ),
+              Text(
+                'Light',
+                style: actPageTxt.copyWith(
+                    color: Get.isDarkMode ? Colors.grey : Colors.black),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  right: 10,
+                  left: 10,
+                ),
+                child: Switch(
+                  value: Get.isDarkMode,
+                  splashRadius: 10,
+                  activeTrackColor: switchClr,
+                  inactiveTrackColor: Colors.grey,
+                  inactiveThumbColor: Colors.white,
+                  activeColor: blueClr,
+                  onChanged: (bool value) {
+                    setState(() {
+                      ThemeService().switchTheme();
+                    });
+                  },
+                ),
+              ),
+              Text(
+                'Dark',
+                style: actPageTxt.copyWith(
+                    color: Get.isDarkMode ? Colors.black : Colors.grey),
+              ),
+            ],
           ),
           Spacer(),
           Padding(

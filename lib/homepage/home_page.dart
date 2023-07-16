@@ -191,7 +191,8 @@ class _HomePageState extends State<HomePage> {
                               fontFamily: 'Roboto',
                               fontWeight: FontWeight.bold,
                               fontSize: 25,
-                              color: Colors.black,
+                              color:
+                                  Get.isDarkMode ? Colors.white : Colors.black,
                             ),
                           );
                         } else if (snapshot.hasError) {
@@ -218,7 +219,7 @@ class _HomePageState extends State<HomePage> {
                         fontFamily: 'Roboto',
                         fontWeight: FontWeight.w100,
                         fontSize: 16,
-                        color: Colors.black,
+                        color: Get.isDarkMode ? Colors.white : Colors.black,
                       ),
                     ),
                   ),
@@ -325,7 +326,8 @@ class _HomePageState extends State<HomePage> {
                 .slideY(duration: 400.ms, begin: 1)
                 .fade(duration: 400.ms);
             rideWidgets.add(rideWidget);
-          } else if (rideFilter2 && ride['Country'] == currentUserDB['country']) {
+          } else if (rideFilter2 &&
+              ride['Country'] == currentUserDB['country']) {
             final rideWidget = RideListItem(
               ride: ride,
               imageNumber: imageNumber,

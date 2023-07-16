@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:roder/navbar/navbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../homepage/home_page.dart';
 import '../ui/notification_page.dart';
 import 'google_sign_in.dart';

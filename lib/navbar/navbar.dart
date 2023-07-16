@@ -30,12 +30,13 @@ class _NavBarState extends State<NavBar> {
           ),
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
-            backgroundColor: navBarBkgClr,
+            backgroundColor:
+                Get.isDarkMode ? navBarBackgroundClr : navBarBkgClr,
             showSelectedLabels: false,
             showUnselectedLabels: false,
             elevation: 0,
-            selectedItemColor: blueClr,
-            unselectedItemColor: Colors.black,
+            selectedItemColor: Get.isDarkMode ? navBarSelectedIcon : blueClr,
+            unselectedItemColor: Get.isDarkMode ? Colors.white : Colors.black,
             currentIndex: controller.tabIndex,
             onTap: controller.changeTabIndex,
             selectedFontSize: 0,
