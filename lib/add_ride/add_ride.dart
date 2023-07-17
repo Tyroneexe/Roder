@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:roder/themes/text_styles.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../homepage/home_page.dart';
 import '../themes/colors.dart';
@@ -55,11 +56,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   ),
                   Text(
                     'Ride Name',
-                    style: TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      color: Colors.black),
+                    style: w700.copyWith(
+                      fontSize: 16,
+                    ),
                   ),
                 ],
               ),
@@ -74,17 +73,13 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   width: MediaQuery.of(context).size.width - 40,
                   height: 40,
                   child: TextFormField(
-                    style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w100,
-                        fontSize: 14,
-                        color: Colors.black),
+                    style: w100.copyWith(
+                      fontSize: 14,
+                    ),
                     controller: titleController,
                     decoration: InputDecoration(
                       hintText: 'Enter Details',
-                      hintStyle: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w100,
+                      hintStyle: w100.copyWith(
                         fontSize: 14,
                         color: Colors.grey,
                       ),
@@ -133,11 +128,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   ),
                   Text(
                     'Meetup Location',
-                    style: TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      color: Colors.black),
+                    style: w700.copyWith(
+                      fontSize: 16,
+                    ),
                   ),
                 ],
               ),
@@ -161,17 +154,12 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           ? 'Choose Meetup Location'
                           : locationController.text,
                       hintStyle: locationController.text == ''
-                          ? TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w100,
+                          ? w100.copyWith(
                               fontSize: 14,
                               color: Colors.grey,
                             )
-                          : TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w100,
+                          : w100.copyWith(
                               fontSize: 14,
-                              color: Colors.black,
                             ),
                       contentPadding: EdgeInsets.only(
                         left: 20,
@@ -218,11 +206,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   ),
                   Text(
                     'Date',
-                    style: TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      color: Colors.black),
+                    style: w700.copyWith(
+                      fontSize: 16,
+                    ),
                   ),
                 ],
               ),
@@ -243,11 +229,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     },
                     decoration: InputDecoration(
                       hintText: _selectedDate,
-                      hintStyle: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w100,
+                      hintStyle: w100.copyWith(
                         fontSize: 14,
-                        color: Colors.black,
                       ),
                       contentPadding: EdgeInsets.only(
                         left: 20,
@@ -304,11 +287,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         },
                         decoration: InputDecoration(
                           hintText: _startTime,
-                          hintStyle: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w100,
+                          hintStyle: w100.copyWith(
                             fontSize: 14,
-                            color: Colors.black,
                           ),
                           contentPadding: EdgeInsets.only(
                             left: 20,
@@ -351,11 +331,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     ),
                     child: Text(
                       'to',
-                      style: TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      color: Colors.black),
+                      style: w700.copyWith(
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                   Padding(
@@ -372,11 +350,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         },
                         decoration: InputDecoration(
                           hintText: _endTime,
-                          hintStyle: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w100,
+                          hintStyle: w100.copyWith(
                             fontSize: 14,
-                            color: Colors.black,
                           ),
                           contentPadding: EdgeInsets.only(
                             left: 20,
@@ -425,11 +400,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   ),
                   Text(
                     'Riders',
-                    style: TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      color: Colors.black),
+                    style: w700.copyWith(
+                      fontSize: 16,
+                    ),
                   ),
                 ],
               ),
@@ -456,11 +429,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     child: DropdownButton<String>(
                       underline: Container(),
                       isExpanded: true,
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w100,
+                      style: w100.copyWith(
                         fontSize: 16,
-                        color: Colors.black,
                       ),
                       icon: Icon(
                         Icons.arrow_drop_down_rounded,
@@ -468,11 +438,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       hint: Text(
                         'Solo',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w100,
+                        style: w100.copyWith(
                           fontSize: 16,
-                          color: Colors.black,
                         ),
                       ),
                       value: selectedRide,
@@ -531,11 +498,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     ),
                     Text(
                       'Memebers',
-                      style: TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      color: Colors.black),
+                      style: w700.copyWith(
+                        fontSize: 16,
+                      ),
                     ),
                   ],
                 ),
@@ -604,11 +569,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     },
                     style: ButtonStyle(
                       textStyle: MaterialStateProperty.all<TextStyle>(
-                        TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w700,
+                        w700.copyWith(
                           fontSize: 14,
-                          color: Colors.white,
                         ),
                       ),
                       foregroundColor: MaterialStateProperty.all<Color>(
@@ -672,20 +634,15 @@ class _AddTaskPageState extends State<AddTaskPage> {
               padding: const EdgeInsets.only(top: 12),
               child: Text(
                 user['name'],
-                style: TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      color: Colors.black),
+                style: w700.copyWith(
+                  fontSize: 16,
+                ),
               ),
             ),
             Text(
               user['bike'],
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w100,
+              style: w100.copyWith(
                 fontSize: 12,
-                color: Colors.black,
               ),
             ),
           ],
@@ -875,11 +832,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
       elevation: 0,
       title: Text(
         'Create A Ride',
-        style: TextStyle(
-          fontFamily: 'Roboto',
-          fontWeight: FontWeight.w700,
+        style: w700.copyWith(
           fontSize: 25,
-          color: Colors.black,
         ),
       ),
       backgroundColor: context.theme.colorScheme.background,
@@ -921,11 +875,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
         return AlertDialog(
           title: Text(
             'Meetup Location',
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontWeight: FontWeight.w700,
+            style: w700.copyWith(
               fontSize: 25,
-              color: Colors.black,
             ),
           ),
           content: IntrinsicHeight(
@@ -935,11 +886,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
               children: [
                 Text(
                   'Country',
-                  style: TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      color: Colors.black),
+                  style: w700.copyWith(
+                    fontSize: 16,
+                  ),
                 ),
                 SizedBox(
                   height: 10,
@@ -948,17 +897,13 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   width: MediaQuery.of(context).size.width - 40,
                   height: 40,
                   child: TextFormField(
-                    style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w100,
-                        fontSize: 14,
-                        color: Colors.black),
+                    style: w100.copyWith(
+                      fontSize: 14,
+                    ),
                     controller: locationProvider.countryController,
                     decoration: InputDecoration(
                       hintText: 'Country',
-                      hintStyle: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w100,
+                      hintStyle: w100.copyWith(
                         fontSize: 14,
                         color: Colors.grey,
                       ),
@@ -1000,11 +945,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 ),
                 Text(
                   'City',
-                  style: TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      color: Colors.black),
+                  style: w700.copyWith(
+                    fontSize: 16,
+                  ),
                 ),
                 SizedBox(
                   height: 10,
@@ -1013,17 +956,13 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   width: MediaQuery.of(context).size.width - 40,
                   height: 40,
                   child: TextFormField(
-                    style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w100,
-                        fontSize: 14,
-                        color: Colors.black),
+                    style: w100.copyWith(
+                      fontSize: 14,
+                    ),
                     controller: locationProvider.cityController,
                     decoration: InputDecoration(
                       hintText: 'City',
-                      hintStyle: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w100,
+                      hintStyle: w100.copyWith(
                         fontSize: 14,
                         color: Colors.grey,
                       ),
@@ -1065,11 +1004,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 ),
                 Text(
                   'Address',
-                  style: TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      color: Colors.black),
+                  style: w700.copyWith(
+                    fontSize: 16,
+                  ),
                 ),
                 SizedBox(
                   height: 10,
@@ -1078,17 +1015,13 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   width: MediaQuery.of(context).size.width - 40,
                   height: 40,
                   child: TextFormField(
-                    style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w100,
-                        fontSize: 14,
-                        color: Colors.black),
+                    style: w100.copyWith(
+                      fontSize: 14,
+                    ),
                     controller: locationProvider.addressController,
                     decoration: InputDecoration(
                       hintText: 'Street',
-                      hintStyle: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w100,
+                      hintStyle: w100.copyWith(
                         fontSize: 14,
                         color: Colors.grey,
                       ),
@@ -1140,14 +1073,14 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 ),
               ),
               onPressed: () {
-                setState(() {
-                  locationController.text =
-                      locationProvider.countryController.text +
-                          ', ' +
-                          locationProvider.cityController.text +
-                          ', ' +
-                          locationProvider.addressController.text;
-                });
+                // setState(() {
+                //   locationController.text =
+                //       locationProvider.countryController.text +
+                //           ', ' +
+                //           locationProvider.cityController.text +
+                //           ', ' +
+                //           locationProvider.addressController.text;
+                // });
                 Navigator.of(context).pop();
               },
             ),

@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-TextStyle get actPageTxt {
-  return TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      color: Colors.black);
-}
-
-TextStyle get rideListItemTxt {
+TextStyle get bold {
   return TextStyle(
     fontFamily: 'Roboto',
-    fontWeight: FontWeight.w100,
-    fontSize: 14,
-    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    color: Get.isDarkMode ? Colors.white : Colors.black,
   );
 }
 
-TextStyle get roRegular14 {
+TextStyle get w700 {
   return TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w700,
-      fontSize: 14,
-      color: Colors.black);
+    fontFamily: 'Roboto',
+    fontWeight: FontWeight.w700,
+    color: Get.isDarkMode ? Colors.white : Colors.black,
+  );
+}
+
+TextStyle get w100 {
+  return TextStyle(
+    fontFamily: 'Roboto',
+    fontWeight: FontWeight.w100,
+    color: Get.isDarkMode ? Colors.white : Colors.black,
+  );
 }

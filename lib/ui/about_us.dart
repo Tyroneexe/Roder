@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:roder/themes/text_styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../themes/colors.dart';
 
@@ -68,7 +69,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                         borderRadius: BorderRadius.circular(
                           6,
                         ),
-                        color: newNotis,
+                        color: Get.isDarkMode ? navBarBackgroundClr : newNotis,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -81,11 +82,8 @@ class _AboutUsPageState extends State<AboutUsPage> {
                             ),
                             child: Text(
                               'Your Ride. Your Way',
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.w700,
+                              style: w700.copyWith(
                                 fontSize: 16,
-                                color: Colors.black,
                               ),
                             ),
                           ),
@@ -99,11 +97,8 @@ class _AboutUsPageState extends State<AboutUsPage> {
                             ),
                             child: Text(
                               'Our app was created with a single goal in mind: to provide for riders to discover new routes and enjoy delicious breakfasts at the same time!\n\nOur team of dedicated developers and motorcycle enthusiasts have created an app that is easy to use. With Roder, you can:',
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.w100,
+                              style: w100.copyWith(
                                 fontSize: 14,
-                                color: Colors.black,
                               ),
                             ),
                           ),
@@ -116,11 +111,8 @@ class _AboutUsPageState extends State<AboutUsPage> {
                             ),
                             child: Text(
                               'How We Work',
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.w700,
+                              style: w700.copyWith(
                                 fontSize: 16,
-                                color: Colors.black,
                               ),
                             ),
                           ),
@@ -168,11 +160,8 @@ class _AboutUsPageState extends State<AboutUsPage> {
             ),
             child: Text(
               "Connect with other riders: Our app allows you to connect with other bikers who share your passion for breakfast runs.",
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w100,
+              style: w100.copyWith(
                 fontSize: 14,
-                color: Colors.black,
               ),
             ),
           ),
@@ -201,11 +190,8 @@ class _AboutUsPageState extends State<AboutUsPage> {
             ),
             child: Text(
               "Plan your ride: Once you've found a great breakfast spot. Use our app to plan Your ride.",
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w100,
+              style: w100.copyWith(
                 fontSize: 14,
-                color: Colors.black,
               ),
             ),
           ),
@@ -219,11 +205,8 @@ class _AboutUsPageState extends State<AboutUsPage> {
       elevation: 0,
       title: Text(
         'About Us',
-        style: TextStyle(
-          fontFamily: 'Roboto',
-          fontWeight: FontWeight.w700,
+        style: w700.copyWith(
           fontSize: 25,
-          color: Colors.black,
         ),
       ),
       backgroundColor: context.theme.colorScheme.background,
@@ -261,20 +244,14 @@ class _AboutUsPageState extends State<AboutUsPage> {
           backgroundColor: navBarBkgClr,
           title: Text(
             "Roder's Code",
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontWeight: FontWeight.bold,
+            style: bold.copyWith(
               fontSize: 20,
-              color: Colors.black,
             ),
           ),
           content: Text(
             "Do you want to view Roder's Code. You can also conribute to the source code!",
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontWeight: FontWeight.w100,
+            style: w100.copyWith(
               fontSize: 16,
-              color: Colors.black,
             ),
           ),
           actions: [

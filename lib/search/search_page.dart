@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:roder/homepage/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../themes/colors.dart';
+import '../themes/text_styles.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -51,9 +52,7 @@ class _SearchState extends State<Search> {
               ),
               Text(
                 'Recent History',
-                style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w700,
+                style: w700.copyWith(
                   fontSize: 18,
                 ),
               ),
@@ -76,21 +75,15 @@ class _SearchState extends State<Search> {
               SizedBox(height: 10),
               Text(
                 'No Searches Yet',
-                style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w700,
+                style: w700.copyWith(
                   fontSize: 20,
-                  color: Colors.black,
                 ),
               ),
               SizedBox(height: 10),
               Text(
                 'Go ahead and explore some rides!',
-                style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w100,
+                style: w100.copyWith(
                   fontSize: 14,
-                  color: Colors.black,
                 ),
               ),
             ] else ...[
@@ -205,12 +198,12 @@ class _SearchState extends State<Search> {
     }
   }
 
-  Container searchBar(BuildContext context) {
+  searchBar(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width - 40,
       height: 45,
       decoration: BoxDecoration(
-        color: searchBarClr,
+        color: Get.isDarkMode ? navBarBackgroundClr : searchBarClr,
         borderRadius: BorderRadius.circular(
           6,
         ),
@@ -239,9 +232,7 @@ class _SearchState extends State<Search> {
                     ),
                   ),
                   hintText: "Search",
-                  hintStyle: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w700,
+                  hintStyle: w700.copyWith(
                     fontSize: 18,
                     color: searchBarTxtClr,
                   ),

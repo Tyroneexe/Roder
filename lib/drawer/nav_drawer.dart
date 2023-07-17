@@ -16,6 +16,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../homepage/home_page.dart';
 import '../settings_page/settings_page.dart';
 import '../themes/colors.dart';
+import '../themes/text_styles.dart';
 
 class NavitionDrawer extends StatefulWidget {
   NavitionDrawer({super.key});
@@ -166,11 +167,8 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                               ConnectionState.waiting) {
                             return Text(
                               currentUser.displayName!,
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.w700,
+                              style: w700.copyWith(
                                 fontSize: 16,
-                                color: Colors.black,
                               ),
                             );
                           } else if (snapshot.hasData) {
@@ -180,11 +178,8 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
 
                             return Text(
                               userName,
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.w700,
+                              style: w700.copyWith(
                                 fontSize: 16,
-                                color: Colors.black,
                               ),
                             );
                           } else {
@@ -194,11 +189,8 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
 
                             return Text(
                               userName,
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.w700,
+                              style: w700.copyWith(
                                 fontSize: 16,
-                                color: Colors.black,
                               ),
                             );
                           }
@@ -211,10 +203,8 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                           if (snapshot.hasData) {
                             return Text(
                               'Software Patch ${snapshot.data?.version}',
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
+                              style: w100.copyWith(
                                 fontSize: 12,
-                                color: Colors.black,
                               ),
                             );
                           } else {
@@ -243,7 +233,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
         children: [
           Divider(
             thickness: 2,
-            color: dividerClr,
+            color: Get.isDarkMode ? navBarBackgroundClr : dividerClr,
             height: 20,
             indent: 25,
             endIndent: 25,
@@ -253,13 +243,10 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             child: ListTile(
               contentPadding: EdgeInsets.symmetric(horizontal: 20),
               leading: Icon(Icons.home, size: 30, color: blueClr),
-              title: const Text(
+              title: Text(
                 'Home',
-                style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.bold,
+                style: bold.copyWith(
                   fontSize: 16,
-                  color: Colors.black,
                 ),
               ),
               onTap: () {
@@ -272,13 +259,10 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             child: ListTile(
                 contentPadding: EdgeInsets.symmetric(horizontal: 20),
                 leading: const Icon(Icons.person, size: 30, color: blueClr),
-                title: const Text(
+                title: Text(
                   'Account',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.bold,
+                  style: bold.copyWith(
                     fontSize: 16,
-                    color: Colors.black,
                   ),
                 ),
                 onTap: () {
@@ -290,13 +274,10 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             child: ListTile(
               contentPadding: EdgeInsets.symmetric(horizontal: 20),
               leading: Icon(Icons.settings, size: 30, color: blueClr),
-              title: const Text(
+              title: Text(
                 'App Settings',
-                style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.bold,
+                style: bold.copyWith(
                   fontSize: 16,
-                  color: Colors.black,
                 ),
               ),
               onTap: () {
@@ -309,13 +290,10 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             child: ListTile(
               contentPadding: EdgeInsets.symmetric(horizontal: 20),
               leading: Icon(Icons.phone, size: 30, color: blueClr),
-              title: const Text(
+              title: Text(
                 'Contact Us',
-                style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.bold,
+                style: bold.copyWith(
                   fontSize: 16,
-                  color: Colors.black,
                 ),
               ),
               onTap: () {
@@ -332,11 +310,8 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                             ),
                             Text(
                               'Contact Us Via',
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.w700,
+                              style: w700.copyWith(
                                 fontSize: 20,
-                                color: Colors.black,
                               ),
                             ),
                             SizedBox(
@@ -406,13 +381,10 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
             child: ListTile(
               contentPadding: EdgeInsets.symmetric(horizontal: 20),
               leading: const Icon(Icons.info_rounded, size: 30, color: blueClr),
-              title: const Text(
+              title: Text(
                 'About Us',
-                style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.bold,
+                style: bold.copyWith(
                   fontSize: 16,
-                  color: Colors.black,
                 ),
               ),
               onTap: () {
@@ -423,7 +395,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
           ),
           Divider(
             thickness: 2,
-            color: dividerClr,
+            color: Get.isDarkMode ? navBarBackgroundClr : dividerClr,
             height: 20,
             indent: 25,
             endIndent: 25,
@@ -435,11 +407,10 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
               ),
               Text(
                 'Light',
-                style: TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      color: Colors.black)
+                style: w700.copyWith(
+                  fontSize: 16,
+                  color: Get.isDarkMode ? Colors.grey : Colors.black,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(
@@ -462,11 +433,9 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
               ),
               Text(
                 'Dark',
-                style: TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      color: Colors.black)
+                style: w700.copyWith(
+                    fontSize: 16,
+                    color: Get.isDarkMode ? Colors.white : Colors.grey),
               ),
             ],
           ),

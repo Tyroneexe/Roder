@@ -5,6 +5,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roder/account/account_page.dart';
+import 'package:roder/themes/text_styles.dart';
 import 'package:roder/ui/update_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -80,11 +81,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 child: Text(
                   'Account',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.bold,
+                  style: bold.copyWith(
                     fontSize: 16,
-                    color: Colors.black,
                   ),
                 ),
               ),
@@ -92,7 +90,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           Divider(
             thickness: 2,
-            color: dividerClr,
+            color: Get.isDarkMode ? navBarBackgroundClr : dividerClr,
             height: 20,
             indent: 25,
             endIndent: 100,
@@ -109,11 +107,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   child: Text(
                     'Content Settings',
-                    style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                        color: Colors.black),
+                    style: w700.copyWith(
+                      fontSize: 14,
+                    ),
                   ),
                 ),
                 Spacer(),
@@ -151,11 +147,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   child: Text(
                     'Privacy Policy',
-                    style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                        color: Colors.black),
+                    style: w700.copyWith(
+                      fontSize: 14,
+                    ),
                   ),
                 ),
                 Spacer(),
@@ -193,11 +187,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   child: Text(
                     'Updates',
-                    style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                        color: Colors.black),
+                    style: w700.copyWith(
+                      fontSize: 14,
+                    ),
                   ),
                 ),
                 Spacer(),
@@ -235,11 +227,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   child: Text(
                     'Roder GitHub',
-                    style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                        color: Colors.black),
+                    style: w700.copyWith(
+                      fontSize: 14,
+                    ),
                   ),
                 ),
                 Spacer(),
@@ -288,11 +278,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 child: Text(
                   'Notifications',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.bold,
+                  style: bold.copyWith(
                     fontSize: 16,
-                    color: Colors.black,
                   ),
                 ),
               ),
@@ -300,7 +287,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           Divider(
             thickness: 2,
-            color: dividerClr,
+            color: Get.isDarkMode ? navBarBackgroundClr : dividerClr,
             height: 20,
             indent: 25,
             endIndent: 100,
@@ -316,11 +303,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 child: Text(
                   'Push Notifications',
-                  style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                      color: Colors.black),
+                  style: w700.copyWith(
+                    fontSize: 14,
+                  ),
                 ),
               ),
               Spacer(),
@@ -364,11 +349,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 child: Text(
                   'News For You',
-                  style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                      color: Colors.black),
+                  style: w700.copyWith(
+                    fontSize: 14,
+                  ),
                 ),
               ),
               Spacer(),
@@ -397,11 +380,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 child: Text(
                   'Group Activity',
-                  style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                      color: Colors.black),
+                  style: w700.copyWith(
+                    fontSize: 14,
+                  ),
                 ),
               ),
               Spacer(),
@@ -430,11 +411,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 child: Text(
                   'Account Activity',
-                  style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                      color: Colors.black),
+                  style: w700.copyWith(
+                    fontSize: 14,
+                  ),
                 ),
               ),
               Spacer(),
@@ -468,20 +447,14 @@ class _SettingsPageState extends State<SettingsPage> {
           backgroundColor: navBarBkgClr,
           title: Text(
             'Roder GitHub',
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontWeight: FontWeight.bold,
+            style: bold.copyWith(
               fontSize: 20,
-              color: Colors.black,
             ),
           ),
           content: Text(
             "Do you want to view Roder's Github",
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontWeight: FontWeight.w100,
+            style: w100.copyWith(
               fontSize: 16,
-              color: Colors.black,
             ),
           ),
           actions: [
@@ -740,11 +713,8 @@ class _SettingsPageState extends State<SettingsPage> {
       elevation: 0,
       title: Text(
         'App Settings',
-        style: TextStyle(
-          fontFamily: 'Roboto',
-          fontWeight: FontWeight.w700,
+        style: w700.copyWith(
           fontSize: 25,
-          color: Colors.black,
         ),
       ),
       backgroundColor: context.theme.colorScheme.background,

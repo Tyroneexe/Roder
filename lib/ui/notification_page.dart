@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:roder/drawer/nav_drawer.dart';
+import 'package:roder/themes/text_styles.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../themes/colors.dart';
 
@@ -142,9 +143,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     SizedBox(width: 20),
                     Text(
                       'Recently',
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w700,
+                      style: w700.copyWith(
                         fontSize: 16,
                       ),
                     ),
@@ -181,9 +180,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     SizedBox(width: 20),
                     Text(
                       'Older',
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w700,
+                      style: w700.copyWith(
                         fontSize: 16,
                       ),
                     ),
@@ -237,21 +234,15 @@ class _NotificationPageState extends State<NotificationPage> {
                       SizedBox(height: 10),
                       Text(
                         'No New Notifications',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w700,
+                        style: w700.copyWith(
                           fontSize: 20,
-                          color: Colors.black,
                         ),
                       ),
                       SizedBox(height: 10),
                       Text(
                         'There are no new notifications to show right now',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w100,
+                        style: w100.copyWith(
                           fontSize: 14,
-                          color: Colors.black,
                         ),
                       ),
                       SizedBox(height: 20),
@@ -265,11 +256,8 @@ class _NotificationPageState extends State<NotificationPage> {
                           },
                           style: ButtonStyle(
                             textStyle: MaterialStateProperty.all<TextStyle>(
-                              TextStyle(
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.w700,
+                              w700.copyWith(
                                 fontSize: 14,
-                                color: Colors.white,
                               ),
                             ),
                             foregroundColor: MaterialStateProperty.all<Color>(
@@ -306,9 +294,7 @@ class _NotificationPageState extends State<NotificationPage> {
                   SizedBox(width: 20),
                   Text(
                     'Older',
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w700,
+                    style: w700.copyWith(
                       fontSize: 16,
                     ),
                   ),
@@ -349,16 +335,13 @@ class _NotificationPageState extends State<NotificationPage> {
   _appBar() {
     return AppBar(
       iconTheme: IconThemeData(
-        color: Colors.black,
+        color: Get.isDarkMode ? Colors.white : Colors.black,
       ),
       elevation: 0,
       title: Text(
         'Notifications',
-        style: TextStyle(
-          fontFamily: 'Roboto',
-          fontWeight: FontWeight.w700,
+        style: w700.copyWith(
           fontSize: 25,
-          color: Colors.black,
         ),
       ),
       backgroundColor: context.theme.colorScheme.background,
@@ -429,32 +412,23 @@ class _NotificationPageState extends State<NotificationPage> {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: 'Welcome to ',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20,
-                            color: textNotis,
-                          ),
-                        ),
+                            text: 'Welcome to ',
+                            style: w700.copyWith(
+                              fontSize: 20,
+                              color: textNotis,
+                            )),
                         TextSpan(
-                          text: 'Roder',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: blueClr,
-                          ),
-                        ),
+                            text: 'Roder',
+                            style: bold.copyWith(
+                              fontSize: 20,
+                              color: blueClr,
+                            )),
                         TextSpan(
-                          text: '\nFind your Ride, your Way.',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20,
-                            color: textNotis,
-                          ),
-                        ),
+                            text: '\nFind your Ride, your Way.',
+                            style: w700.copyWith(
+                              fontSize: 20,
+                              color: textNotis,
+                            )),
                       ],
                     ),
                   ),
@@ -463,15 +437,11 @@ class _NotificationPageState extends State<NotificationPage> {
               SizedBox(
                 height: 5,
               ),
-              Text(
-                _formatNotificationTime(),
-                style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w100,
-                  fontSize: 12,
-                  color: textNotis,
-                ),
-              ),
+              Text(_formatNotificationTime(),
+                  style: w100.copyWith(
+                    fontSize: 12,
+                    color: textNotis,
+                  )),
             ],
           ),
         ],
@@ -553,27 +523,19 @@ class NotificationCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    notification.title,
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                      color: textNotis,
-                    ),
-                  ),
+                  Text(notification.title,
+                      style: w700.copyWith(
+                        fontSize: 14,
+                        color: textNotis,
+                      )),
                   SizedBox(
                     height: 4,
                   ),
-                  Text(
-                    notification.time,
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                      color: textNotis,
-                    ),
-                  ),
+                  Text(notification.time,
+                      style: w700.copyWith(
+                        fontSize: 14,
+                        color: textNotis,
+                      )),
                 ],
               ),
             ),

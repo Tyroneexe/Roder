@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:roder/themes/text_styles.dart';
 import '../homepage/home_page.dart';
 import '../themes/colors.dart';
 import '../widgets/custom_snackbar.dart';
@@ -140,11 +141,9 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                     Text(
                       'User Name',
-                      style: TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      color: Colors.black),
+                      style: w700.copyWith(
+                        fontSize: 16,
+                      ),
                     ),
                   ],
                 ),
@@ -163,11 +162,9 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                     Text(
                       'Contact Number',
-                      style: TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      color: Colors.black),
+                      style: w700.copyWith(
+                        fontSize: 16,
+                      ),
                     ),
                   ],
                 ),
@@ -183,11 +180,9 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                     Text(
                       'Email',
-                      style: TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      color: Colors.black),
+                      style: w700.copyWith(
+                        fontSize: 16,
+                      ),
                     ),
                   ],
                 ),
@@ -206,11 +201,9 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                     Text(
                       'Location',
-                      style: TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      color: Colors.black),
+                      style: w700.copyWith(
+                        fontSize: 16,
+                      ),
                     ),
                   ],
                 ),
@@ -229,11 +222,9 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                     Text(
                       'Your Bike',
-                      style: TextStyle(
-      fontFamily: 'Roboto',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      color: Colors.black),
+                      style: w700.copyWith(
+                        fontSize: 16,
+                      ),
                     ),
                   ],
                 ),
@@ -257,19 +248,15 @@ class _AccountPageState extends State<AccountPage> {
                         },
                         style: ButtonStyle(
                           textStyle: MaterialStateProperty.all<TextStyle>(
-                            TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w700,
+                            w700.copyWith(
                               fontSize: 14,
-                              color: Colors.white,
                             ),
                           ),
                           foregroundColor: MaterialStateProperty.all<Color>(
                             blueClr,
                           ),
                           backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.white,
-                          ),
+                              Colors.transparent),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -352,11 +339,8 @@ class _AccountPageState extends State<AccountPage> {
                               },
                               style: ButtonStyle(
                                 textStyle: MaterialStateProperty.all<TextStyle>(
-                                  TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w700,
+                                  w700.copyWith(
                                     fontSize: 14,
-                                    color: Colors.white,
                                   ),
                                 ),
                                 foregroundColor:
@@ -388,11 +372,8 @@ class _AccountPageState extends State<AccountPage> {
                               onPressed: () {},
                               style: ButtonStyle(
                                 textStyle: MaterialStateProperty.all<TextStyle>(
-                                  TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w700,
+                                  w700.copyWith(
                                     fontSize: 14,
-                                    color: Colors.white,
                                   ),
                                 ),
                                 foregroundColor:
@@ -443,19 +424,14 @@ class _AccountPageState extends State<AccountPage> {
             width: MediaQuery.of(context).size.width - 40,
             height: 40,
             child: TextFormField(
-              style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w100,
-                  fontSize: 14,
-                  color: Colors.black),
+              style: w100.copyWith(
+                fontSize: 14,
+              ),
               controller: bikeController,
               decoration: InputDecoration(
                 hintText: "Rather Not Say",
-                hintStyle: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w100,
+                hintStyle: w100.copyWith(
                   fontSize: 14,
-                  color: Colors.black,
                 ),
                 contentPadding: EdgeInsets.only(
                   left: 20,
@@ -498,26 +474,16 @@ class _AccountPageState extends State<AccountPage> {
             width: MediaQuery.of(context).size.width - 40,
             height: 40,
             child: TextFormField(
-              style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w100,
-                  fontSize: 14,
-                  color: Colors.black),
+              style: w100.copyWith(
+                fontSize: 14,
+              ),
               controller: bikeController,
               decoration: InputDecoration(
                 hintText: userBike == '' ? 'Rather Not Say' : userBike,
                 hintStyle: userBike == ''
-                    ? TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w100,
+                    ? w100.copyWith(fontSize: 14, color: Colors.grey)
+                    : w100.copyWith(
                         fontSize: 14,
-                        color: Colors.grey,
-                      )
-                    : TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w100,
-                        fontSize: 14,
-                        color: Colors.black,
                       ),
                 contentPadding: EdgeInsets.only(
                   left: 20,
@@ -557,19 +523,14 @@ class _AccountPageState extends State<AccountPage> {
             width: MediaQuery.of(context).size.width - 40,
             height: 40,
             child: TextFormField(
-              style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w100,
-                  fontSize: 14,
-                  color: Colors.black),
+              style: w100.copyWith(
+                fontSize: 14,
+              ),
               controller: bikeController,
               decoration: InputDecoration(
                 hintText: 'Rather Not Say',
-                hintStyle: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w100,
+                hintStyle: w100.copyWith(
                   fontSize: 14,
-                  color: Colors.black,
                 ),
                 contentPadding: EdgeInsets.only(
                   left: 20,
@@ -617,18 +578,13 @@ class _AccountPageState extends State<AccountPage> {
       height: 40,
       child: TextFormField(
         readOnly: true,
-        style: TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w100,
-            fontSize: 14,
-            color: Colors.black),
+        style: w100.copyWith(
+          fontSize: 14,
+        ),
         decoration: InputDecoration(
           hintText: _currentCountry + ', ' + _currentCity,
-          hintStyle: TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w100,
+          hintStyle: w100.copyWith(
             fontSize: 14,
-            color: Colors.black,
           ),
           contentPadding: EdgeInsets.only(
             left: 20,
@@ -693,18 +649,13 @@ class _AccountPageState extends State<AccountPage> {
       height: 40,
       child: TextFormField(
         readOnly: true,
-        style: TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w100,
-            fontSize: 14,
-            color: Colors.black),
+        style: w100.copyWith(
+          fontSize: 14,
+        ),
         decoration: InputDecoration(
           hintText: currentUser.email,
-          hintStyle: TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w100,
+          hintStyle: w100.copyWith(
             fontSize: 14,
-            color: Colors.black,
           ),
           contentPadding: EdgeInsets.only(
             left: 20,
@@ -765,20 +716,13 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 disableLengthCheck: false,
                 dropdownIconPosition: IconPosition.trailing,
-                style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w100,
+                style: w100.copyWith(
                   fontSize: 14,
-                  color: Colors.black,
                 ),
                 controller: nuController,
                 decoration: InputDecoration(
                   hintText: 'xxx - xxx - xxx',
-                  hintStyle: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: Colors.grey),
+                  hintStyle: w100.copyWith(fontSize: 14, color: Colors.grey),
                   contentPadding: EdgeInsets.only(
                     left: 20,
                   ),
@@ -840,26 +784,17 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 disableLengthCheck: false,
                 dropdownIconPosition: IconPosition.trailing,
-                style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w100,
+                style: w100.copyWith(
                   fontSize: 14,
-                  color: Colors.black,
                 ),
                 controller: nuController,
                 decoration: InputDecoration(
                   hintText: userNum == '' ? 'xxx-xxx-xxx' : userNum,
                   hintStyle: userNum == ''
-                      ? TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w100,
+                      ? w100.copyWith(fontSize: 14, color: Colors.grey)
+                      : w100.copyWith(
                           fontSize: 14,
-                          color: Colors.grey)
-                      : TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w100,
-                          fontSize: 14,
-                          color: Colors.black),
+                        ),
                   contentPadding: EdgeInsets.only(
                     left: 20,
                   ),
@@ -918,20 +853,13 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 disableLengthCheck: false,
                 dropdownIconPosition: IconPosition.trailing,
-                style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w100,
+                style: w100.copyWith(
                   fontSize: 14,
-                  color: Colors.black,
                 ),
                 controller: nuController,
                 decoration: InputDecoration(
                   hintText: 'xxx - xxx - xxx',
-                  hintStyle: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w100,
-                      fontSize: 14,
-                      color: Colors.grey),
+                  hintStyle: w100.copyWith(fontSize: 14, color: Colors.grey),
                   contentPadding: EdgeInsets.only(
                     left: 20,
                   ),
@@ -994,20 +922,14 @@ class _AccountPageState extends State<AccountPage> {
             width: MediaQuery.of(context).size.width - 40,
             height: 40,
             child: TextFormField(
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w100,
+              style: w100.copyWith(
                 fontSize: 14,
-                color: Colors.black,
               ),
               controller: nameController,
               decoration: InputDecoration(
                 hintText: currentUser.displayName,
-                hintStyle: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w100,
+                hintStyle: w100.copyWith(
                   fontSize: 14,
-                  color: Colors.black,
                 ),
                 contentPadding: EdgeInsets.only(
                   left: 20,
@@ -1044,20 +966,14 @@ class _AccountPageState extends State<AccountPage> {
             width: MediaQuery.of(context).size.width - 40,
             height: 40,
             child: TextFormField(
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w100,
+              style: w100.copyWith(
                 fontSize: 14,
-                color: Colors.black,
               ),
               controller: nameController,
               decoration: InputDecoration(
                 hintText: userName,
-                hintStyle: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w100,
+                hintStyle: w100.copyWith(
                   fontSize: 14,
-                  color: Colors.black,
                 ),
                 contentPadding: EdgeInsets.only(
                   left: 20,
@@ -1091,20 +1007,14 @@ class _AccountPageState extends State<AccountPage> {
             width: MediaQuery.of(context).size.width - 40,
             height: 40,
             child: TextFormField(
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w100,
+              style: w100.copyWith(
                 fontSize: 14,
-                color: Colors.black,
               ),
               controller: nameController,
               decoration: InputDecoration(
                 hintText: currentUser.displayName,
-                hintStyle: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w100,
+                hintStyle: w100.copyWith(
                   fontSize: 14,
-                  color: Colors.black,
                 ),
                 contentPadding: EdgeInsets.only(
                   left: 20,
@@ -1174,11 +1084,8 @@ class _AccountPageState extends State<AccountPage> {
           ),
           content: Text(
             'Are you sure you want to permanently delete the existing account?',
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontWeight: FontWeight.w100,
+            style: w100.copyWith(
               fontSize: 16,
-              color: Colors.black,
             ),
           ),
           actions: <Widget>[
@@ -1197,15 +1104,11 @@ class _AccountPageState extends State<AccountPage> {
               },
             ),
             TextButton(
-              child: Text(
-                'Yes',
-                style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: rred,
-                ),
-              ),
+              child: Text('Yes',
+                  style: bold.copyWith(
+                    fontSize: 16,
+                    color: rred,
+                  )),
               onPressed: () async {
                 try {
                   User? user = FirebaseAuth.instance.currentUser;
@@ -1260,7 +1163,7 @@ class _AccountPageState extends State<AccountPage> {
           ),
           content: Text(
             "Could not delete account.",
-            style: TextStyle(
+            style: w700.copyWith(
               fontSize: 16,
             ),
           ),
