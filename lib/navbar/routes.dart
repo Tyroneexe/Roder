@@ -11,7 +11,7 @@ class AppPage {
     GetPage(name: home, page: () => const HomePage()),
     GetPage(name: noti, page: () => NotificationPage()),
     GetPage(name: search, page: () => const Search()),
-    GetPage(name: message, page: () => const MessagePage()),
+    GetPage(name: message, page: () => MessagePage()),
   ];
 
   //

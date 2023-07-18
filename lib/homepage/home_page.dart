@@ -19,7 +19,7 @@ import '../widgets/unfilter_button.dart';
 /*
 To Do
 
-also on the account edit page. the "rather not say". inside the your bike text block.
+wheater on the day that the ride is on
 
 /
 | Wrtie to Database 
