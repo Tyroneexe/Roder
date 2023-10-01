@@ -1,8 +1,9 @@
 // ignore_for_file: unused_field
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:roder/messages/messages_page.dart';
+import 'package:roder/account/account_page.dart';
 import 'package:roder/navbar/barcontroller.dart';
 import 'package:roder/search/search_page.dart';
 import 'package:roder/ui/notification_page.dart';
@@ -26,7 +27,7 @@ class _NavBarState extends State<NavBar> {
         return Scaffold(
           body: IndexedStack(
             index: controller.tabIndex,
-            children: [HomePage(), NotificationPage(), Search(), MessagePage()],
+            children: [HomePage(), NotificationPage(), Search(), AccountPage()],
           ),
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
@@ -60,7 +61,40 @@ class _NavBarState extends State<NavBar> {
                 "",
                 26,
               ),
-              _bottombarItem(Icons.message, "", 24),
+              // _bottombarItem(Icons.message, "", 24),
+              BottomNavigationBarItem(
+                icon: FutureBuilder<DocumentSnapshot>(
+                  future: FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(currentUser.uid)
+                      .get(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<DocumentSnapshot> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircleAvatar(
+                        backgroundImage: NetworkImage(currentUser.photoURL!),
+                        radius: 16,
+                      );
+                    }
+                    if (snapshot.hasData) {
+                      final user =
+                          snapshot.data!.data() as Map<String, dynamic>;
+                      return CircleAvatar(
+                        backgroundImage: NetworkImage(user['foto']),
+                        radius: 16,
+                      );
+                    } else {
+                      return CircleAvatar(
+                        backgroundImage: NetworkImage(
+                          currentUser.photoURL!,
+                        ),
+                        radius: 16,
+                      );
+                    }
+                  },
+                ),
+                label: '',
+              )
             ],
           ),
         );

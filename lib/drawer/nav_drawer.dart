@@ -302,7 +302,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                     builder: (BuildContext context) {
                       return Container(
                         height: MediaQuery.of(context).size.height / 4,
-                        color: navBarBkgClr,
+                        color: Get.isDarkMode ? Colors.grey[850] : navBarBkgClr,
                         child: Column(
                           children: [
                             SizedBox(
@@ -428,6 +428,7 @@ class _NavitionDrawerState extends State<NavitionDrawer> {
                     setState(() {
                       ThemeService().switchTheme();
                     });
+                    setState(() {});
                   },
                 ),
               ),
